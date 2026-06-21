@@ -173,7 +173,7 @@ class DatabaseSeeder extends Seeder
         }
 
         $experiences = [
-            ['Agent Administratif & Support Informatique', null, 'Nador, Morocco', null, 'September 2023 - Present', [
+            ['Agent Administrative', 'Vectalia Nador', 'Nador, Morocco', null, 'September 2023 - Present', [
                 'Participated in administrative digitalization through internal IT tools.',
                 'Improved digital archiving systems for organizing, searching and tracking documents.',
                 'Created simple Vue.js interfaces to improve data access.',

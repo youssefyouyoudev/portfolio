@@ -21,7 +21,7 @@ export const stackBadges = ["Laravel", "React", "Next.js", "MySQL", "APIs", "Ngi
 export const proofPoints = [
   "Freelance web, SaaS and microservices projects from 2019-2023",
   "Remote React.js work with MediaTechly London in 2023",
-  "Current administrative digitalization and IT support experience",
+  "Current administrative role at Vectalia Nador with digitalization and IT support experience",
   "Strong fit for dashboards, APIs, portals, internal tools and deployment support",
 ];
 
@@ -168,7 +168,8 @@ export const projects = [
 
 export const experiences = [
   {
-    role: "Agent Administratif & Support Informatique",
+    role: "Agent Administrative",
+    company: "Vectalia Nador",
     date: "September 2023 - Present",
     location: "Nador, Morocco",
     points: [
