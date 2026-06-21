@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -106,53 +107,38 @@ function PremiumCard({ children, className = "" }: { children: React.ReactNode; 
   );
 }
 
-const mockupAccents = [
-  "from-cyan-400/70 via-sky-500/45 to-blue-600/30",
-  "from-emerald-300/65 via-cyan-400/45 to-sky-500/30",
-  "from-blue-400/65 via-cyan-300/45 to-teal-300/30",
-  "from-violet-400/60 via-sky-400/45 to-cyan-300/30",
-  "from-amber-300/65 via-sky-400/40 to-cyan-300/30",
-  "from-rose-300/55 via-sky-400/45 to-cyan-300/30",
-];
-
-function ProjectMockup({ title, index }: { title: string; index: number }) {
-  const accent = mockupAccents[index % mockupAccents.length];
-  const primaryWidth = index % 2 === 0 ? "68%" : "84%";
-  const secondaryWidth = index % 3 === 0 ? "52%" : "74%";
-
+function ProjectShowcaseImage({
+  project,
+  priority = false,
+}: {
+  project: (typeof projects)[number];
+  priority?: boolean;
+}) {
   return (
-    <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-sky-200/70 bg-sky-50 p-3 shadow-inner shadow-white/80 dark:border-cyan-400/15 dark:bg-[#020617] dark:shadow-none">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(14,165,233,.18),transparent_35%),linear-gradient(135deg,rgba(255,255,255,.8),rgba(224,242,254,.9))] dark:bg-[radial-gradient(circle_at_72%_18%,rgba(34,211,238,.18),transparent_35%),linear-gradient(135deg,rgba(14,165,233,.14),rgba(2,6,23,.9))]" />
-      <div className="relative flex h-full flex-col rounded-xl border border-sky-200/70 bg-white/75 p-3 dark:border-white/10 dark:bg-slate-950/70">
-        <div className="flex items-center gap-1.5">
-          <span className="h-2 w-2 rounded-full bg-rose-400/80" />
-          <span className="h-2 w-2 rounded-full bg-amber-300/80" />
-          <span className="h-2 w-2 rounded-full bg-emerald-300/80" />
-          <span className="ml-3 text-[10px] text-slate-500">{title.toLowerCase().replaceAll(" ", "-")}.app</span>
-        </div>
-        <div className="mt-5 grid flex-1 grid-cols-[0.7fr_1fr] gap-3">
-          <div className="space-y-2">
-            <div className={`h-3 rounded-full bg-gradient-to-r ${accent}`} />
-            <div className="h-3 w-3/4 rounded-full bg-sky-400/35" />
-            <div className="mt-4 grid gap-2">
-              <div className="h-10 rounded-xl border border-sky-200/70 bg-sky-50 p-2 dark:border-white/10 dark:bg-white/[0.04]">
-                <div className={`h-full rounded-lg bg-gradient-to-r ${accent}`} style={{ width: primaryWidth }} />
-              </div>
-              <div className="h-10 rounded-xl border border-sky-200/70 bg-sky-50 p-2 dark:border-white/10 dark:bg-white/[0.04]">
-                <div className="h-full rounded-lg bg-sky-300/35 dark:bg-cyan-300/15" style={{ width: secondaryWidth }} />
-              </div>
-            </div>
-          </div>
-          <div className="rounded-2xl border border-sky-200/70 bg-sky-100/70 p-3 dark:border-cyan-400/10 dark:bg-cyan-300/[0.05]">
-            <div className={`h-20 rounded-xl bg-gradient-to-br ${accent}`} />
-            <div className="mt-3 grid grid-cols-3 gap-2">
-              <div className="h-8 rounded-lg bg-white/75 dark:bg-white/[0.06]" />
-              <div className="h-8 rounded-lg bg-white/75 dark:bg-white/[0.06]" />
-              <div className="h-8 rounded-lg bg-white/75 dark:bg-white/[0.06]" />
-            </div>
+    <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-sky-200/80 bg-sky-50 shadow-inner shadow-white/80 dark:border-cyan-400/15 dark:bg-[#020617] dark:shadow-none">
+      {project.image ? (
+        <Image
+          src={project.image}
+          alt={project.imageAlt ?? `${project.title} project showcase`}
+          fill
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
+          sizes="(min-width: 1280px) 31vw, (min-width: 768px) 48vw, 92vw"
+          className="object-cover transition duration-700 group-hover:scale-[1.035]"
+        />
+      ) : (
+        <div className="grid h-full place-items-center bg-[radial-gradient(circle_at_65%_20%,rgba(14,165,233,.24),transparent_34%),linear-gradient(135deg,rgba(255,255,255,.85),rgba(224,242,254,.95))] p-6 text-center dark:bg-[radial-gradient(circle_at_65%_20%,rgba(34,211,238,.18),transparent_34%),linear-gradient(135deg,rgba(14,165,233,.14),rgba(2,6,23,.9))]">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">{project.category}</p>
+            <p className="mt-3 text-2xl font-black text-slate-950 dark:text-white">{project.title}</p>
           </div>
         </div>
-      </div>
+      )}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent opacity-70 dark:from-slate-950/55" />
+      <div className="pointer-events-none absolute inset-x-5 top-4 h-px bg-gradient-to-r from-transparent via-cyan-300/55 to-transparent" />
+      <span className="absolute left-3 top-3 rounded-full border border-white/15 bg-slate-950/70 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-cyan-100 shadow-lg backdrop-blur-md">
+        Case-study visual
+      </span>
     </div>
   );
 }
@@ -373,20 +359,28 @@ export default function PortfolioShell() {
         <SectionTitle
           eyebrow="Projects"
           title="Product-style case studies, not simple thumbnails"
-          text="Each project is framed around a business problem, the technical structure and the practical value it creates."
+          text="A practical selection of web platforms, dashboards, admin systems and automation tools built around real business needs."
         />
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project, index) => (
             <Reveal key={project.slug}>
-              <PremiumCard className="h-full p-5">
-                <ProjectMockup title={project.title} index={index} />
+              <PremiumCard className="h-full p-4 md:p-5">
+                <ProjectShowcaseImage project={project} priority={index === 0} />
                 <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-sky-700 dark:text-cyan-300">{project.category}</p>
                 <h3 className="mt-3 text-2xl font-black text-slate-950 dark:text-white">{project.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.businessProblem}</p>
+                <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.shortDescription}</p>
                 <div className="mt-4 rounded-2xl border border-sky-200/80 bg-sky-50 p-4 text-sm leading-7 text-slate-700 dark:border-cyan-300/15 dark:bg-cyan-300/[0.06] dark:text-cyan-50">
                   <span className="font-bold text-sky-700 dark:text-cyan-200">Business value: </span>
                   {project.businessValue}
                 </div>
+                <ul className="mt-4 grid gap-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
+                  {project.features.slice(0, 3).map((feature) => (
+                    <li key={feature} className="flex gap-2">
+                      <CheckCircle2 className="mt-0.5 shrink-0 text-sky-600 dark:text-cyan-300" size={15} />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {project.stack.slice(0, 4).map((tag) => (
                     <span key={tag} className="rounded-full border border-sky-200/75 bg-white px-3 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-200">{tag}</span>
@@ -394,7 +388,7 @@ export default function PortfolioShell() {
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link href={`/projects/${project.slug}`} className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-white">
-                    Case study <ExternalLink size={15} />
+                    View case study <ExternalLink size={15} />
                   </Link>
                   <a href="#contact" className="inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-white/70 px-4 py-2 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/40 dark:hover:text-cyan-100">
                     Similar project

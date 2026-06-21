@@ -1,6 +1,9 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, BadgeCheck, BriefcaseBusiness, Layers, Target } from "lucide-react";
+import { ArrowLeft, ArrowRight, BadgeCheck, BriefcaseBusiness, ChevronRight, Database, Layers, Server, Sparkles, Target } from "lucide-react";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { projects } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -11,78 +14,275 @@ type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: ProjectPageProps) {
+function getProject(slug: string) {
+  return projects.find((item) => item.slug === slug);
+}
+
+function architectureCards(project: (typeof projects)[number]) {
+  const stackText = project.stack.join(", ");
+
+  return [
+    {
+      title: "Frontend",
+      text: stackText.includes("React")
+        ? "React interface with dashboard-focused screens, reusable UI patterns and responsive layouts."
+        : stackText.includes("Vue")
+          ? "Vue.js interface layer for practical document/workflow access and responsive admin screens."
+          : stackText.includes("Excel")
+            ? "Excel forms, dashboards and report views structured around repeatable user inputs."
+            : "Laravel Blade/Vite interface with responsive content views and user-friendly navigation.",
+      icon: Layers,
+    },
+    {
+      title: "Backend / Logic",
+      text: stackText.includes("Excel")
+        ? "VBA automation logic for calculations, filters, report generation and recurring workflows."
+        : "Laravel/PHP business logic organized around clear modules, validation and maintainable workflows.",
+      icon: Server,
+    },
+    {
+      title: "Database",
+      text: stackText.includes("Excel")
+        ? "Structured tables and workbook models for tracking, reporting and repeatable outputs."
+        : "Relational data thinking for users, content, modules, orders, documents or dashboard entities.",
+      icon: Database,
+    },
+    {
+      title: "Admin / Automation",
+      text: "Admin-facing flows, tracking views, reports or automation patterns designed to reduce manual follow-up.",
+      icon: BriefcaseBusiness,
+    },
+    {
+      title: "Deployment",
+      text: stackText.includes("Nginx") || stackText.includes("Cloudflare")
+        ? "Production-aware setup with Nginx, build paths, caching and delivery considerations."
+        : "Structured for practical delivery, maintenance and future production hardening.",
+      icon: Sparkles,
+    },
+  ];
+}
+
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.find((item) => item.slug === slug);
+  const project = getProject(slug);
+  const title = project?.seoTitle ?? (project ? `${project.title} Case Study | Youssef Youyou Portfolio` : "Project Case Study");
+  const description = project?.seoDescription ?? project?.shortDescription ?? project?.businessValue;
+
   return {
-    title: project ? `${project.title} Case Study` : "Project Case Study",
-    description: project?.businessValue,
+    title,
+    description,
     alternates: { canonical: project ? `/projects/${project.slug}` : "/projects" },
+    openGraph: project
+      ? {
+          title,
+          description,
+          url: `/projects/${project.slug}`,
+          type: "article",
+          images: project.image
+            ? [
+                {
+                  url: project.image,
+                  width: 1600,
+                  height: 1200,
+                  alt: project.imageAlt ?? `${project.title} project showcase`,
+                },
+              ]
+            : undefined,
+        }
+      : undefined,
+    twitter: project
+      ? {
+          card: "summary_large_image",
+          title,
+          description,
+          images: project.image ? [project.image] : undefined,
+        }
+      : undefined,
   };
 }
 
 export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const project = projects.find((item) => item.slug === slug);
+  const project = getProject(slug);
   if (!project) notFound();
 
-  const sections = [
-    ["Business problem", project.businessProblem],
-    ["My role", "Full-stack development, UI planning, backend/API structure, deployment preparation and practical workflow design."],
-    ["Architecture overview", project.architecture],
-    ["Backend/API logic", "Structured business modules, validation-first inputs, clear response contracts and production-aware routing/deployment decisions."],
-    ["Database structure", "Relational data modeled around real workflow entities, with flexible fields only where content or reporting benefits from it."],
-    ["Business impact", project.impact],
-    ["What this proves", project.recruiterSignal],
-    ["What I learned", "Production projects need clear business scope, clean structure, simple maintenance, responsive UX and reliable deployment details as much as visual polish."],
-  ];
+  const currentIndex = projects.findIndex((item) => item.slug === project.slug);
+  const previousProject = projects[(currentIndex - 1 + projects.length) % projects.length];
+  const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
-    <main className="min-h-screen bg-slate-50 px-4 py-10 text-slate-950 dark:bg-[#020617] dark:text-white">
-      <div className="mx-auto max-w-5xl">
-        <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-bold text-sky-700 dark:text-cyan-200"><ArrowLeft size={16} /> Back to projects</Link>
-        <section className="mt-10 rounded-[2rem] border border-sky-200/75 bg-white/85 p-6 shadow-2xl shadow-sky-100/80 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-slate-950/30 md:p-10">
-          <p className="text-sm font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">{project.category}</p>
-          <h1 className="mt-4 text-4xl font-black md:text-6xl">{project.title}</h1>
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700 dark:text-slate-300">{project.businessProblem}</p>
-          <div className="mt-6 flex flex-wrap gap-2">{project.stack.map((item) => <span key={item} className="rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-sm font-semibold text-slate-700 dark:border-white/10 dark:bg-cyan-300/10 dark:text-cyan-100">{item}</span>)}</div>
+    <main className="min-h-screen overflow-hidden bg-slate-50 px-4 py-10 text-slate-950 dark:bg-[#020617] dark:text-white">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_18%_2%,rgba(14,165,233,.14),transparent_30%),radial-gradient(circle_at_86%_8%,rgba(8,145,178,.12),transparent_34%),linear-gradient(180deg,#f8fafc,#eef6ff_42%,#f8fafc)] dark:bg-[radial-gradient(circle_at_18%_2%,rgba(34,211,238,.12),transparent_30%),radial-gradient(circle_at_86%_8%,rgba(14,165,233,.14),transparent_34%),linear-gradient(180deg,#020617,#061826_42%,#020617)]" />
+
+      <div className="relative mx-auto max-w-7xl">
+        <header className="mb-8 flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-sky-200/70 bg-white/78 p-3 shadow-xl shadow-sky-100/70 backdrop-blur-2xl dark:border-cyan-400/10 dark:bg-slate-950/70 dark:shadow-none">
+          <Link href="/" className="rounded-2xl px-2 py-1 outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
+            <span className="block text-sm font-black text-slate-950 dark:text-white">Youssef <span className="text-sky-600 dark:text-cyan-300">Youyou</span></span>
+            <span className="block text-xs text-slate-500 dark:text-slate-400">Full-stack project proof</span>
+          </Link>
+          <div className="flex flex-wrap items-center gap-2">
+            <Link href="/projects" className="inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-4 py-2 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-200 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
+              <ArrowLeft size={16} /> Projects
+            </Link>
+            <Link href="/contact" className="hidden rounded-full bg-cyan-300 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-white sm:inline-flex">
+              Contact
+            </Link>
+            <ThemeToggle />
+          </div>
+        </header>
+
+        <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm font-semibold text-slate-600 dark:text-slate-400">
+          <Link href="/" className="hover:text-sky-700 dark:hover:text-cyan-200">Home</Link>
+          <ChevronRight size={15} />
+          <Link href="/projects" className="hover:text-sky-700 dark:hover:text-cyan-200">Projects</Link>
+          <ChevronRight size={15} />
+          <span className="text-slate-950 dark:text-white">{project.title}</span>
+        </nav>
+
+        <section className="mt-8 grid gap-8 rounded-[2rem] border border-sky-200/75 bg-white/88 p-5 shadow-2xl shadow-sky-100/80 backdrop-blur-xl dark:border-cyan-400/15 dark:bg-slate-900/58 dark:shadow-slate-950/30 md:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">{project.category}</p>
+            <h1 className="mt-4 text-balance text-4xl font-black tracking-tight md:text-6xl">{project.title}</h1>
+            <p className="mt-5 text-pretty text-lg leading-8 text-slate-700 dark:text-slate-300">{project.shortDescription}</p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {project.stack.map((item) => (
+                <span key={item} className="rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-sm font-semibold text-slate-700 dark:border-white/10 dark:bg-cyan-300/10 dark:text-cyan-100">
+                  {item}
+                </span>
+              ))}
+            </div>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/projects" className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-5 py-3 text-sm font-bold text-slate-800 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-100 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
+                <ArrowLeft size={16} /> Back to projects
+              </Link>
+              <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-white">
+                Contact me for similar project <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+
+          <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-sky-200/80 bg-sky-50 shadow-2xl shadow-sky-200/80 dark:border-cyan-400/20 dark:bg-slate-950 dark:shadow-cyan-500/10">
+            {project.image ? (
+              <Image
+                src={project.image}
+                alt={project.imageAlt ?? `${project.title} project showcase`}
+                fill
+                priority
+                sizes="(min-width: 1024px) 54vw, 94vw"
+                className="object-cover"
+              />
+            ) : (
+              <div className="grid h-full place-items-center p-6 text-center">
+                <p className="text-3xl font-black">{project.title}</p>
+              </div>
+            )}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent dark:from-slate-950/50" />
+            <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-slate-950/70 px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-cyan-100 shadow-lg backdrop-blur-md">
+              Case-study visual
+            </span>
+          </div>
         </section>
-        <section className="mt-6 grid gap-4 md:grid-cols-3">
+
+        <section className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {[
-            [Target, "Goal", project.businessValue],
-            [BriefcaseBusiness, "Deliverables", project.deliverables.slice(0, 3).join(", ")],
-            [Layers, "Proof signal", project.recruiterSignal],
-          ].map(([Icon, title, text]) => {
+            ["Business problem", project.businessProblem, Target],
+            ["Solution", project.solution, Sparkles],
+            ["My role", project.myRole, BriefcaseBusiness],
+            ["Target users", project.targetUsers, Layers],
+          ].map(([title, text, Icon]) => {
             const CardIcon = Icon as typeof Target;
             return (
-              <div key={String(title)} className="rounded-2xl border border-sky-200/75 bg-white/85 p-5 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
+              <article key={String(title)} className="rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none">
                 <CardIcon className="text-sky-600 dark:text-cyan-300" />
-                <h2 className="mt-4 font-bold text-sky-800 dark:text-cyan-100">{String(title)}</h2>
-                <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">{String(text)}</p>
-              </div>
+                <h2 className="mt-4 text-lg font-black text-slate-950 dark:text-white">{String(title)}</h2>
+                <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">{String(text)}</p>
+              </article>
             );
           })}
         </section>
-        <section className="mt-6 grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-sky-200/75 bg-white/85 p-5 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
-            <h2 className="text-xl font-bold text-sky-800 dark:text-cyan-200">Features</h2>
-            <ul className="mt-4 grid gap-2 text-sm text-slate-700 dark:text-slate-300">{project.features.map((item) => <li key={item} className="flex gap-2"><BadgeCheck className="shrink-0 text-sky-600 dark:text-cyan-300" size={16} />{item}</li>)}</ul>
-          </div>
-          <div className="rounded-2xl border border-sky-200/75 bg-white/85 p-5 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
-            <h2 className="text-xl font-bold text-sky-800 dark:text-cyan-200">Problems solved</h2>
-            <ul className="mt-4 grid gap-2 text-sm text-slate-700 dark:text-slate-300">{project.problems.map((item) => <li key={item} className="flex gap-2"><BadgeCheck className="shrink-0 text-sky-600 dark:text-cyan-300" size={16} />{item}</li>)}</ul>
-          </div>
+
+        <section className="mt-8 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <article className="rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Features</p>
+            <h2 className="mt-3 text-2xl font-black">What the system includes</h2>
+            <ul className="mt-6 grid gap-3 text-sm text-slate-700 dark:text-slate-300 sm:grid-cols-2">
+              {project.features.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <BadgeCheck className="mt-0.5 shrink-0 text-sky-600 dark:text-cyan-300" size={16} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Architecture / Stack</p>
+            <h2 className="mt-3 text-2xl font-black">How it is structured</h2>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              {architectureCards(project).map((card) => {
+                const CardIcon = card.icon;
+                return (
+                  <div key={card.title} className="rounded-2xl border border-sky-200/80 bg-sky-50/85 p-4 dark:border-cyan-400/15 dark:bg-cyan-300/[0.055]">
+                    <CardIcon className="text-sky-600 dark:text-cyan-300" size={19} />
+                    <h3 className="mt-3 font-black text-slate-950 dark:text-white">{card.title}</h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-300">{card.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </article>
         </section>
-        <section className="mt-6 rounded-2xl border border-sky-200/75 bg-white/85 p-5 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
-          <h2 className="text-xl font-bold text-sky-800 dark:text-cyan-200">Deliverables</h2>
-          <ul className="mt-4 grid gap-2 text-sm text-slate-700 dark:text-slate-300 md:grid-cols-2">{project.deliverables.map((item) => <li key={item} className="flex gap-2"><BadgeCheck className="shrink-0 text-sky-600 dark:text-cyan-300" size={16} />{item}</li>)}</ul>
+
+        <section className="mt-8 grid gap-6 lg:grid-cols-3">
+          <article className="rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
+            <h2 className="text-2xl font-black">Problems solved</h2>
+            <ul className="mt-5 grid gap-3 text-sm text-slate-700 dark:text-slate-300">
+              {project.problems.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <BadgeCheck className="mt-0.5 shrink-0 text-sky-600 dark:text-cyan-300" size={16} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
+            <h2 className="text-2xl font-black">Business value</h2>
+            <p className="mt-5 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.businessValue}</p>
+            <p className="mt-4 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.impact}</p>
+          </article>
+
+          <article className="rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
+            <h2 className="text-2xl font-black">What I learned</h2>
+            <p className="mt-5 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.learned}</p>
+            <div className="mt-5 rounded-2xl border border-sky-200/80 bg-sky-50 p-4 text-sm leading-7 text-slate-700 dark:border-cyan-300/15 dark:bg-cyan-300/[0.06] dark:text-cyan-50">
+              <span className="font-bold text-sky-700 dark:text-cyan-200">Recruiter signal: </span>
+              {project.recruiterSignal}
+            </div>
+          </article>
         </section>
-        <section className="mt-6 grid gap-5">
-          {sections.map(([title, text]) => <article key={title} className="rounded-2xl border border-sky-200/75 bg-white/85 p-5 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none"><h2 className="text-xl font-bold text-sky-800 dark:text-cyan-200">{title}</h2><p className="mt-3 leading-7 text-slate-700 dark:text-slate-300">{text}</p></article>)}
+
+        <section className="mt-8 grid gap-4 md:grid-cols-2">
+          <Link href={`/projects/${previousProject.slug}`} className="group rounded-3xl border border-sky-200/75 bg-white/88 p-5 shadow-xl shadow-sky-100/70 transition hover:-translate-y-1 hover:border-sky-400/50 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none dark:hover:border-cyan-300/35">
+            <p className="text-sm font-bold text-sky-700 dark:text-cyan-200">Previous project</p>
+            <h2 className="mt-2 text-xl font-black">{previousProject.title}</h2>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{previousProject.category}</p>
+          </Link>
+          <Link href={`/projects/${nextProject.slug}`} className="group rounded-3xl border border-sky-200/75 bg-white/88 p-5 text-left shadow-xl shadow-sky-100/70 transition hover:-translate-y-1 hover:border-sky-400/50 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none dark:hover:border-cyan-300/35 md:text-right">
+            <p className="text-sm font-bold text-sky-700 dark:text-cyan-200">Next project</p>
+            <h2 className="mt-2 text-xl font-black">{nextProject.title}</h2>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{nextProject.category}</p>
+          </Link>
         </section>
-        <section className="mt-6 rounded-2xl border border-sky-300/40 bg-sky-50 p-6 text-center dark:border-cyan-300/20 dark:bg-cyan-300/10">
-          <h2 className="text-2xl font-bold">Need a similar project?</h2>
-          <Link href="/contact" className="mt-4 inline-flex rounded-full bg-cyan-300 px-5 py-3 font-bold text-slate-950">Request this type of build</Link>
+
+        <section className="mt-8 rounded-[2rem] border border-sky-300/50 bg-gradient-to-br from-sky-50 to-white p-6 text-center shadow-2xl shadow-sky-100/80 dark:border-cyan-300/20 dark:from-cyan-300/10 dark:to-slate-900/60 dark:shadow-cyan-500/10 md:p-10">
+          <h2 className="text-balance text-3xl font-black md:text-4xl">Need a similar website, dashboard, API or internal tool?</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-700 dark:text-slate-300">
+            Share your business problem, workflow and ideal timeline. I will help shape it into a practical, clean and production-minded solution.
+          </p>
+          <Link href="/contact" className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-cyan-300 px-6 py-3 text-sm font-bold text-slate-950 transition hover:bg-white">
+            Contact me <ArrowRight size={16} />
+          </Link>
         </section>
       </div>
     </main>
