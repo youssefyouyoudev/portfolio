@@ -16,11 +16,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://youssefyouyou.com"),
   title: {
-    default: "Youssef Youyou | Laravel & React/Next.js Full-Stack Web Developer",
+    default: "Youssef Youyou | Laravel & React Full-Stack Web Developer in Morocco",
     template: "%s | Youssef Youyou",
   },
   description:
-    "Portfolio of Youssef Youyou, Junior Full-Stack Web Developer from Morocco specializing in Laravel, React, Next.js, REST APIs, dashboards, SaaS platforms, e-commerce, deployment and SEO.",
+    "Portfolio of Youssef Youyou, a full-stack web developer from Morocco building Laravel, React/Next.js, REST API, dashboard, SaaS, automation, deployment and SEO-ready web solutions.",
   applicationName: "Youssef Youyou Portfolio",
   authors: [{ name: "Youssef Youyou", url: "https://youssefyouyou.com" }],
   creator: "Youssef Youyou",
@@ -32,9 +32,13 @@ export const metadata: Metadata = {
     "React developer Morocco",
     "Next.js developer Morocco",
     "Full-stack developer Morocco",
+    "Junior full-stack developer",
+    "Dashboard developer",
+    "API integration developer",
+    "SaaS developer Morocco",
+    "Business website developer",
     "Junior web developer Marrakech",
     "Laravel React portfolio",
-    "SaaS developer Morocco",
     "B2B web developer",
     "B2C web developer",
     "admin dashboard developer",
@@ -47,17 +51,17 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://youssefyouyou.com",
-    title: "Youssef Youyou | Laravel & React/Next.js Full-Stack Web Developer",
+    title: "Youssef Youyou | Laravel & React Full-Stack Web Developer in Morocco",
     description:
-      "Junior Full-Stack Web Developer from Morocco building Laravel, React/Next.js, REST API, dashboard, SaaS, e-commerce and SEO-ready platforms.",
+      "Full-stack web developer from Morocco building Laravel, React/Next.js, REST API, dashboard, SaaS, automation, deployment and SEO-ready web solutions.",
     siteName: "Youssef Youyou Portfolio",
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Youssef Youyou full-stack web developer portfolio" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Youssef Youyou | Laravel & React/Next.js Full-Stack Web Developer",
+    title: "Youssef Youyou | Laravel & React Full-Stack Web Developer in Morocco",
     description:
-      "Laravel, React/Next.js, REST APIs, dashboards, SaaS platforms, e-commerce, deployment and SEO.",
+      "Laravel, React/Next.js, REST APIs, dashboards, automation, deployment and SEO-ready web solutions.",
   },
   robots: {
     index: true,
@@ -93,7 +97,8 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "Person",
                 name: "Youssef Youyou",
-                jobTitle: "Junior Full-Stack Web Developer",
+                jobTitle: "Full-Stack Web Developer",
+                description: "Full-stack web developer from Morocco focused on Laravel, React/Next.js, REST APIs, dashboards, automation, deployment and SEO-ready web solutions.",
                 email: "contact@youssefyouyou.com",
                 url: "https://youssefyouyou.com",
                 sameAs: ["https://github.com/youssefyouyoudev", "https://linkedin.com/in/youssefyouyoudev"],
@@ -112,6 +117,7 @@ export default function RootLayout({
                 url: "https://youssefyouyou.com",
                 areaServed: ["Morocco", "Marrakech", "Remote"],
                 serviceType: ["Laravel backend development", "React and Next.js frontend development", "API integration", "Admin dashboards", "SaaS platforms", "Deployment and SEO"],
+                description: "Laravel, React/Next.js, API, dashboard, automation, deployment and SEO-ready web development services for recruiters, small businesses, agencies and remote clients.",
               },
             ]),
           }}

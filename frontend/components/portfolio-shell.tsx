@@ -31,10 +31,7 @@ import { Reveal } from "@/components/motion-primitives";
 import { Hero } from "@/components/sections/Hero";
 import {
   blogPosts,
-  certifications,
-  education,
   experiences,
-  languages,
   profile,
   projects,
   services,
@@ -49,6 +46,33 @@ const SkillChart = dynamic(() => import("@/components/charts").then((mod) => mod
 });
 
 const serviceIcons = [Server, Code2, LayoutDashboard, Network, Rocket, Globe2, Workflow, Search, Database, ShieldCheck];
+
+const practicalCapabilities = [
+  {
+    title: "Full-Stack Web Development",
+    text: "Production-minded web platforms with Laravel APIs, modern frontend interfaces and database-backed features.",
+    icon: Code2,
+    items: ["Laravel backend", "React/Next.js frontend", "Vue.js interfaces", "REST APIs", "MySQL database structure", "Authentication", "Admin dashboards", "Responsive UI"],
+  },
+  {
+    title: "Business Systems & Dashboards",
+    text: "Internal tools that help teams manage people, inventory, clients, reporting and recurring workflows.",
+    icon: LayoutDashboard,
+    items: ["HR dashboards", "Inventory modules", "Client portals", "Admin panels", "Reporting interfaces", "SaaS-style structures", "Roles and permissions", "Workflow management"],
+  },
+  {
+    title: "Deployment, SEO & Production",
+    text: "The practical release layer: server setup, technical SEO, performance basics and safer production configuration.",
+    icon: Rocket,
+    items: ["Ubuntu/Linux", "Nginx", "Git deployment", "Cloudflare", "Production builds", "Performance optimization", "Technical SEO", "Secure configuration basics"],
+  },
+  {
+    title: "Digitalization & Automation",
+    text: "Workflow improvements for teams moving from manual files and repetitive tasks toward cleaner digital processes.",
+    icon: Workflow,
+    items: ["Digital archiving", "Excel/VBA automation", "Document tracking", "Repetitive task reduction", "Internal workflow improvement", "IT support", "Business process improvement"],
+  },
+];
 
 function SectionTitle({
   eyebrow,
@@ -422,38 +446,65 @@ export default function PortfolioShell() {
         </div>
       </section>
 
-      <section className="relative mx-auto grid max-w-7xl gap-5 px-4 py-16 md:grid-cols-3 md:py-24">
-        {[
-          ["Education", education.map((item) => item.join(" - "))],
-          ["Certifications", certifications],
-          ["Languages", languages],
-        ].map(([title, items]) => (
-          <Reveal key={String(title)}>
-            <PremiumCard className="h-full p-6">
-              <h2 className="text-xl font-black text-sky-800 dark:text-cyan-100">{String(title)}</h2>
-              {(items as string[]).map((item) => (
-                <p key={item} className="mt-4 text-sm leading-7 text-slate-700 dark:text-slate-300">{item}</p>
-              ))}
-            </PremiumCard>
-          </Reveal>
-        ))}
+      <section id="capabilities" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
+        <SectionTitle
+          eyebrow="Practical Capabilities"
+          title="Skills, tools & practical capabilities"
+          text="A focused set of technologies and practical skills I use to build business websites, dashboards, APIs, internal tools and production-ready web platforms."
+        />
+        <div className="grid gap-5 lg:grid-cols-2">
+          {practicalCapabilities.map((capability) => {
+            const Icon = capability.icon;
+            return (
+              <Reveal key={capability.title}>
+                <PremiumCard className="h-full p-6 md:p-7">
+                  <div className="flex flex-wrap items-start justify-between gap-4">
+                    <span className="grid h-13 w-13 place-items-center rounded-2xl border border-sky-200/80 bg-sky-50 text-sky-700 shadow-lg shadow-sky-100/70 dark:border-cyan-400/20 dark:bg-cyan-300/10 dark:text-cyan-200 dark:shadow-cyan-500/10">
+                      <Icon size={24} />
+                    </span>
+                    <span className="rounded-full border border-sky-200/80 bg-white/80 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-sky-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-cyan-100">
+                      Deliverables
+                    </span>
+                  </div>
+                  <h3 className="mt-6 text-2xl font-black text-slate-950 dark:text-white">{capability.title}</h3>
+                  <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600 dark:text-slate-300">{capability.text}</p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {capability.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-200"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </PremiumCard>
+              </Reveal>
+            );
+          })}
+        </div>
       </section>
 
       <section id="blog" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
         <SectionTitle
-          eyebrow="Blog"
-          title="Technical writing that supports trust"
-          text="Article ideas that can become SEO assets and show how I think about dashboards, APIs, Filament, deployment and digitalization."
+          eyebrow="Technical Notes"
+          title="Practical notes from dashboards, APIs and automation work"
+          text="Short, honest technical notes that show how I think about Laravel, React, admin dashboards, deployment and business digitalization."
         />
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {blogPosts.map((post) => (
             <Reveal key={post.slug}>
               <PremiumCard className="h-full p-5">
-                <BookOpenText className="text-sky-600 dark:text-cyan-300" size={20} />
+                <div className="flex items-center justify-between gap-3">
+                  <BookOpenText className="text-sky-600 dark:text-cyan-300" size={20} />
+                  <span className="rounded-full border border-sky-200/75 bg-sky-50 px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-sky-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-cyan-100">
+                    {post.category}
+                  </span>
+                </div>
                 <h3 className="mt-4 font-black text-slate-950 dark:text-white">{post.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{post.excerpt}</p>
                 <Link className="mt-5 inline-flex text-sm font-bold text-sky-700 dark:text-cyan-200" href={`/blog/${post.slug}`}>
-                  Read draft
+                  Read note
                 </Link>
               </PremiumCard>
             </Reveal>
@@ -483,7 +534,7 @@ export default function PortfolioShell() {
           <div className="mt-8 grid gap-3 text-sm text-slate-700 dark:text-slate-300 sm:grid-cols-2">
             {[
               [Mail, "Email", `mailto:${profile.email}`],
-              [Send, "WhatsApp", "https://wa.me/212600000000"],
+              [Send, "WhatsApp on request", `mailto:${profile.email}?subject=WhatsApp%20contact%20request`],
               [GitBranch, "GitHub", profile.github],
               [Network, "LinkedIn", profile.linkedin],
             ].map(([Icon, label, href]) => {

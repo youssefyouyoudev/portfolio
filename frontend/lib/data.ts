@@ -44,7 +44,7 @@ export const skillDistribution = [
 
 export const timeline = [
   { year: "2019", event: "Freelance web development started" },
-  { year: "2021", event: "Full-stack digital development studies" },
+  { year: "2021", event: "Full-stack web development foundations" },
   { year: "2023", event: "MediaTechly React remote experience" },
   { year: "2023", event: "Administrative digitalization and IT support" },
   { year: "2026", event: "Full-stack portfolio and production systems focus" },
@@ -69,14 +69,10 @@ export const services = [
 ].map(([title, description, tag]) => ({ title, description, tag, slug: title.toLowerCase().replaceAll("/", "").replaceAll(" ", "-") }));
 
 export const skills = {
-  Backend: ["Laravel", "PHP", "Node.js", "Express.js", "REST APIs"],
-  Frontend: ["React.js", "Next.js", "Vue.js", "JavaScript ES6+", "HTML5", "CSS3", "Tailwind CSS"],
-  Database: ["MySQL", "PostgreSQL", "Relational database design"],
-  DevOps: ["Linux", "Nginx", "Git", "Production deployment"],
-  Security: ["2FA", "RBAC", "Secured APIs", "OWASP best practices"],
-  Tools: ["GitHub/GitLab", "Jira", "Trello", "Slack", "Postman"],
-  "IT/Admin": ["Excel Advanced", "VBA", "Digital archiving", "Automation", "IT support"],
-  Design: ["Posters", "Visual supports", "Professional documents", "Simple UI"],
+  "Main stack": ["Laravel", "PHP", "React.js", "Next.js", "Vue.js", "MySQL", "REST APIs", "Tailwind CSS"],
+  "Production tools": ["Linux", "Nginx", "Git", "Cloudflare", "Postman", "Production deployment"],
+  "Business systems": ["Admin dashboards", "Client portals", "Roles and permissions", "Reporting interfaces", "Relational database design"],
+  "Automation support": ["Excel Advanced", "VBA", "Digital archiving", "Workflow automation", "SEO basics", "OWASP basics"],
 };
 
 export const projects = [
@@ -138,7 +134,7 @@ export const projects = [
   },
   {
     title: "E-commerce / Client Portal Systems",
-    slug: "e-commerce-client-portal-systems",
+    slug: "ecommerce-client-portal-systems",
     category: "B2C / B2B commerce",
     stack: ["Laravel", "PHP", "JavaScript", "MySQL"],
     features: ["Product catalogue", "Cart", "Orders", "Payment structure", "Client area", "Roles and permissions", "Reporting", "Admin dashboard"],
@@ -214,13 +210,52 @@ export const certifications = ["Sales and Business Development - 2023", "Cyberse
 export const languages = ["Arabic: Native", "French: Good level", "English: Good level", "German: B1"];
 
 export const blogPosts = [
-  "How I build Laravel and React dashboards",
-  "Why businesses need internal digitalization",
-  "Building admin panels with Laravel and Filament",
-  "API integration best practices",
-  "From Excel automation to web applications",
-].map((title) => ({
-  title,
-  slug: title.toLowerCase().replaceAll(" ", "-"),
-  excerpt: "Practical notes about production-minded web platforms, dashboards, APIs and business workflows.",
-}));
+  {
+    title: "How I build Laravel and React dashboards",
+    slug: "how-i-build-laravel-and-react-dashboards",
+    category: "Dashboards",
+    excerpt: "A practical dashboard starts with the workflow: roles, data tables, filters, forms, API responses and the decisions users need to make quickly.",
+    points: [
+      "Define the business entities before designing screens.",
+      "Use Laravel validation and API Resources to keep responses predictable.",
+      "Build React components around repeated dashboard patterns: tables, filters, status badges and forms.",
+      "Keep deployment and SEO details in mind when dashboards connect to public pages.",
+    ],
+  },
+  {
+    title: "From Excel automation to web applications",
+    slug: "from-excel-automation-to-web-applications",
+    category: "Automation",
+    excerpt: "Excel/VBA can be the first step toward digitalization. When the workflow grows, the same logic can become a cleaner web application.",
+    points: [
+      "Start by removing repetitive calculations and manual filtering.",
+      "Identify which spreadsheet fields should become database tables.",
+      "Move shared workflows into simple forms, dashboards and reports.",
+      "Keep Excel when it is still the fastest useful tool, and move to web when collaboration matters.",
+    ],
+  },
+  {
+    title: "Practical API structure for portfolio and admin dashboards",
+    slug: "practical-api-structure-for-portfolio-and-admin-dashboards",
+    category: "APIs",
+    excerpt: "Clean APIs are not only about endpoints. They need validation, resources, rate limits, admin-editable content and predictable frontend states.",
+    points: [
+      "Separate public content endpoints from admin-protected workflows.",
+      "Use Form Requests for validation and Resources for response shape.",
+      "Track important actions such as contact messages and CV downloads.",
+      "Design endpoints around UI needs without coupling everything to one screen.",
+    ],
+  },
+  {
+    title: "Why small businesses need internal dashboards",
+    slug: "why-small-businesses-need-internal-dashboards",
+    category: "Business systems",
+    excerpt: "A small dashboard can replace scattered messages, manual files and repeated follow-up with one clear place to manage work.",
+    points: [
+      "Dashboards make daily work visible: orders, documents, users, tasks or inventory.",
+      "Roles and permissions keep information organized for different team members.",
+      "Reports help owners understand operations without waiting for manual summaries.",
+      "The best dashboard starts small and grows from real team habits.",
+    ],
+  },
+];

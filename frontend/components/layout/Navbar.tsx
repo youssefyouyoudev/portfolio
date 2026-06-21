@@ -53,9 +53,6 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a href="/admin" className="hidden rounded-full px-3 py-2 text-sm text-slate-500 transition hover:text-sky-700 dark:text-slate-400 dark:hover:text-cyan-200 md:inline-flex">
-            Admin
-          </a>
           <ThemeToggle />
           <GradientButton href="#contact" className="hidden min-h-10 rounded-full px-4 py-2.5 lg:inline-flex">
             Hire Me
