@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #020617;
   --foreground: #f8fafc;
@@ -25,6 +27,7 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
+  transition: background-color 220ms ease, color 220ms ease;
 }
 
 html {
@@ -40,9 +43,9 @@ html {
   width: 100%;
   border-radius: 1rem;
   border: 1px solid rgba(34, 211, 238, 0.14);
-  background: rgba(2, 6, 23, 0.72);
+  background: rgba(255, 255, 255, 0.82);
   padding: 0.9rem 1rem;
-  color: white;
+  color: #0f172a;
   outline: none;
   transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
@@ -50,15 +53,54 @@ html {
 .field:focus {
   border-color: rgba(34, 211, 238, 0.75);
   box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.12);
-  background: rgba(2, 6, 23, 0.9);
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .field::placeholder {
-  color: rgb(148, 163, 184);
+  color: rgb(100, 116, 139);
 }
 
 .field option {
   color: #020817;
+}
+
+.dark .field {
+  background: rgba(2, 6, 23, 0.72);
+  color: white;
+}
+
+.dark .field:focus {
+  background: rgba(2, 6, 23, 0.9);
+}
+
+.dark .field::placeholder {
+  color: rgb(148, 163, 184);
+}
+
+html:not(.dark) .text-white,
+html:not(.dark) .text-slate-50,
+html:not(.dark) .text-slate-100,
+html:not(.dark) .text-slate-200 {
+  color: #0f172a;
+}
+
+html:not(.dark) .text-slate-300 {
+  color: #334155;
+}
+
+html:not(.dark) .text-slate-400,
+html:not(.dark) .text-slate-500 {
+  color: #475569;
+}
+
+html:not(.dark) .text-cyan-100,
+html:not(.dark) .text-cyan-200,
+html:not(.dark) .text-cyan-300 {
+  color: #0369a1;
+}
+
+html:not(.dark) .text-cyan-50 {
+  color: #164e63;
 }
 
 @media (prefers-reduced-motion: reduce) {

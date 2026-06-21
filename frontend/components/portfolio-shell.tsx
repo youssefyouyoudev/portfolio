@@ -45,7 +45,7 @@ import {
 
 const SkillChart = dynamic(() => import("@/components/charts").then((mod) => mod.SkillChart), {
   ssr: false,
-  loading: () => <div className="h-80 rounded-3xl border border-cyan-400/15 bg-slate-900/45" />,
+  loading: () => <div className="h-80 rounded-3xl border border-sky-200/70 bg-white/70 dark:border-cyan-400/15 dark:bg-slate-900/45" />,
 });
 
 const serviceIcons = [Server, Code2, LayoutDashboard, Network, Rocket, Globe2, Workflow, Search, Database, ShieldCheck];
@@ -63,9 +63,9 @@ function SectionTitle({
 }) {
   return (
     <Reveal className={`mb-12 max-w-4xl ${align === "center" ? "mx-auto text-center" : ""}`}>
-      <p className="text-xs font-black uppercase tracking-[0.32em] text-cyan-300">{eyebrow}</p>
-      <h2 className="mt-4 text-balance text-3xl font-black tracking-tight text-slate-50 md:text-5xl">{title}</h2>
-      {text && <p className="mt-5 text-pretty text-base leading-8 text-slate-400 md:text-lg">{text}</p>}
+      <p className="text-xs font-black uppercase tracking-[0.32em] text-sky-700 dark:text-cyan-300">{eyebrow}</p>
+      <h2 className="mt-4 text-balance text-3xl font-black tracking-tight text-slate-950 dark:text-slate-50 md:text-5xl">{title}</h2>
+      {text && <p className="mt-5 text-pretty text-base leading-8 text-slate-700 dark:text-slate-300 md:text-lg">{text}</p>}
     </Reveal>
   );
 }
@@ -73,10 +73,10 @@ function SectionTitle({
 function PremiumCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <div
-      className={`group relative overflow-hidden rounded-3xl border border-cyan-400/15 bg-slate-900/55 shadow-2xl shadow-slate-950/25 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-cyan-300/35 hover:bg-slate-900/70 hover:shadow-cyan-500/10 ${className}`}
+      className={`group relative overflow-hidden rounded-3xl border border-sky-200/70 bg-white/85 shadow-2xl shadow-sky-100/80 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-sky-400/45 hover:bg-white hover:shadow-sky-200/80 dark:border-cyan-400/15 dark:bg-slate-900/55 dark:shadow-slate-950/25 dark:hover:border-cyan-300/35 dark:hover:bg-slate-900/70 dark:hover:shadow-cyan-500/10 ${className}`}
     >
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/60 to-transparent opacity-70" />
-      <div className="pointer-events-none absolute -right-16 -top-16 h-32 w-32 rounded-full bg-cyan-400/10 blur-3xl opacity-0 transition group-hover:opacity-100" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-400/55 to-transparent opacity-70 dark:via-cyan-300/60" />
+      <div className="pointer-events-none absolute -right-16 -top-16 h-32 w-32 rounded-full bg-sky-300/20 blur-3xl opacity-0 transition group-hover:opacity-100 dark:bg-cyan-400/10" />
       {children}
     </div>
   );
@@ -84,9 +84,9 @@ function PremiumCard({ children, className = "" }: { children: React.ReactNode; 
 
 function ProjectMockup({ title }: { title: string }) {
   return (
-    <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-cyan-400/15 bg-[#020617] p-3">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(34,211,238,.18),transparent_35%),linear-gradient(135deg,rgba(14,165,233,.14),rgba(2,6,23,.9))]" />
-      <div className="relative flex h-full flex-col rounded-xl border border-white/10 bg-slate-950/70 p-3">
+    <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-sky-200/70 bg-sky-50 p-3 dark:border-cyan-400/15 dark:bg-[#020617]">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(14,165,233,.18),transparent_35%),linear-gradient(135deg,rgba(255,255,255,.8),rgba(224,242,254,.9))] dark:bg-[radial-gradient(circle_at_72%_18%,rgba(34,211,238,.18),transparent_35%),linear-gradient(135deg,rgba(14,165,233,.14),rgba(2,6,23,.9))]" />
+      <div className="relative flex h-full flex-col rounded-xl border border-sky-200/70 bg-white/75 p-3 dark:border-white/10 dark:bg-slate-950/70">
         <div className="flex items-center gap-1.5">
           <span className="h-2 w-2 rounded-full bg-rose-400/80" />
           <span className="h-2 w-2 rounded-full bg-amber-300/80" />
@@ -98,16 +98,16 @@ function ProjectMockup({ title }: { title: string }) {
             <div className="h-3 rounded-full bg-cyan-300/70" />
             <div className="h-3 w-3/4 rounded-full bg-sky-400/35" />
             <div className="mt-4 grid gap-2">
-              <div className="h-10 rounded-xl border border-white/10 bg-white/[0.04]" />
-              <div className="h-10 rounded-xl border border-white/10 bg-white/[0.04]" />
+              <div className="h-10 rounded-xl border border-sky-200/70 bg-sky-50 dark:border-white/10 dark:bg-white/[0.04]" />
+              <div className="h-10 rounded-xl border border-sky-200/70 bg-sky-50 dark:border-white/10 dark:bg-white/[0.04]" />
             </div>
           </div>
-          <div className="rounded-2xl border border-cyan-400/10 bg-cyan-300/[0.05] p-3">
+          <div className="rounded-2xl border border-sky-200/70 bg-sky-100/70 p-3 dark:border-cyan-400/10 dark:bg-cyan-300/[0.05]">
             <div className="h-20 rounded-xl bg-gradient-to-r from-sky-500/40 to-cyan-300/30" />
             <div className="mt-3 grid grid-cols-3 gap-2">
-              <div className="h-8 rounded-lg bg-white/[0.06]" />
-              <div className="h-8 rounded-lg bg-white/[0.06]" />
-              <div className="h-8 rounded-lg bg-white/[0.06]" />
+              <div className="h-8 rounded-lg bg-white/75 dark:bg-white/[0.06]" />
+              <div className="h-8 rounded-lg bg-white/75 dark:bg-white/[0.06]" />
+              <div className="h-8 rounded-lg bg-white/75 dark:bg-white/[0.06]" />
             </div>
           </div>
         </div>
@@ -132,8 +132,8 @@ export default function PortfolioShell() {
   );
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#020617] text-slate-100">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(34,211,238,.14),transparent_30%),radial-gradient(circle_at_82%_0%,rgba(14,165,233,.14),transparent_34%),linear-gradient(180deg,#020617,#061826_42%,#020617)]" />
+    <main className="min-h-screen overflow-hidden bg-slate-50 text-slate-950 dark:bg-[#020617] dark:text-slate-100">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(14,165,233,.14),transparent_30%),radial-gradient(circle_at_82%_0%,rgba(8,145,178,.12),transparent_34%),linear-gradient(180deg,#f8fafc,#eef6ff_42%,#f8fafc)] dark:bg-[radial-gradient(circle_at_18%_8%,rgba(34,211,238,.14),transparent_30%),radial-gradient(circle_at_82%_0%,rgba(14,165,233,.14),transparent_34%),linear-gradient(180deg,#020617,#061826_42%,#020617)]" />
       <Navbar />
       <Hero />
 
@@ -147,15 +147,15 @@ export default function PortfolioShell() {
           {stats.map((stat, index) => (
             <Reveal key={stat.label}>
               <PremiumCard className="h-full p-6">
-                <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-300">{stat.tone}</p>
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-sky-700 dark:text-cyan-300">{stat.tone}</p>
                 <div className="mt-5 flex items-end gap-3">
-                  <span className="text-5xl font-black tracking-tight text-white">{stat.value}</span>
-                  <span className="mb-2 h-1.5 flex-1 rounded-full bg-slate-800">
+                  <span className="text-5xl font-black tracking-tight text-slate-950 dark:text-white">{stat.value}</span>
+                  <span className="mb-2 h-1.5 flex-1 rounded-full bg-sky-100 dark:bg-slate-800">
                     <span className="block h-1.5 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300" style={{ width: `${76 + index * 6}%` }} />
                   </span>
                 </div>
-                <h3 className="mt-5 text-lg font-bold text-slate-50">{stat.label}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-400">{stat.detail}</p>
+                <h3 className="mt-5 text-lg font-bold text-slate-950 dark:text-slate-50">{stat.label}</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{stat.detail}</p>
               </PremiumCard>
             </Reveal>
           ))}
@@ -165,8 +165,8 @@ export default function PortfolioShell() {
             <PremiumCard className="p-4 md:p-6">
               <div className="mb-5 flex items-center justify-between gap-4">
                 <div>
-                  <h3 className="text-xl font-bold text-white">Skill focus distribution</h3>
-                  <p className="mt-1 text-sm text-slate-400">Practical strengths based on CV/project experience.</p>
+                  <h3 className="text-xl font-bold text-slate-950 dark:text-white">Skill focus distribution</h3>
+                  <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Practical strengths based on CV/project experience.</p>
                 </div>
                 <Sparkles className="hidden text-cyan-300 sm:block" />
               </div>
@@ -175,14 +175,14 @@ export default function PortfolioShell() {
           </Reveal>
           <Reveal>
             <PremiumCard className="p-6">
-              <h3 className="text-xl font-bold text-white">Career timeline</h3>
+              <h3 className="text-xl font-bold text-slate-950 dark:text-white">Career timeline</h3>
               <div className="mt-6 space-y-5">
                 {timeline.map((item) => (
                   <div key={`${item.year}-${item.event}`} className="relative pl-8">
                     <span className="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_20px_rgba(34,211,238,.8)]" />
                     <span className="absolute left-1.5 top-5 h-[calc(100%+1rem)] w-px bg-cyan-300/20 last:hidden" />
-                    <p className="text-sm font-black text-cyan-200">{item.year}</p>
-                    <p className="mt-1 text-sm leading-6 text-slate-300">{item.event}</p>
+                    <p className="text-sm font-black text-sky-700 dark:text-cyan-200">{item.year}</p>
+                    <p className="mt-1 text-sm leading-6 text-slate-700 dark:text-slate-300">{item.event}</p>
                   </div>
                 ))}
               </div>
@@ -204,14 +204,14 @@ export default function PortfolioShell() {
               <Reveal key={service.title}>
                 <PremiumCard className="flex h-full flex-col p-6">
                   <div className="flex items-start justify-between gap-4">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl border border-cyan-400/20 bg-cyan-300/10 text-cyan-200 shadow-lg shadow-cyan-500/10">
+                    <span className="grid h-12 w-12 place-items-center rounded-2xl border border-sky-200/80 bg-sky-50 text-sky-700 shadow-lg shadow-sky-200/60 dark:border-cyan-400/20 dark:bg-cyan-300/10 dark:text-cyan-200 dark:shadow-cyan-500/10">
                       <Icon size={22} />
                     </span>
-                    <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs font-bold text-cyan-100">{service.tag}</span>
+                    <span className="rounded-full border border-sky-200/70 bg-sky-50 px-3 py-1 text-xs font-bold text-sky-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-cyan-100">{service.tag}</span>
                   </div>
-                  <h3 className="mt-6 text-xl font-black text-white">{service.title}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-7 text-slate-400">{service.description}</p>
-                  <a href="#contact" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-cyan-200 transition group-hover:translate-x-1">
+                  <h3 className="mt-6 text-xl font-black text-slate-950 dark:text-white">{service.title}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-7 text-slate-600 dark:text-slate-300">{service.description}</p>
+                  <a href="#contact" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-sky-700 transition group-hover:translate-x-1 dark:text-cyan-200">
                     Request this service <ArrowRight size={16} />
                   </a>
                 </PremiumCard>
@@ -224,12 +224,12 @@ export default function PortfolioShell() {
       <section id="about" className="relative mx-auto grid max-w-7xl gap-6 px-4 py-16 md:py-24 lg:grid-cols-[1.05fr_.95fr]">
         <Reveal>
           <PremiumCard className="p-7 md:p-8">
-            <p className="text-xs font-black uppercase tracking-[0.3em] text-cyan-300">About</p>
-            <h2 className="mt-4 text-3xl font-black tracking-tight text-white md:text-5xl">Practical developer with business-process context</h2>
-            <p className="mt-6 leading-8 text-slate-300">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-sky-700 dark:text-cyan-300">About</p>
+            <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 dark:text-white md:text-5xl">Practical developer with business-process context</h2>
+            <p className="mt-6 leading-8 text-slate-700 dark:text-slate-300">
               I am Youssef Youyou, a Full-Stack Web Developer from Nador, Morocco. I focus on Laravel, React/Next.js, Vue.js, REST APIs, MySQL, dashboards, SaaS concepts, e-commerce systems and process digitalization.
             </p>
-            <p className="mt-4 leading-8 text-slate-300">
+            <p className="mt-4 leading-8 text-slate-700 dark:text-slate-300">
               My background combines freelance web projects, remote React.js work with MediaTechly in London, and current administrative digitalization and IT support. That mix helps me build systems that are useful, maintainable and realistic for teams.
             </p>
           </PremiumCard>
@@ -243,9 +243,9 @@ export default function PortfolioShell() {
           ].map(([title, text]) => (
             <Reveal key={title}>
               <PremiumCard className="h-full p-6">
-                <BadgeCheck className="text-cyan-300" />
-                <h3 className="mt-4 font-bold text-white">{title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-400">{text}</p>
+                <BadgeCheck className="text-sky-600 dark:text-cyan-300" />
+                <h3 className="mt-4 font-bold text-slate-950 dark:text-white">{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{text}</p>
               </PremiumCard>
             </Reveal>
           ))}
@@ -262,10 +262,10 @@ export default function PortfolioShell() {
           {Object.entries(skills).map(([category, items]) => (
             <Reveal key={category}>
               <PremiumCard className="h-full p-6">
-                <h3 className="font-black text-cyan-100">{category}</h3>
+                <h3 className="font-black text-sky-800 dark:text-cyan-100">{category}</h3>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {items.map((skill) => (
-                    <span key={skill} className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-sm text-slate-200">
+                    <span key={skill} className="rounded-full border border-sky-200/75 bg-sky-50 px-3 py-1.5 text-sm font-medium text-slate-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-200">
                       {skill}
                     </span>
                   ))}
@@ -282,24 +282,50 @@ export default function PortfolioShell() {
           title="API-driven structure with admin-editable content"
           text="The portfolio itself demonstrates the kind of structure clients need: editable content, clean endpoints, tracked actions, SEO routes and deployment-ready configuration."
         />
-        <div className="grid gap-5 lg:grid-cols-3">
-          {[
-            ["Filament Admin", "Editable projects, posts, skills, services, settings and tracked messages.", LayoutDashboard],
-            ["Laravel REST API", "Resources, Form Requests, Policies, Sanctum, rate limits and clean endpoints.", Server],
-            ["Next.js Frontend", "Responsive pages, charts, motion, JSON-LD, sitemap and optimized visuals.", Code2],
-          ].map(([title, text, Icon]) => {
-            const CardIcon = Icon as typeof LayoutDashboard;
-            return (
-              <Reveal key={String(title)}>
-                <PremiumCard className="p-6">
-                  <CardIcon className="text-cyan-300" />
-                  <h3 className="mt-5 text-xl font-black text-white">{String(title)}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-400">{String(text)}</p>
-                </PremiumCard>
-              </Reveal>
-            );
-          })}
-        </div>
+        <Reveal>
+          <PremiumCard className="p-5 md:p-8">
+            <div className="grid gap-4 lg:grid-cols-4">
+              {[
+                ["Next.js Frontend", "SEO pages, fast UI, contact form and motion layer.", Code2],
+                ["Laravel REST API", "Resources, Form Requests, rate limits and clean endpoints.", Server],
+                ["MySQL Database", "Projects, skills, posts, messages and CV download events.", Database],
+                ["Filament Admin", "Editable content, messages, settings and dashboard widgets.", LayoutDashboard],
+              ].map(([title, text, Icon], index) => {
+                const CardIcon = Icon as typeof LayoutDashboard;
+                return (
+                  <div key={String(title)} className="relative">
+                    {index < 3 && (
+                      <span className="absolute -right-4 top-1/2 z-10 hidden h-px w-8 bg-gradient-to-r from-sky-400 to-cyan-300 lg:block" />
+                    )}
+                    <div className="h-full rounded-2xl border border-sky-200/75 bg-sky-50/80 p-5 shadow-lg shadow-sky-100/70 dark:border-cyan-400/15 dark:bg-slate-950/50 dark:shadow-none">
+                      <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-sky-700 shadow-sm dark:bg-cyan-300/10 dark:text-cyan-200">
+                        <CardIcon size={21} />
+                      </span>
+                      <h3 className="mt-5 text-lg font-black text-slate-950 dark:text-white">{String(title)}</h3>
+                      <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{String(text)}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                ["Projects API", "Case study content and stack data."],
+                ["Contact API", "Validated project inquiries with rate limits."],
+                ["Admin Dashboard", "Filament resources for editable portfolio content."],
+                ["CV Download Tracking", "Download events prepared for admin reporting."],
+              ].map(([title, text]) => (
+                <div
+                  key={title}
+                  className="rounded-2xl border border-sky-200/75 bg-white/75 p-4 dark:border-white/10 dark:bg-white/[0.04]"
+                >
+                  <p className="text-sm font-black text-sky-800 dark:text-cyan-100">{title}</p>
+                  <p className="mt-2 text-xs leading-5 text-slate-600 dark:text-slate-400">{text}</p>
+                </div>
+              ))}
+            </div>
+          </PremiumCard>
+        </Reveal>
       </section>
 
       <section id="projects" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
@@ -313,23 +339,23 @@ export default function PortfolioShell() {
             <Reveal key={project.slug}>
               <PremiumCard className="h-full p-5">
                 <ProjectMockup title={project.title} />
-                <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-cyan-300">{project.category}</p>
-                <h3 className="mt-3 text-2xl font-black text-white">{project.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-300">{project.businessProblem}</p>
-                <div className="mt-4 rounded-2xl border border-cyan-300/15 bg-cyan-300/[0.06] p-4 text-sm leading-7 text-cyan-50">
-                  <span className="font-bold text-cyan-200">Business value: </span>
+                <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-sky-700 dark:text-cyan-300">{project.category}</p>
+                <h3 className="mt-3 text-2xl font-black text-slate-950 dark:text-white">{project.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.businessProblem}</p>
+                <div className="mt-4 rounded-2xl border border-sky-200/80 bg-sky-50 p-4 text-sm leading-7 text-slate-700 dark:border-cyan-300/15 dark:bg-cyan-300/[0.06] dark:text-cyan-50">
+                  <span className="font-bold text-sky-700 dark:text-cyan-200">Business value: </span>
                   {project.businessValue}
                 </div>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {project.stack.slice(0, 4).map((tag) => (
-                    <span key={tag} className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs text-slate-200">{tag}</span>
+                    <span key={tag} className="rounded-full border border-sky-200/75 bg-white px-3 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-200">{tag}</span>
                   ))}
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link href={`/projects/${project.slug}`} className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-white">
                     Case study <ExternalLink size={15} />
                   </Link>
-                  <a href="#contact" className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-sm font-bold text-slate-200 transition hover:border-cyan-300/40 hover:text-cyan-100">
+                  <a href="#contact" className="inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-white/70 px-4 py-2 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/40 dark:hover:text-cyan-100">
                     Similar project
                   </a>
                 </div>
@@ -355,18 +381,18 @@ export default function PortfolioShell() {
                   <PremiumCard className="p-6">
                     <div className="flex flex-wrap items-start justify-between gap-4">
                       <div>
-                        <h3 className="text-xl font-black text-white">{experience.role}</h3>
-                        {experience.company && <p className="mt-1 font-semibold text-cyan-200">{experience.company}</p>}
+                        <h3 className="text-xl font-black text-slate-950 dark:text-white">{experience.role}</h3>
+                        {experience.company && <p className="mt-1 font-semibold text-sky-700 dark:text-cyan-200">{experience.company}</p>}
                       </div>
-                      <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/15 bg-cyan-300/10 px-3 py-1 text-xs font-bold text-cyan-100">
+                      <span className="inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-xs font-bold text-sky-700 dark:border-cyan-400/15 dark:bg-cyan-300/10 dark:text-cyan-100">
                         <CalendarDays size={14} /> {experience.date}
                       </span>
                     </div>
-                    <p className="mt-2 text-sm text-slate-400">{experience.location}</p>
-                    <ul className="mt-5 grid gap-2 text-sm leading-6 text-slate-300">
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{experience.location}</p>
+                    <ul className="mt-5 grid gap-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
                       {experience.points.map((point) => (
                         <li key={point} className="flex gap-2">
-                          <CheckCircle2 className="mt-0.5 shrink-0 text-cyan-300" size={16} />
+                          <CheckCircle2 className="mt-0.5 shrink-0 text-sky-600 dark:text-cyan-300" size={16} />
                           {point}
                         </li>
                       ))}
@@ -387,9 +413,9 @@ export default function PortfolioShell() {
         ].map(([title, items]) => (
           <Reveal key={String(title)}>
             <PremiumCard className="h-full p-6">
-              <h2 className="text-xl font-black text-cyan-100">{String(title)}</h2>
+              <h2 className="text-xl font-black text-sky-800 dark:text-cyan-100">{String(title)}</h2>
               {(items as string[]).map((item) => (
-                <p key={item} className="mt-4 text-sm leading-7 text-slate-300">{item}</p>
+                <p key={item} className="mt-4 text-sm leading-7 text-slate-700 dark:text-slate-300">{item}</p>
               ))}
             </PremiumCard>
           </Reveal>
@@ -406,10 +432,10 @@ export default function PortfolioShell() {
           {blogPosts.map((post) => (
             <Reveal key={post.slug}>
               <PremiumCard className="h-full p-5">
-                <BookOpenText className="text-cyan-300" size={20} />
-                <h3 className="mt-4 font-black text-white">{post.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-400">{post.excerpt}</p>
-                <Link className="mt-5 inline-flex text-sm font-bold text-cyan-200" href={`/blog/${post.slug}`}>
+                <BookOpenText className="text-sky-600 dark:text-cyan-300" size={20} />
+                <h3 className="mt-4 font-black text-slate-950 dark:text-white">{post.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{post.excerpt}</p>
+                <Link className="mt-5 inline-flex text-sm font-bold text-sky-700 dark:text-cyan-200" href={`/blog/${post.slug}`}>
                   Read draft
                 </Link>
               </PremiumCard>
@@ -420,10 +446,10 @@ export default function PortfolioShell() {
 
       <section id="contact" className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 md:py-24 lg:grid-cols-[.9fr_1.1fr]">
         <Reveal>
-          <p className="text-xs font-black uppercase tracking-[0.3em] text-cyan-300">Contact</p>
-          <h2 className="mt-4 text-4xl font-black tracking-tight text-white md:text-5xl">Ready to build a website, dashboard, API or internal tool?</h2>
-          <p className="mt-6 text-lg leading-8 text-slate-300">
-            Let’s turn your idea into a clean, scalable and production-ready solution. Send the business goal, current problem and ideal timeline.
+          <p className="text-xs font-black uppercase tracking-[0.3em] text-sky-700 dark:text-cyan-300">Contact</p>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 dark:text-white md:text-5xl">Ready to build a website, dashboard, API or internal tool?</h2>
+          <p className="mt-6 text-lg leading-8 text-slate-700 dark:text-slate-300">
+            Let&apos;s turn your idea into a clean, scalable and production-ready solution. Send the business goal, current problem and ideal timeline.
           </p>
           <div className="mt-8 grid gap-3">
             {[
@@ -431,25 +457,30 @@ export default function PortfolioShell() {
               "Available for Marrakech, Morocco, remote, freelance, B2B/B2C and pre-hiring internship opportunities.",
               "Realistic scope, clean implementation and production-minded delivery.",
             ].map((item) => (
-              <PremiumCard key={item} className="flex gap-3 p-4 text-sm leading-6 text-slate-300">
-                <BadgeCheck className="mt-0.5 shrink-0 text-cyan-300" size={16} />
+              <PremiumCard key={item} className="flex gap-3 p-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
+                <BadgeCheck className="mt-0.5 shrink-0 text-sky-600 dark:text-cyan-300" size={16} />
                 <span>{item}</span>
               </PremiumCard>
             ))}
           </div>
-          <div className="mt-8 grid gap-3 text-sm text-slate-300 sm:grid-cols-2">
-            <a className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:border-cyan-300/30 hover:text-cyan-100" href={`mailto:${profile.email}`}>
-              <Mail className="text-cyan-300" /> Email
-            </a>
-            <a className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:border-cyan-300/30 hover:text-cyan-100" href="https://wa.me/212600000000">
-              <Send className="text-cyan-300" /> WhatsApp
-            </a>
-            <a className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:border-cyan-300/30 hover:text-cyan-100" href={profile.github}>
-              <GitBranch className="text-cyan-300" /> GitHub
-            </a>
-            <a className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:border-cyan-300/30 hover:text-cyan-100" href={profile.linkedin}>
-              <Network className="text-cyan-300" /> LinkedIn
-            </a>
+          <div className="mt-8 grid gap-3 text-sm text-slate-700 dark:text-slate-300 sm:grid-cols-2">
+            {[
+              [Mail, "Email", `mailto:${profile.email}`],
+              [Send, "WhatsApp", "https://wa.me/212600000000"],
+              [GitBranch, "GitHub", profile.github],
+              [Network, "LinkedIn", profile.linkedin],
+            ].map(([Icon, label, href]) => {
+              const ContactIcon = Icon as typeof Mail;
+              return (
+                <a
+                  key={String(label)}
+                  className="inline-flex items-center gap-3 rounded-2xl border border-sky-200/80 bg-white/75 p-4 font-semibold shadow-lg shadow-sky-100/60 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none dark:hover:border-cyan-300/30 dark:hover:text-cyan-100"
+                  href={String(href)}
+                >
+                  <ContactIcon className="text-sky-600 dark:text-cyan-300" /> {String(label)}
+                </a>
+              );
+            })}
           </div>
         </Reveal>
         <Reveal>
@@ -457,42 +488,42 @@ export default function PortfolioShell() {
         </Reveal>
       </section>
 
-      <footer className="relative border-t border-cyan-400/10 bg-gradient-to-b from-[#020617] to-[#061826] px-4 py-12">
+      <footer className="relative border-t border-sky-200/80 bg-gradient-to-b from-white to-sky-50 px-4 py-12 dark:border-cyan-400/10 dark:from-[#020617] dark:to-[#061826]">
         <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.2fr_.8fr_.8fr_.8fr]">
           <div>
-            <h2 className="text-2xl font-black text-white">Youssef <span className="text-cyan-300">Youyou</span></h2>
-            <p className="mt-3 max-w-sm text-sm leading-7 text-slate-400">
+            <h2 className="text-2xl font-black text-slate-950 dark:text-white">Youssef <span className="text-sky-600 dark:text-cyan-300">Youyou</span></h2>
+            <p className="mt-3 max-w-sm text-sm leading-7 text-slate-600 dark:text-slate-400">
               Full-Stack Web Developer building Laravel, React/Next.js, APIs, dashboards and production-ready web platforms.
             </p>
-            <a href={`mailto:${profile.email}`} className="mt-4 inline-flex text-sm font-bold text-cyan-200">{profile.email}</a>
+            <a href={`mailto:${profile.email}`} className="mt-4 inline-flex text-sm font-bold text-sky-700 dark:text-cyan-200">{profile.email}</a>
           </div>
           <div>
-            <h3 className="font-bold text-white">Quick links</h3>
-            <div className="mt-4 grid gap-3 text-sm text-slate-400">
+            <h3 className="font-bold text-slate-950 dark:text-white">Quick links</h3>
+            <div className="mt-4 grid gap-3 text-sm text-slate-600 dark:text-slate-400">
               {["Services", "Projects", "Experience", "Blog", "Contact"].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-cyan-200">{item}</a>
+                <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-sky-700 dark:hover:text-cyan-200">{item}</a>
               ))}
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-white">Services</h3>
-            <div className="mt-4 grid gap-3 text-sm text-slate-400">
+            <h3 className="font-bold text-slate-950 dark:text-white">Services</h3>
+            <div className="mt-4 grid gap-3 text-sm text-slate-600 dark:text-slate-400">
               {["Laravel APIs", "React/Next.js", "Dashboards", "Deployment"].map((item) => (
-                <a key={item} href="#services" className="hover:text-cyan-200">{item}</a>
+                <a key={item} href="#services" className="hover:text-sky-700 dark:hover:text-cyan-200">{item}</a>
               ))}
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-white">Actions</h3>
-            <div className="mt-4 grid gap-3 text-sm text-slate-400">
-              <a href="/cv-download" className="inline-flex items-center gap-2 hover:text-cyan-200"><Download size={15} /> Download CV</a>
-              <a href="#contact" className="inline-flex items-center gap-2 hover:text-cyan-200"><Send size={15} /> Contact</a>
-              <a href="#" className="hover:text-cyan-200">Back to top</a>
+            <h3 className="font-bold text-slate-950 dark:text-white">Actions</h3>
+            <div className="mt-4 grid gap-3 text-sm text-slate-600 dark:text-slate-400">
+              <a href="/cv-download" className="inline-flex items-center gap-2 hover:text-sky-700 dark:hover:text-cyan-200"><Download size={15} /> Download CV</a>
+              <a href="#contact" className="inline-flex items-center gap-2 hover:text-sky-700 dark:hover:text-cyan-200"><Send size={15} /> Contact</a>
+              <a href="#" className="hover:text-sky-700 dark:hover:text-cyan-200">Back to top</a>
             </div>
           </div>
         </div>
-        <div className="mx-auto mt-10 flex max-w-7xl flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6 text-sm text-slate-500">
-          <span>© 2026 Youssef Youyou. All rights reserved.</span>
+        <div className="mx-auto mt-10 flex max-w-7xl flex-wrap items-center justify-between gap-3 border-t border-sky-200/80 pt-6 text-sm text-slate-500 dark:border-white/10">
+          <span>Copyright 2026 Youssef Youyou. All rights reserved.</span>
           <span>youssefyouyou.com</span>
         </div>
       </footer>
