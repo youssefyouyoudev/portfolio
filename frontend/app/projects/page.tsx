@@ -50,6 +50,13 @@ export default function ProjectsPage() {
           <p className="mt-5 text-pretty text-lg leading-8 text-slate-700 dark:text-slate-300">
             A collection of web platforms, dashboards, admin systems and automation tools focused on practical business problems.
           </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {["Laravel", "React", "Dashboards", "APIs", "Automation", "Deployment"].map((chip) => (
+              <span key={chip} className="rounded-full border border-sky-200/80 bg-white/75 px-3 py-1.5 text-xs font-black uppercase tracking-[0.12em] text-sky-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-cyan-100">
+                {chip}
+              </span>
+            ))}
+          </div>
         </section>
 
         <section className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -82,6 +89,7 @@ export default function ProjectsPage() {
 
               <p className="mt-5 text-xs font-black uppercase tracking-[0.16em] text-sky-700 dark:text-cyan-300">{project.category}</p>
               <h2 className="mt-3 text-2xl font-black text-slate-950 dark:text-white">{project.title}</h2>
+              <p className="mt-1 text-sm font-bold text-sky-700 dark:text-cyan-200">{project.subtitle}</p>
               <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.shortDescription}</p>
               <div className="mt-4 rounded-2xl border border-sky-200/80 bg-sky-50 p-4 text-sm leading-7 text-slate-700 dark:border-cyan-300/15 dark:bg-cyan-300/[0.06] dark:text-cyan-50">
                 <span className="font-bold text-sky-700 dark:text-cyan-200">Business value: </span>
@@ -102,11 +110,21 @@ export default function ProjectsPage() {
                   </span>
                 ))}
               </div>
-              <Link href={`/projects/${project.slug}`} className="mt-6 inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-slate-950">
+              <Link href={project.caseStudyUrl} className="mt-6 inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-slate-950">
                 View case study <ExternalLink size={15} />
               </Link>
             </article>
           ))}
+        </section>
+
+        <section className="mt-10 rounded-[2rem] border border-sky-300/50 bg-gradient-to-br from-sky-50 to-white p-6 text-center shadow-2xl shadow-sky-100/80 dark:border-cyan-300/20 dark:from-cyan-300/10 dark:to-slate-900/60 dark:shadow-cyan-500/10 md:p-10">
+          <h2 className="text-balance text-3xl font-black md:text-4xl">Need a similar website, dashboard, API or internal tool?</h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-700 dark:text-slate-300">
+            Send the business goal, current workflow and ideal timeline. I will help shape it into a practical full-stack solution.
+          </p>
+          <Link href="/contact" className="mt-6 inline-flex items-center gap-2 rounded-full bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-white">
+            Contact me <ExternalLink size={15} />
+          </Link>
         </section>
       </div>
     </main>

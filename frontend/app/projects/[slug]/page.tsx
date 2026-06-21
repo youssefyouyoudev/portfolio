@@ -143,6 +143,7 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
           <div>
             <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">{project.category}</p>
             <h1 className="mt-4 text-balance text-4xl font-black tracking-tight md:text-6xl">{project.title}</h1>
+            <p className="mt-3 text-base font-bold text-sky-700 dark:text-cyan-200">{project.subtitle}</p>
             <p className="mt-5 text-pretty text-lg leading-8 text-slate-700 dark:text-slate-300">{project.shortDescription}</p>
             <div className="mt-6 flex flex-wrap gap-2">
               {project.stack.map((item) => (

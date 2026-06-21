@@ -36,6 +36,7 @@ export function ContactForm() {
         <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">Email<input required type="email" name="email" placeholder="you@company.com" className="field" /></label>
       </div>
       <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">Company or project name<input name="company" placeholder="Optional, but useful for B2B projects" className="field" /></label>
+      <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">Business goal<input required name="business_goal" placeholder="Example: replace manual tracking with a dashboard" className="field" /></label>
       <div className="grid gap-4 md:grid-cols-2">
         <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">Project type<select required name="project_type" className="field">{projectTypes.map((item) => <option key={item}>{item}</option>)}</select></label>
         <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">Budget range<select required name="budget_range" className="field">{budgets.map((item) => <option key={item}>{item}</option>)}</select></label>
@@ -43,7 +44,7 @@ export function ContactForm() {
       <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">Timeline<select name="timeline" className="field">{timelines.map((item) => <option key={item}>{item}</option>)}</select></label>
       <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">Project context<textarea required minLength={20} name="message" placeholder="What are you trying to improve? What exists today? Which users, dashboards, APIs, workflows or deployment needs matter most?" className="field min-h-40" /></label>
       <button disabled={status === "loading"} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-300 px-5 py-3.5 font-black text-white shadow-lg shadow-cyan-500/20 outline-none transition hover:-translate-y-0.5 hover:shadow-cyan-400/40 focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:opacity-60 dark:focus-visible:ring-cyan-300 dark:focus-visible:ring-offset-slate-950">
-        <Send size={18} /> {status === "loading" ? "Sending..." : "Send project request"}
+        <Send size={18} /> {status === "loading" ? "Sending..." : "Send message"}
       </button>
       <p className="text-xs text-slate-500 dark:text-slate-500">Protected by Laravel validation and rate limiting. No spammy newsletter tricks.</p>
       {status === "success" && <p className="rounded-xl border border-emerald-300/50 bg-emerald-50 p-3 text-sm font-medium text-emerald-800 dark:border-emerald-300/30 dark:bg-emerald-300/10 dark:text-emerald-100">Message sent. I will review the business goal, scope and technical path before replying.</p>}

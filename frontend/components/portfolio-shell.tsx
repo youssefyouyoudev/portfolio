@@ -316,7 +316,7 @@ export default function PortfolioShell() {
                 ["Next.js Frontend", "SEO pages, fast UI, contact form and motion layer.", Code2],
                 ["Laravel REST API", "Resources, Form Requests, rate limits and clean endpoints.", Server],
                 ["MySQL Database", "Projects, skills, posts, messages and CV download events.", Database],
-                ["Filament Admin", "Editable content, messages, settings and dashboard widgets.", LayoutDashboard],
+                ["Content Admin", "Editable portfolio content, messages, settings and dashboard widgets.", LayoutDashboard],
               ].map(([title, text, Icon], index) => {
                 const CardIcon = Icon as typeof LayoutDashboard;
                 return (
@@ -339,7 +339,7 @@ export default function PortfolioShell() {
               {[
                 ["Projects API", "Case study content and stack data."],
                 ["Contact API", "Validated project inquiries with rate limits."],
-                ["Admin Dashboard", "Filament resources for editable portfolio content."],
+                ["Content Dashboard", "Editable portfolio content and message review workflow."],
                 ["CV Download Tracking", "Download events prepared for admin reporting."],
               ].map(([title, text]) => (
                 <div
@@ -359,7 +359,7 @@ export default function PortfolioShell() {
         <SectionTitle
           eyebrow="Projects"
           title="Product-style case studies, not simple thumbnails"
-          text="A practical selection of web platforms, dashboards, admin systems and automation tools built around real business needs."
+          text="A practical selection of web platforms, dashboards, admin systems and automation tools focused on real business needs."
         />
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {projects.map((project, index) => (
@@ -368,6 +368,7 @@ export default function PortfolioShell() {
                 <ProjectShowcaseImage project={project} priority={index === 0} />
                 <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-sky-700 dark:text-cyan-300">{project.category}</p>
                 <h3 className="mt-3 text-2xl font-black text-slate-950 dark:text-white">{project.title}</h3>
+                <p className="mt-1 text-sm font-bold text-sky-700 dark:text-cyan-200">{project.subtitle}</p>
                 <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.shortDescription}</p>
                 <div className="mt-4 rounded-2xl border border-sky-200/80 bg-sky-50 p-4 text-sm leading-7 text-slate-700 dark:border-cyan-300/15 dark:bg-cyan-300/[0.06] dark:text-cyan-50">
                   <span className="font-bold text-sky-700 dark:text-cyan-200">Business value: </span>
@@ -387,7 +388,7 @@ export default function PortfolioShell() {
                   ))}
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href={`/projects/${project.slug}`} className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-white">
+                  <Link href={project.caseStudyUrl} className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-bold text-slate-950 transition hover:bg-white">
                     View case study <ExternalLink size={15} />
                   </Link>
                   <a href="#contact" className="inline-flex items-center gap-2 rounded-full border border-sky-200/80 bg-white/70 px-4 py-2 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/40 dark:hover:text-cyan-100">
@@ -482,10 +483,10 @@ export default function PortfolioShell() {
       <section id="blog" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
         <SectionTitle
           eyebrow="Technical Notes"
-          title="Practical notes from dashboards, APIs and automation work"
-          text="Short, honest technical notes that show how I think about Laravel, React, admin dashboards, deployment and business digitalization."
+          title="Technical writing that supports trust"
+          text="Short practical notes about dashboards, APIs, automation and production-minded web development."
         />
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {blogPosts.map((post) => (
             <Reveal key={post.slug}>
               <PremiumCard className="h-full p-5">
@@ -562,9 +563,11 @@ export default function PortfolioShell() {
           <div>
             <h3 className="font-bold text-slate-950 dark:text-white">Quick links</h3>
             <div className="mt-4 grid gap-3 text-sm text-slate-600 dark:text-slate-400">
-              {["Services", "Projects", "Experience", "Blog", "Contact"].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-sky-700 dark:hover:text-cyan-200">{item}</a>
-              ))}
+              <a href="#services" className="hover:text-sky-700 dark:hover:text-cyan-200">Services</a>
+              <a href="#projects" className="hover:text-sky-700 dark:hover:text-cyan-200">Projects</a>
+              <a href="#experience" className="hover:text-sky-700 dark:hover:text-cyan-200">Experience</a>
+              <a href="/blog" className="hover:text-sky-700 dark:hover:text-cyan-200">Technical Notes</a>
+              <a href="#contact" className="hover:text-sky-700 dark:hover:text-cyan-200">Contact</a>
             </div>
           </div>
           <div>
