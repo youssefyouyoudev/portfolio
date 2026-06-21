@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, CheckCircle2, Download, MapPin } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { FloatingDashboardVisual } from "@/components/ui/FloatingDashboardVisual";
 import { GradientButton } from "@/components/ui/GradientButton";
 import { TechBadge } from "@/components/ui/TechBadge";
@@ -16,8 +16,6 @@ const fadeUp = {
 };
 
 export function Hero() {
-  const reduceMotion = useReducedMotion();
-
   return (
     <section className="relative isolate min-h-[calc(100vh-72px)] overflow-hidden bg-gradient-to-br from-slate-50 via-sky-50 to-cyan-50 dark:from-[#020617] dark:via-[#061826] dark:to-[#071b2f]">
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(2,132,199,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(2,132,199,.08)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)] dark:bg-[linear-gradient(rgba(34,211,238,.052)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,.052)_1px,transparent_1px)]" />
@@ -25,17 +23,17 @@ export function Hero() {
       <div className="absolute right-[-8%] top-24 -z-10 h-96 w-96 rounded-full bg-cyan-300/25 blur-3xl dark:bg-blue-600/20" />
       <div className="absolute bottom-0 left-1/3 -z-10 h-64 w-64 rounded-full bg-sky-300/20 blur-3xl dark:bg-sky-400/10" />
 
-      <div className="mx-auto grid min-h-[calc(100vh-72px)] max-w-7xl items-center gap-12 px-4 py-12 sm:py-16 lg:grid-cols-[0.92fr_1.08fr] xl:gap-16">
+      <div className="mx-auto grid min-h-[calc(100vh-72px)] max-w-7xl items-center gap-14 px-4 py-16 sm:py-20 lg:grid-cols-[0.94fr_1.06fr] lg:py-18 xl:gap-20">
         <motion.div
-          initial={reduceMotion ? false : "hidden"}
+          initial={false}
           animate="show"
           transition={{ staggerChildren: 0.09 }}
-          className="relative z-10"
+          className="relative z-10 min-w-0"
         >
           <motion.div
             variants={fadeUp}
             transition={{ duration: 0.55 }}
-            className="inline-flex max-w-full items-center gap-2 rounded-full border border-sky-300/50 bg-white/75 px-4 py-2 text-sm font-medium text-sky-800 shadow-lg shadow-sky-100/70 backdrop-blur-xl dark:border-cyan-400/20 dark:bg-cyan-400/10 dark:text-cyan-100 dark:shadow-cyan-500/10"
+            className="inline-flex w-full max-w-full items-center gap-2 rounded-full border border-sky-300/50 bg-white/75 px-4 py-2 text-sm font-medium text-sky-800 shadow-lg shadow-sky-100/70 backdrop-blur-xl dark:border-cyan-400/20 dark:bg-cyan-400/10 dark:text-cyan-100 dark:shadow-cyan-500/10 sm:w-auto"
           >
             <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(16,185,129,.65)] dark:bg-emerald-300 dark:shadow-[0_0_16px_rgba(110,231,183,.9)]" />
             <span className="truncate sm:whitespace-normal">{profile.availability}</span>
@@ -44,10 +42,10 @@ export function Hero() {
           <motion.h1
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="mt-7 max-w-3xl text-5xl font-black leading-[0.92] tracking-tight text-slate-950 dark:text-slate-50 sm:text-6xl lg:text-7xl xl:text-[5.65rem]"
+            className="mt-8 max-w-3xl text-5xl font-black leading-[0.92] tracking-tight text-slate-950 dark:text-slate-50 sm:text-6xl lg:text-7xl xl:text-[5.85rem]"
           >
-            Youssef{" "}
-            <span className="bg-gradient-to-r from-sky-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent dark:from-sky-400 dark:via-blue-500 dark:to-cyan-300">
+            <span className="block">Youssef</span>
+            <span className="block bg-gradient-to-r from-sky-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent dark:from-sky-400 dark:via-blue-500 dark:to-cyan-300">
               Youyou
             </span>
           </motion.h1>
@@ -68,13 +66,18 @@ export function Hero() {
             {profile.description}
           </motion.p>
 
-          <motion.p
+          <motion.div
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="mt-5 text-sm font-semibold uppercase tracking-[0.16em] text-sky-700 dark:text-sky-300 sm:text-base sm:normal-case sm:tracking-normal"
+            className="mt-6 flex max-w-full flex-wrap items-center gap-x-3 gap-y-2 text-xs font-bold uppercase tracking-[0.14em] text-sky-700 dark:text-sky-300 sm:text-base sm:normal-case sm:tracking-normal"
           >
-            Laravel • React/Next.js • APIs • Dashboards • Deployment • SEO
-          </motion.p>
+            {["Laravel", "React/Next.js", "APIs", "Dashboards", "Deployment", "SEO"].map((item, index) => (
+              <span key={item} className="inline-flex items-center gap-3">
+                {index > 0 && <span className="h-1.5 w-1.5 rounded-full bg-sky-400 dark:bg-cyan-300" aria-hidden="true" />}
+                {item}
+              </span>
+            ))}
+          </motion.div>
 
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <GradientButton href="#projects" className="w-full sm:w-auto">
@@ -83,7 +86,7 @@ export function Hero() {
             <GradientButton href="#contact" variant="secondary" className="w-full sm:w-auto">
               Contact Me
             </GradientButton>
-            <GradientButton href="/cv-download" variant="link" className="hidden sm:inline-flex">
+            <GradientButton href="/cv-download" variant="link" className="w-full sm:w-auto">
               <Download size={17} /> Download CV
             </GradientButton>
           </motion.div>
@@ -105,16 +108,16 @@ export function Hero() {
             ))}
           </motion.div>
 
-          <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-7 flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400">
+          <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-7 flex max-w-full flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400">
             <span className="inline-flex items-center gap-2">
               <MapPin size={16} className="text-sky-600 dark:text-cyan-300" />
               Nador, Morocco
             </span>
-            <span>Remote • Freelance • Marrakech opportunities</span>
+            <span className="max-w-full">Remote / Freelance / Marrakech opportunities</span>
           </motion.div>
         </motion.div>
 
-        <div className="relative z-10 mt-2 lg:mt-0 lg:pl-4">
+        <div className="relative z-10 mt-2 max-w-full overflow-hidden lg:mt-0 lg:overflow-visible lg:pl-4">
           <FloatingDashboardVisual />
         </div>
       </div>

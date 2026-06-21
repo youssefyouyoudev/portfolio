@@ -13,7 +13,7 @@ export function TechBadge({ children, delay = 0 }: TechBadgeProps) {
 
   return (
     <motion.div
-      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, delay }}
       whileHover={reduceMotion ? undefined : { y: -5, borderColor: "rgba(34,211,238,.55)" }}

@@ -18,7 +18,7 @@ function FloatingCard({
 
   return (
     <motion.div
-      initial={reduceMotion ? false : { opacity: 0, y: 18, scale: 0.96 }}
+      initial={false}
       animate={
         reduceMotion
           ? { opacity: 1 }
@@ -45,11 +45,9 @@ function FloatingCard({
 }
 
 export function FloatingDashboardVisual() {
-  const reduceMotion = useReducedMotion();
-
   return (
     <motion.div
-      initial={reduceMotion ? false : { opacity: 0, x: 36, scale: 0.96 }}
+      initial={false}
       animate={{ opacity: 1, x: 0, scale: 1 }}
       transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
       className="relative mx-auto w-full max-w-[740px] overflow-visible"

@@ -82,9 +82,22 @@ function PremiumCard({ children, className = "" }: { children: React.ReactNode; 
   );
 }
 
-function ProjectMockup({ title }: { title: string }) {
+const mockupAccents = [
+  "from-cyan-400/70 via-sky-500/45 to-blue-600/30",
+  "from-emerald-300/65 via-cyan-400/45 to-sky-500/30",
+  "from-blue-400/65 via-cyan-300/45 to-teal-300/30",
+  "from-violet-400/60 via-sky-400/45 to-cyan-300/30",
+  "from-amber-300/65 via-sky-400/40 to-cyan-300/30",
+  "from-rose-300/55 via-sky-400/45 to-cyan-300/30",
+];
+
+function ProjectMockup({ title, index }: { title: string; index: number }) {
+  const accent = mockupAccents[index % mockupAccents.length];
+  const primaryWidth = index % 2 === 0 ? "68%" : "84%";
+  const secondaryWidth = index % 3 === 0 ? "52%" : "74%";
+
   return (
-    <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-sky-200/70 bg-sky-50 p-3 dark:border-cyan-400/15 dark:bg-[#020617]">
+    <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-sky-200/70 bg-sky-50 p-3 shadow-inner shadow-white/80 dark:border-cyan-400/15 dark:bg-[#020617] dark:shadow-none">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(14,165,233,.18),transparent_35%),linear-gradient(135deg,rgba(255,255,255,.8),rgba(224,242,254,.9))] dark:bg-[radial-gradient(circle_at_72%_18%,rgba(34,211,238,.18),transparent_35%),linear-gradient(135deg,rgba(14,165,233,.14),rgba(2,6,23,.9))]" />
       <div className="relative flex h-full flex-col rounded-xl border border-sky-200/70 bg-white/75 p-3 dark:border-white/10 dark:bg-slate-950/70">
         <div className="flex items-center gap-1.5">
@@ -95,15 +108,19 @@ function ProjectMockup({ title }: { title: string }) {
         </div>
         <div className="mt-5 grid flex-1 grid-cols-[0.7fr_1fr] gap-3">
           <div className="space-y-2">
-            <div className="h-3 rounded-full bg-cyan-300/70" />
+            <div className={`h-3 rounded-full bg-gradient-to-r ${accent}`} />
             <div className="h-3 w-3/4 rounded-full bg-sky-400/35" />
             <div className="mt-4 grid gap-2">
-              <div className="h-10 rounded-xl border border-sky-200/70 bg-sky-50 dark:border-white/10 dark:bg-white/[0.04]" />
-              <div className="h-10 rounded-xl border border-sky-200/70 bg-sky-50 dark:border-white/10 dark:bg-white/[0.04]" />
+              <div className="h-10 rounded-xl border border-sky-200/70 bg-sky-50 p-2 dark:border-white/10 dark:bg-white/[0.04]">
+                <div className={`h-full rounded-lg bg-gradient-to-r ${accent}`} style={{ width: primaryWidth }} />
+              </div>
+              <div className="h-10 rounded-xl border border-sky-200/70 bg-sky-50 p-2 dark:border-white/10 dark:bg-white/[0.04]">
+                <div className="h-full rounded-lg bg-sky-300/35 dark:bg-cyan-300/15" style={{ width: secondaryWidth }} />
+              </div>
             </div>
           </div>
           <div className="rounded-2xl border border-sky-200/70 bg-sky-100/70 p-3 dark:border-cyan-400/10 dark:bg-cyan-300/[0.05]">
-            <div className="h-20 rounded-xl bg-gradient-to-r from-sky-500/40 to-cyan-300/30" />
+            <div className={`h-20 rounded-xl bg-gradient-to-br ${accent}`} />
             <div className="mt-3 grid grid-cols-3 gap-2">
               <div className="h-8 rounded-lg bg-white/75 dark:bg-white/[0.06]" />
               <div className="h-8 rounded-lg bg-white/75 dark:bg-white/[0.06]" />
@@ -335,10 +352,10 @@ export default function PortfolioShell() {
           text="Each project is framed around a business problem, the technical structure and the practical value it creates."
         />
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <Reveal key={project.slug}>
               <PremiumCard className="h-full p-5">
-                <ProjectMockup title={project.title} />
+                <ProjectMockup title={project.title} index={index} />
                 <p className="mt-5 text-xs font-black uppercase tracking-[0.18em] text-sky-700 dark:text-cyan-300">{project.category}</p>
                 <h3 className="mt-3 text-2xl font-black text-slate-950 dark:text-white">{project.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.businessProblem}</p>

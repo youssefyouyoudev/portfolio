@@ -23,7 +23,7 @@ export function Navbar() {
 
   return (
     <motion.header
-      initial={reduceMotion ? false : { opacity: 0, y: -16 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
       className="sticky top-0 z-50 border-b border-sky-200/70 bg-white/76 backdrop-blur-2xl dark:border-cyan-400/10 dark:bg-[#020617]/76"
@@ -57,7 +57,7 @@ export function Navbar() {
             Admin
           </a>
           <ThemeToggle />
-          <GradientButton href="#contact" className="hidden min-h-10 rounded-full px-4 py-2.5 sm:inline-flex">
+          <GradientButton href="#contact" className="hidden min-h-10 rounded-full px-4 py-2.5 lg:inline-flex">
             Hire Me
           </GradientButton>
           <button

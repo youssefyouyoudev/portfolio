@@ -12,7 +12,7 @@ export const fadeUp: Variants = {
 export function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   const reduceMotion = useReducedMotion();
   return (
-    <motion.div className={className} initial={reduceMotion ? false : "hidden"} whileInView="show" viewport={{ once: true, margin: "-60px" }} variants={fadeUp}>
+    <motion.div className={className} initial={false} whileInView="show" viewport={{ once: true, margin: "-60px" }} variants={reduceMotion ? undefined : fadeUp}>
       {children}
     </motion.div>
   );
