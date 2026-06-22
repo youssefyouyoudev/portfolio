@@ -27,7 +27,7 @@ import {
 import { ContactForm } from "@/components/contact-form";
 import { Navbar } from "@/components/layout/Navbar";
 import { Reveal } from "@/components/motion-primitives";
-import { ProjectExplorer } from "@/components/projects/ProjectExplorer";
+import { ProjectsSection } from "@/components/projects/ProjectExplorer";
 import { Hero } from "@/components/sections/Hero";
 import {
   blogPosts as fallbackBlogPosts,
@@ -348,7 +348,7 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
           title="Projects built to solve real business problems"
           text="A selection of platforms, dashboards, automation tools and web systems built with Laravel, React, Next.js, APIs and deployment-ready architecture."
         />
-        <ProjectExplorer projects={displayProjects} />
+        <ProjectsSection projects={displayProjects} />
       </section>
 
       <section id="experience" className="relative mx-auto max-w-6xl px-4 py-16 md:py-24">

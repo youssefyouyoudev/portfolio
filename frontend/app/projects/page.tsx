@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { ProjectExplorer } from "@/components/projects/ProjectExplorer";
+import { ProjectsSection } from "@/components/projects/ProjectExplorer";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { getProjects } from "@/lib/api";
 
@@ -71,7 +71,7 @@ export default async function ProjectsPage() {
         </section>
 
         <section className="mt-12">
-          <ProjectExplorer projects={projects} mode="page" />
+          <ProjectsSection projects={projects} mode="page" />
         </section>
       </div>
     </main>

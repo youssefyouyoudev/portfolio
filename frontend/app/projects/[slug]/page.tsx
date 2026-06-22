@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, BadgeCheck, BriefcaseBusiness, ChevronRight, Database, ExternalLink, GitBranch, Layers, Rocket, Server, Sparkles, Target } from "lucide-react";
+import { ArrowLeft, ArrowRight, BadgeCheck, BriefcaseBusiness, ChevronRight, Database, ExternalLink, GitBranch, Layers, Server, Sparkles, Target } from "lucide-react";
+import { ProjectCTA, ProjectDetailPage, ProjectGallery } from "@/components/projects/ProjectDetailPage";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { getProject, getProjects } from "@/lib/api";
 import { projects as fallbackProjects } from "@/lib/data";
@@ -127,11 +128,7 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-slate-50 px-4 py-10 text-slate-950 dark:bg-[#020617] dark:text-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_18%_2%,rgba(14,165,233,.14),transparent_30%),radial-gradient(circle_at_86%_8%,rgba(8,145,178,.12),transparent_34%),linear-gradient(180deg,#f8fafc,#eef6ff_42%,#f8fafc)] dark:bg-[radial-gradient(circle_at_18%_2%,rgba(34,211,238,.12),transparent_30%),radial-gradient(circle_at_86%_8%,rgba(14,165,233,.14),transparent_34%),linear-gradient(180deg,#020617,#061826_42%,#020617)]" />
-
-      <div className="relative mx-auto max-w-7xl">
+    <ProjectDetailPage structuredData={structuredData}>
         <header className="mb-8 flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-sky-200/70 bg-white/78 p-3 shadow-xl shadow-sky-100/70 backdrop-blur-2xl dark:border-cyan-400/10 dark:bg-slate-950/70 dark:shadow-none">
           <Link href="/" className="rounded-2xl px-2 py-1 outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
             <span className="block text-sm font-black text-slate-950 dark:text-white">Youssef <span className="text-sky-600 dark:text-cyan-300">Youyou</span></span>
@@ -281,38 +278,7 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
           </article>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Screenshots / Gallery</p>
-              <h2 className="mt-3 text-2xl font-black">Product proof and interface direction</h2>
-            </div>
-            <span className="rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-sky-700 dark:border-cyan-300/15 dark:bg-cyan-300/10 dark:text-cyan-100">
-              {project.gallery.length || 1} visual
-            </span>
-          </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {(project.gallery.length ? project.gallery : [project.image]).filter(Boolean).map((image, index) => (
-              <div key={`${image}-${index}`} className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-sky-200/80 bg-sky-50 dark:border-cyan-400/15 dark:bg-slate-950">
-                <Image
-                  src={image as string}
-                  alt={`${project.title} screenshot ${index + 1}`}
-                  fill
-                  sizes="(min-width: 1024px) 45vw, 92vw"
-                  className="object-cover"
-                />
-              </div>
-            ))}
-            {!project.gallery.length && !project.image ? (
-              <div className="grid aspect-[16/10] place-items-center rounded-3xl border border-sky-200/80 bg-sky-50 p-6 text-center dark:border-cyan-400/15 dark:bg-slate-950">
-                <Rocket className="text-sky-600 dark:text-cyan-300" />
-                <p className="mt-4 max-w-sm text-sm leading-7 text-slate-700 dark:text-slate-300">
-                  Visual placeholder prepared for future real screenshots while keeping the case study complete and honest.
-                </p>
-              </div>
-            ) : null}
-          </div>
-        </section>
+        <ProjectGallery project={project} />
 
         <section className="mt-8 grid gap-6 lg:grid-cols-3">
           <article className="rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
@@ -369,16 +335,7 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
           </Link>
         </section>
 
-        <section className="mt-8 rounded-[2rem] border border-sky-300/50 bg-gradient-to-br from-sky-50 to-white p-6 text-center shadow-2xl shadow-sky-100/80 dark:border-cyan-300/20 dark:from-cyan-300/10 dark:to-slate-900/60 dark:shadow-cyan-500/10 md:p-10">
-          <h2 className="text-balance text-3xl font-black md:text-4xl">Need a similar website, dashboard, API or internal tool?</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-700 dark:text-slate-300">
-            Share your business problem, workflow and ideal timeline. I will help shape it into a practical, clean and production-minded solution.
-          </p>
-          <Link href="/contact" className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-cyan-300 px-6 py-3 text-sm font-bold text-slate-950 transition hover:bg-white">
-            Contact me <ArrowRight size={16} />
-          </Link>
-        </section>
-      </div>
-    </main>
+        <ProjectCTA />
+    </ProjectDetailPage>
   );
 }

@@ -69,7 +69,7 @@ function ProjectMockup({ project }: { project: PortfolioProject }) {
   );
 }
 
-function ProjectImage({ project, priority = false }: { project: PortfolioProject; priority?: boolean }) {
+export function ProjectImage({ project, priority = false }: { project: PortfolioProject; priority?: boolean }) {
   return (
     <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-sky-200/80 bg-sky-50 shadow-inner shadow-white/80 dark:border-cyan-400/15 dark:bg-[#020617] dark:shadow-none">
       {project.image ? (
@@ -96,7 +96,7 @@ function ProjectImage({ project, priority = false }: { project: PortfolioProject
   );
 }
 
-function ProjectCard({ project, featured = false, priority = false }: { project: PortfolioProject; featured?: boolean; priority?: boolean }) {
+export function ProjectCard({ project, featured = false, priority = false }: { project: PortfolioProject; featured?: boolean; priority?: boolean }) {
   return (
     <article
       className={`group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-sky-200/75 bg-white/90 shadow-2xl shadow-sky-100/80 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-sky-400/55 hover:shadow-sky-200/90 dark:border-cyan-400/15 dark:bg-slate-900/62 dark:shadow-slate-950/30 dark:hover:border-cyan-300/35 dark:hover:shadow-cyan-500/10 ${featured ? "p-4 md:p-5" : "p-4"}`}
@@ -154,7 +154,88 @@ function ProjectCard({ project, featured = false, priority = false }: { project:
   );
 }
 
-export function ProjectExplorer({ projects, mode = "home" }: { projects: PortfolioProject[]; mode?: "home" | "page" }) {
+export function FeaturedProjectCard({ project, priority = false }: { project: PortfolioProject; priority?: boolean }) {
+  return <ProjectCard project={project} featured priority={priority} />;
+}
+
+export function ProjectFilters({
+  activeCategory,
+  count,
+  query,
+  onCategoryChange,
+  onQueryChange,
+}: {
+  activeCategory: (typeof projectCategories)[number];
+  count: number;
+  query: string;
+  onCategoryChange: (category: (typeof projectCategories)[number]) => void;
+  onQueryChange: (query: string) => void;
+}) {
+  return (
+    <>
+      <div className="mb-8 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="flex flex-wrap gap-2">
+          {projectCategories.map((category) => (
+            <button
+              key={category}
+              onClick={() => onCategoryChange(category)}
+              className={`rounded-full border px-4 py-2 text-sm font-black transition ${
+                activeCategory === category
+                  ? "border-sky-400 bg-sky-600 text-white shadow-lg shadow-sky-500/20 dark:border-cyan-300 dark:bg-cyan-300 dark:text-slate-950"
+                  : "border-sky-200/80 bg-white/75 text-slate-700 hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100"
+              }`}
+              type="button"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        <label className="relative block min-w-0 lg:w-80">
+          <span className="sr-only">Search projects</span>
+          <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={17} />
+          <input
+            value={query}
+            onChange={(event) => onQueryChange(event.target.value)}
+            placeholder="Search stack, feature or project"
+            className="w-full rounded-full border border-sky-200/80 bg-white/78 py-3 pl-11 pr-4 text-sm font-semibold text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-300/15 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-100 dark:focus:border-cyan-300/45"
+          />
+        </label>
+      </div>
+
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">Proof of Work</p>
+          <h3 className="mt-2 text-2xl font-black text-slate-950 dark:text-white">{activeCategory === "All" ? "All case studies" : `${activeCategory} projects`}</h3>
+        </div>
+        <div className="flex items-center gap-2 rounded-full border border-sky-200/80 bg-white/70 px-4 py-2 text-sm font-bold text-slate-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">
+          <MonitorSmartphone size={16} className="text-sky-600 dark:text-cyan-300" />
+          {count} project{count === 1 ? "" : "s"}
+        </div>
+      </div>
+    </>
+  );
+}
+
+export function ProjectCTA() {
+  return (
+    <div className="mt-10 rounded-[2rem] border border-sky-300/50 bg-gradient-to-br from-sky-50 via-white to-cyan-50 p-6 shadow-2xl shadow-sky-100/80 dark:border-cyan-300/20 dark:from-cyan-300/10 dark:via-slate-900/60 dark:to-slate-950 dark:shadow-cyan-500/10 md:p-10">
+      <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">Have a project in mind?</p>
+          <h3 className="mt-3 text-3xl font-black tracking-tight text-slate-950 dark:text-white">I can help you build a dashboard, SaaS platform, business website or custom web application.</h3>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-700 dark:text-slate-300">
+            Send the business problem, current workflow and ideal timeline. I will help shape the scope into a practical Laravel, React/Next.js or automation solution.
+          </p>
+        </div>
+        <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5">
+          Contact Me <ArrowRight size={16} />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export function ProjectsSection({ projects, mode = "home" }: { projects: PortfolioProject[]; mode?: "home" | "page" }) {
   const [activeCategory, setActiveCategory] = useState<(typeof projectCategories)[number]>("All");
   const [query, setQuery] = useState("");
 
@@ -177,53 +258,15 @@ export function ProjectExplorer({ projects, mode = "home" }: { projects: Portfol
 
   return (
     <div>
-      <div className="mb-8 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
-        <div className="flex flex-wrap gap-2">
-          {projectCategories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`rounded-full border px-4 py-2 text-sm font-black transition ${
-                activeCategory === category
-                  ? "border-sky-400 bg-sky-600 text-white shadow-lg shadow-sky-500/20 dark:border-cyan-300 dark:bg-cyan-300 dark:text-slate-950"
-                  : "border-sky-200/80 bg-white/75 text-slate-700 hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100"
-              }`}
-              type="button"
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-        <label className="relative block min-w-0 lg:w-80">
-          <span className="sr-only">Search projects</span>
-          <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={17} />
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search stack, feature or project"
-            className="w-full rounded-full border border-sky-200/80 bg-white/78 py-3 pl-11 pr-4 text-sm font-semibold text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-300/15 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-100 dark:focus:border-cyan-300/45"
-          />
-        </label>
-      </div>
+      <ProjectFilters activeCategory={activeCategory} count={filteredProjects.length} query={query} onCategoryChange={setActiveCategory} onQueryChange={setQuery} />
 
       {mode === "home" && activeCategory === "All" && !query ? (
         <div className="mb-8 grid gap-6 xl:grid-cols-3">
           {featuredProjects.map((project, index) => (
-            <ProjectCard key={project.slug} project={project} featured priority={index === 0} />
+            <FeaturedProjectCard key={project.slug} project={project} priority={index === 0} />
           ))}
         </div>
       ) : null}
-
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">Proof of Work</p>
-          <h3 className="mt-2 text-2xl font-black text-slate-950 dark:text-white">{activeCategory === "All" ? "All case studies" : `${activeCategory} projects`}</h3>
-        </div>
-        <div className="flex items-center gap-2 rounded-full border border-sky-200/80 bg-white/70 px-4 py-2 text-sm font-bold text-slate-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">
-          <MonitorSmartphone size={16} className="text-sky-600 dark:text-cyan-300" />
-          {filteredProjects.length} project{filteredProjects.length === 1 ? "" : "s"}
-        </div>
-      </div>
 
       {filteredProjects.length ? (
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -239,20 +282,9 @@ export function ProjectExplorer({ projects, mode = "home" }: { projects: Portfol
         </div>
       )}
 
-      <div className="mt-10 rounded-[2rem] border border-sky-300/50 bg-gradient-to-br from-sky-50 via-white to-cyan-50 p-6 shadow-2xl shadow-sky-100/80 dark:border-cyan-300/20 dark:from-cyan-300/10 dark:via-slate-900/60 dark:to-slate-950 dark:shadow-cyan-500/10 md:p-10">
-        <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">Have a project in mind?</p>
-            <h3 className="mt-3 text-3xl font-black tracking-tight text-slate-950 dark:text-white">I can help you build a dashboard, SaaS platform, business website or custom web application.</h3>
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-700 dark:text-slate-300">
-              Send the business problem, current workflow and ideal timeline. I will help shape the scope into a practical Laravel, React/Next.js or automation solution.
-            </p>
-          </div>
-          <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5">
-            Contact Me <ArrowRight size={16} />
-          </Link>
-        </div>
-      </div>
+      <ProjectCTA />
     </div>
   );
 }
+
+export { ProjectsSection as ProjectExplorer };
