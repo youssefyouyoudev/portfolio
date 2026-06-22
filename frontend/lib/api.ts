@@ -17,6 +17,28 @@ type NextFetchInit = RequestInit & { next?: { revalidate?: number } };
 type FallbackProject = (typeof fallbackProjects)[number];
 type FallbackBlogPost = (typeof fallbackBlogPosts)[number];
 
+const projectImageBySlug: Record<string, string> = {
+  rifitv: "/images/projects/rifitv-showcase.png",
+  erplus: "/images/projects/erplus-showcase.png",
+  "digital-archiving-system": "/images/projects/digital-archiving-showcase.png",
+  "social-media-management-saas": "/images/projects/social-media-saas-showcase.png",
+  "ecommerce-client-portal": "/images/projects/ecommerce-client-portal-showcase.png",
+  "ecommerce-client-portal-systems": "/images/projects/ecommerce-client-portal-showcase.png",
+  "excel-vba-automation-tools": "/images/projects/excel-vba-automation-showcase.png",
+};
+
+const blogSlugAliases: Record<string, string> = {
+  "why-businesses-need-internal-digitalization": "why-small-businesses-need-internal-dashboards",
+  "api-integration-best-practices": "practical-api-structure-for-admin-dashboards",
+  "building-admin-panels-with-laravel-and-filament": "practical-api-structure-for-admin-dashboards",
+};
+
+export const legacyBlogSlugs = Object.keys(blogSlugAliases);
+
+function canonicalBlogSlug(slug: string) {
+  return blogSlugAliases[slug] ?? slug;
+}
+
 async function fetchJson<T>(path: string, init?: NextFetchInit): Promise<T | null> {
   try {
     const response = await fetch(`${apiBase}${path}`, {
@@ -41,10 +63,14 @@ function collection<T>(payload: ApiCollection<T> | null): T[] {
 }
 
 function normalizeProject(project: any): FallbackProject {
+  const slug = canonicalProjectSlug(project.slug);
+  const rawImage = project.image ?? project.cover_image ?? "";
+  const image = rawImage && !rawImage.endsWith(".jpg") ? rawImage : projectImageBySlug[slug] ?? rawImage;
+
   return {
     ...project,
     title: project.title,
-    slug: project.slug,
+    slug,
     category: project.category,
     subtitle: project.subtitle ?? project.category,
     shortDescription: project.shortDescription ?? project.summary ?? project.short_description ?? "",
@@ -59,9 +85,9 @@ function normalizeProject(project: any): FallbackProject {
     impact: project.impact ?? project.case_study?.impact ?? project.business_value ?? "",
     learned: project.learned ?? project.case_study?.learned ?? "",
     recruiterSignal: project.recruiterSignal ?? project.case_study?.recruiter_signal ?? "",
-    image: project.image ?? project.cover_image ?? null,
+    image,
     imageAlt: project.imageAlt ?? `${project.title} project preview`,
-    caseStudyUrl: project.caseStudyUrl ?? `/projects/${project.slug}`,
+    caseStudyUrl: `/projects/${slug}`,
     seoTitle: project.seoTitle ?? project.seo_title,
     seoDescription: project.seoDescription ?? project.seo_description,
     ogImage: project.ogImage ?? project.og_image,
@@ -70,11 +96,12 @@ function normalizeProject(project: any): FallbackProject {
 
 function normalizeBlogPost(post: any): FallbackBlogPost {
   const points = Array.isArray(post.points) ? post.points : extractPoints(post.content);
+  const slug = canonicalBlogSlug(post.slug);
 
   return {
     ...post,
     title: post.title,
-    slug: post.slug,
+    slug,
     category: post.category ?? "Technical Notes",
     excerpt: post.excerpt ?? post.summary ?? "",
     points,
@@ -159,9 +186,12 @@ export async function getBlogPosts() {
 }
 
 export async function getBlogPost(slug: string) {
+  const canonical = canonicalBlogSlug(slug);
   const payload = await fetchJson<any>(`/api/blog/${slug}`);
-  if (payload?.data || payload?.slug) return normalizeBlogPost(payload.data ?? payload);
-  return fallbackBlogPosts.find((post) => post.slug === slug) ?? null;
+  const canonicalPayload = payload ? null : await fetchJson<any>(`/api/blog/${canonical}`);
+  const postPayload = payload ?? canonicalPayload;
+  if (postPayload?.data || postPayload?.slug) return normalizeBlogPost(postPayload.data ?? postPayload);
+  return fallbackBlogPosts.find((post) => post.slug === canonical) ?? null;
 }
 
 function normalizeSkills(payload: Record<string, string[]> | ApiCollection<any> | null) {

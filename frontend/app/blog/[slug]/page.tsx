@@ -3,11 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, BadgeCheck } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { getBlogPost } from "@/lib/api";
+import { getBlogPost, legacyBlogSlugs } from "@/lib/api";
 import { blogPosts } from "@/lib/data";
 
 export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+  return [...blogPosts.map((post) => ({ slug: post.slug })), ...legacyBlogSlugs.map((slug) => ({ slug }))];
 }
 
 type BlogPageProps = {
