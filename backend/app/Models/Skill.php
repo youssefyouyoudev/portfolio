@@ -9,5 +9,10 @@ class Skill extends Model
 {
     use HasPortfolioOrdering;
 
-    protected $fillable = ['name', 'category', 'level', 'icon', 'sort_order'];
+    protected $fillable = ['name', 'category', 'level', 'icon', 'icon_path', 'is_featured', 'is_visible', 'sort_order'];
+
+    protected function casts(): array
+    {
+        return ['is_featured' => 'boolean', 'is_visible' => 'boolean'];
+    }
 }

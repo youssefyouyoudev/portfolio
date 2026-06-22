@@ -24,5 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         RateLimiter::for('contact', fn (Request $request) => Limit::perMinute(3)->by($request->ip()));
         RateLimiter::for('cv-download', fn (Request $request) => Limit::perMinute(5)->by($request->ip()));
+        RateLimiter::for('login', fn (Request $request) => Limit::perMinute(5)->by($request->ip()));
+        RateLimiter::for('api', fn (Request $request) => Limit::perMinute(120)->by($request->user()?->id ?: $request->ip()));
     }
 }

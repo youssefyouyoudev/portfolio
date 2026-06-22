@@ -10,7 +10,12 @@ class ProjectImage extends Model
 {
     use HasPortfolioOrdering;
 
-    protected $fillable = ['project_id', 'title', 'image_path', 'alt_text', 'sort_order'];
+    protected $fillable = ['project_id', 'title', 'image_path', 'alt_text', 'is_cover', 'sort_order'];
+
+    protected function casts(): array
+    {
+        return ['is_cover' => 'boolean'];
+    }
 
     public function project(): BelongsTo
     {

@@ -3,11 +3,18 @@
 namespace Database\Seeders;
 
 use App\Models\BlogPost;
+use App\Models\AboutSection;
+use App\Models\BlogCategory;
+use App\Models\BlogTag;
 use App\Models\Certification;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\FooterSetting;
+use App\Models\HeroSection;
 use App\Models\Language;
+use App\Models\MenuItem;
 use App\Models\Project;
+use App\Models\ProjectImage;
 use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Skill;
@@ -31,6 +38,7 @@ class DatabaseSeeder extends Seeder
         ], [
             'name' => 'Youssef Youyou',
             'password' => Hash::make('ChangeThisStrongPassword!2026'),
+            'is_admin' => true,
         ]);
 
         Setting::query()->upsert([
@@ -40,13 +48,51 @@ class DatabaseSeeder extends Seeder
                 'keywords' => ['Youssef Youyou', 'Laravel developer Morocco', 'React developer Morocco', 'Next.js developer Morocco', 'Full-stack developer Morocco', 'Junior web developer Marrakech', 'Laravel React portfolio', 'SaaS developer Morocco', 'B2B web developer', 'B2C web developer', 'admin dashboard developer', 'API integration developer', 'Nador developer', 'Marrakech developer'],
             ])],
             ['key' => 'cv_file', 'group' => 'files', 'is_public' => true, 'value' => json_encode(['url' => '/cv/youssef-youyou-cv.pdf'])],
+            ['key' => 'site', 'group' => 'general', 'is_public' => true, 'value' => json_encode([
+                'site_name' => 'Youssef Youyou',
+                'logo' => '/images/logo.png',
+                'favicon' => '/favicon.ico',
+                'maintenance_mode' => false,
+                'default_theme' => 'dark',
+                'theme_colors' => ['primary' => '#0ea5e9', 'cyan' => '#22d3ee', 'background' => '#020617'],
+            ])],
             ['key' => 'contact', 'group' => 'profile', 'is_public' => true, 'value' => json_encode([
                 'email' => 'contact@youssefyouyou.com',
                 'website' => 'https://youssefyouyou.com',
                 'github' => 'https://github.com/youssefyouyoudev',
                 'linkedin' => 'https://linkedin.com/in/youssefyouyoudev',
+                'whatsapp' => null,
+                'location' => 'Nador, Morocco',
             ])],
         ], ['key'], ['group', 'is_public', 'value']);
+
+        HeroSection::query()->updateOrCreate(['headline' => 'Youssef Youyou'], [
+            'subtitle' => 'Junior Full-Stack Web Developer',
+            'description' => 'I build modern Laravel, React/Next.js, API-driven, SEO-ready and production-deployed web platforms for businesses, startups and digital projects.',
+            'badges' => ['Laravel', 'React', 'Next.js', 'MySQL', 'APIs', 'Nginx', 'SEO'],
+            'cta_buttons' => [
+                ['label' => 'View My Work', 'href' => '#projects', 'variant' => 'primary'],
+                ['label' => 'Contact Me', 'href' => '#contact', 'variant' => 'secondary'],
+                ['label' => 'Download CV', 'href' => '/cv-download', 'variant' => 'link'],
+            ],
+            'image_path' => '/images/hero-portfolio.png',
+            'show_image' => true,
+            'is_published' => true,
+            'sort_order' => 1,
+        ]);
+
+        AboutSection::query()->updateOrCreate(['title' => 'Practical developer with business-process context'], [
+            'short_bio' => 'Full-stack web developer from Nador, Morocco focused on Laravel, React/Next.js, APIs, dashboards, deployment and digitalization.',
+            'body' => 'I combine freelance web work, remote React.js experience and administrative digitalization context to build practical systems that are useful, maintainable and realistic for teams.',
+            'highlights' => ['Practical problem solving', 'Clean development', 'Business-focused solutions', 'Deployment mindset'],
+            'cards' => [
+                ['title' => 'Practical problem solving', 'text' => 'I start from the workflow and user need, then choose the simplest reliable technical path.'],
+                ['title' => 'Clean development', 'text' => 'Readable structure, reusable components, clear API contracts and maintainable database logic.'],
+                ['title' => 'Business-focused solutions', 'text' => 'Dashboards, portals, SaaS tools and automation that support real operations.'],
+                ['title' => 'Deployment mindset', 'text' => 'Nginx, Linux, production builds, SEO basics and environment separation.'],
+            ],
+            'is_published' => true,
+        ]);
 
         $services = [
             ['Business websites', 'business-websites', 'Premium SEO-ready websites for service businesses, agencies, and local brands.', 'B2B/B2C', 'Globe'],
@@ -137,7 +183,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'title' => 'E-commerce / Client Portal Systems',
-                'slug' => 'e-commerce-client-portal-systems',
+                'slug' => 'ecommerce-client-portal-systems',
                 'category' => 'B2C / B2B commerce',
                 'summary' => 'Commerce and portal foundations with client areas, roles, reporting, orders, and admin control.',
                 'business_value' => 'Helps businesses sell online, manage clients, and track operations.',
@@ -169,6 +215,142 @@ class DatabaseSeeder extends Seeder
                 'is_featured' => $index < 3,
                 'cover_image' => '/images/projects/'.$project['slug'].'.jpg',
                 'sort_order' => $index + 1,
+            ]);
+        }
+
+        $projectCms = [
+            'rifitv' => [
+                'subtitle' => 'Media Platform - Laravel - Blade - Vite - Nginx',
+                'project_type' => 'Real Project',
+                'cover_image' => '/images/projects/rifitv-showcase.png',
+                'status' => 'Live',
+                'show_on_homepage' => true,
+                'seo_title' => 'RiFiTV Case Study | Youssef Youyou Portfolio',
+                'seo_description' => 'Case study for RiFiTV, a Laravel media-style platform focused on content organization, responsive UI, SEO structure and production deployment.',
+                'case_study' => [
+                    'business_problem' => 'Users need a simple, fast and organized way to browse channels, matches and media content without a confusing interface.',
+                    'solution' => 'A Laravel-based platform with a responsive UI, categorized content, search, channel/match presentation, SEO-friendly structure and production deployment.',
+                    'role' => 'Full-stack development, UI/UX improvement, Laravel/Blade/Vite implementation, deployment support and production troubleshooting.',
+                    'target_users' => 'Football/media visitors, content platform owners and users browsing across desktop, mobile and TV-style screens.',
+                    'impact' => 'Improves user access to media content, creates a more organized viewing experience and supports monetization/SEO structure.',
+                    'learned' => 'Better understanding of media UI, deployment workflow, production caching, Cloudflare/Nginx behavior and user-first navigation.',
+                ],
+            ],
+            'erplus' => [
+                'subtitle' => 'Business Management Platform - Laravel - React - MySQL',
+                'project_type' => 'SaaS',
+                'cover_image' => '/images/projects/erplus-showcase.png',
+                'status' => 'Concept',
+                'show_on_homepage' => true,
+                'seo_title' => 'ERPlus Case Study | Youssef Youyou Portfolio',
+                'seo_description' => 'Case study for ERPlus, a Laravel and React business management platform concept for HR workflows, inventory modules, admin dashboards and API-driven structure.',
+                'case_study' => [
+                    'business_problem' => 'Businesses need one organized system to manage people, processes, HR data, inventory information and operational dashboards.',
+                    'solution' => 'A Laravel backend and React frontend structure with API-driven modules, admin dashboards, authentication, HR workflows and inventory management.',
+                    'role' => 'Backend/frontend structure, API integration, UI improvements, deployment support, dashboard logic and production issue fixing.',
+                    'target_users' => 'Small business teams, HR/admin users and managers who need clearer operational dashboards.',
+                    'impact' => 'Helps businesses organize internal operations through dashboards, structured workflows and centralized admin control.',
+                    'learned' => 'Improved experience with Laravel APIs, React dashboards, SaaS structure, deployment issues and business workflow design.',
+                ],
+            ],
+            'digital-archiving-system' => [
+                'subtitle' => 'Internal Tool - Vue.js - Document Tracking - Automation',
+                'project_type' => 'Dashboard',
+                'cover_image' => '/images/projects/digital-archiving-showcase.png',
+                'status' => 'Concept',
+                'show_on_homepage' => true,
+                'seo_title' => 'Digital Archiving System Case Study | Youssef Youyou Portfolio',
+                'seo_description' => 'Case study for a digital archiving system focused on document organization, search, tracking and internal administrative workflow improvement.',
+                'case_study' => [
+                    'business_problem' => 'Manual document handling creates slow search, poor tracking, duplicate work and difficulty following administrative records.',
+                    'solution' => 'A structured digital archiving interface with document categories, metadata, search, tracking status, workflow support and activity overview.',
+                    'role' => 'Process analysis, UI concept, simple interface development, digitalization support and workflow improvement.',
+                    'target_users' => 'Administrative teams, document managers and internal staff handling recurring files and records.',
+                    'impact' => 'Helps teams find documents faster, reduce repetitive administrative work and improve organization.',
+                    'learned' => 'How to translate real administrative workflow problems into digital tools and simple interfaces.',
+                ],
+            ],
+            'social-media-management-saas' => [
+                'subtitle' => 'SaaS Platform - Laravel - React - Analytics',
+                'project_type' => 'SaaS',
+                'cover_image' => '/images/projects/social-media-saas-showcase.png',
+                'status' => 'Concept',
+                'show_on_homepage' => true,
+                'seo_title' => 'Social Media Management SaaS Case Study | Youssef Youyou Portfolio',
+                'seo_description' => 'Case study for a Laravel and React social media management SaaS concept with scheduling, analytics widgets, account management and team workflow.',
+                'case_study' => [
+                    'business_problem' => 'Small teams need one place to schedule content, follow campaign activity and analyze social media performance.',
+                    'solution' => 'A Laravel and React-based SaaS dashboard concept with calendar planning, scheduled posts, analytics widgets, account management and team workflow.',
+                    'role' => 'Full-stack concept, dashboard design, Laravel/React structure, responsive UI and SaaS workflow planning.',
+                    'target_users' => 'Marketing teams, agencies, content managers and small businesses managing recurring campaigns.',
+                    'impact' => 'Supports content planning, campaign visibility and better marketing workflow organization.',
+                    'learned' => 'Improved dashboard design, SaaS module planning and analytics UI structure.',
+                ],
+            ],
+            'ecommerce-client-portal-systems' => [
+                'subtitle' => 'Web Applications - Laravel - MySQL - Payments',
+                'project_type' => 'E-commerce',
+                'cover_image' => '/images/projects/ecommerce-client-portal-showcase.png',
+                'status' => 'Concept',
+                'show_on_homepage' => true,
+                'seo_title' => 'E-commerce Client Portal Systems Case Study | Youssef Youyou Portfolio',
+                'seo_description' => 'Case study for e-commerce and client portal systems focused on product catalogs, order flows, client dashboards, admin reporting and Laravel logic.',
+                'case_study' => [
+                    'business_problem' => 'Businesses need online sales systems that are easy for customers to use and easy for admins to manage.',
+                    'solution' => 'A Laravel-based e-commerce/client portal structure with product listings, cart/order flow, client area, admin dashboard and reporting widgets.',
+                    'role' => 'Full-stack development concept, database structure, Laravel logic, UI planning, admin/client workflow design.',
+                    'target_users' => 'Business owners, online customers, admin teams and clients who need a self-service portal.',
+                    'impact' => 'Helps businesses sell online, manage customer orders and provide clients with a clear portal experience.',
+                    'learned' => 'Better understanding of commerce flows, admin tools, customer portals and conversion-focused UI.',
+                ],
+            ],
+            'excel-vba-automation-tools' => [
+                'subtitle' => 'Automation - Reporting - Productivity - VBA',
+                'project_type' => 'Other',
+                'cover_image' => '/images/projects/excel-vba-automation-showcase.png',
+                'status' => 'Concept',
+                'show_on_homepage' => true,
+                'seo_title' => 'Excel/VBA Automation Tools Case Study | Youssef Youyou Portfolio',
+                'seo_description' => 'Case study for Excel and VBA automation tools focused on reports, forms, filters, calculations and administrative productivity workflows.',
+                'case_study' => [
+                    'business_problem' => 'Administrative teams often lose time on repetitive Excel tasks, manual reports, repeated calculations and file tracking.',
+                    'solution' => 'Excel/VBA automation tools with forms, dynamic reports, dashboards, filters, tracked tables and workflow automation.',
+                    'role' => 'Excel/VBA automation, workflow analysis, reporting logic, form creation and administrative productivity improvement.',
+                    'target_users' => 'Administrative teams, operations users and staff working with recurring reports or spreadsheet-heavy workflows.',
+                    'impact' => 'Saves time, reduces manual errors and improves productivity for administrative workflows.',
+                    'learned' => 'How automation can create quick business value even without a full web app.',
+                ],
+            ],
+        ];
+
+        $legacyCommerceProject = Project::query()->where('slug', 'e-commerce-client-portal-systems')->first();
+        if ($legacyCommerceProject) {
+            if (Project::query()->where('slug', 'ecommerce-client-portal-systems')->exists()) {
+                $legacyCommerceProject->delete();
+            } else {
+                $legacyCommerceProject->update(['slug' => 'ecommerce-client-portal-systems']);
+            }
+        }
+
+        foreach ($projectCms as $slug => $meta) {
+            $project = Project::query()->where('slug', $slug)->first();
+            if (! $project) {
+                continue;
+            }
+            $project->update($meta + [
+                'is_published' => true,
+                'is_featured' => true,
+                'og_image' => $meta['cover_image'],
+                'my_role' => $meta['case_study']['role'],
+            ]);
+            ProjectImage::query()->updateOrCreate([
+                'project_id' => $project->id,
+                'image_path' => $meta['cover_image'],
+            ], [
+                'title' => $project->title.' showcase',
+                'alt_text' => $project->title.' project preview',
+                'is_cover' => true,
+                'sort_order' => 1,
             ]);
         }
 
@@ -260,23 +442,81 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        foreach ([
-            'How I build Laravel and React dashboards',
-            'Why businesses need internal digitalization',
-            'Building admin panels with Laravel and Filament',
-            'API integration best practices',
-            'From Excel automation to web applications',
-        ] as $index => $title) {
-            $slug = str($title)->slug()->toString();
-            BlogPost::query()->updateOrCreate(['slug' => $slug], [
-                'title' => $title,
-                'excerpt' => 'A practical article idea for sharing real production lessons from Laravel, React, APIs, dashboards, and process digitalization.',
-                'content' => 'Draft this article from real project notes, including the business problem, technical decisions, implementation details, and lessons learned.',
-                'tags' => ['Laravel', 'React', 'Dashboards', 'Digitalization'],
-                'meta_title' => $title.' | Youssef Youyou',
-                'meta_description' => 'Practical notes from Youssef Youyou about full-stack web development, APIs, dashboards, and business digitalization.',
-                'published_at' => now()->subDays(10 - $index),
+        $categories = ['Dashboards', 'Automation', 'APIs', 'Business systems', 'Deployment'];
+        foreach ($categories as $index => $category) {
+            BlogCategory::query()->updateOrCreate(['slug' => str($category)->slug()->toString()], [
+                'name' => $category,
+                'description' => 'Technical notes about '.$category.'.',
+                'sort_order' => $index + 1,
             ]);
         }
+
+        foreach (['Laravel', 'React', 'Dashboards', 'Automation', 'Deployment', 'APIs'] as $tag) {
+            BlogTag::query()->updateOrCreate(['slug' => str($tag)->slug()->toString()], ['name' => $tag]);
+        }
+
+        $posts = [
+            ['How I build Laravel and React dashboards', 'Dashboards', 'A practical look at how I structure dashboards with Laravel APIs, React components, filters, validation and reusable UI patterns.'],
+            ['From Excel automation to web applications', 'Automation', 'How repetitive spreadsheet workflows can become cleaner tools, dashboards or internal web applications.'],
+            ['Practical API structure for admin dashboards', 'APIs', 'Notes on organizing REST endpoints, resources, validation and frontend consumption for dashboard-style applications.'],
+            ['Why small businesses need internal dashboards', 'Business systems', 'A simple explanation of how dashboards help teams track work, reduce manual tasks and make better decisions.'],
+            ['Deploying Laravel and Next.js on Ubuntu', 'Deployment', 'A practical deployment checklist covering Nginx, PM2, Laravel cache, environment files and production builds.'],
+        ];
+
+        foreach ($posts as $index => [$title, $category, $excerpt]) {
+            $slug = str($title)->slug()->toString();
+            $post = BlogPost::query()->updateOrCreate(['slug' => $slug], [
+                'title' => $title,
+                'excerpt' => $excerpt,
+                'content' => implode("\n\n", [
+                    $excerpt,
+                    'Key point: define the business workflow before choosing the technical structure.',
+                    'Key point: keep the implementation maintainable, secure and production-minded.',
+                    'Key point: document what should be improved next instead of pretending the first version is perfect.',
+                ]),
+                'blog_category_id' => BlogCategory::query()->where('name', $category)->value('id'),
+                'tags' => ['Laravel', 'React', 'Dashboards'],
+                'author' => 'Youssef Youyou',
+                'reading_time' => 2,
+                'is_featured' => $index < 2,
+                'is_published' => true,
+                'meta_title' => $title.' | Youssef Youyou',
+                'meta_description' => $excerpt,
+                'seo_title' => $title.' | Youssef Youyou',
+                'seo_description' => $excerpt,
+                'published_at' => now()->subDays(10 - $index),
+                'sort_order' => $index + 1,
+            ]);
+
+            $post->tagModels()->sync(BlogTag::query()->whereIn('name', ['Laravel', 'React', 'Dashboards'])->pluck('id'));
+        }
+
+        foreach ([
+            ['Services', '#services', 1],
+            ['Work', '#stats', 2],
+            ['Projects', '#projects', 3],
+            ['Experience', '#experience', 4],
+            ['Technical Notes', '#blog', 5],
+            ['Contact', '#contact', 6],
+        ] as [$label, $url, $sortOrder]) {
+            MenuItem::query()->updateOrCreate(['label' => $label], [
+                'url' => $url,
+                'is_external' => false,
+                'open_in_new_tab' => false,
+                'is_visible' => true,
+                'sort_order' => $sortOrder,
+            ]);
+        }
+
+        FooterSetting::query()->updateOrCreate(['key' => 'footer'], [
+            'value' => [
+                'positioning' => 'Full-stack web developer building Laravel, React/Next.js, API and dashboard solutions.',
+                'availability' => 'Available for freelance & remote work.',
+                'copyright' => 'Copyright 2026 Youssef Youyou. All rights reserved.',
+                'quick_links' => ['Services', 'Projects', 'Experience', 'Technical Notes', 'Contact'],
+                'service_links' => ['Laravel APIs', 'React/Next.js', 'Dashboards', 'Deployment'],
+            ],
+            'is_visible' => true,
+        ]);
     }
 }

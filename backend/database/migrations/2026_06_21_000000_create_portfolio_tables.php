@@ -8,6 +8,10 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (Schema::hasTable('settings') && Schema::hasTable('projects')) {
+            return;
+        }
+
         Schema::create('settings', function (Blueprint $table): void {
             $table->id();
             $table->string('key')->unique();

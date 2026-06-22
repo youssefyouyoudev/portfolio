@@ -1,0 +1,258 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowRight,
+  BadgeCheck,
+  BarChart3,
+  CheckCircle2,
+  Code2,
+  ExternalLink,
+  GitBranch,
+  MonitorSmartphone,
+  Search,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
+import { PortfolioProject, projectCategories } from "@/lib/project-content";
+
+function statusClass(status: PortfolioProject["status"]) {
+  if (status === "Live") return "border-emerald-300/70 bg-emerald-50 text-emerald-700 dark:border-emerald-300/25 dark:bg-emerald-300/10 dark:text-emerald-200";
+  if (status === "In Development") return "border-sky-300/70 bg-sky-50 text-sky-700 dark:border-cyan-300/25 dark:bg-cyan-300/10 dark:text-cyan-100";
+  if (status === "Internal") return "border-violet-300/70 bg-violet-50 text-violet-700 dark:border-violet-300/25 dark:bg-violet-300/10 dark:text-violet-100";
+  if (status === "Client Project") return "border-amber-300/70 bg-amber-50 text-amber-700 dark:border-amber-300/25 dark:bg-amber-300/10 dark:text-amber-100";
+  return "border-slate-300/80 bg-slate-100 text-slate-700 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200";
+}
+
+function ProjectMockup({ project }: { project: PortfolioProject }) {
+  return (
+    <div className="relative h-full w-full overflow-hidden bg-[radial-gradient(circle_at_80%_20%,rgba(14,165,233,.24),transparent_32%),linear-gradient(135deg,#f8fafc,#e0f2fe)] p-5 dark:bg-[radial-gradient(circle_at_80%_20%,rgba(34,211,238,.2),transparent_32%),linear-gradient(135deg,#020617,#0f172a)]">
+      <div className="absolute inset-x-5 top-5 flex items-center gap-1.5">
+        <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
+        <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
+        <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+      </div>
+      <div className="mt-8 grid h-[calc(100%-2rem)] grid-cols-[0.34fr_1fr] gap-4">
+        <div className="rounded-2xl border border-sky-200/80 bg-white/70 p-3 dark:border-white/10 dark:bg-white/[0.05]">
+          <div className="h-3 w-16 rounded-full bg-sky-300/70 dark:bg-cyan-300/40" />
+          <div className="mt-5 grid gap-2">
+            {[48, 66, 54, 72, 44].map((width, index) => (
+              <span key={index} className="h-2 rounded-full bg-slate-300/70 dark:bg-slate-700" style={{ width: `${width}%` }} />
+            ))}
+          </div>
+        </div>
+        <div className="grid gap-3">
+          <div className="rounded-2xl border border-sky-200/80 bg-white/80 p-4 shadow-lg shadow-sky-100/70 dark:border-cyan-400/15 dark:bg-slate-900/70 dark:shadow-none">
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-sky-700 dark:text-cyan-300">{project.categoryGroup}</p>
+            <p className="mt-2 text-xl font-black text-slate-950 dark:text-white">{project.title}</p>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {[BarChart3, ShieldCheck, Code2].map((Icon, index) => (
+              <div key={index} className="rounded-2xl border border-sky-200/80 bg-white/70 p-3 dark:border-white/10 dark:bg-white/[0.05]">
+                <Icon className="text-sky-600 dark:text-cyan-300" size={18} />
+                <span className="mt-4 block h-2 rounded-full bg-sky-200 dark:bg-cyan-300/20" />
+              </div>
+            ))}
+          </div>
+          <div className="flex-1 rounded-2xl border border-sky-200/80 bg-white/70 p-4 dark:border-white/10 dark:bg-white/[0.05]">
+            <div className="grid gap-2">
+              {[85, 62, 74, 52].map((width) => (
+                <span key={width} className="h-2 rounded-full bg-slate-300/70 dark:bg-slate-700" style={{ width: `${width}%` }} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectImage({ project, priority = false }: { project: PortfolioProject; priority?: boolean }) {
+  return (
+    <div className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-sky-200/80 bg-sky-50 shadow-inner shadow-white/80 dark:border-cyan-400/15 dark:bg-[#020617] dark:shadow-none">
+      {project.image ? (
+        <Image
+          src={project.image}
+          alt={project.imageAlt ?? `${project.title} project preview`}
+          fill
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
+          sizes="(min-width: 1280px) 42vw, (min-width: 768px) 48vw, 92vw"
+          className="object-cover transition duration-700 group-hover:scale-[1.035]"
+        />
+      ) : (
+        <ProjectMockup project={project} />
+      )}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/38 via-transparent to-transparent dark:from-slate-950/60" />
+      <div className="absolute left-3 top-3 flex flex-wrap gap-2">
+        <span className={`rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] shadow-lg backdrop-blur-md ${statusClass(project.status)}`}>{project.status}</span>
+        <span className="rounded-full border border-white/15 bg-slate-950/72 px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-cyan-100 shadow-lg backdrop-blur-md">
+          {project.technicalDifficulty}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function ProjectCard({ project, featured = false, priority = false }: { project: PortfolioProject; featured?: boolean; priority?: boolean }) {
+  return (
+    <article
+      className={`group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-sky-200/75 bg-white/90 shadow-2xl shadow-sky-100/80 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-sky-400/55 hover:shadow-sky-200/90 dark:border-cyan-400/15 dark:bg-slate-900/62 dark:shadow-slate-950/30 dark:hover:border-cyan-300/35 dark:hover:shadow-cyan-500/10 ${featured ? "p-4 md:p-5" : "p-4"}`}
+    >
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-sky-400/70 to-transparent dark:via-cyan-300/70" />
+      <ProjectImage project={project} priority={priority} />
+      <div className={featured ? "p-2 pt-5 md:p-3 md:pt-6" : "p-1 pt-5"}>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-sky-700 dark:border-cyan-300/15 dark:bg-cyan-300/10 dark:text-cyan-100">
+            {project.categoryGroup}
+          </span>
+          <span className="rounded-full border border-sky-200/80 bg-white/80 px-3 py-1 text-[11px] font-bold text-slate-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">
+            Built for: {project.builtFor.split(" ").slice(0, 5).join(" ")}...
+          </span>
+        </div>
+        <h3 className={`${featured ? "mt-5 text-3xl" : "mt-4 text-2xl"} text-balance font-black tracking-tight text-slate-950 dark:text-white`}>{project.title}</h3>
+        <p className="mt-2 text-sm font-bold text-sky-700 dark:text-cyan-200">{project.subtitle}</p>
+        <p className="mt-4 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.shortDescription}</p>
+        <div className="mt-5 rounded-2xl border border-sky-200/80 bg-sky-50/90 p-4 text-sm leading-7 text-slate-700 dark:border-cyan-300/15 dark:bg-cyan-300/[0.06] dark:text-cyan-50">
+          <span className="font-black text-sky-700 dark:text-cyan-200">Business value: </span>
+          {project.results}
+        </div>
+        <div className="mt-5 grid gap-2">
+          {project.features.slice(0, 3).map((feature) => (
+            <p key={feature} className="flex gap-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
+              <CheckCircle2 className="mt-0.5 shrink-0 text-sky-600 dark:text-cyan-300" size={16} />
+              {feature}
+            </p>
+          ))}
+        </div>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {project.stack.slice(0, featured ? 6 : 5).map((tag) => (
+            <span key={tag} className="rounded-full border border-sky-200/75 bg-white px-3 py-1 text-xs font-semibold text-slate-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-200">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link href={project.caseStudyUrl} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300 px-4 py-2.5 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5 hover:shadow-cyan-400/30">
+            View case study <ArrowRight size={15} />
+          </Link>
+          {project.liveUrl ? (
+            <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-4 py-2.5 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
+              Live demo <ExternalLink size={15} />
+            </a>
+          ) : null}
+          {project.githubUrl ? (
+            <a href={project.githubUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-4 py-2.5 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
+              GitHub <GitBranch size={15} />
+            </a>
+          ) : null}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export function ProjectExplorer({ projects, mode = "home" }: { projects: PortfolioProject[]; mode?: "home" | "page" }) {
+  const [activeCategory, setActiveCategory] = useState<(typeof projectCategories)[number]>("All");
+  const [query, setQuery] = useState("");
+
+  const featuredProjects = projects.filter((project) => project.featured).slice(0, mode === "home" ? 3 : 2);
+  const filteredProjects = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    return projects.filter((project) => {
+      const categoryMatch = activeCategory === "All" || project.categoryGroup === activeCategory;
+      const queryMatch =
+        !normalized ||
+        [project.title, project.category, project.shortDescription, project.businessValue, project.stack.join(" "), project.features.join(" ")]
+          .join(" ")
+          .toLowerCase()
+          .includes(normalized);
+      return categoryMatch && queryMatch;
+    });
+  }, [activeCategory, projects, query]);
+
+  const gridProjects = filteredProjects.filter((project) => !featuredProjects.some((featured) => featured.slug === project.slug));
+
+  return (
+    <div>
+      <div className="mb-8 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="flex flex-wrap gap-2">
+          {projectCategories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`rounded-full border px-4 py-2 text-sm font-black transition ${
+                activeCategory === category
+                  ? "border-sky-400 bg-sky-600 text-white shadow-lg shadow-sky-500/20 dark:border-cyan-300 dark:bg-cyan-300 dark:text-slate-950"
+                  : "border-sky-200/80 bg-white/75 text-slate-700 hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100"
+              }`}
+              type="button"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        <label className="relative block min-w-0 lg:w-80">
+          <span className="sr-only">Search projects</span>
+          <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={17} />
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search stack, feature or project"
+            className="w-full rounded-full border border-sky-200/80 bg-white/78 py-3 pl-11 pr-4 text-sm font-semibold text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-300/15 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-100 dark:focus:border-cyan-300/45"
+          />
+        </label>
+      </div>
+
+      {mode === "home" && activeCategory === "All" && !query ? (
+        <div className="mb-8 grid gap-6 xl:grid-cols-3">
+          {featuredProjects.map((project, index) => (
+            <ProjectCard key={project.slug} project={project} featured priority={index === 0} />
+          ))}
+        </div>
+      ) : null}
+
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">Proof of Work</p>
+          <h3 className="mt-2 text-2xl font-black text-slate-950 dark:text-white">{activeCategory === "All" ? "All case studies" : `${activeCategory} projects`}</h3>
+        </div>
+        <div className="flex items-center gap-2 rounded-full border border-sky-200/80 bg-white/70 px-4 py-2 text-sm font-bold text-slate-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">
+          <MonitorSmartphone size={16} className="text-sky-600 dark:text-cyan-300" />
+          {filteredProjects.length} project{filteredProjects.length === 1 ? "" : "s"}
+        </div>
+      </div>
+
+      {filteredProjects.length ? (
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {(mode === "home" && activeCategory === "All" && !query ? gridProjects : filteredProjects).map((project, index) => (
+            <ProjectCard key={project.slug} project={project} priority={mode === "page" && index === 0} />
+          ))}
+        </div>
+      ) : (
+        <div className="rounded-[2rem] border border-dashed border-sky-300/70 bg-white/75 p-8 text-center text-slate-700 dark:border-cyan-300/25 dark:bg-white/[0.04] dark:text-slate-300">
+          <Sparkles className="mx-auto text-sky-600 dark:text-cyan-300" />
+          <p className="mt-4 font-black">No project matches that filter yet.</p>
+          <p className="mt-2 text-sm">Try another category or search for Laravel, dashboard, API, media or automation.</p>
+        </div>
+      )}
+
+      <div className="mt-10 rounded-[2rem] border border-sky-300/50 bg-gradient-to-br from-sky-50 via-white to-cyan-50 p-6 shadow-2xl shadow-sky-100/80 dark:border-cyan-300/20 dark:from-cyan-300/10 dark:via-slate-900/60 dark:to-slate-950 dark:shadow-cyan-500/10 md:p-10">
+        <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">Have a project in mind?</p>
+            <h3 className="mt-3 text-3xl font-black tracking-tight text-slate-950 dark:text-white">I can help you build a dashboard, SaaS platform, business website or custom web application.</h3>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-700 dark:text-slate-300">
+              Send the business problem, current workflow and ideal timeline. I will help shape the scope into a practical Laravel, React/Next.js or automation solution.
+            </p>
+          </div>
+          <Link href="/contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300 px-6 py-3.5 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5">
+            Contact Me <ArrowRight size={16} />
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

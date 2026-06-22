@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, BadgeCheck } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { getBlogPost } from "@/lib/api";
 import { blogPosts } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -15,7 +16,7 @@ type BlogPageProps = {
 
 export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = blogPosts.find((item) => item.slug === slug);
+  const post = await getBlogPost(slug);
 
   return {
     title: post?.title ?? "Technical Note",
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 
 export default async function BlogPost({ params }: BlogPageProps) {
   const { slug } = await params;
-  const post = blogPosts.find((item) => item.slug === slug);
+  const post = await getBlogPost(slug);
   if (!post) notFound();
 
   return (

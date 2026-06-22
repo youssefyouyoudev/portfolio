@@ -9,10 +9,10 @@ class Testimonial extends Model
 {
     use HasPortfolioOrdering;
 
-    protected $fillable = ['name', 'role', 'company', 'quote', 'is_published', 'sort_order'];
+    protected $fillable = ['name', 'role', 'company', 'quote', 'avatar', 'rating', 'is_published', 'is_featured', 'is_visible', 'sort_order'];
 
     protected function casts(): array
     {
-        return ['is_published' => 'boolean'];
+        return ['is_published' => 'boolean', 'is_featured' => 'boolean', 'is_visible' => 'boolean'];
     }
 }

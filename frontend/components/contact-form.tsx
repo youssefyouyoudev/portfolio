@@ -31,6 +31,7 @@ export function ContactForm() {
         <h3 className="font-bold text-slate-950 dark:text-cyan-100">Request a practical project estimate</h3>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Share enough context to understand the business goal, not just the technology list.</p>
       </div>
+      <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       <div className="grid gap-4 md:grid-cols-2">
         <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">Name<input required name="name" placeholder="Your name" className="field" /></label>
         <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200">Email<input required type="email" name="email" placeholder="you@company.com" className="field" /></label>

@@ -1,8 +1,10 @@
 import type { MetadataRoute } from "next";
-import { blogPosts, projects } from "@/lib/data";
+import { getBlogPosts, getProjects } from "@/lib/api";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = "https://youssefyouyou.com";
+  const [projects, blogPosts] = await Promise.all([getProjects(), getBlogPosts()]);
+
   return [
     { url: base, lastModified: new Date(), priority: 1 },
     { url: `${base}/projects`, lastModified: new Date(), priority: 0.85 },

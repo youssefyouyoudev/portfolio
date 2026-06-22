@@ -178,11 +178,11 @@ export const projects = [
   },
   {
     title: "E-commerce / Client Portal Systems",
-    slug: "ecommerce-client-portal-systems",
+    slug: "ecommerce-client-portal",
     category: "E-commerce / client portals / business web apps",
     subtitle: "Web Applications - Laravel - MySQL - Payments",
     shortDescription: "A web application concept for product catalogs, carts, orders, client dashboards, payment workflows and admin reporting.",
-    caseStudyUrl: "/projects/ecommerce-client-portal-systems",
+    caseStudyUrl: "/projects/ecommerce-client-portal",
     image: "/images/projects/ecommerce-client-portal-showcase.png",
     imageAlt: "E-commerce client portal system project preview",
     seoTitle: "E-commerce Client Portal Systems Case Study | Youssef Youyou Portfolio",
