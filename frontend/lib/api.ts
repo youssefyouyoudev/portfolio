@@ -28,14 +28,20 @@ const projectImageBySlug: Record<string, string> = {
 };
 
 const blogSlugAliases: Record<string, string> = {
-  "why-businesses-need-internal-digitalization": "why-small-businesses-need-internal-dashboards",
-  "api-integration-best-practices": "laravel-api-react-dashboard-architecture-business-platforms",
-  "building-admin-panels-with-laravel-and-filament": "building-admin-dashboards-laravel-react-role-permissions",
-  "how-i-build-laravel-and-react-dashboards": "laravel-api-react-dashboard-architecture-business-platforms",
-  "from-excel-automation-to-web-applications": "building-admin-dashboards-laravel-react-role-permissions",
-  "practical-api-structure-for-admin-dashboards": "laravel-api-react-dashboard-architecture-business-platforms",
-  "why-small-businesses-need-internal-dashboards": "building-admin-dashboards-laravel-react-role-permissions",
-  "deploying-laravel-and-nextjs-on-ubuntu": "deploy-laravel-nextjs-ubuntu-nginx-pm2-ssl",
+  "why-businesses-need-internal-digitalization": "business-automation-from-excel-to-web-app",
+  "api-integration-best-practices": "laravel-api-react-dashboard-architecture",
+  "building-admin-panels-with-laravel-and-filament": "build-admin-dashboard-laravel-react",
+  "how-i-build-laravel-and-react-dashboards": "laravel-api-react-dashboard-architecture",
+  "from-excel-automation-to-web-applications": "business-automation-from-excel-to-web-app",
+  "practical-api-structure-for-admin-dashboards": "laravel-api-react-dashboard-architecture",
+  "why-small-businesses-need-internal-dashboards": "build-admin-dashboard-laravel-react",
+  "deploying-laravel-and-nextjs-on-ubuntu": "deploy-laravel-nextjs-ubuntu-nginx-pm2",
+  "deploy-laravel-nextjs-ubuntu-nginx-pm2-ssl": "deploy-laravel-nextjs-ubuntu-nginx-pm2",
+  "laravel-api-react-dashboard-architecture-business-platforms": "laravel-api-react-dashboard-architecture",
+  "fix-vite-build-assets-not-loading-production": "fix-vite-assets-production-laravel",
+  "seo-checklist-laravel-nextjs-websites": "seo-checklist-laravel-nextjs",
+  "building-admin-dashboards-laravel-react-role-permissions": "build-admin-dashboard-laravel-react",
+  "structure-saas-projects-laravel-api-react-frontend": "laravel-saas-project-structure",
 };
 
 export const legacyBlogSlugs = Object.keys(blogSlugAliases);

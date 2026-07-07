@@ -7,8 +7,8 @@ import { GradientButton } from "@/components/ui/GradientButton";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { profile } from "@/lib/data";
 
-const tech = ["Laravel", "React", "Next.js", "MySQL", "Nginx", "API"];
-const trustItems = ["Full-stack systems", "Admin dashboards", "SaaS tools", "Production deployment"];
+const tech = ["Laravel", "React/Next.js", "SaaS Platforms", "Admin Dashboards", "APIs", "Business Automation", "SEO", "Deployment"];
+const trustItems = ["Nador-based", "Morocco-ready", "Remote-friendly", "Production systems"];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -50,11 +50,11 @@ export function Hero() {
           <motion.h1
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="mt-4 max-w-4xl text-5xl font-black leading-[0.92] tracking-tight text-slate-950 dark:text-slate-50 sm:text-6xl lg:text-7xl xl:text-[5.35rem]"
+            className="mt-4 max-w-5xl text-5xl font-black leading-[0.92] tracking-tight text-slate-950 dark:text-slate-50 sm:text-6xl lg:text-7xl xl:text-[5.05rem]"
           >
-            <span className="block">Senior</span>
+            <span className="block">Senior Full-Stack Web Developer</span>
             <span className="block bg-gradient-to-r from-sky-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent dark:from-sky-400 dark:via-blue-500 dark:to-cyan-300">
-              Full-Stack Web Developer
+              from Nador, Morocco
             </span>
           </motion.h1>
 
@@ -63,7 +63,7 @@ export function Hero() {
             transition={{ duration: 0.6 }}
             className="mt-5 text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-200 sm:text-3xl"
           >
-            Senior Laravel & React Developer based in Morocco
+            Laravel, React & Next.js Developer for SaaS, dashboards and business automation
           </motion.p>
 
           <motion.p
@@ -79,7 +79,7 @@ export function Hero() {
             transition={{ duration: 0.6 }}
             className="mt-6 flex max-w-full flex-wrap items-center gap-x-3 gap-y-2 text-xs font-bold uppercase tracking-[0.14em] text-sky-700 dark:text-sky-300 sm:text-base sm:normal-case sm:tracking-normal"
           >
-            {["Laravel", "React/Next.js", "APIs", "Dashboards", "Deployment", "SEO"].map((item, index) => (
+            {tech.map((item, index) => (
               <span key={item} className="inline-flex items-center gap-3">
                 {index > 0 && <span className="h-1.5 w-1.5 rounded-full bg-sky-400 dark:bg-cyan-300" aria-hidden="true" />}
                 {item}
@@ -88,11 +88,11 @@ export function Hero() {
           </motion.div>
 
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <GradientButton href="#projects" className="w-full sm:w-auto">
-              View my work <ArrowUpRight size={18} />
-            </GradientButton>
             <GradientButton href="#contact" variant="secondary" className="w-full sm:w-auto">
-              Start a project
+              Start a Project
+            </GradientButton>
+            <GradientButton href="#projects" className="w-full sm:w-auto">
+              View Case Studies <ArrowUpRight size={18} />
             </GradientButton>
             <GradientButton href="/cv-download" variant="link" className="w-full sm:w-auto">
               <Download size={17} /> Download CV
@@ -108,7 +108,7 @@ export function Hero() {
             ))}
           </motion.div>
 
-          <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-3">
+          <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
             {tech.map((item, index) => (
               <TechBadge key={item} delay={0.5 + index * 0.05}>
                 {item}
@@ -121,7 +121,7 @@ export function Hero() {
               <MapPin size={16} className="text-sky-600 dark:text-cyan-300" />
               Nador, Morocco
             </span>
-            <span className="max-w-full">Remote / Freelance / Marrakech opportunities</span>
+            <span className="max-w-full">Remote / Freelance / Morocco-wide projects</span>
           </motion.div>
         </motion.div>
 

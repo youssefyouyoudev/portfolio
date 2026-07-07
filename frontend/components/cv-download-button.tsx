@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 export function CvDownloadButton() {
   const [loading, setLoading] = useState(false);
@@ -20,6 +21,7 @@ export function CvDownloadButton() {
       }
     } finally {
       setLoading(false);
+      trackEvent("cv_download", { source: "portfolio-cv-page" });
       window.location.href = url;
     }
   }

@@ -2,6 +2,9 @@ User-agent: *
 Disallow: /admin
 Disallow: /api
 Disallow: /private
+Disallow: /dashboard
+Disallow: /login
+Disallow: /storage/private
 Disallow: /storage/app
 
 Sitemap: https://youssefyouyou.com/sitemap.xml

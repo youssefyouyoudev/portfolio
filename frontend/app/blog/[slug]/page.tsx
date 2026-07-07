@@ -48,25 +48,42 @@ export default async function BlogPost({ params }: BlogPageProps) {
   const checklist = "checklist" in post && Array.isArray(post.checklist) ? post.checklist : post.points;
   const relatedProjects = "relatedProjects" in post && Array.isArray(post.relatedProjects) ? post.relatedProjects : [];
   const relatedServices = "relatedServices" in post && Array.isArray(post.relatedServices) ? post.relatedServices : [];
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
-    url: `https://youssefyouyou.com/blog/${post.slug}`,
-    author: {
-      "@type": "Person",
-      name: "Youssef Youyou",
-      jobTitle: "Senior Full-Stack Web Developer",
-      url: "https://youssefyouyou.com",
+  const publishedDate = "2026-07-07";
+  const updatedDate = "2026-07-07";
+  const readingTime = Math.max(6, Math.ceil((sections.reduce((total, section) => total + section.body.join(" ").split(/\s+/).length, 0) + post.excerpt.split(/\s+/).length) / 180));
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.excerpt,
+      url: `https://youssefyouyou.com/blog/${post.slug}`,
+      datePublished: publishedDate,
+      dateModified: updatedDate,
+      timeRequired: `PT${readingTime}M`,
+      author: {
+        "@type": "Person",
+        name: "Youssef Youyou",
+        jobTitle: "Senior Full-Stack Web Developer",
+        url: "https://youssefyouyou.com",
+      },
+      publisher: {
+        "@type": "Person",
+        name: "Youssef Youyou",
+      },
+      mainEntityOfPage: `https://youssefyouyou.com/blog/${post.slug}`,
+      keywords: [post.category, "Laravel", "React", "Next.js", "dashboards", "deployment", "SEO"].join(", "),
     },
-    publisher: {
-      "@type": "Person",
-      name: "Youssef Youyou",
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://youssefyouyou.com" },
+        { "@type": "ListItem", position: 2, name: "Blog", item: "https://youssefyouyou.com/blog" },
+        { "@type": "ListItem", position: 3, name: post.title, item: `https://youssefyouyou.com/blog/${post.slug}` },
+      ],
     },
-    mainEntityOfPage: `https://youssefyouyou.com/blog/${post.slug}`,
-    keywords: [post.category, "Laravel", "React", "Next.js", "dashboards", "deployment", "SEO"].join(", "),
-  };
+  ];
 
   return (
     <main className="min-h-screen overflow-hidden bg-slate-50 px-4 py-10 text-slate-950 dark:bg-[#020617] dark:text-white">
@@ -90,6 +107,11 @@ export default async function BlogPost({ params }: BlogPageProps) {
           <p className="text-sm font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">{post.category}</p>
           <h1 className="mt-4 text-balance text-4xl font-black tracking-tight md:text-5xl">{post.title}</h1>
           <p className="mt-5 text-lg leading-8 text-slate-700 dark:text-slate-300">{post.excerpt}</p>
+          <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-[0.12em] text-slate-600 dark:text-slate-400">
+            <span>Published {publishedDate}</span>
+            <span>Updated {updatedDate}</span>
+            <span>{readingTime} min read</span>
+          </div>
           <div className="mt-8 rounded-2xl border border-sky-200/75 bg-sky-50 p-5 dark:border-cyan-300/15 dark:bg-cyan-300/[0.06]">
             <h2 className="text-xl font-bold text-sky-800 dark:text-cyan-100">Table of contents</h2>
             <div className="mt-4 grid gap-2 text-sm leading-7 text-slate-700 dark:text-slate-300">

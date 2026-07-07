@@ -83,6 +83,15 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         acceptedAnswer: { "@type": "Answer", text: faq.answer },
       })),
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://youssefyouyou.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://youssefyouyou.com/#services" },
+        { "@type": "ListItem", position: 3, name: service.h1, item: `https://youssefyouyou.com/services/${service.slug}` },
+      ],
+    },
   ];
 
   return (
@@ -173,6 +182,33 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 <li key={item} className="flex gap-2"><BadgeCheck className="mt-0.5 shrink-0 text-sky-600 dark:text-cyan-300" size={16} />{item}</li>
               ))}
             </ul>
+          </Card>
+        </section>
+
+        <section className="mt-8 grid gap-6 lg:grid-cols-2">
+          <Card>
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">Who This Is For</p>
+            <h2 className="mt-3 text-2xl font-black">Business fit and use cases</h2>
+            <p className="mt-5 text-sm leading-7 text-slate-700 dark:text-slate-300">
+              This service is for businesses that need a practical web system, not vague decoration. It fits local Nador businesses, Morocco-wide companies, remote teams, founders and operations teams that need cleaner workflows, better visibility, stronger SEO structure, secure access or a maintainable platform.
+            </p>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              {["Local business website", "Admin dashboard", "Laravel API", "React/Next.js interface", "SaaS MVP", "Business automation"].map((item) => (
+                <span key={item} className="rounded-2xl border border-sky-200/80 bg-sky-50/85 p-3 text-sm font-bold text-slate-700 dark:border-cyan-400/15 dark:bg-cyan-300/[0.055] dark:text-slate-200">{item}</span>
+              ))}
+            </div>
+          </Card>
+          <Card>
+            <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">SEO Positioning</p>
+            <h2 className="mt-3 text-2xl font-black">Nador, Morocco and remote visibility</h2>
+            <p className="mt-5 text-sm leading-7 text-slate-700 dark:text-slate-300">
+              The content strategy is three-level: Nador-first local visibility, Morocco-wide authority for Laravel, React, SaaS and dashboards, then international credibility for remote Laravel API, React dashboard and Next.js SEO website projects. The wording stays natural and avoids keyword stuffing.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {["Nador", "Morocco", "Marrakech", "Casablanca", "Rabat", "Tangier", "Remote"].map((item) => (
+                <span key={item} className="rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-sky-700 dark:border-white/10 dark:bg-white/[0.05] dark:text-cyan-100">{item}</span>
+              ))}
+            </div>
           </Card>
         </section>
 

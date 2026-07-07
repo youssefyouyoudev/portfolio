@@ -40,6 +40,7 @@ import {
   timeline as fallbackTimeline,
 } from "@/lib/data";
 import { getDisplayProjects } from "@/lib/project-content";
+import { trackEvent } from "@/lib/analytics";
 
 type PortfolioShellProps = {
   content?: {
@@ -70,6 +71,8 @@ const servicePageByTitle: Record<string, string> = {
   "IT support and process digitalization": "/services/business-automation-morocco",
   "Business websites": "/services/freelance-web-developer-morocco",
   "SEO technical optimization": "/services/freelance-web-developer-morocco",
+  "API integrations": "/services/laravel-developer-morocco",
+  "E-commerce websites": "/services/freelance-web-developer-morocco",
 };
 
 const practicalCapabilities = [
@@ -162,6 +165,35 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
       <Navbar />
       <Hero />
 
+      <section id="proof" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
+        <SectionTitle
+          eyebrow="Proof"
+          title="Proof That I Can Build Real Systems"
+          text="A practical proof layer for local Nador businesses, Morocco-wide clients and remote teams: production deployment thinking, Laravel APIs, dashboard workflows, automation experience and real case studies without inflated claims."
+        />
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            ["Production deployments", "Laravel/Next.js production builds, environment separation, cache clearing, Nginx and Cloudflare troubleshooting.", Rocket],
+            ["Laravel APIs", "REST endpoints, validation, resources, authentication, policies and clean contracts for frontend dashboards.", Server],
+            ["Admin dashboards", "CRUD systems, roles, reporting views, HR/inventory modules and admin-facing workflows.", LayoutDashboard],
+            ["Business automation", "Excel/VBA replacement paths, document tracking, digital archiving and internal process digitalization.", Workflow],
+            ["SEO structure", "Metadata, canonical URLs, sitemap, robots, JSON-LD, image alt text and internal linking.", Search],
+            ["MySQL database design", "Relational data modeling for users, content, documents, inventory, HR records, portals and reports.", Database],
+          ].map(([title, text, Icon]) => {
+            const ProofIcon = Icon as typeof Rocket;
+            return (
+              <Reveal key={String(title)}>
+                <PremiumCard className="h-full p-6">
+                  <ProofIcon className="text-sky-600 dark:text-cyan-300" />
+                  <h3 className="mt-4 text-xl font-black text-slate-950 dark:text-white">{String(title)}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{String(text)}</p>
+                </PremiumCard>
+              </Reveal>
+            );
+          })}
+        </div>
+      </section>
+
       <section id="stats" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
         <SectionTitle
           eyebrow="Real Stats"
@@ -216,6 +248,32 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
         </div>
       </section>
 
+      <section id="why-youssef" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
+        <SectionTitle
+          eyebrow="Personal Brand"
+          title="Why choose Youssef Youyou?"
+          text="The positioning is proof-based: business-focused full-stack development, Laravel/React production stack, real dashboard and automation experience, and a Nador-based profile available across Morocco and remotely."
+        />
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            ["Business-focused developer", "I start from workflows, users and business goals before deciding the technical shape."],
+            ["Laravel/React production stack", "Laravel APIs, React/Next.js interfaces, MySQL data models and production deployment practices."],
+            ["Real admin/dashboard experience", "Case studies include dashboards, CMS control, HR/inventory direction, content systems and reporting flows."],
+            ["Automation background", "Administrative digitalization and Excel/VBA automation experience help me spot practical improvements."],
+            ["SEO and deployment mindset", "The site itself demonstrates metadata, schema, sitemap, robots, Open Graph and deployment readiness."],
+            ["Based in Nador, available remote", "Focused on Nador first, Morocco authority next, and remote Laravel/React projects internationally."],
+          ].map(([title, text]) => (
+            <Reveal key={title}>
+              <PremiumCard className="h-full p-6">
+                <BadgeCheck className="text-sky-600 dark:text-cyan-300" />
+                <h3 className="mt-4 text-xl font-black text-slate-950 dark:text-white">{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{text}</p>
+              </PremiumCard>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       <section id="services" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
         <SectionTitle
           eyebrow="Services"
@@ -236,7 +294,7 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
                   </div>
                   <h3 className="mt-6 text-xl font-black text-slate-950 dark:text-white">{service.title}</h3>
                   <p className="mt-3 flex-1 text-sm leading-7 text-slate-600 dark:text-slate-300">{service.description}</p>
-                  <Link href={servicePageByTitle[service.title] ?? "/contact"} className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-sky-700 transition group-hover:translate-x-1 dark:text-cyan-200">
+                  <Link href={servicePageByTitle[service.title] ?? "/contact"} onClick={() => trackEvent("service_page_cta_click", { service: service.title })} className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-sky-700 transition group-hover:translate-x-1 dark:text-cyan-200">
                     View service <ArrowRight size={16} />
                   </Link>
                 </PremiumCard>
@@ -445,7 +503,7 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
         <SectionTitle
           eyebrow="Technical Notes"
           title="Technical writing that supports trust"
-          text="Short practical notes about dashboards, APIs, automation and production-minded web development."
+          text="Practical articles about Laravel, React, Next.js, dashboards, SaaS structure, deployment, Vite production fixes, SEO and business automation."
         />
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {blogPosts.map((post) => (
@@ -460,12 +518,29 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
                 <h3 className="mt-4 font-black text-slate-950 dark:text-white">{post.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{post.excerpt}</p>
                 <Link className="mt-5 inline-flex text-sm font-bold text-sky-700 dark:text-cyan-200" href={`/blog/${post.slug}`}>
-                  Read note
+                  Read article
                 </Link>
               </PremiumCard>
             </Reveal>
           ))}
         </div>
+      </section>
+
+      <section id="references" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
+        <SectionTitle
+          eyebrow="References"
+          title="References & Feedback"
+          text="Client trust matters, and it should be handled honestly. Public testimonials will only appear here when permission is clear."
+        />
+        <Reveal>
+          <PremiumCard className="mx-auto max-w-3xl p-8 text-center">
+            <BadgeCheck className="mx-auto text-sky-600 dark:text-cyan-300" />
+            <h3 className="mt-4 text-2xl font-black text-slate-950 dark:text-white">Real testimonials will be added after client permission.</h3>
+            <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">
+              Until then, the portfolio relies on case studies, technical writing, project structure, deployment notes and visible proof sections instead of invented reviews.
+            </p>
+          </PremiumCard>
+        </Reveal>
       </section>
 
       <section id="contact" className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 md:py-24 lg:grid-cols-[.9fr_1.1fr]">
@@ -498,6 +573,7 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
               return (
                 <a
                   key={String(label)}
+                  onClick={() => String(label) === "GitHub" || String(label) === "LinkedIn" ? trackEvent("external_profile_click", { profile: String(label) }) : undefined}
                   className="inline-flex items-center gap-3 rounded-2xl border border-sky-200/80 bg-white/75 p-4 font-semibold shadow-lg shadow-sky-100/60 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none dark:hover:border-cyan-300/30 dark:hover:text-cyan-100"
                   href={String(href)}
                 >
@@ -529,6 +605,9 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
               <a href="/#experience" className="hover:text-sky-700 dark:hover:text-cyan-200">Experience</a>
               <a href="/blog" className="hover:text-sky-700 dark:hover:text-cyan-200">Blog/Technical Notes</a>
               <a href="/contact" className="hover:text-sky-700 dark:hover:text-cyan-200">Contact</a>
+              <a href="/work-with-me" className="hover:text-sky-700 dark:hover:text-cyan-200">Work With Me</a>
+              <a href="/nador-full-stack-developer" className="hover:text-sky-700 dark:hover:text-cyan-200">Full-Stack Developer in Nador</a>
+              <a href="/morocco-full-stack-developer" className="hover:text-sky-700 dark:hover:text-cyan-200">Full-Stack Developer Morocco</a>
               <a href={profile.github} className="hover:text-sky-700 dark:hover:text-cyan-200">GitHub</a>
               <a href={profile.linkedin} className="hover:text-sky-700 dark:hover:text-cyan-200">LinkedIn</a>
             </div>
@@ -540,6 +619,9 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
               <a href="/services/react-nextjs-developer-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">React/Next.js</a>
               <a href="/services/admin-dashboard-development" className="hover:text-sky-700 dark:hover:text-cyan-200">Dashboards</a>
               <a href="/services/saas-development-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">SaaS Platforms</a>
+              <a href="/services/web-developer-nador" className="hover:text-sky-700 dark:hover:text-cyan-200">Web Developer in Nador</a>
+              <a href="/services/laravel-developer-nador" className="hover:text-sky-700 dark:hover:text-cyan-200">Laravel Developer Nador</a>
+              <a href="/services/business-automation-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">Business Automation Morocco</a>
             </div>
           </div>
           <div>

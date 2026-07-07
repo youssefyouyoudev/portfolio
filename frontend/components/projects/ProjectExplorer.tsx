@@ -17,6 +17,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { PortfolioProject, projectCategories } from "@/lib/project-content";
+import { trackEvent } from "@/lib/analytics";
 
 function statusClass(status: PortfolioProject["status"]) {
   if (status === "Live") return "border-emerald-300/70 bg-emerald-50 text-emerald-700 dark:border-emerald-300/25 dark:bg-emerald-300/10 dark:text-emerald-200";
@@ -135,11 +136,11 @@ export function ProjectCard({ project, featured = false, priority = false }: { p
           ))}
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link href={project.caseStudyUrl} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300 px-4 py-2.5 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5 hover:shadow-cyan-400/30">
+          <Link href={project.caseStudyUrl} onClick={() => trackEvent("project_case_study_click", { project: project.slug })} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300 px-4 py-2.5 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5 hover:shadow-cyan-400/30">
             View case study <ArrowRight size={15} />
           </Link>
           {project.liveUrl ? (
-            <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-4 py-2.5 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
+            <a href={project.liveUrl} onClick={() => trackEvent("external_project_click", { project: project.slug })} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-4 py-2.5 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
               Live demo <ExternalLink size={15} />
             </a>
           ) : null}

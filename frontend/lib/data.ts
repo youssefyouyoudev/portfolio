@@ -9,7 +9,7 @@ export const profile = {
   availability:
     "Available for freelance, remote and business web projects in Morocco and internationally",
   description:
-    "I build production-ready Laravel APIs, React/Next.js interfaces, SaaS platforms, dashboards, business automation tools, and SEO-friendly websites for businesses.",
+    "I build production-ready Laravel APIs, React/Next.js interfaces, SaaS platforms, admin dashboards, business automation tools, and SEO-friendly websites for businesses in Morocco and worldwide.",
   email: "contact@youssefyouyou.com",
   website: "https://youssefyouyou.com",
   github: "https://github.com/youssefyouyoudev",
@@ -28,6 +28,7 @@ export const proofPoints = [
 export const stats = [
   { value: "4+", label: "Years project experience", detail: "Freelance web, SaaS and microservices from 2019-2023.", tone: "Production practice" },
   { value: "10+", label: "Practical project types", detail: "Websites, dashboards, SaaS, e-commerce, portals, admin tools, archiving, automation, APIs and support.", tone: "Broad delivery" },
+  { value: "7", label: "Portfolio case studies", detail: "RiFiTV, ERPlus, Portfolio Admin System, archiving, SaaS, e-commerce/client portal and Excel/VBA automation proof.", tone: "Case-study proof" },
   { value: "6", label: "Technical areas", detail: "Backend, Frontend, Database, DevOps, Security, IT/Admin.", tone: "Full-stack coverage" },
   { value: "4", label: "Languages", detail: "Arabic, French, English and German B1.", tone: "Client communication" },
 ];
@@ -270,7 +271,7 @@ export const experiences = [
 export const blogPosts = [
   {
     title: "How I Deploy Laravel and Next.js on Ubuntu with Nginx, PM2 and SSL",
-    slug: "deploy-laravel-nextjs-ubuntu-nginx-pm2-ssl",
+    slug: "deploy-laravel-nextjs-ubuntu-nginx-pm2",
     category: "Deployment",
     excerpt: "A practical production checklist for deploying a Laravel API and Next.js frontend on Ubuntu with Nginx, PM2, SSL, env files and cache commands.",
     seoTitle: "Deploy Laravel and Next.js on Ubuntu with Nginx, PM2 and SSL",
@@ -318,7 +319,7 @@ export const blogPosts = [
   },
   {
     title: "Laravel API + React Dashboard Architecture for Business Platforms",
-    slug: "laravel-api-react-dashboard-architecture-business-platforms",
+    slug: "laravel-api-react-dashboard-architecture",
     category: "Dashboards",
     excerpt: "How I structure Laravel APIs and React dashboards for business platforms that need roles, modules, filters, reports and maintainable growth.",
     seoTitle: "Laravel API + React Dashboard Architecture for Business Platforms",
@@ -364,7 +365,7 @@ export const blogPosts = [
   },
   {
     title: "How to Fix Vite Build Assets Not Loading in Production",
-    slug: "fix-vite-build-assets-not-loading-production",
+    slug: "fix-vite-assets-production-laravel",
     category: "Deployment",
     excerpt: "A practical guide to diagnosing Vite production asset issues in Laravel, React and Blade projects, including manifest paths, base URLs, caches and Nginx config.",
     seoTitle: "How to Fix Vite Build Assets Not Loading in Production",
@@ -409,7 +410,7 @@ export const blogPosts = [
   },
   {
     title: "SEO Checklist for Laravel and Next.js Websites",
-    slug: "seo-checklist-laravel-nextjs-websites",
+    slug: "seo-checklist-laravel-nextjs",
     category: "SEO",
     excerpt: "A practical SEO checklist for Laravel and Next.js websites covering metadata, headings, JSON-LD, sitemap, robots, image alt text, internal links and performance.",
     seoTitle: "SEO Checklist for Laravel and Next.js Websites",
@@ -453,7 +454,7 @@ export const blogPosts = [
   },
   {
     title: "Building Admin Dashboards with Laravel, React and Role Permissions",
-    slug: "building-admin-dashboards-laravel-react-role-permissions",
+    slug: "build-admin-dashboard-laravel-react",
     category: "Dashboards",
     excerpt: "How I approach admin dashboards with Laravel, React, role permissions, CRUD modules, validation, audit-friendly actions and business reporting.",
     seoTitle: "Building Admin Dashboards with Laravel, React and Role Permissions",
@@ -497,7 +498,7 @@ export const blogPosts = [
   },
   {
     title: "How I Structure SaaS Projects with Laravel API and React Frontend",
-    slug: "structure-saas-projects-laravel-api-react-frontend",
+    slug: "laravel-saas-project-structure",
     category: "SaaS",
     excerpt: "A practical SaaS structure for Laravel API and React frontend projects, covering users, organizations, modules, dashboards, subscriptions-ready design and deployment.",
     seoTitle: "How I Structure SaaS Projects with Laravel API and React Frontend",
@@ -538,5 +539,95 @@ export const blogPosts = [
     checklist: ["Account model exists", "Roles and ownership rules are clear", "Public and app routes are separated", "Modules match MVP scope", "Deployment plan exists", "Future billing path is documented"],
     relatedProjects: ["erplus", "social-media-management-saas"],
     relatedServices: ["saas-development-morocco", "laravel-developer-morocco"],
+  },
+  {
+    title: "From Excel Automation to Web Applications: A Practical Business Guide",
+    slug: "business-automation-from-excel-to-web-app",
+    category: "Automation",
+    excerpt: "A practical guide to deciding when Excel/VBA automation should stay in spreadsheets and when it should become a Laravel, React or dashboard-based web application.",
+    seoTitle: "From Excel Automation to Web Applications: A Practical Business Guide",
+    seoDescription: "Business automation guide for moving from Excel/VBA workflows to Laravel, React dashboards, document systems and internal web applications.",
+    points: [
+      "Start by mapping the repeated spreadsheet workflow.",
+      "Keep Excel when it is still the fastest reliable tool.",
+      "Move to a web app when collaboration, permissions and central data matter.",
+      "Use dashboards and reports to make the workflow visible.",
+    ],
+    sections: [
+      {
+        heading: "When Excel is still useful",
+        body: [
+          "Excel is not the enemy. For a small internal workflow, a structured workbook with clear inputs, formulas, filters and VBA automation can create value quickly. I keep Excel when the data is small, one or two people own the workflow, and the process does not require user roles or central access.",
+          "The mistake is forcing every workflow into a web app too early. The better approach is to understand the business problem first, then choose the simplest maintainable tool.",
+        ],
+      },
+      {
+        heading: "When a web app becomes necessary",
+        body: [
+          "A Laravel and React web app becomes the better option when several people need access, permissions matter, records need history, reports are repeated, files need tracking or the business wants one central source of truth. This is common in HR, inventory, document tracking and operations workflows.",
+        ],
+        code: "Spreadsheet columns -> database fields\nRepeated filters -> dashboard filters\nManual report -> generated report\nShared workbook -> authenticated web app\nHidden VBA logic -> tested backend logic",
+      },
+      {
+        heading: "Practical migration path",
+        body: [
+          "I usually start by listing the spreadsheet sheets, fields, formulas, manual steps, repeated reports and user decisions. Then I decide which parts become forms, which become tables, which become reports and which should stay as exports.",
+        ],
+      },
+      {
+        heading: "Common errors",
+        body: [
+          "Common mistakes include copying messy spreadsheet structure directly into the database, ignoring roles, skipping validation, and building a dashboard that does not answer the real daily questions. A useful automation project should reduce repeated work and make the workflow easier to trust.",
+        ],
+      },
+    ],
+    checklist: ["Workflow mapped", "Repeated actions identified", "Database fields planned", "Permissions considered", "Reports defined", "Next improvement list written"],
+    relatedProjects: ["excel-vba-automation-tools", "digital-archiving-system"],
+    relatedServices: ["business-automation-nador", "business-automation-morocco"],
+  },
+  {
+    title: "Common Cloudflare, Nginx and Laravel Deployment Errors and How to Fix Them",
+    slug: "cloudflare-nginx-laravel-deployment-errors",
+    category: "Deployment",
+    excerpt: "A practical troubleshooting guide for Cloudflare, Nginx and Laravel production errors, including 502s, SSL loops, Vite asset issues, cache problems and API routing mistakes.",
+    seoTitle: "Common Cloudflare, Nginx and Laravel Deployment Errors and How to Fix Them",
+    seoDescription: "Troubleshoot Cloudflare, Nginx and Laravel deployment errors including 502 Bad Gateway, SSL redirects, Vite assets, Laravel cache and API routes.",
+    points: [
+      "Check whether the error comes from Cloudflare, Nginx, PHP-FPM, Laravel or the frontend build.",
+      "Use logs before changing random config.",
+      "Clear Laravel caches after environment or route changes.",
+      "Verify SSL mode and proxy headers when Cloudflare is involved.",
+    ],
+    sections: [
+      {
+        heading: "Start with the layer",
+        body: [
+          "Deployment errors are easier when you identify the layer first. Cloudflare errors may mean the origin is unreachable, Nginx errors may mean the server block or upstream is wrong, PHP-FPM errors may point to Laravel or permissions, and frontend errors may come from assets, API URLs or build output.",
+        ],
+      },
+      {
+        heading: "Useful commands",
+        body: [
+          "I check Nginx syntax, service status, Laravel logs, PHP-FPM status and response headers before changing configuration. Guessing usually makes production issues slower.",
+        ],
+        code: "sudo nginx -t\nsudo systemctl status nginx\nsudo systemctl status php8.3-fpm\ntail -n 80 storage/logs/laravel.log\ncurl -I https://example.com",
+      },
+      {
+        heading: "Common fixes",
+        body: [
+          "For 502 errors, check upstream ports and running processes. For SSL loops, check Cloudflare SSL mode and trusted proxy headers. For Laravel 500 errors, check `.env`, permissions, app key, migrations and caches. For Vite assets, check the build directory, manifest and Nginx public root.",
+        ],
+        code: "php artisan optimize:clear\nphp artisan config:cache\nphp artisan route:cache\nphp artisan view:cache",
+      },
+      {
+        heading: "Production checklist",
+        body: [
+          "A clean deployment should have a working homepage, working API, valid SSL, no mixed content, reachable sitemap and robots files, correct cache state, working contact form and no public indexing of admin/API/private routes.",
+        ],
+      },
+    ],
+    checklist: ["Layer identified", "Nginx config tested", "Laravel logs checked", "SSL mode verified", "Caches rebuilt", "Sitemap and robots reachable"],
+    relatedProjects: ["rifitv", "portfolio-admin-system"],
+    relatedServices: ["laravel-developer-morocco", "freelance-web-developer-morocco"],
   },
 ];

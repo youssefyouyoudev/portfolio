@@ -81,6 +81,21 @@ function relatedServiceLinks(project: PortfolioProject) {
     .filter(Boolean);
 }
 
+function relatedBlogLinks(project: PortfolioProject) {
+  const text = `${project.title} ${project.category} ${project.stack.join(" ")} ${project.features.join(" ")}`.toLowerCase();
+  const links = new Map<string, string>();
+
+  if (text.includes("laravel") || text.includes("api")) links.set("Laravel API + React Dashboard Architecture", "/blog/laravel-api-react-dashboard-architecture");
+  if (text.includes("dashboard") || text.includes("admin")) links.set("Build Admin Dashboards with Laravel and React", "/blog/build-admin-dashboard-laravel-react");
+  if (text.includes("vite") || text.includes("deployment") || text.includes("nginx")) links.set("Deploy Laravel and Next.js on Ubuntu", "/blog/deploy-laravel-nextjs-ubuntu-nginx-pm2");
+  if (text.includes("seo")) links.set("SEO Checklist for Laravel and Next.js", "/blog/seo-checklist-laravel-nextjs");
+  if (text.includes("automation") || text.includes("excel") || text.includes("archiving")) links.set("From Excel Automation to Web Applications", "/blog/business-automation-from-excel-to-web-app");
+  if (text.includes("saas")) links.set("Laravel SaaS Project Structure", "/blog/laravel-saas-project-structure");
+  if (!links.size) links.set("Cloudflare, Nginx and Laravel Deployment Errors", "/blog/cloudflare-nginx-laravel-deployment-errors");
+
+  return Array.from(links.entries()).slice(0, 4);
+}
+
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = await getProject(canonicalProjectSlug(slug));
@@ -130,22 +145,34 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
   const previousProject = allProjects[(currentIndex - 1 + allProjects.length) % allProjects.length];
   const nextProject = allProjects[(currentIndex + 1) % allProjects.length];
   const relatedServices = relatedServiceLinks(project);
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: project.title,
-    url: `https://youssefyouyou.com/projects/${project.slug}`,
-    image: project.image ? `https://youssefyouyou.com${project.image}` : undefined,
-    description: project.seoDescription ?? project.shortDescription,
-    creator: {
-      "@type": "Person",
-      name: "Youssef Youyou",
-      url: "https://youssefyouyou.com",
-      jobTitle: "Senior Full-Stack Web Developer",
+  const relatedBlogs = relatedBlogLinks(project);
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": project.categoryGroup === "SaaS" || project.categoryGroup === "Dashboard" ? "SoftwareApplication" : "CreativeWork",
+      name: project.title,
+      url: `https://youssefyouyou.com/projects/${project.slug}`,
+      image: project.image ? `https://youssefyouyou.com${project.image}` : undefined,
+      description: project.seoDescription ?? project.shortDescription,
+      creator: {
+        "@type": "Person",
+        name: "Youssef Youyou",
+        url: "https://youssefyouyou.com",
+        jobTitle: "Senior Full-Stack Web Developer",
+      },
+      keywords: project.stack.join(", "),
+      genre: project.category,
     },
-    keywords: project.stack.join(", "),
-    genre: project.category,
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://youssefyouyou.com" },
+        { "@type": "ListItem", position: 2, name: "Projects", item: "https://youssefyouyou.com/projects" },
+        { "@type": "ListItem", position: 3, name: project.title, item: `https://youssefyouyou.com/projects/${project.slug}` },
+      ],
+    },
+  ];
 
   return (
     <ProjectDetailPage structuredData={structuredData}>
@@ -296,6 +323,22 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
               })}
             </div>
           </article>
+
+          <article className="rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8 lg:col-span-2">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Modules / Data Model</p>
+            <h2 className="mt-3 text-2xl font-black">Database and feature explanation</h2>
+            <p className="mt-5 text-sm leading-7 text-slate-700 dark:text-slate-300">
+              The project is explained around the same parts a production system needs: core entities, user-facing flows, admin-facing controls, reporting or content areas, and the deployment layer. Where a project is a concept, the structure is presented honestly as planned architecture rather than fake production usage.
+            </p>
+            <div className="mt-6 grid gap-3 md:grid-cols-2">
+              {(project.deliverables ?? project.features).slice(0, 6).map((item) => (
+                <div key={item} className="rounded-2xl border border-sky-200/80 bg-sky-50/85 p-4 text-sm leading-7 text-slate-700 dark:border-cyan-400/15 dark:bg-cyan-300/[0.055] dark:text-slate-300">
+                  <BadgeCheck className="mb-3 text-sky-600 dark:text-cyan-300" size={17} />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </article>
         </section>
 
         <ProjectGallery project={project} />
@@ -349,6 +392,19 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
             {relatedServices.map((service) => (
               <Link key={service!.slug} href={`/services/${service!.slug}`} className="inline-flex items-center justify-between gap-3 rounded-2xl border border-sky-200/80 bg-sky-50/85 p-4 text-sm font-bold text-slate-800 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-cyan-400/15 dark:bg-cyan-300/[0.055] dark:text-slate-100 dark:hover:text-cyan-100">
                 {service!.h1}
+                <ArrowRight size={15} />
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Related Technical Articles</p>
+          <h2 className="mt-3 text-2xl font-black">Technical writing connected to this case study</h2>
+          <div className="mt-6 grid gap-3 md:grid-cols-2">
+            {relatedBlogs.map(([label, href]) => (
+              <Link key={href} href={href} className="inline-flex items-center justify-between gap-3 rounded-2xl border border-sky-200/80 bg-sky-50/85 p-4 text-sm font-bold text-slate-800 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-cyan-400/15 dark:bg-cyan-300/[0.055] dark:text-slate-100 dark:hover:text-cyan-100">
+                {label}
                 <ArrowRight size={15} />
               </Link>
             ))}

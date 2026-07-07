@@ -10,8 +10,9 @@ class ContactMessage extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'email', 'company', 'business_goal', 'project_type', 'budget_range',
-        'timeline', 'message', 'ip_address', 'user_agent', 'read_at', 'archived_at',
+        'name', 'email', 'company', 'country_city', 'business_goal', 'current_problem',
+        'project_type', 'budget_range', 'timeline', 'preferred_contact_method',
+        'message', 'ip_address', 'user_agent', 'read_at', 'archived_at',
     ];
 
     protected function casts(): array

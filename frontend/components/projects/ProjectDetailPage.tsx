@@ -8,7 +8,7 @@ export function ProjectDetailPage({
   structuredData,
 }: {
   children: React.ReactNode;
-  structuredData: Record<string, unknown>;
+  structuredData: unknown;
 }) {
   return (
     <main className="min-h-screen overflow-hidden bg-slate-50 px-4 py-10 text-slate-950 dark:bg-[#020617] dark:text-white">

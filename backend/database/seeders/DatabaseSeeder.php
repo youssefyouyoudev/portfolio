@@ -43,8 +43,8 @@ class DatabaseSeeder extends Seeder
 
         Setting::query()->upsert([
             ['key' => 'seo', 'group' => 'seo', 'is_public' => true, 'value' => json_encode([
-                'title' => 'Youssef Youyou | Senior Laravel & React Full-Stack Web Developer in Morocco',
-                'description' => 'Senior Full-Stack Web Developer based in Morocco. I build Laravel APIs, React/Next.js interfaces, SaaS platforms, dashboards, business automation tools, and SEO-friendly websites.',
+                'title' => 'Youssef Youyou | Senior Laravel & React Full-Stack Developer in Nador, Morocco',
+                'description' => 'Senior Full-Stack Developer from Nador, Morocco building Laravel APIs, React/Next.js interfaces, SaaS platforms, admin dashboards, business automation tools and SEO-friendly websites.',
                 'keywords' => ['Youssef Youyou', 'Laravel developer Morocco', 'React developer Morocco', 'Next.js developer Morocco', 'Full-stack developer Morocco', 'Senior web developer Morocco', 'Laravel React portfolio', 'SaaS developer Morocco', 'B2B web developer', 'B2C web developer', 'admin dashboard developer', 'API integration developer', 'Nador developer', 'Marrakech developer'],
             ])],
             ['key' => 'cv_file', 'group' => 'files', 'is_public' => true, 'value' => json_encode(['url' => '/cv/youssef-youyou-cv.pdf'])],
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
 
         HeroSection::query()->updateOrCreate(['headline' => 'Youssef Youyou'], [
             'subtitle' => 'Senior Full-Stack Web Developer',
-            'description' => 'I build production-ready Laravel APIs, React/Next.js interfaces, SaaS platforms, dashboards, business automation tools, and SEO-friendly websites for businesses.',
+            'description' => 'I build production-ready Laravel APIs, React/Next.js interfaces, SaaS platforms, admin dashboards, business automation tools, and SEO-friendly websites for businesses in Morocco and worldwide.',
             'badges' => ['Laravel', 'React', 'Next.js', 'MySQL', 'APIs', 'Nginx', 'SEO'],
             'cta_buttons' => [
                 ['label' => 'View My Work', 'href' => '#projects', 'variant' => 'primary'],
@@ -411,6 +411,7 @@ class DatabaseSeeder extends Seeder
             ['2023', 'Remote React.js experience', 'Frontend work with MediaTechly London.'],
             ['2023-present', 'Administrative digitalization', 'Internal IT support, digital archiving, Excel/VBA automation, and practical workflows.'],
             ['10+', 'Practical project types', 'Websites, dashboards, SaaS, e-commerce, portals, admin tools, archiving, automation, APIs, support.'],
+            ['7', 'Portfolio case studies', 'RiFiTV, ERPlus, Portfolio Admin System, archiving, SaaS, e-commerce/client portal and Excel/VBA automation proof.'],
             ['6', 'Main technical areas', 'Backend, Frontend, Database, DevOps, Security, IT/Admin.'],
             ['4', 'Languages', 'Arabic, French, English, German B1.'],
             ['3', 'Business targets', 'B2B, B2C, and internal business tools.'],

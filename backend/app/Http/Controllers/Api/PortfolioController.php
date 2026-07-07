@@ -34,14 +34,14 @@ class PortfolioController extends Controller
         return response()->json([
             'name' => 'Youssef Youyou',
             'title' => 'Senior Full-Stack Web Developer',
-            'positioning' => 'Senior Laravel & React Developer | Full-Stack Laravel, React & Next.js Developer | API Integration | Admin Dashboards | SaaS | Deployment & SEO',
+            'positioning' => 'Full-Stack Developer from Nador, Morocco | Laravel, React & Next.js Developer | SaaS, Dashboard & Business Automation Developer',
             'location' => 'Nador, Morocco',
             'availability' => 'Available for freelance, remote and business web projects in Morocco and internationally.',
             'email' => 'contact@youssefyouyou.com',
             'website' => 'https://youssefyouyou.com',
             'github' => 'https://github.com/youssefyouyoudev',
             'linkedin' => 'https://linkedin.com/in/youssefyouyoudev',
-            'summary' => 'I build production-ready Laravel APIs, React/Next.js interfaces, SaaS platforms, dashboards, business automation tools, and SEO-friendly websites for businesses.',
+            'summary' => 'I build production-ready Laravel APIs, React/Next.js interfaces, SaaS platforms, admin dashboards, business automation tools, and SEO-friendly websites for businesses in Morocco and worldwide.',
         ]);
     }
 

@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import "./globals.css";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://youssefyouyou.com";
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,13 +20,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://youssefyouyou.com"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Youssef Youyou | Senior Laravel & React Full-Stack Web Developer in Morocco",
+    default: "Youssef Youyou | Senior Laravel & React Full-Stack Developer in Nador, Morocco",
     template: "%s | Youssef Youyou",
   },
   description:
-    "Senior Full-Stack Web Developer based in Morocco. I build Laravel APIs, React/Next.js interfaces, SaaS platforms, dashboards, business automation tools, and SEO-friendly websites.",
+    "Senior Full-Stack Developer from Nador, Morocco building Laravel APIs, React/Next.js interfaces, SaaS platforms, admin dashboards, business automation tools and SEO-friendly websites.",
   applicationName: "Youssef Youyou Portfolio",
   authors: [{ name: "Youssef Youyou", url: "https://youssefyouyou.com" }],
   creator: "Youssef Youyou",
@@ -46,24 +52,32 @@ export const metadata: Metadata = {
     "API integration developer",
     "Nador developer",
     "Marrakech developer",
+    "web developer in Nador",
+    "Laravel developer Nador",
+    "freelance web developer Nador",
+    "website development Nador",
+    "business automation Nador",
+    "remote Laravel developer",
+    "React dashboard developer",
   ],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://youssefyouyou.com",
-    title: "Youssef Youyou | Senior Laravel & React Full-Stack Web Developer in Morocco",
+    url: siteUrl,
+    title: "Youssef Youyou | Senior Full-Stack Developer from Nador, Morocco",
     description:
-      "Senior Full-Stack Web Developer based in Morocco. I build Laravel APIs, React/Next.js interfaces, SaaS platforms, dashboards, business automation tools, and SEO-friendly websites.",
+      "Laravel, React, Next.js, SaaS platforms, dashboards, APIs, business automation and production-ready web development.",
     siteName: "Youssef Youyou Portfolio",
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Youssef Youyou senior full stack developer portfolio" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Youssef Youyou | Senior Laravel & React Full-Stack Web Developer in Morocco",
+    title: "Youssef Youyou | Senior Full-Stack Developer from Nador, Morocco",
     description:
-      "Senior Full-Stack Web Developer based in Morocco. I build Laravel APIs, React/Next.js interfaces, SaaS platforms, dashboards, business automation tools, and SEO-friendly websites.",
+      "Laravel, React, Next.js, SaaS platforms, dashboards, APIs, business automation and production-ready web development.",
   },
+  ...(googleVerification ? { verification: { google: googleVerification } } : {}),
   robots: {
     index: true,
     follow: true,
@@ -89,6 +103,15 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        {gaId ? (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`}
+            </Script>
+          </>
+        ) : null}
+        {plausibleDomain ? <Script defer data-domain={plausibleDomain} src="https://plausible.io/js/script.js" strategy="afterInteractive" /> : null}
         <script
           type="application/ld+json"
           suppressHydrationWarning
@@ -104,6 +127,7 @@ export default function RootLayout({
                 url: "https://youssefyouyou.com",
                 sameAs: ["https://github.com/youssefyouyoudev", "https://linkedin.com/in/youssefyouyoudev"],
                 address: { "@type": "PostalAddress", addressLocality: "Nador", addressCountry: "MA" },
+                homeLocation: { "@type": "Place", name: "Nador, Morocco" },
                 knowsAbout: ["Laravel", "PHP", "React", "Next.js", "JavaScript", "TypeScript", "MySQL", "REST APIs", "dashboards", "SaaS", "SEO", "Nginx", "Cloudflare", "deployment", "business automation"],
               },
               {
