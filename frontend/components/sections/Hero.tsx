@@ -63,7 +63,7 @@ export function Hero() {
             transition={{ duration: 0.6 }}
             className="mt-5 text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-200 sm:text-3xl"
           >
-            Laravel, React & Next.js Developer for SaaS, dashboards and business automation
+            Laravel, React & Next.js developer building SaaS platforms, dashboards, APIs and business automation tools.
           </motion.p>
 
           <motion.p

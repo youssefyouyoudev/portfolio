@@ -14,6 +14,9 @@ export type PortfolioProject = FallbackProject & {
   results: string;
   gallery: string[];
   nextImprovements: string[];
+  specificLine: string;
+  demoLabel: "Available" | "Private" | "Coming soon";
+  codeLabel: "GitHub" | "Private repo" | "Coming soon";
   liveUrl?: string;
   githubUrl?: string;
   showInProjects?: boolean;
@@ -63,6 +66,9 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
       "Organized football/media content so channel and match pages stay useful without relying on unsafe SEO claims.",
     ],
     results: "A clearer live football/media browsing experience with organized channels, match pages, responsive playback UX, SEO-safe content areas and production deployment awareness.",
+    specificLine: "Solved Laravel/Vite/Nginx production issues and built a football-media interface with match pages, channel structure, live-style UI and SEO-safe content areas.",
+    demoLabel: "Available",
+    codeLabel: "Private repo",
     nextImprovements: ["Admin-controlled channel scheduling", "Cleaner analytics for popular content", "Better fallback states for stream/player pages", "Performance tracking for playback and content pages"],
     liveUrl: "https://rifitv.com",
   },
@@ -79,6 +85,9 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
       "Structured the platform toward SaaS/business management needs with roles, permissions, dashboards and API-driven modules.",
     ],
     results: "A serious Laravel API and React/Vite business-platform foundation for HR, inventory, payroll-style workflows, dashboards, roles/permissions and future SaaS direction.",
+    specificLine: "Separated Laravel API logic from React/Vite frontend modules for HR, inventory, payroll direction, dashboards and role-based business workflows.",
+    demoLabel: "Private",
+    codeLabel: "Private repo",
     nextImprovements: ["More granular RBAC permissions", "Audit logs for HR/inventory actions", "Exportable reports and notification rules", "Workspace/subscription structure for SaaS growth"],
   },
   "digital-archiving-system": {
@@ -93,6 +102,9 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
       "Used Excel/VBA logic where quick automation was more practical than a full web module.",
     ],
     results: "Reduced search friction conceptually by organizing documents around metadata, status, verification and repeatable tracking.",
+    specificLine: "Designed a document tracking workflow that replaces manual searching with structured metadata, categories, filters and repeatable archive processes.",
+    demoLabel: "Coming soon",
+    codeLabel: "Private repo",
     nextImprovements: ["OCR-assisted search", "Role-based verification queue", "Activity history for each dossier"],
   },
   [commerceSlug]: {
@@ -107,6 +119,9 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
       "Prepared a payment-ready structure without claiming a live payment integration.",
     ],
     results: "A practical commerce/client-portal blueprint for turning manual orders into a self-service customer experience.",
+    specificLine: "Built commerce and portal foundations with product catalogues, orders, client areas, payment-ready structure and reporting logic.",
+    demoLabel: "Coming soon",
+    codeLabel: "Coming soon",
     nextImprovements: ["Real payment gateway integration", "Customer notifications", "Invoice/export workflow"],
   },
   "social-media-management-saas": {
@@ -121,6 +136,9 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
       "Planned roles and subscriptions-ready architecture without inventing fake production metrics.",
     ],
     results: "A believable SaaS product concept that shows dashboard design, multi-user thinking and analytics UI organization.",
+    specificLine: "Planned a SaaS structure for accounts, post scheduling, analytics dashboards and multi-user workflow organization.",
+    demoLabel: "Coming soon",
+    codeLabel: "Coming soon",
     nextImprovements: ["Social API integrations", "Subscription billing module", "Approval workflow for client campaigns"],
   },
   "excel-vba-automation-tools": {
@@ -135,6 +153,9 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
       "Connected the workflow thinking to future web dashboard possibilities.",
     ],
     results: "Practical automation that can save time quickly before a full web application is justified.",
+    specificLine: "Built spreadsheet-driven automation for calculations, filters, reporting, productivity and administrative workflows.",
+    demoLabel: "Private",
+    codeLabel: "Private repo",
     nextImprovements: ["Move stable workflows into a web dashboard", "Add permissions and central storage", "Create export-ready reporting views"],
   },
   "portfolio-admin-system": {
@@ -145,6 +166,9 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
     builtFor: "A portfolio owner who needs online content control without editing code for every project, service, note or image update.",
     whatIBuilt: portfolioAdminProject.deliverables,
     results: portfolioAdminProject.impact,
+    specificLine: "Private admin system for managing portfolio content, project pages, technical notes, services, skills, CV files and contact messages.",
+    demoLabel: "Private",
+    codeLabel: "Private repo",
     nextImprovements: ["Add richer visual editors", "Add image thumbnail generation", "Add revalidation hooks after admin updates"],
   },
 };
@@ -184,6 +208,9 @@ export function enrichProject(project: FallbackProject): PortfolioProject {
     results: meta.results ?? canonical.impact ?? canonical.businessValue,
     gallery,
     nextImprovements: meta.nextImprovements ?? ["Add more admin controls", "Improve reporting views", "Expand production monitoring"],
+    specificLine: meta.specificLine ?? canonical.solution ?? canonical.shortDescription,
+    demoLabel: meta.demoLabel ?? (meta.liveUrl || optionalLinks.liveUrl ? "Available" : "Coming soon"),
+    codeLabel: meta.codeLabel ?? (meta.githubUrl || optionalLinks.githubUrl ? "GitHub" : "Coming soon"),
     liveUrl: meta.liveUrl ?? optionalLinks.liveUrl,
     githubUrl: meta.githubUrl ?? optionalLinks.githubUrl,
     showInProjects: meta.showInProjects ?? true,

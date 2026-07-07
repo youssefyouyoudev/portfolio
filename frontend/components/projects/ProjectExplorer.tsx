@@ -116,6 +116,15 @@ export function ProjectCard({ project, featured = false, priority = false }: { p
         <h3 className={`${featured ? "mt-5 text-3xl" : "mt-4 text-2xl"} text-balance font-black tracking-tight text-slate-950 dark:text-white`}>{project.title}</h3>
         <p className="mt-2 text-sm font-bold text-sky-700 dark:text-cyan-200">{project.subtitle}</p>
         <p className="mt-4 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.shortDescription}</p>
+        <div className="mt-4 grid gap-2 rounded-2xl border border-sky-200/80 bg-white/80 p-4 text-xs font-bold text-slate-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300 sm:grid-cols-3">
+          <span>Status: <strong className="text-sky-700 dark:text-cyan-200">{project.status}</strong></span>
+          <span>Demo: <strong className="text-sky-700 dark:text-cyan-200">{project.demoLabel}</strong></span>
+          <span>Code: <strong className="text-sky-700 dark:text-cyan-200">{project.codeLabel}</strong></span>
+        </div>
+        <div className="mt-5 rounded-2xl border border-sky-200/80 bg-white/80 p-4 text-sm leading-7 text-slate-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">
+          <span className="font-black text-sky-700 dark:text-cyan-200">Technical line: </span>
+          {project.specificLine}
+        </div>
         <div className="mt-5 rounded-2xl border border-sky-200/80 bg-sky-50/90 p-4 text-sm leading-7 text-slate-700 dark:border-cyan-300/15 dark:bg-cyan-300/[0.06] dark:text-cyan-50">
           <span className="font-black text-sky-700 dark:text-cyan-200">Business value: </span>
           {project.results}

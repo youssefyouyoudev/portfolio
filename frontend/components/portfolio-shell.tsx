@@ -304,6 +304,39 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
         </div>
       </section>
 
+      <section id="build-for-you" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
+        <SectionTitle
+          eyebrow="Practical Examples"
+          title="What I can build for you"
+          text="Clear examples for businesses that need websites, dashboards, internal tools or automation systems."
+        />
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {[
+            ["Business website with admin panel", "A professional website with editable services, projects, messages and SEO fields.", "Laravel + Next.js", "/services/web-developer-nador"],
+            ["Booking or reservation platform", "A structured booking flow for appointments, local services, rooms or business availability.", "Laravel + React", "/contact"],
+            ["HR dashboard", "Employee records, payroll direction, roles, reports and admin workflow screens.", "Laravel API + React", "/services/admin-dashboard-development"],
+            ["Inventory management system", "Products, stock movement, filters, alerts, reporting and role-based access.", "Laravel + MySQL", "/services/admin-dashboard-development"],
+            ["Client portal", "A secure area for clients to view documents, project status, requests and updates.", "Laravel + Next.js", "/services/freelance-web-developer-morocco"],
+            ["SaaS MVP", "A focused multi-user product foundation with accounts, modules, dashboards and API structure.", "Laravel + React", "/services/saas-development-morocco"],
+            ["Laravel REST API", "Clean endpoints, validation, resources, policies, auth and database-backed business logic.", "Laravel + MySQL", "/services/laravel-developer-morocco"],
+            ["React/Next.js dashboard", "Responsive tables, filters, forms, cards, analytics and admin UI states.", "React + Next.js", "/services/react-nextjs-developer-morocco"],
+            ["Excel/VBA replacement web app", "Move repeated spreadsheet workflows into forms, dashboards, reports and permissions.", "Laravel + React", "/services/business-automation-nador"],
+            ["SEO-ready landing page", "A focused page with metadata, schema, internal links, contact CTA and fast responsive layout.", "Next.js + SEO", "/services/website-development-nador"],
+          ].map(([title, description, stack, href]) => (
+            <Reveal key={title}>
+              <PremiumCard className="flex h-full flex-col p-5">
+                <h3 className="text-lg font-black text-slate-950 dark:text-white">{title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-7 text-slate-600 dark:text-slate-300">{description}</p>
+                <span className="mt-4 rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-xs font-bold text-sky-700 dark:border-cyan-300/15 dark:bg-cyan-300/10 dark:text-cyan-100">{stack}</span>
+                <Link href={href} className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-sky-700 dark:text-cyan-200">
+                  Open path <ArrowRight size={15} />
+                </Link>
+              </PremiumCard>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       <section id="about" className="relative mx-auto grid max-w-7xl gap-6 px-4 py-16 md:py-24 lg:grid-cols-[1.05fr_.95fr]">
         <Reveal>
           <PremiumCard className="p-7 md:p-8">
@@ -333,6 +366,34 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      <section id="nador-trust" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
+        <Reveal>
+          <PremiumCard className="grid gap-8 p-7 md:p-8 lg:grid-cols-[1fr_.9fr] lg:items-center">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-sky-700 dark:text-cyan-300">Human Trust</p>
+              <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 dark:text-white md:text-5xl">Based in Nador, building for Morocco and remote clients</h2>
+              <p className="mt-6 leading-8 text-slate-700 dark:text-slate-300">
+                I am Youssef Youyou, a full-stack developer from Nador, Morocco. My work combines Laravel/React development, administrative digitalization experience, automation thinking and production deployment practice. I focus on practical systems that solve real workflow problems, not only beautiful interfaces.
+              </p>
+            </div>
+            <div className="grid gap-3">
+              {[
+                "Based in Nador, Morocco",
+                "Available for freelance and remote projects",
+                "Comfortable with business dashboards and internal tools",
+                "Experience with administrative workflows and digitalization",
+                "Focused on clean delivery and realistic scope",
+              ].map((item) => (
+                <div key={item} className="flex gap-3 rounded-2xl border border-sky-200/80 bg-sky-50/85 p-4 text-sm font-semibold text-slate-700 dark:border-cyan-400/15 dark:bg-cyan-300/[0.055] dark:text-slate-200">
+                  <BadgeCheck className="mt-0.5 shrink-0 text-sky-600 dark:text-cyan-300" size={16} />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </PremiumCard>
+        </Reveal>
       </section>
 
       <section id="skills" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
@@ -548,7 +609,7 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
           <p className="text-xs font-black uppercase tracking-[0.3em] text-sky-700 dark:text-cyan-300">Contact</p>
           <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 dark:text-white md:text-5xl">Need a Laravel, React or Next.js developer for your business platform?</h2>
           <p className="mt-6 text-lg leading-8 text-slate-700 dark:text-slate-300">
-            Let&apos;s turn your idea into a clean, scalable and production-ready solution. Send the business goal, current problem and ideal timeline.
+            Send me your business goal, current problem and ideal timeline. I will help turn it into a realistic technical scope.
           </p>
           <div className="mt-8 grid gap-3">
             {[

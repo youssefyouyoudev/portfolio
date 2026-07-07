@@ -9,7 +9,7 @@ export const profile = {
   availability:
     "Available for freelance, remote and business web projects in Morocco and internationally",
   description:
-    "I build production-ready Laravel APIs, React/Next.js interfaces, SaaS platforms, admin dashboards, business automation tools, and SEO-friendly websites for businesses in Morocco and worldwide.",
+    "I help businesses in Morocco and internationally turn manual workflows into production-ready web systems with clean interfaces, scalable backend logic and SEO-ready structure.",
   email: "contact@youssefyouyou.com",
   website: "https://youssefyouyou.com",
   github: "https://github.com/youssefyouyoudev",
@@ -26,11 +26,14 @@ export const proofPoints = [
 ];
 
 export const stats = [
-  { value: "4+", label: "Years project experience", detail: "Freelance web, SaaS and microservices from 2019-2023.", tone: "Production practice" },
-  { value: "10+", label: "Practical project types", detail: "Websites, dashboards, SaaS, e-commerce, portals, admin tools, archiving, automation, APIs and support.", tone: "Broad delivery" },
-  { value: "7", label: "Portfolio case studies", detail: "RiFiTV, ERPlus, Portfolio Admin System, archiving, SaaS, e-commerce/client portal and Excel/VBA automation proof.", tone: "Case-study proof" },
-  { value: "6", label: "Technical areas", detail: "Backend, Frontend, Database, DevOps, Security, IT/Admin.", tone: "Full-stack coverage" },
-  { value: "4", label: "Languages", detail: "Arabic, French, English and German B1.", tone: "Client communication" },
+  { value: "4+", label: "Years project experience", detail: "Shows practical delivery across freelance web, SaaS and microservice-style projects from 2019-2023.", tone: "Project history" },
+  { value: "2023", label: "Remote React.js experience", detail: "Remote frontend work with MediaTechly helped strengthen component structure, responsiveness and delivery discipline.", tone: "Remote proof" },
+  { value: "2023-present", label: "Administrative digitalization", detail: "Daily workflow context helps me build dashboards, automation and internal tools around real operational problems.", tone: "Business context" },
+  { value: "10+", label: "Practical project types", detail: "Websites, dashboards, SaaS concepts, e-commerce, portals, APIs, archiving and automation are represented in the work.", tone: "Broad delivery" },
+  { value: "7", label: "Portfolio case studies", detail: "The portfolio includes seven case studies with stack, business problem, technical approach and next improvements.", tone: "Case-study proof" },
+  { value: "3", label: "Production-focused stacks", detail: "Laravel/PHP, React/Next.js and MySQL/Nginx deployment workflows cover the core platform layers.", tone: "Stack focus" },
+  { value: "4", label: "Languages", detail: "Arabic, French, English and German B1 support communication with Moroccan and remote clients.", tone: "Communication" },
+  { value: "MA + remote", label: "Availability", detail: "Based in Nador and available for Morocco-wide freelance work and remote Laravel/React projects.", tone: "Location fit" },
 ];
 
 export const skillDistribution = [

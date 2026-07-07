@@ -48,6 +48,25 @@ function Card({ children, className = "" }: { children: React.ReactNode; classNa
   );
 }
 
+function relatedBlogLinks(slug: string) {
+  const defaults: [string, string][] = [
+    ["Laravel API + React Dashboard Architecture", "/blog/laravel-api-react-dashboard-architecture"],
+    ["SEO Checklist for Laravel and Next.js", "/blog/seo-checklist-laravel-nextjs"],
+  ];
+  const map: Record<string, [string, string][]> = {
+    "web-developer-nador": [["SEO Checklist for Laravel and Next.js", "/blog/seo-checklist-laravel-nextjs"], ["From Excel Automation to Web Applications", "/blog/business-automation-from-excel-to-web-app"]],
+    "laravel-developer-nador": [["Laravel API + React Dashboard Architecture", "/blog/laravel-api-react-dashboard-architecture"], ["Common Cloudflare, Nginx and Laravel Deployment Errors", "/blog/cloudflare-nginx-laravel-deployment-errors"]],
+    "business-automation-nador": [["From Excel Automation to Web Applications", "/blog/business-automation-from-excel-to-web-app"], ["How I Build Admin Dashboards with Laravel and React", "/blog/build-admin-dashboard-laravel-react"]],
+    "admin-dashboard-development": [["How I Build Admin Dashboards with Laravel and React", "/blog/build-admin-dashboard-laravel-react"], ["Laravel API + React Dashboard Architecture", "/blog/laravel-api-react-dashboard-architecture"]],
+    "saas-development-morocco": [["Laravel SaaS Project Structure", "/blog/laravel-saas-project-structure"], ["Laravel API + React Dashboard Architecture", "/blog/laravel-api-react-dashboard-architecture"]],
+    "business-automation-morocco": [["From Excel Automation to Web Applications", "/blog/business-automation-from-excel-to-web-app"], ["How I Build Admin Dashboards with Laravel and React", "/blog/build-admin-dashboard-laravel-react"]],
+    "react-nextjs-developer-morocco": [["SEO Checklist for Laravel and Next.js", "/blog/seo-checklist-laravel-nextjs"], ["How to Fix Vite Assets Not Loading in Laravel Production", "/blog/fix-vite-assets-production-laravel"]],
+    "laravel-developer-morocco": [["Laravel API + React Dashboard Architecture", "/blog/laravel-api-react-dashboard-architecture"], ["Deploy Laravel and Next.js on Ubuntu", "/blog/deploy-laravel-nextjs-ubuntu-nginx-pm2"]],
+  };
+
+  return map[slug] ?? defaults;
+}
+
 export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const { slug } = await params;
   const service = getServicePage(slug);
@@ -57,6 +76,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   const relatedServices = service.relatedServiceSlugs
     .map((relatedSlug) => servicePages.find((item) => item.slug === relatedSlug))
     .filter(Boolean);
+  const relatedBlogs = relatedBlogLinks(service.slug);
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -237,6 +257,19 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
               ))}
             </div>
           </Card>
+        </section>
+
+        <section className="mt-8 rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
+          <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">Related Blog Articles</p>
+          <h2 className="mt-3 text-2xl font-black">Technical articles connected to this service</h2>
+          <div className="mt-6 grid gap-3 md:grid-cols-2">
+            {relatedBlogs.map(([label, href]) => (
+              <Link key={href} href={href} className="inline-flex items-center justify-between gap-3 rounded-2xl border border-sky-200/80 bg-sky-50/85 p-4 text-sm font-bold text-slate-800 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-cyan-400/15 dark:bg-cyan-300/[0.055] dark:text-slate-100 dark:hover:text-cyan-100">
+                {label}
+                <ArrowRight size={15} />
+              </Link>
+            ))}
+          </div>
         </section>
 
         <section className="mt-8 rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">

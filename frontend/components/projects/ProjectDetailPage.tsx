@@ -27,8 +27,8 @@ export function ProjectGallery({ project }: { project: PortfolioProject }) {
     <section className="mt-8 rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Screenshots / Gallery</p>
-          <h2 className="mt-3 text-2xl font-black">Product proof and interface direction</h2>
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Screenshots & product views</p>
+          <h2 className="mt-3 text-2xl font-black">Real screenshots will be added here after final visual review.</h2>
         </div>
         <span className="rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-sky-700 dark:border-cyan-300/15 dark:bg-cyan-300/10 dark:text-cyan-100">
           {images.length + placeholderCount || 1} visual

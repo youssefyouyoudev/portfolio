@@ -97,8 +97,8 @@ export function FloatingDashboardVisual() {
             <span>Dashboard</span>
             <Gauge size={15} className="text-cyan-300" />
           </div>
-          <p className="mt-3 text-4xl font-black text-slate-950 dark:text-white">98</p>
-          <p className="text-xs text-sky-700 dark:text-cyan-200">SEO-ready score</p>
+          <p className="mt-3 text-lg font-black leading-tight text-slate-950 dark:text-white">SEO structure ready</p>
+          <p className="text-xs text-sky-700 dark:text-cyan-200">Metadata • Sitemap • Schema</p>
         </GlassCard>
       </FloatingCard>
 

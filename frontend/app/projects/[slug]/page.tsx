@@ -213,6 +213,11 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
                 </span>
               ))}
             </div>
+            <div className="mt-5 grid gap-2 rounded-2xl border border-sky-200/80 bg-white/78 p-4 text-xs font-bold text-slate-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300 sm:grid-cols-3">
+              <span>Status: <strong className="text-sky-700 dark:text-cyan-200">{project.status}</strong></span>
+              <span>Demo: <strong className="text-sky-700 dark:text-cyan-200">{project.demoLabel}</strong></span>
+              <span>Code: <strong className="text-sky-700 dark:text-cyan-200">{project.codeLabel}</strong></span>
+            </div>
             <div className="mt-6 flex flex-wrap gap-2">
               {project.stack.map((item) => (
                 <span key={item} className="rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-sm font-semibold text-slate-700 dark:border-white/10 dark:bg-cyan-300/10 dark:text-cyan-100">
@@ -338,6 +343,12 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
                 </div>
               ))}
             </div>
+          </article>
+
+          <article className="rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8 lg:col-span-2">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Specific Technical Work</p>
+            <h2 className="mt-3 text-2xl font-black">What makes this project specific</h2>
+            <p className="mt-5 text-sm leading-7 text-slate-700 dark:text-slate-300">{project.specificLine}</p>
           </article>
         </section>
 
