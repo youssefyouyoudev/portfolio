@@ -9,6 +9,11 @@ use App\Models\AboutSection;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use App\Models\BlogTag;
+use App\Models\ChatLead;
+use App\Models\ChatMessage;
+use App\Models\ChatSession;
+use App\Models\ChatbotKnowledge;
+use App\Models\ChatbotSetting;
 use App\Models\ContactMessage;
 use App\Models\Experience;
 use App\Models\FooterSetting;
@@ -38,6 +43,8 @@ class CmsController extends Controller
                 'published_projects' => Project::query()->where('is_published', true)->count(),
                 'blog_posts' => BlogPost::query()->count(),
                 'unread_contact_messages' => ContactMessage::query()->whereNull('read_at')->count(),
+                'chatbot_leads' => ChatLead::query()->count(),
+                'chatbot_sessions' => ChatSession::query()->count(),
                 'media' => Media::query()->count(),
             ],
             'latest_messages' => ContactMessage::query()->latest()->limit(5)->get(),
@@ -205,6 +212,11 @@ class CmsController extends Controller
             'media' => Media::class,
             'menu-items' => MenuItem::class,
             'footer-settings' => FooterSetting::class,
+            'chatbot-knowledge' => ChatbotKnowledge::class,
+            'chatbot-settings' => ChatbotSetting::class,
+            'chatbot-leads' => ChatLead::class,
+            'chat-sessions' => ChatSession::class,
+            'chat-messages' => ChatMessage::class,
         ][$resource] ?? abort(404, 'Unknown admin resource.');
     }
 
@@ -227,6 +239,11 @@ class CmsController extends Controller
             'media' => ['alt_text' => ['nullable', 'string', 'max:180'], 'meta' => ['nullable', 'array']],
             'menu-items' => ['label' => ['required', 'string', 'max:120'], 'url' => ['required', 'string', 'max:500'], 'is_external' => ['boolean'], 'open_in_new_tab' => ['boolean'], 'is_visible' => ['boolean'], 'sort_order' => ['integer']],
             'footer-settings' => ['key' => ['required', 'string', 'max:120', Rule::unique('footer_settings', 'key')->ignore($id)], 'value' => ['nullable'], 'is_visible' => ['boolean']],
+            'chatbot-knowledge' => ['title' => ['required', 'string', 'max:180'], 'type' => ['required', 'string', 'max:80'], 'content' => ['required', 'string'], 'keywords' => ['nullable', 'array'], 'language' => ['nullable', 'string', 'max:24'], 'is_active' => ['boolean'], 'sort_order' => ['integer']],
+            'chatbot-settings' => ['key' => ['required', 'string', 'max:120', Rule::unique('chatbot_settings', 'key')->ignore($id)], 'label' => ['nullable', 'string', 'max:180'], 'value' => ['nullable', 'array'], 'group' => ['required', 'string', 'max:80'], 'is_public' => ['boolean']],
+            'chatbot-leads' => ['status' => ['nullable', 'string', 'max:80'], 'notes' => ['nullable', 'string', 'max:2000']],
+            'chat-sessions' => ['lead_status' => ['nullable', 'string', 'max:80']],
+            'chat-messages' => ['metadata' => ['nullable', 'array']],
         ][$resource] ?? abort(404);
 
         $data = $request->validate($rules);

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Admin\CmsController;
+use App\Http\Controllers\Api\ChatbotController;
 use App\Http\Controllers\Api\PortfolioController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,12 @@ Route::middleware('throttle:api')->group(function (): void {
 
 Route::post('/contact', [PortfolioController::class, 'contact'])->middleware('throttle:contact');
 Route::post('/cv-download', [PortfolioController::class, 'cvDownload'])->middleware('throttle:cv-download');
+
+Route::prefix('chatbot')->group(function (): void {
+    Route::get('/settings', [ChatbotController::class, 'settings'])->middleware('throttle:api');
+    Route::post('/message', [ChatbotController::class, 'message'])->middleware('throttle:chatbot');
+    Route::post('/lead', [ChatbotController::class, 'lead'])->middleware('throttle:chatbot-lead');
+});
 
 Route::prefix('admin')->group(function (): void {
     Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:login');

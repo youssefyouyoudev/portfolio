@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import {
   Archive,
+  Bot,
   CheckCircle2,
   Database,
   Eye,
@@ -166,7 +167,52 @@ const resources: Resource[] = [
     icon: PanelTop,
     template: { key: "main", content: { text: "Full-stack web developer building Laravel, React/Next.js, API and dashboard solutions." }, is_visible: true },
   },
+  {
+    key: "chatbot-knowledge",
+    label: "Chatbot Knowledge",
+    description: "Services, FAQs, pricing notes, project descriptions and chatbot instructions.",
+    icon: Bot,
+    template: {
+      title: "Website pricing guidance",
+      type: "pricing",
+      content: "Website pricing depends on page count, design polish, SEO setup, admin editing, forms and deployment. Ask for project scope before giving a quote.",
+      keywords: ["pricing", "website", "quote"],
+      language: "multilingual",
+      is_active: true,
+      sort_order: 0,
+    },
+  },
+  {
+    key: "chatbot-settings",
+    label: "Chatbot Settings",
+    description: "Enable or disable the chatbot, welcome message, quick actions, prompts and pricing ranges.",
+    icon: Settings,
+    template: { key: "enabled", label: "Enable chatbot", group: "general", value: { value: true }, is_public: false },
+  },
+  {
+    key: "chatbot-leads",
+    label: "Chatbot Leads",
+    description: "Qualified leads captured from the AI assistant.",
+    icon: Mail,
+    template: {},
+  },
+  {
+    key: "chat-sessions",
+    label: "Chat Sessions",
+    description: "Visitor chatbot sessions and lead status.",
+    icon: Bot,
+    template: {},
+  },
+  {
+    key: "chat-messages",
+    label: "Chat Messages",
+    description: "Stored visitor and assistant conversation messages.",
+    icon: FileText,
+    template: {},
+  },
 ];
+
+const readOnlyResources = ["contact-messages", "media", "chatbot-leads", "chat-sessions", "chat-messages"];
 
 function pretty(record: unknown) {
   return JSON.stringify(record, null, 2);
@@ -447,7 +493,7 @@ export default function AdminDashboard() {
                 <button onClick={() => loadRecords(activeKey)} className="inline-flex items-center gap-2 rounded-2xl border border-sky-200/80 bg-white/75 px-4 py-2 text-sm font-black text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-200 dark:hover:text-cyan-100">
                   <Eye size={16} /> Refresh
                 </button>
-                {!["contact-messages", "media"].includes(activeKey) ? (
+                {!readOnlyResources.includes(activeKey) ? (
                   <button onClick={startCreate} className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-400 px-4 py-2 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5">
                     <Plus size={16} /> New
                   </button>
@@ -530,7 +576,7 @@ export default function AdminDashboard() {
                   <h3 className="font-black">{selected ? `Edit ${titleFor(selected)}` : "JSON editor"}</h3>
                   <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Edit content safely as structured JSON. Extra fields are ignored by Laravel validation.</p>
                 </div>
-                <button onClick={saveRecord} disabled={!editor || saving || ["contact-messages", "media"].includes(activeKey)} className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-400 px-4 py-2 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50" type="button">
+                <button onClick={saveRecord} disabled={!editor || saving || readOnlyResources.includes(activeKey)} className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-sky-500 to-cyan-400 px-4 py-2 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50" type="button">
                   {saving ? <Loader2 className="animate-spin" size={16} /> : <Save size={16} />} Save
                 </button>
               </div>

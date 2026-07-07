@@ -7,6 +7,8 @@ use App\Models\AboutSection;
 use App\Models\BlogCategory;
 use App\Models\BlogTag;
 use App\Models\Certification;
+use App\Models\ChatbotKnowledge;
+use App\Models\ChatbotSetting;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\FooterSetting;
@@ -65,6 +67,85 @@ class DatabaseSeeder extends Seeder
                 'location' => 'Nador, Morocco',
             ])],
         ], ['key'], ['group', 'is_public', 'value']);
+
+        ChatbotSetting::query()->updateOrCreate(['key' => 'enabled'], [
+            'label' => 'Enable chatbot',
+            'group' => 'general',
+            'is_public' => false,
+            'value' => ['value' => true],
+        ]);
+        ChatbotSetting::query()->updateOrCreate(['key' => 'welcome_message'], [
+            'label' => 'Welcome message',
+            'group' => 'copy',
+            'is_public' => true,
+            'value' => ['text' => "Hi, I'm Youssef's AI assistant. I can help you explore his services, projects, skills, and contact options."],
+        ]);
+        ChatbotSetting::query()->updateOrCreate(['key' => 'quick_actions'], [
+            'label' => 'Quick actions',
+            'group' => 'copy',
+            'is_public' => true,
+            'value' => ['items' => ['View Services', 'See Projects', 'Request a Quote', 'Contact Youssef', 'Website Pricing', 'AI Automation']],
+        ]);
+        ChatbotSetting::query()->updateOrCreate(['key' => 'system_prompt'], [
+            'label' => 'System prompt',
+            'group' => 'instructions',
+            'is_public' => false,
+            'value' => [
+                'text' => 'You are the AI assistant of Youssef Youyou, a Moroccan full-stack developer. Youssef builds modern websites, Laravel/Next.js applications, admin dashboards, APIs, automation systems, AI integrations, booking platforms, portfolio websites, and business tools. Your job is to help visitors understand his skills, projects, services, pricing, and contact options. Be clear, professional, friendly, and focused on converting visitors into qualified leads. If the user wants a project, collect their name, contact, project type, budget, and deadline. Do not invent fake experience. If something is unknown, say that Youssef can confirm it directly.',
+            ],
+        ]);
+        ChatbotSetting::query()->updateOrCreate(['key' => 'pricing_ranges'], [
+            'label' => 'Pricing guidance',
+            'group' => 'sales',
+            'is_public' => false,
+            'value' => [
+                'website' => 'Business website or landing page: depends on pages, content, SEO setup, admin editing, forms and deployment.',
+                'dashboard' => 'Admin dashboard/internal tool: depends on modules, roles, reports, data model, integrations and deployment.',
+                'saas' => 'SaaS MVP: depends on user roles, subscriptions, dashboards, APIs, billing-ready structure and launch plan.',
+                'automation' => 'Business automation: depends on workflow complexity, files, reports, documents and manual steps replaced.',
+            ],
+        ]);
+
+        $chatbotKnowledge = [
+            [
+                'title' => 'Core positioning',
+                'type' => 'instruction',
+                'content' => 'Youssef Youyou is a Senior Full-Stack Web Developer from Nador, Morocco. He focuses on Laravel, React, Next.js, REST APIs, SaaS platforms, admin dashboards, business automation, SEO-ready websites, deployment, Nginx and Cloudflare.',
+                'keywords' => ['positioning', 'about', 'skills'],
+            ],
+            [
+                'title' => 'Main services',
+                'type' => 'service',
+                'content' => 'Youssef can build business websites, SEO landing pages, Laravel REST APIs, React/Next.js dashboards, SaaS MVPs, admin panels, booking platforms, client portals, e-commerce foundations, digital archiving systems and Excel/VBA replacement web apps.',
+                'keywords' => ['services', 'website', 'dashboard', 'api', 'saas'],
+            ],
+            [
+                'title' => 'Project proof',
+                'type' => 'project',
+                'content' => 'Important project examples include RiFiTV, ERPlus, Digital Archiving System, Social Media Management SaaS, E-commerce / Client Portal Systems, Excel/VBA Automation Tools and Portfolio Admin System. Do not invent screenshots, clients, traffic or revenue.',
+                'keywords' => ['projects', 'case studies', 'rifitv', 'erplus'],
+            ],
+            [
+                'title' => 'Pricing approach',
+                'type' => 'pricing',
+                'content' => 'Pricing must be flexible and scope-based. Explain that a realistic estimate depends on features, number of pages, dashboard modules, integrations, user roles, content, timeline and deployment. Encourage visitors to request a quote and provide name, contact, project type, budget and deadline.',
+                'keywords' => ['pricing', 'quote', 'estimate', 'budget'],
+            ],
+            [
+                'title' => 'Lead qualification',
+                'type' => 'instruction',
+                'content' => 'When a visitor wants a project, politely collect: name, email or WhatsApp, project type, budget range, deadline and short business goal. Stay helpful and not pushy.',
+                'keywords' => ['lead', 'contact', 'quote'],
+            ],
+        ];
+
+        foreach ($chatbotKnowledge as $index => $item) {
+            ChatbotKnowledge::query()->updateOrCreate(['title' => $item['title']], $item + [
+                'language' => 'multilingual',
+                'is_active' => true,
+                'sort_order' => $index + 1,
+            ]);
+        }
 
         HeroSection::query()->updateOrCreate(['headline' => 'Youssef Youyou'], [
             'subtitle' => 'Senior Full-Stack Web Developer',
