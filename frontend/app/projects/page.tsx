@@ -59,7 +59,7 @@ export default async function ProjectsPage() {
           <div className="mt-7 grid gap-3 sm:grid-cols-3">
             {[
               ["Proof, not decoration", "Every card highlights the problem, what I built and the value it creates."],
-              ["Realistic positioning", "No fake clients, fake revenue or exaggerated senior claims."],
+              ["Realistic positioning", "Clear scope, honest results and practical technical depth."],
               ["Business-focused", "Built for recruiters, B2B clients, agencies and practical teams."],
             ].map(([title, text]) => (
               <div key={title} className="rounded-3xl border border-sky-200/70 bg-white/78 p-4 shadow-lg shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none">

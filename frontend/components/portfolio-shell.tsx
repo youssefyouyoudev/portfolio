@@ -61,6 +61,17 @@ const SkillChart = dynamic(() => import("@/components/charts").then((mod) => mod
 
 const serviceIcons = [Server, Code2, LayoutDashboard, Network, Rocket, Globe2, Workflow, Search, Database, ShieldCheck];
 
+const servicePageByTitle: Record<string, string> = {
+  "Laravel backend development": "/services/laravel-developer-morocco",
+  "React/Next.js frontend development": "/services/react-nextjs-developer-morocco",
+  "Admin dashboards": "/services/admin-dashboard-development",
+  "SaaS platforms": "/services/saas-development-morocco",
+  "Internal management systems": "/services/business-automation-morocco",
+  "IT support and process digitalization": "/services/business-automation-morocco",
+  "Business websites": "/services/freelance-web-developer-morocco",
+  "SEO technical optimization": "/services/freelance-web-developer-morocco",
+};
+
 const practicalCapabilities = [
   {
     title: "Full-Stack Web Development",
@@ -76,9 +87,9 @@ const practicalCapabilities = [
   },
   {
     title: "Deployment, SEO & Production",
-    text: "The practical release layer: server setup, technical SEO, performance basics and safer production configuration.",
+    text: "The practical release layer: server setup, technical SEO, performance improvements and safer production configuration.",
     icon: Rocket,
-    items: ["Ubuntu/Linux", "Nginx", "Git deployment", "Cloudflare", "Production builds", "Performance optimization", "Technical SEO", "Secure configuration basics"],
+    items: ["Ubuntu/Linux", "Nginx", "Git deployment", "Cloudflare", "Production builds", "Performance optimization", "Technical SEO", "Secure configuration"],
   },
   {
     title: "Digitalization & Automation",
@@ -225,9 +236,9 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
                   </div>
                   <h3 className="mt-6 text-xl font-black text-slate-950 dark:text-white">{service.title}</h3>
                   <p className="mt-3 flex-1 text-sm leading-7 text-slate-600 dark:text-slate-300">{service.description}</p>
-                  <a href="#contact" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-sky-700 transition group-hover:translate-x-1 dark:text-cyan-200">
-                    Request this service <ArrowRight size={16} />
-                  </a>
+                  <Link href={servicePageByTitle[service.title] ?? "/contact"} className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-sky-700 transition group-hover:translate-x-1 dark:text-cyan-200">
+                    View service <ArrowRight size={16} />
+                  </Link>
                 </PremiumCard>
               </Reveal>
             );
@@ -241,7 +252,7 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
             <p className="text-xs font-black uppercase tracking-[0.3em] text-sky-700 dark:text-cyan-300">About</p>
             <h2 className="mt-4 text-3xl font-black tracking-tight text-slate-950 dark:text-white md:text-5xl">Practical developer with business-process context</h2>
             <p className="mt-6 leading-8 text-slate-700 dark:text-slate-300">
-              I am Youssef Youyou, a Full-Stack Web Developer from Nador, Morocco. I focus on Laravel, React/Next.js, Vue.js, REST APIs, MySQL, dashboards, SaaS concepts, e-commerce systems and process digitalization.
+              I am Youssef Youyou, a Senior Full-Stack Web Developer from Nador, Morocco. I focus on Laravel, React/Next.js, Vue.js, REST APIs, MySQL, dashboards, SaaS platforms, e-commerce systems and process digitalization.
             </p>
             <p className="mt-4 leading-8 text-slate-700 dark:text-slate-300">
               My background combines freelance web projects, remote React.js work with MediaTechly in London, and current administrative digitalization and IT support. That mix helps me build systems that are useful, maintainable and realistic for teams.
@@ -253,7 +264,7 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
             ["Practical problem solving", "I start from the workflow and user need, then choose the simplest reliable technical path."],
             ["Clean development", "Readable structure, reusable components, clear API contracts and maintainable database logic."],
             ["Business-focused solutions", "Dashboards, portals, SaaS tools and automation that support real operations."],
-            ["Deployment mindset", "Nginx, Linux, production builds, SEO basics and environment separation."],
+            ["Deployment mindset", "Nginx, Linux, production builds, technical SEO and environment separation."],
           ].map(([title, text]) => (
             <Reveal key={title}>
               <PremiumCard className="h-full p-6">
@@ -460,14 +471,14 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
       <section id="contact" className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 md:py-24 lg:grid-cols-[.9fr_1.1fr]">
         <Reveal>
           <p className="text-xs font-black uppercase tracking-[0.3em] text-sky-700 dark:text-cyan-300">Contact</p>
-          <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 dark:text-white md:text-5xl">Ready to build a website, dashboard, API or internal tool?</h2>
+          <h2 className="mt-4 text-4xl font-black tracking-tight text-slate-950 dark:text-white md:text-5xl">Need a Laravel, React or Next.js developer for your business platform?</h2>
           <p className="mt-6 text-lg leading-8 text-slate-700 dark:text-slate-300">
             Let&apos;s turn your idea into a clean, scalable and production-ready solution. Send the business goal, current problem and ideal timeline.
           </p>
           <div className="mt-8 grid gap-3">
             {[
               "Best fit: Laravel APIs, React/Next.js frontends, admin dashboards and internal tools.",
-              "Available for Marrakech, Morocco, remote, freelance, B2B/B2C and pre-hiring internship opportunities.",
+              "Available for freelance, remote and business web projects in Morocco and internationally.",
               "Realistic scope, clean implementation and production-minded delivery.",
             ].map((item) => (
               <PremiumCard key={item} className="flex gap-3 p-4 text-sm leading-6 text-slate-700 dark:text-slate-300">
@@ -506,26 +517,29 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
           <div>
             <h2 className="text-2xl font-black text-slate-950 dark:text-white">Youssef <span className="text-sky-600 dark:text-cyan-300">Youyou</span></h2>
             <p className="mt-3 max-w-sm text-sm leading-7 text-slate-600 dark:text-slate-400">
-              Full-Stack Web Developer building Laravel, React/Next.js, APIs, dashboards and production-ready web platforms.
+              Senior Full-Stack Web Developer building Laravel, React/Next.js, APIs, dashboards and production-ready web platforms.
             </p>
             <a href={`mailto:${profile.email}`} className="mt-4 inline-flex text-sm font-bold text-sky-700 dark:text-cyan-200">{profile.email}</a>
           </div>
           <div>
             <h3 className="font-bold text-slate-950 dark:text-white">Quick links</h3>
             <div className="mt-4 grid gap-3 text-sm text-slate-600 dark:text-slate-400">
-              <a href="#services" className="hover:text-sky-700 dark:hover:text-cyan-200">Services</a>
-              <a href="#projects" className="hover:text-sky-700 dark:hover:text-cyan-200">Projects</a>
-              <a href="#experience" className="hover:text-sky-700 dark:hover:text-cyan-200">Experience</a>
-              <a href="/blog" className="hover:text-sky-700 dark:hover:text-cyan-200">Technical Notes</a>
-              <a href="#contact" className="hover:text-sky-700 dark:hover:text-cyan-200">Contact</a>
+              <a href="/#services" className="hover:text-sky-700 dark:hover:text-cyan-200">Services</a>
+              <a href="/projects" className="hover:text-sky-700 dark:hover:text-cyan-200">Projects</a>
+              <a href="/#experience" className="hover:text-sky-700 dark:hover:text-cyan-200">Experience</a>
+              <a href="/blog" className="hover:text-sky-700 dark:hover:text-cyan-200">Blog/Technical Notes</a>
+              <a href="/contact" className="hover:text-sky-700 dark:hover:text-cyan-200">Contact</a>
+              <a href={profile.github} className="hover:text-sky-700 dark:hover:text-cyan-200">GitHub</a>
+              <a href={profile.linkedin} className="hover:text-sky-700 dark:hover:text-cyan-200">LinkedIn</a>
             </div>
           </div>
           <div>
             <h3 className="font-bold text-slate-950 dark:text-white">Services</h3>
             <div className="mt-4 grid gap-3 text-sm text-slate-600 dark:text-slate-400">
-              {["Laravel APIs", "React/Next.js", "Dashboards", "Deployment"].map((item) => (
-                <a key={item} href="#services" className="hover:text-sky-700 dark:hover:text-cyan-200">{item}</a>
-              ))}
+              <a href="/services/laravel-developer-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">Laravel APIs</a>
+              <a href="/services/react-nextjs-developer-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">React/Next.js</a>
+              <a href="/services/admin-dashboard-development" className="hover:text-sky-700 dark:hover:text-cyan-200">Dashboards</a>
+              <a href="/services/saas-development-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">SaaS Platforms</a>
             </div>
           </div>
           <div>

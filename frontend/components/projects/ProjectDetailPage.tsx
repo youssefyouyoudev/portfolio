@@ -21,6 +21,7 @@ export function ProjectDetailPage({
 
 export function ProjectGallery({ project }: { project: PortfolioProject }) {
   const images = (project.gallery.length ? project.gallery : [project.image]).filter(Boolean);
+  const placeholderCount = Math.max(0, 4 - images.length);
 
   return (
     <section className="mt-8 rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
@@ -30,7 +31,7 @@ export function ProjectGallery({ project }: { project: PortfolioProject }) {
           <h2 className="mt-3 text-2xl font-black">Product proof and interface direction</h2>
         </div>
         <span className="rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-sky-700 dark:border-cyan-300/15 dark:bg-cyan-300/10 dark:text-cyan-100">
-          {images.length || 1} visual
+          {images.length + placeholderCount || 1} visual
         </span>
       </div>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -45,14 +46,15 @@ export function ProjectGallery({ project }: { project: PortfolioProject }) {
             />
           </div>
         ))}
-        {!images.length ? (
-          <div className="grid aspect-[16/10] place-items-center rounded-3xl border border-sky-200/80 bg-sky-50 p-6 text-center dark:border-cyan-400/15 dark:bg-slate-950">
+        {Array.from({ length: placeholderCount }).map((_, index) => (
+          <div key={`placeholder-${index}`} className="grid aspect-[16/10] place-items-center rounded-3xl border border-dashed border-sky-300/80 bg-sky-50 p-6 text-center dark:border-cyan-400/25 dark:bg-slate-950">
             <Rocket className="text-sky-600 dark:text-cyan-300" />
-            <p className="mt-4 max-w-sm text-sm leading-7 text-slate-700 dark:text-slate-300">
-              Visual placeholder prepared for future real screenshots while keeping the case study complete and honest.
+            <p className="mt-4 text-lg font-black text-slate-950 dark:text-white">Screenshot coming soon</p>
+            <p className="mt-2 max-w-sm text-sm leading-7 text-slate-700 dark:text-slate-300">
+              Placeholder reserved for a real {project.title} interface screenshot.
             </p>
           </div>
-        ) : null}
+        ))}
       </div>
     </section>
   );

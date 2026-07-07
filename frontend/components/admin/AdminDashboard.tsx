@@ -52,7 +52,7 @@ const resources: Resource[] = [
     icon: Sparkles,
     template: {
       headline: "Youssef Youyou",
-      subtitle: "Junior Full-Stack Web Developer",
+      subtitle: "Senior Full-Stack Web Developer",
       description: "I build Laravel, React/Next.js, API-driven and production-ready web platforms.",
       badges: ["Laravel", "React/Next.js", "APIs"],
       ctas: [{ label: "View My Work", url: "#projects" }],

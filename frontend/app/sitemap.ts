@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getBlogPosts, getProjects } from "@/lib/api";
+import { servicePageSlugs } from "@/lib/service-content";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = "https://youssefyouyou.com";
@@ -11,6 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/blog`, lastModified: new Date(), priority: 0.7 },
     { url: `${base}/contact`, lastModified: new Date(), priority: 0.8 },
     { url: `${base}/cv-download`, lastModified: new Date(), priority: 0.7 },
+    ...servicePageSlugs.map((slug) => ({ url: `${base}/services/${slug}`, lastModified: new Date(), priority: 0.82 })),
     ...projects.map((project) => ({ url: `${base}/projects/${project.slug}`, lastModified: new Date(), priority: 0.8 })),
     ...blogPosts.map((post) => ({ url: `${base}/blog/${post.slug}`, lastModified: new Date(), priority: 0.6 })),
   ];

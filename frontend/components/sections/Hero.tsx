@@ -39,14 +39,22 @@ export function Hero() {
             <span className="truncate sm:whitespace-normal">{profile.availability}</span>
           </motion.div>
 
+          <motion.p
+            variants={fadeUp}
+            transition={{ duration: 0.6 }}
+            className="mt-8 text-lg font-black uppercase tracking-[0.18em] text-sky-700 dark:text-cyan-300"
+          >
+            Youssef Youyou
+          </motion.p>
+
           <motion.h1
             variants={fadeUp}
             transition={{ duration: 0.6 }}
-            className="mt-8 max-w-3xl text-5xl font-black leading-[0.92] tracking-tight text-slate-950 dark:text-slate-50 sm:text-6xl lg:text-7xl xl:text-[5.85rem]"
+            className="mt-4 max-w-4xl text-5xl font-black leading-[0.92] tracking-tight text-slate-950 dark:text-slate-50 sm:text-6xl lg:text-7xl xl:text-[5.35rem]"
           >
-            <span className="block">Youssef</span>
+            <span className="block">Senior</span>
             <span className="block bg-gradient-to-r from-sky-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent dark:from-sky-400 dark:via-blue-500 dark:to-cyan-300">
-              Youyou
+              Full-Stack Web Developer
             </span>
           </motion.h1>
 
@@ -55,7 +63,7 @@ export function Hero() {
             transition={{ duration: 0.6 }}
             className="mt-5 text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-200 sm:text-3xl"
           >
-            {profile.title}
+            Senior Laravel & React Developer based in Morocco
           </motion.p>
 
           <motion.p
@@ -81,10 +89,10 @@ export function Hero() {
 
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <GradientButton href="#projects" className="w-full sm:w-auto">
-              View My Work <ArrowUpRight size={18} />
+              View my work <ArrowUpRight size={18} />
             </GradientButton>
             <GradientButton href="#contact" variant="secondary" className="w-full sm:w-auto">
-              Contact Me
+              Start a project
             </GradientButton>
             <GradientButton href="/cv-download" variant="link" className="w-full sm:w-auto">
               <Download size={17} /> Download CV

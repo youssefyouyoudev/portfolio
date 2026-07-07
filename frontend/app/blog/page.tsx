@@ -5,18 +5,18 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { getBlogPosts } from "@/lib/api";
 
 export const metadata: Metadata = {
-  title: "Technical Notes",
-  description: "Short practical notes by Youssef Youyou about dashboards, APIs, automation, Laravel, React and production-minded web development.",
+  title: "Technical Blog | Laravel, React, Next.js & Deployment Notes",
+  description: "Practical technical articles by Youssef Youyou about Laravel, React, Next.js, dashboards, SaaS architecture, deployment, Vite fixes and SEO.",
   alternates: { canonical: "/blog" },
   openGraph: {
-    title: "Technical Notes | Youssef Youyou",
-    description: "Practical notes about dashboards, APIs, automation and production-minded web development.",
+    title: "Technical Blog | Youssef Youyou",
+    description: "Practical articles about Laravel, React, Next.js, dashboards, deployment and production-minded web development.",
     url: "/blog",
   },
   twitter: {
     card: "summary",
-    title: "Technical Notes | Youssef Youyou",
-    description: "Practical notes about dashboards, APIs, automation and production-minded web development.",
+    title: "Technical Blog | Youssef Youyou",
+    description: "Practical articles about Laravel, React, Next.js, dashboards, deployment and production-minded web development.",
   },
 };
 
@@ -42,9 +42,9 @@ export default async function BlogPage() {
 
         <section className="mt-10 max-w-4xl">
           <p className="text-xs font-black uppercase tracking-[0.3em] text-sky-700 dark:text-cyan-300">Technical Notes</p>
-          <h1 className="mt-4 text-balance text-4xl font-black tracking-tight md:text-6xl">Technical writing that supports trust</h1>
+          <h1 className="mt-4 text-balance text-4xl font-black tracking-tight md:text-6xl">Technical articles for Laravel, React and production web platforms</h1>
           <p className="mt-5 text-pretty text-lg leading-8 text-slate-700 dark:text-slate-300">
-            Short practical notes about dashboards, APIs, automation and production-minded web development.
+            Practical guides about dashboards, APIs, automation, SaaS structure, deployment, Vite production fixes and technical SEO.
           </p>
         </section>
 

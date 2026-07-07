@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { getProject, getProjects } from "@/lib/api";
 import { projects as fallbackProjects } from "@/lib/data";
 import { canonicalProjectSlug, getDisplayProjects, type PortfolioProject } from "@/lib/project-content";
+import { servicePages } from "@/lib/service-content";
 
 export function generateStaticParams() {
   const params = getDisplayProjects(fallbackProjects).map((project) => ({ slug: project.slug }));
@@ -62,6 +63,24 @@ function architectureCards(project: PortfolioProject) {
   ];
 }
 
+function relatedServiceLinks(project: PortfolioProject) {
+  const text = `${project.title} ${project.category} ${project.stack.join(" ")} ${project.features.join(" ")}`.toLowerCase();
+  const slugs = new Set<string>();
+
+  if (text.includes("laravel")) slugs.add("laravel-developer-morocco");
+  if (text.includes("react") || text.includes("next")) slugs.add("react-nextjs-developer-morocco");
+  if (text.includes("dashboard") || text.includes("admin") || text.includes("hr") || text.includes("inventory")) slugs.add("admin-dashboard-development");
+  if (text.includes("saas")) slugs.add("saas-development-morocco");
+  if (text.includes("automation") || text.includes("archiving") || text.includes("excel")) slugs.add("business-automation-morocco");
+  if (text.includes("e-commerce") || text.includes("client portal") || text.includes("website")) slugs.add("freelance-web-developer-morocco");
+  if (!slugs.size) slugs.add("freelance-web-developer-morocco");
+
+  return Array.from(slugs)
+    .slice(0, 4)
+    .map((serviceSlug) => servicePages.find((service) => service.slug === serviceSlug))
+    .filter(Boolean);
+}
+
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = await getProject(canonicalProjectSlug(slug));
@@ -110,6 +129,7 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
   const currentIndex = allProjects.findIndex((item) => item.slug === project.slug);
   const previousProject = allProjects[(currentIndex - 1 + allProjects.length) % allProjects.length];
   const nextProject = allProjects[(currentIndex + 1) % allProjects.length];
+  const relatedServices = relatedServiceLinks(project);
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
@@ -121,7 +141,7 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
       "@type": "Person",
       name: "Youssef Youyou",
       url: "https://youssefyouyou.com",
-      jobTitle: "Full-Stack Web Developer",
+      jobTitle: "Senior Full-Stack Web Developer",
     },
     keywords: project.stack.join(", "),
     genre: project.category,
@@ -282,7 +302,7 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
 
         <section className="mt-8 grid gap-6 lg:grid-cols-3">
           <article className="rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
-            <h2 className="text-2xl font-black">Problems solved</h2>
+            <h2 className="text-2xl font-black">Technical challenges solved</h2>
             <ul className="mt-5 grid gap-3 text-sm text-slate-700 dark:text-slate-300">
               {project.problems.map((item) => (
                 <li key={item} className="flex gap-2">
@@ -318,6 +338,19 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
                 <BadgeCheck className="mb-3 text-sky-600 dark:text-cyan-300" size={17} />
                 {item}
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-8 rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Related Services</p>
+          <h2 className="mt-3 text-2xl font-black">Services connected to this project</h2>
+          <div className="mt-6 grid gap-3 md:grid-cols-2">
+            {relatedServices.map((service) => (
+              <Link key={service!.slug} href={`/services/${service!.slug}`} className="inline-flex items-center justify-between gap-3 rounded-2xl border border-sky-200/80 bg-sky-50/85 p-4 text-sm font-bold text-slate-800 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-cyan-400/15 dark:bg-cyan-300/[0.055] dark:text-slate-100 dark:hover:text-cyan-100">
+                {service!.h1}
+                <ArrowRight size={15} />
+              </Link>
             ))}
           </div>
         </section>

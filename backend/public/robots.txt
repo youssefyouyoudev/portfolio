@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /api
+Disallow: /private
+Disallow: /storage/app
+
+Sitemap: https://youssefyouyou.com/sitemap.xml

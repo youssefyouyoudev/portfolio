@@ -5,8 +5,8 @@ import { ContactForm } from "@/components/contact-form";
 import { profile } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Contact Youssef Youyou for Laravel, React/Next.js, API, dashboard, website, internal tool and automation projects.",
+  title: "Contact Youssef Youyou | Senior Full-Stack Web Developer",
+  description: "Contact Youssef Youyou for Laravel APIs, React/Next.js interfaces, admin dashboards, SaaS platforms, business automation and SEO-friendly websites.",
   alternates: { canonical: "/contact" },
 };
 
@@ -26,7 +26,7 @@ export default function ContactPage() {
           <div className="mt-8 grid gap-3">
             {[
               "Good fit for Laravel APIs, React/Next.js frontends, admin dashboards and internal tools.",
-              "Available for remote, freelance, Marrakech/Morocco and pre-hiring internship opportunities.",
+              "Available for freelance, remote and business web projects in Morocco and internationally.",
               "Practical scope, clear communication and production-minded delivery.",
             ].map((item) => (
               <div key={item} className="flex gap-3 rounded-2xl border border-sky-200/80 bg-white/85 p-4 text-sm leading-6 text-slate-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">

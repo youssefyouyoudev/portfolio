@@ -43,9 +43,9 @@ class DatabaseSeeder extends Seeder
 
         Setting::query()->upsert([
             ['key' => 'seo', 'group' => 'seo', 'is_public' => true, 'value' => json_encode([
-                'title' => 'Youssef Youyou | Laravel & React/Next.js Full-Stack Web Developer',
-                'description' => 'Portfolio of Youssef Youyou, Junior Full-Stack Web Developer from Morocco specializing in Laravel, React, Next.js, REST APIs, dashboards, SaaS platforms, e-commerce, deployment and SEO.',
-                'keywords' => ['Youssef Youyou', 'Laravel developer Morocco', 'React developer Morocco', 'Next.js developer Morocco', 'Full-stack developer Morocco', 'Junior web developer Marrakech', 'Laravel React portfolio', 'SaaS developer Morocco', 'B2B web developer', 'B2C web developer', 'admin dashboard developer', 'API integration developer', 'Nador developer', 'Marrakech developer'],
+                'title' => 'Youssef Youyou | Senior Laravel & React Full-Stack Web Developer in Morocco',
+                'description' => 'Senior Full-Stack Web Developer based in Morocco. I build Laravel APIs, React/Next.js interfaces, SaaS platforms, dashboards, business automation tools, and SEO-friendly websites.',
+                'keywords' => ['Youssef Youyou', 'Laravel developer Morocco', 'React developer Morocco', 'Next.js developer Morocco', 'Full-stack developer Morocco', 'Senior web developer Morocco', 'Laravel React portfolio', 'SaaS developer Morocco', 'B2B web developer', 'B2C web developer', 'admin dashboard developer', 'API integration developer', 'Nador developer', 'Marrakech developer'],
             ])],
             ['key' => 'cv_file', 'group' => 'files', 'is_public' => true, 'value' => json_encode(['url' => '/cv/youssef-youyou-cv.pdf'])],
             ['key' => 'site', 'group' => 'general', 'is_public' => true, 'value' => json_encode([
@@ -67,8 +67,8 @@ class DatabaseSeeder extends Seeder
         ], ['key'], ['group', 'is_public', 'value']);
 
         HeroSection::query()->updateOrCreate(['headline' => 'Youssef Youyou'], [
-            'subtitle' => 'Junior Full-Stack Web Developer',
-            'description' => 'I build modern Laravel, React/Next.js, API-driven, SEO-ready and production-deployed web platforms for businesses, startups and digital projects.',
+            'subtitle' => 'Senior Full-Stack Web Developer',
+            'description' => 'I build production-ready Laravel APIs, React/Next.js interfaces, SaaS platforms, dashboards, business automation tools, and SEO-friendly websites for businesses.',
             'badges' => ['Laravel', 'React', 'Next.js', 'MySQL', 'APIs', 'Nginx', 'SEO'],
             'cta_buttons' => [
                 ['label' => 'View My Work', 'href' => '#projects', 'variant' => 'primary'],
@@ -82,14 +82,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         AboutSection::query()->updateOrCreate(['title' => 'Practical developer with business-process context'], [
-            'short_bio' => 'Full-stack web developer from Nador, Morocco focused on Laravel, React/Next.js, APIs, dashboards, deployment and digitalization.',
+            'short_bio' => 'Senior Full-Stack Web Developer from Nador, Morocco focused on Laravel, React/Next.js, APIs, dashboards, deployment and digitalization.',
             'body' => 'I combine freelance web work, remote React.js experience and administrative digitalization context to build practical systems that are useful, maintainable and realistic for teams.',
             'highlights' => ['Practical problem solving', 'Clean development', 'Business-focused solutions', 'Deployment mindset'],
             'cards' => [
                 ['title' => 'Practical problem solving', 'text' => 'I start from the workflow and user need, then choose the simplest reliable technical path.'],
                 ['title' => 'Clean development', 'text' => 'Readable structure, reusable components, clear API contracts and maintainable database logic.'],
                 ['title' => 'Business-focused solutions', 'text' => 'Dashboards, portals, SaaS tools and automation that support real operations.'],
-                ['title' => 'Deployment mindset', 'text' => 'Nginx, Linux, production builds, SEO basics and environment separation.'],
+                ['title' => 'Deployment mindset', 'text' => 'Nginx, Linux, production builds, technical SEO and environment separation.'],
             ],
             'is_published' => true,
         ]);
@@ -393,7 +393,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ([
             ['Technicien Specialise en Developpement Digital - Option Web Full-Stack', 'ISTA Nador, OFPPT', '2021 - 2023', 'Equivalent BTS / application developer.'],
-            ['Baccalaureat Sciences et Technologies Electriques - Option Reseaux et Maintenance', 'Nador, Morocco', '2020 - 2021', 'Strong basics in networks, infrastructure IT and hardware maintenance.'],
+            ['Baccalaureat Sciences et Technologies Electriques - Option Reseaux et Maintenance', 'Nador, Morocco', '2020 - 2021', 'Strong foundation in networks, infrastructure IT and hardware maintenance.'],
         ] as $index => [$title, $institution, $dateRange, $description]) {
             Education::query()->updateOrCreate(['title' => $title], compact('institution', 'description') + ['date_range' => $dateRange, 'sort_order' => $index + 1]);
         }

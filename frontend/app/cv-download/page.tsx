@@ -4,7 +4,7 @@ import { CvDownloadButton } from "@/components/cv-download-button";
 
 export const metadata = {
   title: "Download CV",
-  description: "Download the CV of Youssef Youyou, Junior Full-Stack Web Developer.",
+  description: "Download the CV of Youssef Youyou, Senior Full-Stack Web Developer.",
 };
 
 export default function CvDownload() {

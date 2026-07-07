@@ -29,8 +29,13 @@ const projectImageBySlug: Record<string, string> = {
 
 const blogSlugAliases: Record<string, string> = {
   "why-businesses-need-internal-digitalization": "why-small-businesses-need-internal-dashboards",
-  "api-integration-best-practices": "practical-api-structure-for-admin-dashboards",
-  "building-admin-panels-with-laravel-and-filament": "practical-api-structure-for-admin-dashboards",
+  "api-integration-best-practices": "laravel-api-react-dashboard-architecture-business-platforms",
+  "building-admin-panels-with-laravel-and-filament": "building-admin-dashboards-laravel-react-role-permissions",
+  "how-i-build-laravel-and-react-dashboards": "laravel-api-react-dashboard-architecture-business-platforms",
+  "from-excel-automation-to-web-applications": "building-admin-dashboards-laravel-react-role-permissions",
+  "practical-api-structure-for-admin-dashboards": "laravel-api-react-dashboard-architecture-business-platforms",
+  "why-small-businesses-need-internal-dashboards": "building-admin-dashboards-laravel-react-role-permissions",
+  "deploying-laravel-and-nextjs-on-ubuntu": "deploy-laravel-nextjs-ubuntu-nginx-pm2-ssl",
 };
 
 export const legacyBlogSlugs = Object.keys(blogSlugAliases);
@@ -106,6 +111,10 @@ function normalizeBlogPost(post: any): FallbackBlogPost {
     excerpt: post.excerpt ?? post.summary ?? "",
     points,
     content: post.content,
+    sections: post.sections ?? [],
+    checklist: post.checklist ?? points,
+    relatedProjects: post.relatedProjects ?? post.related_projects ?? [],
+    relatedServices: post.relatedServices ?? post.related_services ?? [],
     seoTitle: post.seo_title ?? post.meta_title ?? post.title,
     seoDescription: post.seo_description ?? post.meta_description ?? post.excerpt,
     ogImage: post.og_image ?? post.featured_image,
@@ -182,16 +191,24 @@ export async function getProject(slug: string) {
 export async function getBlogPosts() {
   const payload = await fetchJson<ApiCollection<any>>("/api/blog");
   const apiPosts = collection(payload).map(normalizeBlogPost);
-  return apiPosts.length ? apiPosts : fallbackBlogPosts;
+  const merged = new Map(fallbackBlogPosts.map((post) => [post.slug, post]));
+  for (const post of apiPosts) {
+    if (!merged.has(post.slug)) {
+      merged.set(post.slug, post);
+    }
+  }
+  return Array.from(merged.values());
 }
 
 export async function getBlogPost(slug: string) {
   const canonical = canonicalBlogSlug(slug);
+  const fallback = fallbackBlogPosts.find((post) => post.slug === canonical);
+  if (fallback) return fallback;
   const payload = await fetchJson<any>(`/api/blog/${slug}`);
   const canonicalPayload = payload ? null : await fetchJson<any>(`/api/blog/${canonical}`);
   const postPayload = payload ?? canonicalPayload;
   if (postPayload?.data || postPayload?.slug) return normalizeBlogPost(postPayload.data ?? postPayload);
-  return fallbackBlogPosts.find((post) => post.slug === canonical) ?? null;
+  return null;
 }
 
 function normalizeSkills(payload: Record<string, string[]> | ApiCollection<any> | null) {

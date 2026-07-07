@@ -1,15 +1,15 @@
 export const profile = {
   name: "Youssef Youyou",
-  title: "Junior Full-Stack Web Developer",
+  title: "Senior Full-Stack Web Developer",
   heroPromise:
-    "I turn business workflows into Laravel + React systems: dashboards, APIs, portals, SEO-ready platforms and deployment-ready products.",
+    "I build production-ready Laravel APIs, React/Next.js interfaces, admin dashboards, SaaS platforms, business automation tools, and SEO-friendly websites for businesses.",
   positioning:
-    "Laravel Backend Developer | React/Next.js Frontend Developer | API Integration | Admin Dashboards | SaaS | B2B/B2C Web Platforms | Deployment & SEO",
+    "Senior Laravel & React Developer | Full-Stack Laravel, React & Next.js Developer | API Integration | Admin Dashboards | SaaS | Deployment & SEO",
   location: "Nador, Morocco",
   availability:
-    "Available for freelance, remote, Marrakech & Morocco opportunities",
+    "Available for freelance, remote and business web projects in Morocco and internationally",
   description:
-    "I build modern Laravel, React/Next.js, API-driven, SEO-ready and production-deployed web platforms for businesses, startups, and digital projects.",
+    "I build production-ready Laravel APIs, React/Next.js interfaces, SaaS platforms, dashboards, business automation tools, and SEO-friendly websites for businesses.",
   email: "contact@youssefyouyou.com",
   website: "https://youssefyouyou.com",
   github: "https://github.com/youssefyouyoudev",
@@ -72,7 +72,7 @@ export const skills = {
   "Main stack": ["Laravel", "PHP", "React.js", "Next.js", "Vue.js", "MySQL", "REST APIs", "Tailwind CSS"],
   "Production tools": ["Linux", "Nginx", "Git", "Cloudflare", "Postman", "Production deployment"],
   "Business systems": ["Admin dashboards", "Client portals", "Roles and permissions", "Reporting interfaces", "Relational database design"],
-  "Automation support": ["Excel Advanced", "VBA", "Digital archiving", "Workflow automation", "SEO basics", "OWASP basics"],
+  "Automation support": ["Excel Advanced", "VBA", "Digital archiving", "Workflow automation", "Technical SEO", "OWASP awareness"],
 };
 
 export const projects = [
@@ -84,7 +84,7 @@ export const projects = [
     shortDescription: "A media-style web platform focused on live TV-style navigation, football content, channel organization and user-friendly access across devices.",
     caseStudyUrl: "/projects/rifitv",
     image: "/images/projects/rifitv-showcase.png",
-    imageAlt: "RiFiTV media platform project preview",
+    imageAlt: "RiFiTV Laravel football media platform dashboard",
     seoTitle: "RiFiTV Case Study | Youssef Youyou Portfolio",
     seoDescription: "Case study for RiFiTV, a Laravel media-style platform focused on content organization, responsive UI, SEO structure and production deployment.",
     stack: ["Laravel", "Blade", "Vite", "JavaScript", "MySQL", "Nginx", "Cloudflare"],
@@ -109,7 +109,7 @@ export const projects = [
     shortDescription: "A business management platform concept focused on HR workflows, payroll-style features, inventory modules, dashboards and admin control.",
     caseStudyUrl: "/projects/erplus",
     image: "/images/projects/erplus-showcase.png",
-    imageAlt: "ERPlus business management dashboard project preview",
+    imageAlt: "ERPlus HR and inventory management dashboard",
     seoTitle: "ERPlus Case Study | Youssef Youyou Portfolio",
     seoDescription: "Case study for ERPlus, a Laravel and React business management platform concept for HR workflows, inventory modules, admin dashboards and API-driven structure.",
     stack: ["Laravel", "React", "Vite", "MySQL", "Tailwind CSS", "REST API", "Nginx"],
@@ -134,7 +134,7 @@ export const projects = [
     shortDescription: "An internal digital archiving concept for organizing, searching, tracking and managing administrative documents more efficiently.",
     caseStudyUrl: "/projects/digital-archiving-system",
     image: "/images/projects/digital-archiving-showcase.png",
-    imageAlt: "Digital Archiving System document management project preview",
+    imageAlt: "Digital Archiving System document management dashboard",
     seoTitle: "Digital Archiving System Case Study | Youssef Youyou Portfolio",
     seoDescription: "Case study for a digital archiving system focused on document organization, search, tracking and internal administrative workflow improvement.",
     stack: ["Vue.js", "JavaScript", "Excel/VBA logic", "MySQL concept", "Digital workflow"],
@@ -159,7 +159,7 @@ export const projects = [
     shortDescription: "A SaaS platform concept for planning posts, managing multiple accounts, tracking engagement and organizing marketing workflows.",
     caseStudyUrl: "/projects/social-media-management-saas",
     image: "/images/projects/social-media-saas-showcase.png",
-    imageAlt: "Social Media Management SaaS dashboard project preview",
+    imageAlt: "Social Media Management SaaS Laravel React dashboard",
     seoTitle: "Social Media Management SaaS Case Study | Youssef Youyou Portfolio",
     seoDescription: "Case study for a Laravel and React social media management SaaS concept with scheduling, analytics widgets, account management and team workflow.",
     stack: ["Laravel", "React", "MySQL", "Tailwind CSS", "Redis concept", "API"],
@@ -184,7 +184,7 @@ export const projects = [
     shortDescription: "A web application concept for product catalogs, carts, orders, client dashboards, payment workflows and admin reporting.",
     caseStudyUrl: "/projects/ecommerce-client-portal",
     image: "/images/projects/ecommerce-client-portal-showcase.png",
-    imageAlt: "E-commerce client portal system project preview",
+    imageAlt: "E-commerce client portal Laravel project dashboard",
     seoTitle: "E-commerce Client Portal Systems Case Study | Youssef Youyou Portfolio",
     seoDescription: "Case study for e-commerce and client portal systems focused on product catalogs, order flows, client dashboards, admin reporting and Laravel logic.",
     stack: ["Laravel", "Blade", "Vite", "MySQL", "Tailwind CSS", "Payment workflow concept"],
@@ -198,7 +198,7 @@ export const projects = [
     deliverables: ["Catalogue and cart flow", "Order management", "Client area", "Role and permission structure", "Reporting dashboard"],
     architecture: "Laravel/PHP and MySQL commerce modules with admin controls, customer-facing pages and reporting-friendly data structure.",
     impact: "Reduced manual sales handling and made client/order operations easier to manage from one system.",
-    recruiterSignal: "Shows e-commerce basics, RBAC awareness, relational modeling and admin dashboard delivery.",
+    recruiterSignal: "Shows e-commerce workflow knowledge, RBAC awareness, relational modeling and admin dashboard delivery.",
     learned: "Better understanding of commerce flows, admin tools, customer portals and conversion-focused UI.",
   },
   {
@@ -209,7 +209,7 @@ export const projects = [
     shortDescription: "A set of Excel/VBA automation concepts for reports, dashboards, forms, filters, calculations and repetitive workflow reduction.",
     caseStudyUrl: "/projects/excel-vba-automation-tools",
     image: "/images/projects/excel-vba-automation-showcase.png",
-    imageAlt: "Excel VBA automation dashboard project preview",
+    imageAlt: "Excel VBA automation reporting dashboard",
     seoTitle: "Excel/VBA Automation Tools Case Study | Youssef Youyou Portfolio",
     seoDescription: "Case study for Excel and VBA automation tools focused on reports, forms, filters, calculations and administrative productivity workflows.",
     stack: ["Excel", "VBA", "Power Query", "Power Pivot", "Charts", "Automation logic"],
@@ -269,63 +269,274 @@ export const experiences = [
 
 export const blogPosts = [
   {
-    title: "How I build Laravel and React dashboards",
-    slug: "how-i-build-laravel-and-react-dashboards",
-    category: "Dashboards",
-    excerpt: "A practical look at how I structure dashboards with Laravel APIs, React components, filters, validation and reusable UI patterns.",
-    points: [
-      "Define the business entities before designing screens.",
-      "Use Laravel validation and API Resources to keep responses predictable.",
-      "Build React components around repeated dashboard patterns: tables, filters, status badges and forms.",
-      "Keep deployment and SEO details in mind when dashboards connect to public pages.",
-    ],
-  },
-  {
-    title: "From Excel automation to web applications",
-    slug: "from-excel-automation-to-web-applications",
-    category: "Automation",
-    excerpt: "How repetitive spreadsheet workflows can become cleaner tools, dashboards or internal web applications.",
-    points: [
-      "Start by removing repetitive calculations and manual filtering.",
-      "Identify which spreadsheet fields should become database tables.",
-      "Move shared workflows into simple forms, dashboards and reports.",
-      "Keep Excel when it is still the fastest useful tool, and move to web when collaboration matters.",
-    ],
-  },
-  {
-    title: "Practical API structure for admin dashboards",
-    slug: "practical-api-structure-for-admin-dashboards",
-    category: "APIs",
-    excerpt: "Notes on organizing REST endpoints, resources, validation and frontend consumption for dashboard-style applications.",
-    points: [
-      "Separate public content endpoints from admin-protected workflows.",
-      "Use Form Requests for validation and Resources for response shape.",
-      "Track important actions such as contact messages and CV downloads.",
-      "Design endpoints around UI needs without coupling everything to one screen.",
-    ],
-  },
-  {
-    title: "Why small businesses need internal dashboards",
-    slug: "why-small-businesses-need-internal-dashboards",
-    category: "Business systems",
-    excerpt: "A simple explanation of how dashboards help teams track work, reduce manual tasks and make better decisions.",
-    points: [
-      "Dashboards make daily work visible: orders, documents, users, tasks or inventory.",
-      "Roles and permissions keep information organized for different team members.",
-      "Reports help owners understand operations without waiting for manual summaries.",
-      "The best dashboard starts small and grows from real team habits.",
-    ],
-  },
-  {
-    title: "Deploying Laravel and Next.js on Ubuntu",
-    slug: "deploying-laravel-and-nextjs-on-ubuntu",
+    title: "How I Deploy Laravel and Next.js on Ubuntu with Nginx, PM2 and SSL",
+    slug: "deploy-laravel-nextjs-ubuntu-nginx-pm2-ssl",
     category: "Deployment",
-    excerpt: "A practical deployment checklist covering Nginx, PM2, Laravel cache, environment files and production builds.",
+    excerpt: "A practical production checklist for deploying a Laravel API and Next.js frontend on Ubuntu with Nginx, PM2, SSL, env files and cache commands.",
+    seoTitle: "Deploy Laravel and Next.js on Ubuntu with Nginx, PM2 and SSL",
+    seoDescription: "Practical guide to deploying Laravel and Next.js on Ubuntu using Nginx, PM2, SSL, production builds, Laravel cache commands and rollback checks.",
     points: [
-      "Separate the Laravel API and Next.js frontend into clear production directories.",
-      "Use Nginx server blocks for the frontend domain and API subdomain.",
-      "Prepare Laravel cache, queues, permissions and environment variables before launch.",
-      "Run production builds carefully and keep rollback steps simple.",
+      "Keep Laravel API and Next.js frontend in separate production directories.",
+      "Use Nginx server blocks for the frontend and API hostnames.",
+      "Run Laravel cache and permission commands after every deployment.",
+      "Use PM2 for the Next.js process and Certbot or Cloudflare SSL for HTTPS.",
     ],
+    sections: [
+      {
+        heading: "Production structure",
+        body: [
+          "I prefer a clear split between the Laravel backend and the Next.js frontend. The Laravel app owns API routes, database access, queues and admin logic. The Next.js app owns public SEO pages, metadata, Open Graph previews and user-facing React interfaces. That separation makes debugging easier when an asset, route or cache issue appears after deployment.",
+          "A typical Ubuntu layout uses one directory for the API and one for the frontend. Environment files stay out of Git. Public uploads and Laravel storage permissions are handled deliberately, not fixed by giving everything unsafe permissions.",
+        ],
+        code: "cd /var/www/api.youssefyouyou.com\ncomposer install --no-dev --optimize-autoloader\nphp artisan migrate --force\nphp artisan storage:link\nphp artisan optimize:clear\nphp artisan config:cache\nphp artisan route:cache\nphp artisan view:cache",
+      },
+      {
+        heading: "Next.js build and PM2",
+        body: [
+          "For the frontend, I build with production environment variables already set. If the frontend consumes a Laravel API, `NEXT_PUBLIC_API_URL` must point to the real API domain before `npm run build`. After the build passes, PM2 keeps the Next.js process alive and can restart it during future deploys.",
+        ],
+        code: "cd /var/www/youssefyouyou.com\nnpm ci\nNEXT_PUBLIC_API_URL=https://api.youssefyouyou.com npm run build\npm2 start npm --name portfolio-frontend -- start\npm2 save",
+      },
+      {
+        heading: "Nginx and SSL checks",
+        body: [
+          "Nginx should proxy the frontend to the Next.js port and send the API host to PHP-FPM through Laravel's public directory. I check `nginx -t` before every reload, then verify the site in the browser, including API calls, images, sitemap and robots output.",
+          "Common errors include 502 from a stopped PM2 process, 404 assets from a wrong build path, Laravel 500 errors from missing `.env` values, and mixed content when HTTPS is active but an API URL still uses HTTP.",
+        ],
+        code: "sudo nginx -t\nsudo systemctl reload nginx\npm2 status\ncurl -I https://youssefyouyou.com\ncurl -I https://youssefyouyou.com/sitemap.xml",
+      },
+      {
+        heading: "Final deployment checklist",
+        body: [
+          "Before calling a deployment complete, I confirm that the homepage loads, contact form requests reach Laravel, `/sitemap.xml` and `/robots.txt` are public, admin/API/private routes are not indexed, Laravel logs are clean, and mobile layout still works after the production build.",
+        ],
+      },
+    ],
+    checklist: ["Build passes on the server", "PM2 process is online", "Nginx config test passes", "SSL works on frontend and API", "Laravel cache is rebuilt", "Sitemap and robots are reachable"],
+    relatedProjects: ["rifitv", "erplus"],
+    relatedServices: ["laravel-developer-morocco", "react-nextjs-developer-morocco"],
+  },
+  {
+    title: "Laravel API + React Dashboard Architecture for Business Platforms",
+    slug: "laravel-api-react-dashboard-architecture-business-platforms",
+    category: "Dashboards",
+    excerpt: "How I structure Laravel APIs and React dashboards for business platforms that need roles, modules, filters, reports and maintainable growth.",
+    seoTitle: "Laravel API + React Dashboard Architecture for Business Platforms",
+    seoDescription: "Practical architecture notes for Laravel API and React dashboard business platforms with modules, roles, validation, resources, filters and reporting.",
+    points: [
+      "Start with business entities before designing screens.",
+      "Use Laravel Form Requests and API Resources for predictable contracts.",
+      "Build React dashboard components around repeated workflows.",
+      "Keep permissions, filters and reports part of the architecture from the start.",
+    ],
+    sections: [
+      {
+        heading: "Start from the workflow",
+        body: [
+          "A dashboard should not begin as a collection of pretty cards. It should begin with the real work: who logs in, what they manage, what they need to approve, what data they search, and what reports help them make decisions. For a business platform like ERPlus, that means thinking about HR, inventory, payroll-style flows, roles and dashboard summaries before building the UI.",
+          "I map entities first: users, roles, employees, stock items, documents, settings, reports and audit-worthy actions. Once those entities are clear, routes and screens become more stable.",
+        ],
+      },
+      {
+        heading: "Laravel API layer",
+        body: [
+          "Laravel works well as the backend for business dashboards because validation, policies, resources and migrations give the project a clean structure. I keep public endpoints separate from authenticated admin endpoints and make API responses predictable so React components do not depend on accidental database shape.",
+        ],
+        code: "Route::middleware('auth:sanctum')->prefix('admin')->group(function () {\n    Route::apiResource('employees', EmployeeController::class);\n    Route::apiResource('inventory-items', InventoryItemController::class);\n    Route::get('dashboard/summary', DashboardSummaryController::class);\n});",
+      },
+      {
+        heading: "React dashboard layer",
+        body: [
+          "On the frontend, repeated patterns matter: data tables, filters, forms, status badges, empty states, loading states and error messages. Reusable components make the platform easier to extend when a new module appears.",
+          "The dashboard should handle API errors clearly. A validation error should attach to a field, a permission error should explain access limits, and a loading state should not shift the whole layout.",
+        ],
+      },
+      {
+        heading: "Common architecture mistakes",
+        body: [
+          "The biggest mistakes are mixing admin and public routes, returning raw models without resources, skipping permission rules, and building one-off React screens that cannot be reused. Another common issue is treating reports as an afterthought even though business users often judge the platform by how quickly they can understand the data.",
+        ],
+      },
+    ],
+    checklist: ["Entities are mapped", "API routes are protected", "Responses use resources", "Forms handle validation", "Permissions are tested", "Dashboard states are reusable"],
+    relatedProjects: ["erplus", "portfolio-admin-system"],
+    relatedServices: ["admin-dashboard-development", "laravel-developer-morocco"],
+  },
+  {
+    title: "How to Fix Vite Build Assets Not Loading in Production",
+    slug: "fix-vite-build-assets-not-loading-production",
+    category: "Deployment",
+    excerpt: "A practical guide to diagnosing Vite production asset issues in Laravel, React and Blade projects, including manifest paths, base URLs, caches and Nginx config.",
+    seoTitle: "How to Fix Vite Build Assets Not Loading in Production",
+    seoDescription: "Fix Vite production assets not loading in Laravel or React projects with manifest checks, build paths, base URLs, cache clearing and Nginx/static file debugging.",
+    points: [
+      "Check whether assets were built and uploaded to the expected directory.",
+      "Verify Laravel's Vite manifest and Nginx public root.",
+      "Clear Laravel and browser/CDN caches after deployment.",
+      "Inspect the network tab for 404, MIME type or mixed-content errors.",
+    ],
+    sections: [
+      {
+        heading: "Start with the network error",
+        body: [
+          "When Vite assets fail in production, the browser usually tells you the real category of the issue. A 404 means the file path is wrong or the build files are missing. A MIME type error often means Nginx is returning an HTML 404 page where JavaScript was expected. A mixed-content error means the page is HTTPS but an asset or API URL is HTTP.",
+        ],
+      },
+      {
+        heading: "Laravel Vite checks",
+        body: [
+          "For Laravel Blade projects, `@vite()` reads the production manifest from the build output. If the manifest is missing, stale or deployed to the wrong folder, Laravel cannot generate the correct asset URLs. I check the build folder, manifest file and public root before changing code.",
+        ],
+        code: "npm run build\nls -la public/build\nphp artisan optimize:clear\nphp artisan view:clear",
+      },
+      {
+        heading: "React/Vite base path checks",
+        body: [
+          "For React/Vite apps, `base` in `vite.config.js` matters when the app is served from a subdirectory. If the app is served from the domain root, the default is usually fine. If assets appear as `/assets/...` but the app lives under another path, the base needs to match the deployment path.",
+        ],
+        code: "export default defineConfig({\n  plugins: [react()],\n  base: '/',\n});",
+      },
+      {
+        heading: "Nginx and cache issues",
+        body: [
+          "Nginx must serve static files from the correct public directory. Cloudflare can also keep old files briefly, so after a build-path fix I purge or bypass cache for testing. I also verify that old HTML is not pointing to asset hashes that no longer exist.",
+        ],
+      },
+    ],
+    checklist: ["Build folder exists", "Manifest exists", "Nginx root is correct", "Laravel caches cleared", "Cloudflare cache checked", "Browser network errors reviewed"],
+    relatedProjects: ["rifitv", "erplus"],
+    relatedServices: ["laravel-developer-morocco", "freelance-web-developer-morocco"],
+  },
+  {
+    title: "SEO Checklist for Laravel and Next.js Websites",
+    slug: "seo-checklist-laravel-nextjs-websites",
+    category: "SEO",
+    excerpt: "A practical SEO checklist for Laravel and Next.js websites covering metadata, headings, JSON-LD, sitemap, robots, image alt text, internal links and performance.",
+    seoTitle: "SEO Checklist for Laravel and Next.js Websites",
+    seoDescription: "Technical SEO checklist for Laravel and Next.js websites: metadata, canonical URLs, headings, JSON-LD, sitemap, robots, image SEO, internal links and performance.",
+    points: [
+      "Every indexable page needs a unique title, description, H1 and canonical URL.",
+      "Use JSON-LD for Person, WebSite, ProfilePage, BlogPosting and project schemas.",
+      "Generate sitemap and robots files that include public pages and exclude admin routes.",
+      "Add descriptive alt text and use optimized images for important visuals.",
+    ],
+    sections: [
+      {
+        heading: "Metadata and headings",
+        body: [
+          "The first SEO pass is simple but important: one clear H1 per page, unique title, unique meta description and a canonical URL. Service pages should target one search intent each. Project pages should explain the problem, stack, role and business value. Blog posts should answer practical developer questions with enough detail to be useful.",
+        ],
+      },
+      {
+        heading: "Structured data",
+        body: [
+          "JSON-LD helps search engines understand who the site represents and what each page is about. A portfolio homepage can use Person, WebSite and ProfilePage. Project pages can use CreativeWork or SoftwareApplication. Technical articles can use BlogPosting. FAQ sections on service pages can use FAQPage schema.",
+        ],
+        code: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"name\": \"Youssef Youyou\",\n  \"jobTitle\": \"Senior Full-Stack Web Developer\",\n  \"url\": \"https://youssefyouyou.com\"\n}",
+      },
+      {
+        heading: "Sitemap, robots and private routes",
+        body: [
+          "The sitemap should include the homepage, projects, blog posts, service pages and contact page. Robots should allow normal crawling but disallow admin, API and private routes that are not meant to appear in search results.",
+        ],
+      },
+      {
+        heading: "Image and internal-link SEO",
+        body: [
+          "Important images need descriptive alt text that explains the real subject, not generic words like screenshot. Internal links should connect services, projects and articles so visitors and crawlers can move through the site naturally.",
+        ],
+      },
+    ],
+    checklist: ["Unique title", "Unique meta description", "One H1", "Canonical URL", "JSON-LD", "Sitemap entry", "Robots rules", "Image alt text"],
+    relatedProjects: ["portfolio-admin-system", "rifitv"],
+    relatedServices: ["freelance-web-developer-morocco", "react-nextjs-developer-morocco"],
+  },
+  {
+    title: "Building Admin Dashboards with Laravel, React and Role Permissions",
+    slug: "building-admin-dashboards-laravel-react-role-permissions",
+    category: "Dashboards",
+    excerpt: "How I approach admin dashboards with Laravel, React, role permissions, CRUD modules, validation, audit-friendly actions and business reporting.",
+    seoTitle: "Building Admin Dashboards with Laravel, React and Role Permissions",
+    seoDescription: "Guide to admin dashboard development with Laravel, React, roles, permissions, CRUD modules, validation, protected routes and business reporting.",
+    points: [
+      "Define roles around real team responsibilities.",
+      "Protect routes in Laravel and hide unavailable actions in React.",
+      "Design CRUD flows with validation, empty states and useful filters.",
+      "Add reporting and audit-friendly details where business risk exists.",
+    ],
+    sections: [
+      {
+        heading: "Roles before screens",
+        body: [
+          "Role permissions should come before interface polish. An HR user, inventory manager and owner do not need the same actions. When roles are clear, the dashboard can show fewer decisions to each person and reduce mistakes.",
+        ],
+      },
+      {
+        heading: "Laravel permission layer",
+        body: [
+          "In Laravel, policies and middleware keep rules close to the backend. React can hide unavailable buttons, but Laravel still needs to enforce permission checks because frontend checks alone are not security.",
+        ],
+        code: "public function update(User $user, Employee $employee): bool\n{\n    return $user->hasRole('admin') || $user->can('employees.update');\n}",
+      },
+      {
+        heading: "React UX for admin work",
+        body: [
+          "Admin users repeat the same actions many times. Forms should preserve context after errors, tables should offer useful filters, and destructive actions should be confirmed. Loading states should keep dimensions stable so dashboards feel reliable.",
+        ],
+      },
+      {
+        heading: "Business reporting",
+        body: [
+          "A dashboard becomes more valuable when it summarizes work: totals, pending items, recent changes, inventory warnings, HR status or document queues. The reporting does not need to be complex at first; it needs to answer the team's daily questions.",
+        ],
+      },
+    ],
+    checklist: ["Roles defined", "Policies added", "Routes protected", "React actions conditionally shown", "CRUD validation handled", "Reports answer real questions"],
+    relatedProjects: ["erplus", "digital-archiving-system"],
+    relatedServices: ["admin-dashboard-development", "business-automation-morocco"],
+  },
+  {
+    title: "How I Structure SaaS Projects with Laravel API and React Frontend",
+    slug: "structure-saas-projects-laravel-api-react-frontend",
+    category: "SaaS",
+    excerpt: "A practical SaaS structure for Laravel API and React frontend projects, covering users, organizations, modules, dashboards, subscriptions-ready design and deployment.",
+    seoTitle: "How I Structure SaaS Projects with Laravel API and React Frontend",
+    seoDescription: "Practical SaaS architecture with Laravel API and React frontend: organizations, users, roles, modules, dashboards, subscription-ready design and deployment.",
+    points: [
+      "Model users, organizations and roles early.",
+      "Keep SaaS modules focused around the MVP workflow.",
+      "Separate public marketing pages from authenticated product screens.",
+      "Plan billing and integrations without pretending they are finished before they exist.",
+    ],
+    sections: [
+      {
+        heading: "The SaaS foundation",
+        body: [
+          "A SaaS project needs more than a login and dashboard. It needs an account model, user roles, ownership rules, settings, onboarding, module boundaries and a path for future billing or integrations. I prefer to build the first version around one strong workflow instead of spreading the MVP across too many unfinished features.",
+        ],
+      },
+      {
+        heading: "Laravel API modules",
+        body: [
+          "The Laravel API should separate organization-aware resources from global admin resources. For example, a workspace user can manage their records, while a platform admin can see broader system settings. This prevents future permission problems when the product grows.",
+        ],
+        code: "organizations/{organization}/members\norganizations/{organization}/dashboard\norganizations/{organization}/settings\nadmin/platform/users",
+      },
+      {
+        heading: "React frontend structure",
+        body: [
+          "The React frontend usually has public pages, auth pages, onboarding, dashboard modules and settings. Each product module should own its table, form and detail views, while shared components handle buttons, fields, badges, modals and empty states.",
+        ],
+      },
+      {
+        heading: "Future improvements",
+        body: [
+          "After the MVP works, the next improvements are usually billing integration, email notifications, audit logs, exportable reports, analytics and admin support tools. Planning for those features early is useful, but shipping a focused production-ready core matters more.",
+        ],
+      },
+    ],
+    checklist: ["Account model exists", "Roles and ownership rules are clear", "Public and app routes are separated", "Modules match MVP scope", "Deployment plan exists", "Future billing path is documented"],
+    relatedProjects: ["erplus", "social-media-management-saas"],
+    relatedServices: ["saas-development-morocco", "laravel-developer-morocco"],
   },
 ];

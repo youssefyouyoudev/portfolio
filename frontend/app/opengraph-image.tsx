@@ -29,7 +29,7 @@ export default function OpenGraphImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 76, fontWeight: 900, lineHeight: 1.02 }}>Youssef Youyou</div>
-          <div style={{ marginTop: 22, fontSize: 44, color: "#bae6fd" }}>Junior Full-Stack Web Developer</div>
+          <div style={{ marginTop: 22, fontSize: 44, color: "#bae6fd" }}>Senior Full-Stack Web Developer</div>
           <div style={{ marginTop: 34, maxWidth: 920, fontSize: 30, lineHeight: 1.35, color: "#dbeafe" }}>
             Laravel backend, React/Next.js frontend, APIs, dashboards, SaaS concepts, deployment and SEO.
           </div>

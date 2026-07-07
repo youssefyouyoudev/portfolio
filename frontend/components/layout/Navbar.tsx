@@ -55,7 +55,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <GradientButton href="#contact" className="hidden min-h-10 rounded-full px-4 py-2.5 lg:inline-flex">
-            Hire Me
+            Start a project
           </GradientButton>
           <button
             type="button"
@@ -92,7 +92,7 @@ export function Navbar() {
                 onClick={() => setOpen(false)}
                 className="mt-2 rounded-2xl bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 px-4 py-3 text-center text-sm font-black text-white"
               >
-                Hire Me
+                Start a project
               </a>
             </nav>
           </motion.div>
