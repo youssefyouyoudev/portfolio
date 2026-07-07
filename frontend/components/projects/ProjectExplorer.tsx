@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { KeyboardEvent, MouseEvent, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
@@ -15,6 +16,7 @@ import {
   Search,
   ShieldCheck,
   Sparkles,
+  X,
 } from "lucide-react";
 import { PortfolioProject, projectCategories } from "@/lib/project-content";
 import { trackEvent } from "@/lib/analytics";
@@ -97,10 +99,133 @@ export function ProjectImage({ project, priority = false }: { project: Portfolio
   );
 }
 
-export function ProjectCard({ project, featured = false, priority = false }: { project: PortfolioProject; featured?: boolean; priority?: boolean }) {
+function ProjectQuickView({ project, onClose }: { project: PortfolioProject | null; onClose: () => void }) {
+  useEffect(() => {
+    if (!project) return;
+    const onKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [onClose, project]);
+
+  return (
+    <AnimatePresence>
+      {project ? (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-end justify-center bg-slate-950/72 p-3 backdrop-blur-sm sm:items-center sm:p-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-quick-view-title"
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 24, scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+            onClick={(event) => event.stopPropagation()}
+            className="max-h-[88vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-cyan-300/20 bg-white p-5 shadow-2xl shadow-cyan-500/10 dark:bg-slate-950 sm:p-7"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">{project.categoryGroup}</p>
+                <h3 id="project-quick-view-title" className="mt-3 text-3xl font-black tracking-tight text-slate-950 dark:text-white">
+                  {project.title}
+                </h3>
+                <p className="mt-2 font-bold text-sky-700 dark:text-cyan-200">{project.subtitle}</p>
+              </div>
+              <button
+                type="button"
+                aria-label="Close quick view"
+                onClick={onClose}
+                className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-sky-200/80 bg-white text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-200"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="mt-5 grid gap-2 rounded-2xl border border-sky-200/80 bg-sky-50/80 p-4 text-sm font-bold text-slate-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300 sm:grid-cols-3">
+              <span>Status: <strong className="text-sky-700 dark:text-cyan-200">{project.status}</strong></span>
+              <span>Demo: <strong className="text-sky-700 dark:text-cyan-200">{project.demoLabel}</strong></span>
+              <span>Code: <strong className="text-sky-700 dark:text-cyan-200">{project.codeLabel}</strong></span>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              {[
+                ["Problem solved", project.businessValue],
+                ["Technical line", project.specificLine],
+                ["Business value", project.results],
+                ["Tech stack", project.stack.slice(0, 8).join(", ")],
+              ].map(([label, text]) => (
+                <div key={label} className="rounded-2xl border border-sky-200/80 bg-white/80 p-4 text-sm leading-7 text-slate-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">
+                  <p className="font-black text-sky-700 dark:text-cyan-200">{label}</p>
+                  <p className="mt-2">{text}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href={project.caseStudyUrl}
+                onClick={() => trackEvent("project_case_study_click", { project: project.slug, source: "quick_view" })}
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300 px-5 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5"
+              >
+                Open full case study <ArrowRight size={15} />
+              </Link>
+              <Link
+                href="/work-with-me"
+                onClick={() => trackEvent("service_page_cta_click", { source: `quick_view_${project.slug}` })}
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-5 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100"
+              >
+                Contact about similar project
+              </Link>
+            </div>
+          </motion.div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
+  );
+}
+
+export function ProjectCard({
+  project,
+  featured = false,
+  priority = false,
+  onQuickView,
+}: {
+  project: PortfolioProject;
+  featured?: boolean;
+  priority?: boolean;
+  onQuickView?: (project: PortfolioProject) => void;
+}) {
+  function openCaseStudy() {
+    trackEvent("project_case_study_click", { project: project.slug, source: "card" });
+    window.location.href = project.caseStudyUrl;
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLElement>) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openCaseStudy();
+    }
+  }
+
+  function stopCardClick(event: MouseEvent<HTMLElement>) {
+    event.stopPropagation();
+  }
+
   return (
     <article
-      className={`group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-sky-200/75 bg-white/90 shadow-2xl shadow-sky-100/80 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-sky-400/55 hover:shadow-sky-200/90 dark:border-cyan-400/15 dark:bg-slate-900/62 dark:shadow-slate-950/30 dark:hover:border-cyan-300/35 dark:hover:shadow-cyan-500/10 ${featured ? "p-4 md:p-5" : "p-4"}`}
+      role="link"
+      tabIndex={0}
+      aria-label={`Open ${project.title} case study`}
+      onClick={openCaseStudy}
+      onKeyDown={handleKeyDown}
+      className={`group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-[2rem] border border-sky-200/75 bg-white/90 shadow-2xl shadow-sky-100/80 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-sky-400/55 hover:shadow-sky-200/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 dark:border-cyan-400/15 dark:bg-slate-900/62 dark:shadow-slate-950/30 dark:hover:border-cyan-300/35 dark:hover:shadow-cyan-500/10 ${featured ? "p-4 md:p-5" : "p-4"}`}
     >
       <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-sky-400/70 to-transparent dark:via-cyan-300/70" />
       <ProjectImage project={project} priority={priority} />
@@ -109,6 +234,11 @@ export function ProjectCard({ project, featured = false, priority = false }: { p
           <span className="rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-sky-700 dark:border-cyan-300/15 dark:bg-cyan-300/10 dark:text-cyan-100">
             {project.categoryGroup}
           </span>
+          {project.featured ? (
+            <span className="rounded-full border border-cyan-300/35 bg-cyan-300/10 px-3 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-cyan-700 dark:text-cyan-100">
+              {project.slug === "rifitv" || project.slug === "erplus" ? "Best proof" : "Featured"}
+            </span>
+          ) : null}
           <span className="rounded-full border border-sky-200/80 bg-white/80 px-3 py-1 text-[11px] font-bold text-slate-600 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">
             Built for: {project.builtFor.split(" ").slice(0, 5).join(" ")}...
           </span>
@@ -145,16 +275,26 @@ export function ProjectCard({ project, featured = false, priority = false }: { p
           ))}
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link href={project.caseStudyUrl} onClick={() => trackEvent("project_case_study_click", { project: project.slug })} className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300 px-4 py-2.5 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5 hover:shadow-cyan-400/30">
+          <Link href={project.caseStudyUrl} onClick={(event) => { stopCardClick(event); trackEvent("project_case_study_click", { project: project.slug }); }} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300 px-4 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5 hover:shadow-cyan-400/30">
             View case study <ArrowRight size={15} />
           </Link>
+          <button
+            type="button"
+            onClick={(event) => {
+              stopCardClick(event);
+              onQuickView?.(project);
+            }}
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-4 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100"
+          >
+            Quick view
+          </button>
           {project.liveUrl ? (
-            <a href={project.liveUrl} onClick={() => trackEvent("external_project_click", { project: project.slug })} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-4 py-2.5 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
+            <a href={project.liveUrl} onClick={(event) => { stopCardClick(event); trackEvent("external_project_click", { project: project.slug }); }} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-4 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
               Live demo <ExternalLink size={15} />
             </a>
           ) : null}
           {project.githubUrl ? (
-            <a href={project.githubUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-4 py-2.5 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
+            <a href={project.githubUrl} onClick={stopCardClick} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-4 text-sm font-bold text-slate-700 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-transparent dark:text-slate-200 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
               GitHub <GitBranch size={15} />
             </a>
           ) : null}
@@ -164,8 +304,8 @@ export function ProjectCard({ project, featured = false, priority = false }: { p
   );
 }
 
-export function FeaturedProjectCard({ project, priority = false }: { project: PortfolioProject; priority?: boolean }) {
-  return <ProjectCard project={project} featured priority={priority} />;
+export function FeaturedProjectCard({ project, priority = false, onQuickView }: { project: PortfolioProject; priority?: boolean; onQuickView?: (project: PortfolioProject) => void }) {
+  return <ProjectCard project={project} featured priority={priority} onQuickView={onQuickView} />;
 }
 
 export function ProjectFilters({
@@ -189,6 +329,7 @@ export function ProjectFilters({
             <button
               key={category}
               onClick={() => onCategoryChange(category)}
+              aria-pressed={activeCategory === category}
               className={`rounded-full border px-4 py-2 text-sm font-black transition ${
                 activeCategory === category
                   ? "border-sky-400 bg-sky-600 text-white shadow-lg shadow-sky-500/20 dark:border-cyan-300 dark:bg-cyan-300 dark:text-slate-950"
@@ -206,9 +347,20 @@ export function ProjectFilters({
           <input
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
+            aria-label="Search projects by stack, feature or project name"
             placeholder="Search stack, feature or project"
-            className="w-full rounded-full border border-sky-200/80 bg-white/78 py-3 pl-11 pr-4 text-sm font-semibold text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-300/15 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-100 dark:focus:border-cyan-300/45"
+            className="w-full rounded-full border border-sky-200/80 bg-white/78 py-3 pl-11 pr-11 text-sm font-semibold text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-300/15 dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-100 dark:focus:border-cyan-300/45"
           />
+          {query ? (
+            <button
+              type="button"
+              aria-label="Clear project search"
+              onClick={() => onQueryChange("")}
+              className="absolute right-3 top-1/2 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full text-slate-500 transition hover:bg-sky-100 hover:text-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 dark:hover:bg-white/10 dark:hover:text-cyan-100"
+            >
+              <X size={15} />
+            </button>
+          ) : null}
         </label>
       </div>
 
@@ -248,6 +400,7 @@ export function ProjectCTA() {
 export function ProjectsSection({ projects, mode = "home" }: { projects: PortfolioProject[]; mode?: "home" | "page" }) {
   const [activeCategory, setActiveCategory] = useState<(typeof projectCategories)[number]>("All");
   const [query, setQuery] = useState("");
+  const [quickViewProject, setQuickViewProject] = useState<PortfolioProject | null>(null);
 
   const featuredProjects = projects.filter((project) => project.featured).slice(0, mode === "home" ? 3 : 2);
   const filteredProjects = useMemo(() => {
@@ -269,11 +422,12 @@ export function ProjectsSection({ projects, mode = "home" }: { projects: Portfol
   return (
     <div>
       <ProjectFilters activeCategory={activeCategory} count={filteredProjects.length} query={query} onCategoryChange={setActiveCategory} onQueryChange={setQuery} />
+      <ProjectQuickView project={quickViewProject} onClose={() => setQuickViewProject(null)} />
 
       {mode === "home" && activeCategory === "All" && !query ? (
         <div className="mb-8 grid gap-6 xl:grid-cols-3">
           {featuredProjects.map((project, index) => (
-            <FeaturedProjectCard key={project.slug} project={project} priority={index === 0} />
+            <FeaturedProjectCard key={project.slug} project={project} priority={index === 0} onQuickView={setQuickViewProject} />
           ))}
         </div>
       ) : null}
@@ -281,7 +435,7 @@ export function ProjectsSection({ projects, mode = "home" }: { projects: Portfol
       {filteredProjects.length ? (
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {(mode === "home" && activeCategory === "All" && !query ? gridProjects : filteredProjects).map((project, index) => (
-            <ProjectCard key={project.slug} project={project} priority={mode === "page" && index === 0} />
+            <ProjectCard key={project.slug} project={project} priority={mode === "page" && index === 0} onQuickView={setQuickViewProject} />
           ))}
         </div>
       ) : (

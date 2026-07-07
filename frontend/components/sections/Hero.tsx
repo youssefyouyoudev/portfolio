@@ -17,7 +17,7 @@ const fadeUp = {
 
 export function Hero() {
   return (
-    <section className="relative isolate min-h-[calc(100vh-72px)] overflow-hidden bg-gradient-to-br from-slate-50 via-sky-50 to-cyan-50 dark:from-[#020617] dark:via-[#061826] dark:to-[#071b2f]">
+    <section id="hero" className="relative isolate min-h-[calc(100vh-72px)] overflow-hidden bg-gradient-to-br from-slate-50 via-sky-50 to-cyan-50 dark:from-[#020617] dark:via-[#061826] dark:to-[#071b2f]">
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(2,132,199,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(2,132,199,.08)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)] dark:bg-[linear-gradient(rgba(34,211,238,.052)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,.052)_1px,transparent_1px)]" />
       <div className="absolute left-[-10%] top-16 -z-10 h-72 w-72 rounded-full bg-sky-300/35 blur-3xl dark:bg-cyan-400/18" />
       <div className="absolute right-[-8%] top-24 -z-10 h-96 w-96 rounded-full bg-cyan-300/25 blur-3xl dark:bg-blue-600/20" />
@@ -88,10 +88,10 @@ export function Hero() {
           </motion.div>
 
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <GradientButton href="#contact" variant="secondary" className="w-full sm:w-auto">
+            <GradientButton href="#contact" className="w-full sm:w-auto">
               Start a Project
             </GradientButton>
-            <GradientButton href="#projects" className="w-full sm:w-auto">
+            <GradientButton href="#projects" variant="secondary" className="w-full sm:w-auto">
               View Case Studies <ArrowUpRight size={18} />
             </GradientButton>
             <GradientButton href="/cv-download" variant="link" className="w-full sm:w-auto">

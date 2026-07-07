@@ -27,6 +27,8 @@ import {
 import { ContactForm } from "@/components/contact-form";
 import { Navbar } from "@/components/layout/Navbar";
 import { Reveal } from "@/components/motion-primitives";
+import { FloatingEngagement } from "@/components/navigation/FloatingEngagement";
+import { SectionNavigator } from "@/components/navigation/SectionNavigator";
 import { ProjectsSection } from "@/components/projects/ProjectExplorer";
 import { Hero } from "@/components/sections/Hero";
 import {
@@ -164,6 +166,42 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(14,165,233,.14),transparent_30%),radial-gradient(circle_at_82%_0%,rgba(8,145,178,.12),transparent_34%),linear-gradient(180deg,#f8fafc,#eef6ff_42%,#f8fafc)] dark:bg-[radial-gradient(circle_at_18%_8%,rgba(34,211,238,.14),transparent_30%),radial-gradient(circle_at_82%_0%,rgba(14,165,233,.14),transparent_34%),linear-gradient(180deg,#020617,#061826_42%,#020617)]" />
       <Navbar />
       <Hero />
+      <SectionNavigator />
+      <FloatingEngagement />
+
+      <section id="quick-path" className="relative mx-auto max-w-7xl px-4 py-16 md:py-20">
+        <SectionTitle
+          eyebrow="Choose Your Path"
+          title="Pick the fastest way to explore"
+          text="Start with the path that matches your current need: website, dashboard, full-stack delivery, proof or a project estimate."
+        />
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          {[
+            ["I need a business website", "View website services", "/services/website-development-nador", Globe2],
+            ["I need a dashboard or internal tool", "View dashboard work", "/services/admin-dashboard-development", LayoutDashboard],
+            ["I need a Laravel/React developer", "View full-stack services", "/services/laravel-developer-morocco", Code2],
+            ["I want to see proof first", "View case studies", "#projects", BadgeCheck],
+            ["I want a project estimate", "Request estimate", "/work-with-me", Send],
+          ].map(([title, cta, href, Icon]) => {
+            const PathIcon = Icon as typeof Globe2;
+            return (
+              <Reveal key={String(title)}>
+                <PremiumCard className="flex h-full flex-col p-5">
+                  <PathIcon className="text-sky-600 dark:text-cyan-300" size={22} aria-hidden="true" />
+                  <h3 className="mt-4 flex-1 text-lg font-black leading-snug text-slate-950 dark:text-white">{String(title)}</h3>
+                  <Link
+                    href={String(href)}
+                    onClick={() => trackEvent("service_page_cta_click", { source: String(title) })}
+                    className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-4 text-sm font-black text-sky-700 transition hover:border-sky-400/50 hover:bg-sky-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-cyan-100 dark:hover:border-cyan-300/35"
+                  >
+                    {String(cta)} <ArrowRight size={15} />
+                  </Link>
+                </PremiumCard>
+              </Reveal>
+            );
+          })}
+        </div>
+      </section>
 
       <section id="proof" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
         <SectionTitle
@@ -312,24 +350,27 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
         />
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {[
-            ["Business website with admin panel", "A professional website with editable services, projects, messages and SEO fields.", "Laravel + Next.js", "/services/web-developer-nador"],
-            ["Booking or reservation platform", "A structured booking flow for appointments, local services, rooms or business availability.", "Laravel + React", "/contact"],
-            ["HR dashboard", "Employee records, payroll direction, roles, reports and admin workflow screens.", "Laravel API + React", "/services/admin-dashboard-development"],
-            ["Inventory management system", "Products, stock movement, filters, alerts, reporting and role-based access.", "Laravel + MySQL", "/services/admin-dashboard-development"],
-            ["Client portal", "A secure area for clients to view documents, project status, requests and updates.", "Laravel + Next.js", "/services/freelance-web-developer-morocco"],
-            ["SaaS MVP", "A focused multi-user product foundation with accounts, modules, dashboards and API structure.", "Laravel + React", "/services/saas-development-morocco"],
-            ["Laravel REST API", "Clean endpoints, validation, resources, policies, auth and database-backed business logic.", "Laravel + MySQL", "/services/laravel-developer-morocco"],
-            ["React/Next.js dashboard", "Responsive tables, filters, forms, cards, analytics and admin UI states.", "React + Next.js", "/services/react-nextjs-developer-morocco"],
-            ["Excel/VBA replacement web app", "Move repeated spreadsheet workflows into forms, dashboards, reports and permissions.", "Laravel + React", "/services/business-automation-nador"],
-            ["SEO-ready landing page", "A focused page with metadata, schema, internal links, contact CTA and fast responsive layout.", "Next.js + SEO", "/services/website-development-nador"],
-          ].map(([title, description, stack, href]) => (
+            ["Business website with admin panel", "local businesses, agencies, service providers", "Laravel + Next.js", "Editable pages, contact forms, SEO structure", "/services/web-developer-nador", "View Service"],
+            ["Booking or reservation platform", "transport, appointments, rooms, services", "Laravel API + React", "Booking flow, admin dashboard, notifications", "/contact", "Plan This"],
+            ["HR dashboard", "teams managing employees and payroll direction", "Laravel API + React", "Records, roles, reports and HR screens", "/services/admin-dashboard-development", "Build This"],
+            ["Inventory management system", "stores, warehouses and internal operations", "Laravel + MySQL", "Stock movement, filters, alerts and reports", "/services/admin-dashboard-development", "Build This"],
+            ["Client portal", "service providers and B2B teams", "Laravel + Next.js", "Secure client area, requests and updates", "/services/freelance-web-developer-morocco", "Explore Option"],
+            ["SaaS MVP", "founders testing a focused product", "Laravel + React", "Accounts, modules, dashboard and API structure", "/services/saas-development-morocco", "Plan This"],
+            ["Laravel REST API", "apps that need clean backend contracts", "Laravel + MySQL", "Endpoints, validation, auth and policies", "/services/laravel-developer-morocco", "View Service"],
+            ["React/Next.js dashboard", "teams that need responsive admin screens", "React + Next.js", "Tables, filters, forms, cards and states", "/services/react-nextjs-developer-morocco", "View Service"],
+            ["Excel/VBA replacement web app", "administrative teams with repeated files", "Laravel + React", "Forms, dashboards, reports and permissions", "/services/business-automation-nador", "Plan This"],
+            ["SEO-ready landing page", "businesses that need focused local leads", "Next.js + SEO", "Metadata, schema, internal links and CTA", "/services/website-development-nador", "View Service"],
+          ].map(([title, bestFor, stack, output, href, cta]) => (
             <Reveal key={title}>
               <PremiumCard className="flex h-full flex-col p-5">
                 <h3 className="text-lg font-black text-slate-950 dark:text-white">{title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-7 text-slate-600 dark:text-slate-300">{description}</p>
-                <span className="mt-4 rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-xs font-bold text-sky-700 dark:border-cyan-300/15 dark:bg-cyan-300/10 dark:text-cyan-100">{stack}</span>
+                <div className="mt-4 grid flex-1 gap-3 text-sm leading-6 text-slate-600 dark:text-slate-300">
+                  <p><span className="font-black text-slate-900 dark:text-cyan-100">Best for:</span> {bestFor}</p>
+                  <p><span className="font-black text-slate-900 dark:text-cyan-100">Output:</span> {output}</p>
+                </div>
+                <span className="mt-4 rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-xs font-bold text-sky-700 dark:border-cyan-300/15 dark:bg-cyan-300/10 dark:text-cyan-100">Stack: {stack}</span>
                 <Link href={href} className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-sky-700 dark:text-cyan-200">
-                  Open path <ArrowRight size={15} />
+                  {cta} <ArrowRight size={15} />
                 </Link>
               </PremiumCard>
             </Reveal>

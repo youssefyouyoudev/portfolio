@@ -145,6 +145,37 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <span className="text-slate-950 dark:text-white">{service.h1}</span>
         </nav>
 
+        <div className="sticky top-3 z-20 mt-6 hidden items-center justify-between gap-4 rounded-full border border-sky-200/75 bg-white/82 p-2 shadow-xl shadow-sky-100/70 backdrop-blur-2xl dark:border-cyan-400/15 dark:bg-slate-950/76 dark:shadow-none lg:flex">
+          <nav aria-label="Service table of contents" className="flex flex-wrap items-center gap-1 text-sm font-bold text-slate-700 dark:text-slate-300">
+            {[
+              ["#service-details", "Details"],
+              ["#service-fit", "Fit"],
+              ["#related-proof", "Proof"],
+              ["#faq", "FAQ"],
+            ].map(([href, label]) => (
+              <a key={href} href={href} className="rounded-full px-4 py-2 transition hover:bg-sky-50 hover:text-sky-700 dark:hover:bg-white/10 dark:hover:text-cyan-100">
+                {label}
+              </a>
+            ))}
+          </nav>
+          <Link href="/work-with-me" className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5">
+            Request estimate <ArrowRight size={15} />
+          </Link>
+        </div>
+
+        <nav aria-label="Service page guide" className="mt-6 grid gap-2 rounded-3xl border border-sky-200/75 bg-white/82 p-3 text-sm font-bold text-slate-700 shadow-xl shadow-sky-100/70 backdrop-blur-2xl dark:border-cyan-400/15 dark:bg-slate-950/76 dark:text-slate-300 dark:shadow-none sm:grid-cols-4 lg:hidden">
+          {[
+            ["#service-details", "Details"],
+            ["#service-fit", "Fit"],
+            ["#related-proof", "Proof"],
+            ["#faq", "FAQ"],
+          ].map(([href, label]) => (
+            <a key={href} href={href} className="rounded-2xl border border-sky-200/70 bg-sky-50 px-4 py-3 text-center transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
+              {label}
+            </a>
+          ))}
+        </nav>
+
         <section className="mt-8 grid gap-8 rounded-[2rem] border border-sky-200/75 bg-white/88 p-6 shadow-2xl shadow-sky-100/80 backdrop-blur-xl dark:border-cyan-400/15 dark:bg-slate-900/58 dark:shadow-slate-950/30 md:p-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.28em] text-sky-700 dark:text-cyan-300">Service</p>
@@ -172,7 +203,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </Card>
         </section>
 
-        <section className="mt-8 grid gap-6 lg:grid-cols-3">
+        <section id="service-details" className="mt-8 grid scroll-mt-28 gap-6 lg:grid-cols-3">
           <Card>
             <Wrench className="text-sky-600 dark:text-cyan-300" />
             <h2 className="mt-4 text-2xl font-black">Service details</h2>
@@ -205,7 +236,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </Card>
         </section>
 
-        <section className="mt-8 grid gap-6 lg:grid-cols-2">
+        <section id="service-fit" className="mt-8 grid scroll-mt-28 gap-6 lg:grid-cols-2">
           <Card>
             <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">Who This Is For</p>
             <h2 className="mt-3 text-2xl font-black">Business fit and use cases</h2>
@@ -232,7 +263,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </Card>
         </section>
 
-        <section className="mt-8 grid gap-6 lg:grid-cols-[1.05fr_.95fr]">
+        <section id="related-proof" className="mt-8 grid scroll-mt-28 gap-6 lg:grid-cols-[1.05fr_.95fr]">
           <Card>
             <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">Related Projects</p>
             <h2 className="mt-3 text-2xl font-black">Relevant project proof</h2>
@@ -259,7 +290,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </Card>
         </section>
 
-        <section className="mt-8 rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
+        <section id="faq" className="mt-8 scroll-mt-28 rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
           <p className="text-xs font-black uppercase tracking-[0.24em] text-sky-700 dark:text-cyan-300">Related Blog Articles</p>
           <h2 className="mt-3 text-2xl font-black">Technical articles connected to this service</h2>
           <div className="mt-6 grid gap-3 md:grid-cols-2">
@@ -277,11 +308,14 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <h2 className="mt-3 text-2xl font-black">Common questions</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {service.faqs.map((faq) => (
-              <article key={faq.question} className="rounded-2xl border border-sky-200/80 bg-sky-50/85 p-5 dark:border-cyan-400/15 dark:bg-cyan-300/[0.055]">
-                <HelpCircle className="text-sky-600 dark:text-cyan-300" size={18} />
-                <h3 className="mt-3 font-black text-slate-950 dark:text-white">{faq.question}</h3>
-                <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-300">{faq.answer}</p>
-              </article>
+              <details key={faq.question} className="group rounded-2xl border border-sky-200/80 bg-sky-50/85 p-5 dark:border-cyan-400/15 dark:bg-cyan-300/[0.055]">
+                <summary className="flex cursor-pointer list-none items-start gap-3 font-black text-slate-950 outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 dark:text-white">
+                  <HelpCircle className="mt-0.5 shrink-0 text-sky-600 dark:text-cyan-300" size={18} />
+                  <span className="flex-1">{faq.question}</span>
+                  <span className="text-sky-700 transition group-open:rotate-90 dark:text-cyan-200">+</span>
+                </summary>
+                <p className="mt-3 pl-8 text-sm leading-7 text-slate-700 dark:text-slate-300">{faq.answer}</p>
+              </details>
             ))}
           </div>
         </section>

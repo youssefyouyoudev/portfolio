@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, BadgeCheck, ListChecks } from "lucide-react";
+import { CopyCodeBlock } from "@/components/blog/CopyCodeBlock";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { getBlogPost, legacyBlogSlugs } from "@/lib/api";
 import { blogPosts } from "@/lib/data";
@@ -51,6 +52,9 @@ export default async function BlogPost({ params }: BlogPageProps) {
   const publishedDate = "2026-07-07";
   const updatedDate = "2026-07-07";
   const readingTime = Math.max(6, Math.ceil((sections.reduce((total, section) => total + section.body.join(" ").split(/\s+/).length, 0) + post.excerpt.split(/\s+/).length) / 180));
+  const currentIndex = blogPosts.findIndex((item) => item.slug === post.slug);
+  const previousPost = currentIndex > 0 ? blogPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex >= 0 && currentIndex < blogPosts.length - 1 ? blogPosts[currentIndex + 1] : null;
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -133,11 +137,7 @@ export default async function BlogPost({ params }: BlogPageProps) {
                       <p key={paragraph}>{paragraph}</p>
                     ))}
                   </div>
-                  {section.code ? (
-                    <pre className="mt-5 overflow-x-auto rounded-2xl border border-sky-200/75 bg-slate-950 p-5 text-sm leading-7 text-cyan-100 dark:border-cyan-300/15">
-                      <code>{section.code}</code>
-                    </pre>
-                  ) : null}
+                  {section.code ? <CopyCodeBlock code={section.code} /> : null}
                 </section>
               ))}
             </div>
@@ -186,6 +186,33 @@ export default async function BlogPost({ params }: BlogPageProps) {
               </div>
             </div>
           </section>
+
+          <section className="mt-10 rounded-2xl border border-sky-300/50 bg-gradient-to-br from-sky-50 via-white to-cyan-50 p-6 dark:border-cyan-300/20 dark:from-cyan-300/10 dark:via-slate-900/60 dark:to-slate-950">
+            <h2 className="text-2xl font-black text-slate-950 dark:text-white">Need help with something similar?</h2>
+            <p className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">
+              If this article matches a deployment, dashboard, Laravel API, React frontend or SEO problem in your project, send me the context and I will help turn it into a practical technical scope.
+            </p>
+            <Link href="/work-with-me" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-r from-sky-500 to-cyan-300 px-5 text-sm font-black text-white shadow-lg shadow-cyan-500/20 transition hover:-translate-y-0.5">
+              Request estimate <ArrowRight size={15} />
+            </Link>
+          </section>
+
+          {(previousPost || nextPost) && (
+            <nav aria-label="Previous and next technical notes" className="mt-10 grid gap-4 md:grid-cols-2">
+              {previousPost ? (
+                <Link href={`/blog/${previousPost.slug}`} className="rounded-2xl border border-sky-200/75 bg-white/75 p-5 transition hover:border-sky-400/50 dark:border-white/10 dark:bg-white/[0.04]">
+                  <span className="text-xs font-black uppercase tracking-[0.18em] text-sky-700 dark:text-cyan-300">Previous</span>
+                  <span className="mt-2 block font-black text-slate-950 dark:text-white">{previousPost.title}</span>
+                </Link>
+              ) : <span />}
+              {nextPost ? (
+                <Link href={`/blog/${nextPost.slug}`} className="rounded-2xl border border-sky-200/75 bg-white/75 p-5 text-right transition hover:border-sky-400/50 dark:border-white/10 dark:bg-white/[0.04]">
+                  <span className="text-xs font-black uppercase tracking-[0.18em] text-sky-700 dark:text-cyan-300">Next</span>
+                  <span className="mt-2 block font-black text-slate-950 dark:text-white">{nextPost.title}</span>
+                </Link>
+              ) : <span />}
+            </nav>
+          )}
         </article>
       </div>
     </main>
