@@ -83,13 +83,13 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       "@type": "Service",
       name: service.h1,
       serviceType: service.focus,
-      url: `https://youssefyouyou.com/services/${service.slug}`,
+      url: `https://www.youssefyouyou.com/services/${service.slug}`,
       areaServed: ["Morocco", "Nador", "Marrakech", "Remote"],
       provider: {
         "@type": "Person",
         name: "Youssef Youyou",
         jobTitle: "Senior Full-Stack Web Developer",
-        url: "https://youssefyouyou.com",
+        url: "https://www.youssefyouyou.com",
       },
       description: service.metaDescription,
       knowsAbout: service.technologies,
@@ -107,9 +107,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://youssefyouyou.com" },
-        { "@type": "ListItem", position: 2, name: "Services", item: "https://youssefyouyou.com/#services" },
-        { "@type": "ListItem", position: 3, name: service.h1, item: `https://youssefyouyou.com/services/${service.slug}` },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.youssefyouyou.com" },
+        { "@type": "ListItem", position: 2, name: "Services", item: "https://www.youssefyouyou.com/#services" },
+        { "@type": "ListItem", position: 3, name: service.h1, item: `https://www.youssefyouyou.com/services/${service.slug}` },
       ],
     },
   ];

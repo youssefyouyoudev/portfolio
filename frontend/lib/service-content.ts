@@ -16,7 +16,7 @@ export type ServicePage = {
   faqs: { question: string; answer: string }[];
 };
 
-export const servicePages: ServicePage[] = [
+const baseServicePages: ServicePage[] = [
   {
     slug: "web-developer-nador",
     title: "Web Developer in Nador | Youssef Youyou",
@@ -268,6 +268,146 @@ export const servicePages: ServicePage[] = [
       { question: "Can you mention Marrakech or Morocco SEO too?", answer: "Yes, where it is relevant and natural. I avoid stuffing city names into pages that do not need them." },
     ],
   },
+];
+
+const generatedServiceSpecs = [
+  {
+    slug: "admin-dashboard-developer-nador",
+    title: "Admin Dashboard Developer in Nador | Laravel & React",
+    h1: "Admin Dashboard Developer in Nador",
+    focus: "CRUD systems, reporting screens, document workflows, HR, inventory and local business admin tools.",
+    location: "Nador",
+    intent: "local businesses that need a private dashboard to manage daily work",
+    projectSlugs: ["erplus", "digital-archiving-system", "portfolio-admin-system"],
+    related: ["web-developer-nador", "business-automation-nador", "admin-dashboard-development"],
+  },
+  {
+    slug: "full-stack-developer-morocco",
+    title: "Full-Stack Developer in Morocco | Laravel, React & Next.js",
+    h1: "Full-Stack Developer in Morocco",
+    focus: "Laravel APIs, React/Next.js frontends, dashboards, SaaS MVPs and production deployment.",
+    location: "Morocco",
+    intent: "companies that need one developer to connect backend, frontend, database, SEO and deployment",
+    projectSlugs: ["rifitv", "erplus", "portfolio-admin-system"],
+    related: ["laravel-developer-morocco", "react-nextjs-developer-morocco", "saas-development-morocco"],
+  },
+  {
+    slug: "website-developer-morocco",
+    title: "Website Developer in Morocco | Business Websites & SEO",
+    h1: "Website Developer in Morocco",
+    focus: "Business websites, landing pages, SEO-ready content, contact flows and admin-editable structures.",
+    location: "Morocco",
+    intent: "businesses that need a credible website with clear pages, conversion paths and technical SEO",
+    projectSlugs: ["rifitv", "ecommerce-client-portal", "portfolio-admin-system"],
+    related: ["freelance-web-developer-morocco", "react-nextjs-developer-morocco", "website-development-nador"],
+  },
+  {
+    slug: "remote-laravel-developer",
+    title: "Remote Laravel Developer | APIs, Dashboards & Business Platforms",
+    h1: "Remote Laravel Developer",
+    focus: "Remote Laravel API development, backend modules, roles, MySQL schemas and deployment support.",
+    location: "remote",
+    intent: "remote teams that need Laravel backend support without exposing business logic to a weak structure",
+    projectSlugs: ["erplus", "rifitv", "portfolio-admin-system"],
+    related: ["laravel-developer-morocco", "laravel-api-developer", "remote-react-developer"],
+  },
+  {
+    slug: "remote-react-developer",
+    title: "Remote React Developer | Dashboards & Next.js Interfaces",
+    h1: "Remote React Developer",
+    focus: "React dashboards, Next.js interfaces, responsive components, API integration and remote collaboration.",
+    location: "remote",
+    intent: "remote teams that need maintainable frontend implementation connected to APIs",
+    projectSlugs: ["erplus", "social-media-management-saas", "portfolio-admin-system"],
+    related: ["react-nextjs-developer-morocco", "react-dashboard-developer", "remote-laravel-developer"],
+  },
+  {
+    slug: "nextjs-saas-developer",
+    title: "Next.js SaaS Developer | SEO Pages, Dashboards & Product UI",
+    h1: "Next.js SaaS Developer",
+    focus: "Next.js marketing pages, app interfaces, SaaS dashboards, metadata, routing and conversion flows.",
+    location: "remote",
+    intent: "founders and businesses that need a SaaS frontend with SEO pages and dashboard UX",
+    projectSlugs: ["social-media-management-saas", "erplus", "portfolio-admin-system"],
+    related: ["saas-development-morocco", "react-nextjs-developer-morocco", "remote-react-developer"],
+  },
+  {
+    slug: "laravel-api-developer",
+    title: "Laravel API Developer | REST APIs, Auth & Dashboards",
+    h1: "Laravel API Developer",
+    focus: "REST APIs, authentication, validation, resources, policies, MySQL and frontend-ready contracts.",
+    location: "remote",
+    intent: "teams that need a Laravel backend API for React, Next.js, mobile or admin dashboard clients",
+    projectSlugs: ["erplus", "portfolio-admin-system", "rifitv"],
+    related: ["laravel-developer-morocco", "remote-laravel-developer", "admin-dashboard-development"],
+  },
+  {
+    slug: "react-dashboard-developer",
+    title: "React Dashboard Developer | Admin Panels & Business Tools",
+    h1: "React Dashboard Developer",
+    focus: "React dashboard components, forms, filters, tables, reporting screens and Laravel API integration.",
+    location: "remote",
+    intent: "businesses that need clean dashboards for repeated internal workflows",
+    projectSlugs: ["erplus", "digital-archiving-system", "social-media-management-saas"],
+    related: ["admin-dashboard-development", "remote-react-developer", "business-automation-morocco"],
+  },
+];
+
+function generatedServicePage(spec: (typeof generatedServiceSpecs)[number]): ServicePage {
+  const isRemote = spec.location === "remote";
+  const areaText = isRemote ? "remote teams and international clients" : `businesses in ${spec.location}`;
+  const localText = spec.location === "Nador"
+    ? "For Nador businesses, useful examples include stores, agencies, schools, transport teams, local administrations, service providers and cafes that need cleaner websites, booking flows, inventory tracking, dashboards or document workflows."
+    : spec.location === "Morocco"
+      ? "For Moroccan companies, the work can support Nador, Marrakech, Casablanca, Rabat, Tangier, Agadir, Oujda and Fez through remote collaboration, clear scope and production-minded delivery."
+      : "For remote collaboration, the work is organized around written scope, Git workflow, API contracts, deployment notes and clear communication.";
+
+  return {
+    slug: spec.slug,
+    title: spec.title,
+    metaDescription: `${spec.h1} for ${spec.intent}. Laravel, React, Next.js, APIs, dashboards, SEO structure and production deployment support.`,
+    h1: spec.h1,
+    focus: spec.focus,
+    intro: `${spec.h1} services are for ${areaText} that need practical software, not vague decoration. I focus on business goals first, then choose the right Laravel, React, Next.js, MySQL and deployment structure. ${localText}`,
+    details: [
+      `Who this is for: ${spec.intent}.`,
+      "Problems solved: manual workflows, unclear reporting, weak contact flow, scattered data, slow updates and production issues.",
+      `What I build: ${spec.focus}`,
+      "Deliverables can include page structure, database schema, API endpoints, dashboard modules, forms, validation, metadata, sitemap entries, deployment notes and a next-improvement checklist.",
+      "The content and technical structure stay business-focused, human-readable and search-friendly without keyword stuffing.",
+    ],
+    process: [
+      "Discovery: clarify business goal, users, current problem, budget range and deadline.",
+      "Scope: define pages, modules, data, roles, integrations, SEO targets and deployment requirements.",
+      "Build: implement the backend/frontend structure with responsive UI, validation, accessibility and maintainable code.",
+      "Launch: test mobile, metadata, sitemap, robots, schema, contact flow, analytics events and production deployment.",
+      "Improve: review Search Console, user questions, conversion paths and the next backlog.",
+    ],
+    technologies: ["Laravel", "PHP", "React", "Next.js", "TypeScript", "MySQL", "REST APIs", "Tailwind CSS", "Nginx", "Cloudflare", "SEO"],
+    benefits: [
+      "Clearer business workflow",
+      "More credible web presence",
+      "Maintainable full-stack structure",
+      "SEO-ready technical foundation",
+      "Remote-friendly delivery and deployment notes",
+    ],
+    relatedProjectSlugs: spec.projectSlugs,
+    relatedServiceSlugs: spec.related,
+    faqs: [
+      { question: `Who is this ${spec.h1.toLowerCase()} page for?`, answer: `It is for ${spec.intent}. The goal is to connect real business needs with a practical Laravel, React, Next.js or automation solution.` },
+      { question: "Can you work remotely?", answer: "Yes. I am based in Nador, Morocco and available for Morocco-wide and remote projects with structured communication, Git workflow and clear scope." },
+      { question: "Can you work on an existing project?", answer: "Yes. I can review existing Laravel, React, Next.js, dashboard, API or deployment setups and propose practical improvements." },
+      { question: "Do you give fixed pricing immediately?", answer: "No. I give realistic estimates after scope is clear because pages, modules, integrations, roles, content and deployment needs change the work." },
+      { question: "What is the best next step?", answer: "Send the business goal, current problem, project type, budget range and deadline through the contact form or Work With Me page." },
+    ],
+  };
+}
+
+export const servicePages: ServicePage[] = [
+  ...baseServicePages,
+  ...generatedServiceSpecs
+    .filter((spec) => !baseServicePages.some((page) => page.slug === spec.slug))
+    .map(generatedServicePage),
 ];
 
 export const servicePageSlugs = servicePages.map((service) => service.slug);

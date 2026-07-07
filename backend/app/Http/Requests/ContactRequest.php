@@ -25,6 +25,8 @@ class ContactRequest extends FormRequest
             'budget_range' => ['required', Rule::in(['Small project', 'Medium project', 'Large project', 'Not sure yet'])],
             'timeline' => ['nullable', 'string', 'max:120'],
             'preferred_contact_method' => ['nullable', Rule::in(['Email', 'WhatsApp on request', 'Google Meet', 'Phone call if needed'])],
+            'contact_as' => ['nullable', Rule::in(['Business owner', 'Agency', 'Recruiter', 'Startup founder', 'Developer/team', 'Other'])],
+            'engagement_type' => ['nullable', Rule::in(['Freelance project', 'Remote job', 'Part-time contract', 'Consultation', 'Maintenance/fix', 'Long-term collaboration'])],
             'message' => ['required', 'string', 'min:20', 'max:3000'],
             'website' => ['nullable', 'prohibited'],
         ];

@@ -11,7 +11,7 @@ export const profile = {
   description:
     "I help businesses in Morocco and internationally turn manual workflows into production-ready web systems with clean interfaces, scalable backend logic and SEO-ready structure.",
   email: "contact@youssefyouyou.com",
-  website: "https://youssefyouyou.com",
+  website: "https://www.youssefyouyou.com",
   github: "https://github.com/youssefyouyoudev",
   linkedin: "https://linkedin.com/in/youssefyouyoudev",
 };
@@ -273,6 +273,99 @@ export const experiences = [
 
 export const blogPosts = [
   {
+    title: "How to Plan a Business Dashboard Before Writing Code",
+    slug: "how-to-plan-business-dashboard",
+    category: "Dashboards",
+    excerpt: "A practical guide for planning an admin dashboard around users, roles, data, reports, workflows and business value before opening the code editor.",
+    seoTitle: "How to Plan a Business Dashboard Before Writing Code",
+    seoDescription: "Learn how to plan a business dashboard before development by defining users, roles, modules, data, reports, workflows and Laravel/React architecture.",
+    points: ["Start with the workflow, not the UI.", "Define users, roles and permissions early.", "Map entities, reports and repeated actions.", "Plan MVP modules before advanced analytics."],
+    sections: [
+      {
+        heading: "Start with the business workflow",
+        body: [
+          "A dashboard should not begin with charts. It should begin with the daily workflow: who uses the system, what decisions they make, which data they need and what manual work should disappear. For a Moroccan business, that could mean HR records, inventory movement, document tracking, orders, client requests or internal reports.",
+          "Before writing code, I ask what the dashboard should improve. Faster search? Better reporting? Fewer Excel files? Clearer roles? The answer decides the database, screens and modules.",
+        ],
+      },
+      {
+        heading: "Define users and permissions",
+        body: [
+          "A useful dashboard usually has more than one type of user. Admins, managers, HR users, inventory users and content managers should not all see the same actions. Defining permissions early keeps the Laravel backend cleaner and makes the React interface easier to reason about.",
+          "This is where Laravel policies, middleware, roles and API resources become part of the user experience, not only backend details.",
+        ],
+        code: "Admin: manage users, settings, reports\nManager: view reports, approve workflows\nStaff: create records, update assigned tasks\nViewer: read-only dashboards",
+      },
+      {
+        heading: "Map data and modules",
+        body: [
+          "After users are clear, I map the business entities. A dashboard for HR may need employees, departments, contracts, attendance and payslip direction. Inventory may need products, stock movements, suppliers and alerts. Document tracking may need categories, metadata, status and search.",
+          "This planning prevents random database tables and helps the first version stay focused.",
+        ],
+      },
+      {
+        heading: "Plan reports and success signals",
+        body: [
+          "Dashboard reports should answer useful business questions. How many pending documents exist? Which stock items are low? Which projects need follow-up? Which users submitted requests this week? These questions guide summary cards, filters and export-ready views.",
+        ],
+      },
+      {
+        heading: "Final checklist",
+        body: [
+          "Before development, confirm the users, roles, modules, required fields, reports, API endpoints, mobile expectations, deployment needs and future improvements. A clear plan makes Laravel and React development faster and reduces expensive changes later.",
+        ],
+      },
+    ],
+    checklist: ["Users and roles defined", "Core modules scoped", "Database entities mapped", "Reports listed", "MVP separated from later features", "Deployment and access needs clear"],
+    relatedProjects: ["erplus", "digital-archiving-system", "portfolio-admin-system"],
+    relatedServices: ["admin-dashboard-development", "laravel-api-developer", "react-dashboard-developer"],
+  },
+  {
+    title: "What Small Businesses Need Before Building a Website",
+    slug: "what-small-businesses-need-before-building-website",
+    category: "Business Websites",
+    excerpt: "A practical checklist for small businesses preparing a website: offer, pages, content, trust signals, SEO basics, contact flow and future admin needs.",
+    seoTitle: "What Small Businesses Need Before Building a Website",
+    seoDescription: "Small business website planning checklist covering offer, pages, content, SEO, trust, contact flow, admin editing and Laravel/Next.js options.",
+    points: ["Clarify the offer and target customers.", "Prepare content before design.", "Decide the contact and lead flow.", "Plan SEO and admin editing early."],
+    sections: [
+      {
+        heading: "Clarify the business offer",
+        body: [
+          "A website cannot explain a business if the business offer is unclear. Before development, define what you sell, who you help, which city or market you target and what action visitors should take. For local businesses in Nador or Morocco, this can be a call, WhatsApp request, booking, quote form or visit to a physical location.",
+        ],
+      },
+      {
+        heading: "Plan the pages",
+        body: [
+          "Most small business websites need a homepage, services page, about section, contact page and sometimes location or landing pages. If SEO matters, each important service should have its own useful page instead of hiding everything in one paragraph.",
+        ],
+        code: "Homepage\nServices\nService detail pages\nAbout\nProjects or proof\nContact\nLocation page when relevant",
+      },
+      {
+        heading: "Prepare trust content",
+        body: [
+          "Trust can come from real projects, clear process, real photos, approved testimonials, business registration details, FAQs, service explanations and helpful technical content. It should never come from fake awards, fake reviews or invented numbers.",
+        ],
+      },
+      {
+        heading: "Choose the right technical structure",
+        body: [
+          "A simple website may only need Next.js pages and a contact form. A business that updates content often may need an admin panel. A company with bookings, inventory or client requests may need a Laravel backend, MySQL database and dashboard.",
+        ],
+      },
+      {
+        heading: "Final checklist",
+        body: [
+          "Before starting, prepare the business goal, services, city targets, content, images, contact email, social links, must-have pages, budget range and deadline. This makes the estimate more realistic and the delivery smoother.",
+        ],
+      },
+    ],
+    checklist: ["Offer clarified", "Pages listed", "Content drafted", "Contact flow decided", "SEO targets selected", "Admin/dashboard needs identified"],
+    relatedProjects: ["rifitv", "ecommerce-client-portal", "portfolio-admin-system"],
+    relatedServices: ["web-developer-nador", "website-development-nador", "website-developer-morocco"],
+  },
+  {
     title: "How I Deploy Laravel and Next.js on Ubuntu with Nginx, PM2 and SSL",
     slug: "deploy-laravel-nextjs-ubuntu-nginx-pm2",
     category: "Deployment",
@@ -307,7 +400,7 @@ export const blogPosts = [
           "Nginx should proxy the frontend to the Next.js port and send the API host to PHP-FPM through Laravel's public directory. I check `nginx -t` before every reload, then verify the site in the browser, including API calls, images, sitemap and robots output.",
           "Common errors include 502 from a stopped PM2 process, 404 assets from a wrong build path, Laravel 500 errors from missing `.env` values, and mixed content when HTTPS is active but an API URL still uses HTTP.",
         ],
-        code: "sudo nginx -t\nsudo systemctl reload nginx\npm2 status\ncurl -I https://youssefyouyou.com\ncurl -I https://youssefyouyou.com/sitemap.xml",
+        code: "sudo nginx -t\nsudo systemctl reload nginx\npm2 status\ncurl -I https://www.youssefyouyou.com\ncurl -I https://www.youssefyouyou.com/sitemap.xml",
       },
       {
         heading: "Final deployment checklist",
@@ -436,7 +529,7 @@ export const blogPosts = [
         body: [
           "JSON-LD helps search engines understand who the site represents and what each page is about. A portfolio homepage can use Person, WebSite and ProfilePage. Project pages can use CreativeWork or SoftwareApplication. Technical articles can use BlogPosting. FAQ sections on service pages can use FAQPage schema.",
         ],
-        code: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"name\": \"Youssef Youyou\",\n  \"jobTitle\": \"Senior Full-Stack Web Developer\",\n  \"url\": \"https://youssefyouyou.com\"\n}",
+        code: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"name\": \"Youssef Youyou\",\n  \"jobTitle\": \"Senior Full-Stack Web Developer\",\n  \"url\": \"https://www.youssefyouyou.com\"\n}",
       },
       {
         heading: "Sitemap, robots and private routes",

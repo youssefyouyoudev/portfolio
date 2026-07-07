@@ -708,6 +708,8 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
               <a href="/blog" className="hover:text-sky-700 dark:hover:text-cyan-200">Blog/Technical Notes</a>
               <a href="/contact" className="hover:text-sky-700 dark:hover:text-cyan-200">Contact</a>
               <a href="/work-with-me" className="hover:text-sky-700 dark:hover:text-cyan-200">Work With Me</a>
+              <a href="/hire-laravel-react-developer" className="hover:text-sky-700 dark:hover:text-cyan-200">Hire Me</a>
+              <a href="/cv" className="hover:text-sky-700 dark:hover:text-cyan-200">CV</a>
               <a href="/nador-full-stack-developer" className="hover:text-sky-700 dark:hover:text-cyan-200">Full-Stack Developer in Nador</a>
               <a href="/morocco-full-stack-developer" className="hover:text-sky-700 dark:hover:text-cyan-200">Full-Stack Developer Morocco</a>
               <a href={profile.github} className="hover:text-sky-700 dark:hover:text-cyan-200">GitHub</a>
@@ -730,6 +732,7 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
             <h3 className="font-bold text-slate-950 dark:text-white">Actions</h3>
             <div className="mt-4 grid gap-3 text-sm text-slate-600 dark:text-slate-400">
               <a href="/cv-download" className="inline-flex items-center gap-2 hover:text-sky-700 dark:hover:text-cyan-200"><Download size={15} /> Download CV</a>
+              <a href="/hire-laravel-react-developer" className="inline-flex items-center gap-2 hover:text-sky-700 dark:hover:text-cyan-200"><BadgeCheck size={15} /> Hire Me</a>
               <a href="#contact" className="inline-flex items-center gap-2 hover:text-sky-700 dark:hover:text-cyan-200"><Send size={15} /> Contact</a>
               <a href="#" className="hover:text-sky-700 dark:hover:text-cyan-200">Back to top</a>
             </div>

@@ -5,7 +5,7 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import type { AuthorityPageContent } from "@/lib/authority-content";
 
 export function AuthorityPage({ page }: { page: AuthorityPageContent }) {
-  const url = `https://youssefyouyou.com/${page.slug}`;
+  const url = `https://www.youssefyouyou.com/${page.slug}`;
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -18,7 +18,7 @@ export function AuthorityPage({ page }: { page: AuthorityPageContent }) {
         "@type": "Person",
         name: "Youssef Youyou",
         jobTitle: "Senior Full-Stack Web Developer",
-        url: "https://youssefyouyou.com",
+        url: "https://www.youssefyouyou.com",
       },
     },
     {
@@ -34,7 +34,7 @@ export function AuthorityPage({ page }: { page: AuthorityPageContent }) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://youssefyouyou.com" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.youssefyouyou.com" },
         { "@type": "ListItem", position: 2, name: page.h1, item: url },
       ],
     },

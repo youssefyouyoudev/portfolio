@@ -5,9 +5,9 @@ import { ChatWidget } from "@/components/chatbot/ChatWidget";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://youssefyouyou.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.youssefyouyou.com";
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
-const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "G-Z8SL805ZQB";
+const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
 const geistSans = Geist({
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   description:
     "Senior Full-Stack Developer from Nador, Morocco building Laravel APIs, React/Next.js interfaces, SaaS platforms, admin dashboards, business automation tools and SEO-friendly websites.",
   applicationName: "Youssef Youyou Portfolio",
-  authors: [{ name: "Youssef Youyou", url: "https://youssefyouyou.com" }],
+  authors: [{ name: "Youssef Youyou", url: siteUrl }],
   creator: "Youssef Youyou",
   publisher: "Youssef Youyou",
   category: "technology",
@@ -125,7 +125,7 @@ export default function RootLayout({
                 jobTitle: "Senior Full-Stack Web Developer",
                 description: "Senior Full-Stack Web Developer based in Morocco focused on Laravel APIs, React/Next.js interfaces, dashboards, SaaS platforms, deployment, Cloudflare, Nginx, business automation and SEO-friendly websites.",
                 email: "contact@youssefyouyou.com",
-                url: "https://youssefyouyou.com",
+                url: siteUrl,
                 sameAs: ["https://github.com/youssefyouyoudev", "https://linkedin.com/in/youssefyouyoudev"],
                 address: { "@type": "PostalAddress", addressLocality: "Nador", addressCountry: "MA" },
                 homeLocation: { "@type": "Place", name: "Nador, Morocco" },
@@ -135,18 +135,18 @@ export default function RootLayout({
                 "@context": "https://schema.org",
                 "@type": "WebSite",
                 name: "Youssef Youyou Portfolio",
-                url: "https://youssefyouyou.com",
+                url: siteUrl,
               },
               {
                 "@context": "https://schema.org",
                 "@type": "ProfilePage",
                 name: "Youssef Youyou Senior Full-Stack Web Developer Portfolio",
-                url: "https://youssefyouyou.com",
+                url: siteUrl,
                 about: {
                   "@type": "Person",
                   name: "Youssef Youyou",
                   jobTitle: "Senior Full-Stack Web Developer",
-                  url: "https://youssefyouyou.com",
+                  url: siteUrl,
                 },
                 description: "Portfolio profile for Youssef Youyou, a Senior Full-Stack Web Developer based in Morocco.",
               },

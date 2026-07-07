@@ -9,6 +9,8 @@ const projectTypes = ["B2B website", "B2C website", "SaaS", "Admin dashboard", "
 const budgets = ["Small project", "Medium project", "Large project", "Not sure yet"];
 const timelines = ["As soon as possible", "This month", "1-3 months", "Flexible / planning phase"];
 const contactMethods = ["Email", "WhatsApp on request", "Google Meet", "Phone call if needed"];
+const contactAsOptions = ["Business owner", "Agency", "Recruiter", "Startup founder", "Developer/team", "Other"];
+const engagementTypes = ["Freelance project", "Remote job", "Part-time contract", "Consultation", "Maintenance/fix", "Long-term collaboration"];
 const draftKey = "youssef-contact-form-draft";
 
 type ContactControl = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
@@ -112,6 +114,10 @@ export function ContactForm() {
         <div className="grid gap-4 md:grid-cols-2">
           <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200"><FieldLabel required>Project type</FieldLabel><select required name="project_type" className="field min-h-11">{projectTypes.map((item) => <option key={item}>{item}</option>)}</select></label>
           <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200"><FieldLabel required>Budget range</FieldLabel><select required name="budget_range" className="field min-h-11">{budgets.map((item) => <option key={item}>{item}</option>)}</select></label>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200"><FieldLabel>I am contacting you as</FieldLabel><select name="contact_as" className="field min-h-11">{contactAsOptions.map((item) => <option key={item}>{item}</option>)}</select></label>
+          <label className="grid gap-2 text-sm font-medium text-slate-700 dark:text-slate-200"><FieldLabel>Engagement type</FieldLabel><select name="engagement_type" className="field min-h-11">{engagementTypes.map((item) => <option key={item}>{item}</option>)}</select></label>
         </div>
       </fieldset>
 
