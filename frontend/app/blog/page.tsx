@@ -3,22 +3,13 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, BookOpenText } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { getBlogPosts } from "@/lib/api";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Technical Blog | Laravel, React, Next.js & Deployment Notes",
+export const metadata: Metadata = pageMetadata({
+  title: "Technical Blog",
   description: "Practical technical articles by Youssef Youyou about Laravel, React, Next.js, dashboards, SaaS architecture, deployment, Vite fixes and SEO.",
-  alternates: { canonical: "/blog" },
-  openGraph: {
-    title: "Technical Blog | Youssef Youyou",
-    description: "Practical articles about Laravel, React, Next.js, dashboards, deployment and production-minded web development.",
-    url: "/blog",
-  },
-  twitter: {
-    card: "summary",
-    title: "Technical Blog | Youssef Youyou",
-    description: "Practical articles about Laravel, React, Next.js, dashboards, deployment and production-minded web development.",
-  },
-};
+  path: "/blog",
+});
 
 export default async function BlogPage() {
   const blogPosts = await getBlogPosts();

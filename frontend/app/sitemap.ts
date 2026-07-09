@@ -3,22 +3,69 @@ import { getBlogPosts, getProjects } from "@/lib/api";
 import { authorityPageSlugs } from "@/lib/authority-content";
 import { locationPageSlugs } from "@/lib/location-content";
 import { servicePageSlugs } from "@/lib/service-content";
+import { siteUrl } from "@/lib/site";
+
+const contentLastModified = new Date("2026-07-09T00:00:00.000Z");
+
+function availableDate(item: unknown) {
+  if (!item || typeof item !== "object") return contentLastModified;
+  const record = item as Record<string, unknown>;
+  const value = record.updated_at ?? record.published_at ?? record.completed_at ?? record.created_at;
+  if (typeof value !== "string") return contentLastModified;
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? contentLastModified : parsed;
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = "https://www.youssefyouyou.com";
+  // API helpers catch network failures and return local project/blog fallbacks.
   const [projects, blogPosts] = await Promise.all([getProjects(), getBlogPosts()]);
 
+  const staticPages: MetadataRoute.Sitemap = [
+    { url: siteUrl, lastModified: contentLastModified, changeFrequency: "weekly", priority: 1 },
+    { url: `${siteUrl}/about`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${siteUrl}/services`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${siteUrl}/projects`, lastModified: contentLastModified, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${siteUrl}/blog`, lastModified: contentLastModified, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${siteUrl}/contact`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${siteUrl}/hire-laravel-react-developer`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${siteUrl}/local-web-developer-morocco`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${siteUrl}/cv`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.6 },
+  ];
+
   return [
-    { url: base, lastModified: new Date(), priority: 1 },
-    { url: `${base}/projects`, lastModified: new Date(), priority: 0.85 },
-    { url: `${base}/blog`, lastModified: new Date(), priority: 0.7 },
-    { url: `${base}/contact`, lastModified: new Date(), priority: 0.8 },
-    { url: `${base}/cv`, lastModified: new Date(), priority: 0.72 },
-    { url: `${base}/cv-download`, lastModified: new Date(), priority: 0.7 },
-    ...authorityPageSlugs.map((slug) => ({ url: `${base}/${slug}`, lastModified: new Date(), priority: slug.includes("/") ? 0.68 : 0.78 })),
-    ...servicePageSlugs.map((slug) => ({ url: `${base}/services/${slug}`, lastModified: new Date(), priority: 0.82 })),
-    ...locationPageSlugs.map((slug) => ({ url: `${base}/locations/${slug}`, lastModified: new Date(), priority: 0.74 })),
-    ...projects.map((project) => ({ url: `${base}/projects/${project.slug}`, lastModified: new Date(), priority: 0.8 })),
-    ...blogPosts.map((post) => ({ url: `${base}/blog/${post.slug}`, lastModified: new Date(), priority: 0.6 })),
+    ...staticPages,
+    ...authorityPageSlugs
+      .filter((slug) => !["hire-laravel-react-developer"].includes(slug))
+      .map((slug) => ({
+        url: `${siteUrl}/${slug}`,
+        lastModified: contentLastModified,
+        changeFrequency: "monthly" as const,
+        priority: slug.includes("/") ? 0.6 : 0.8,
+      })),
+    ...servicePageSlugs.map((slug) => ({
+      url: `${siteUrl}/services/${slug}`,
+      lastModified: contentLastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    ...locationPageSlugs.map((slug) => ({
+      url: `${siteUrl}/locations/${slug}`,
+      lastModified: contentLastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    ...projects.map((project) => ({
+      url: `${siteUrl}/projects/${project.slug}`,
+      lastModified: availableDate(project),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    ...blogPosts.map((post) => ({
+      url: `${siteUrl}/blog/${post.slug}`,
+      lastModified: availableDate(post),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
   ];
 }
+

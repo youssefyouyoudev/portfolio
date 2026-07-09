@@ -4,8 +4,10 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, BadgeCheck, ListChecks } from "lucide-react";
 import { CopyCodeBlock } from "@/components/blog/CopyCodeBlock";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { getBlogPost, legacyBlogSlugs } from "@/lib/api";
 import { blogPosts } from "@/lib/data";
+import { brandedTitle } from "@/lib/site";
 
 export function generateStaticParams() {
   return [...blogPosts.map((post) => ({ slug: post.slug })), ...legacyBlogSlugs.map((slug) => ({ slug }))];
@@ -18,24 +20,29 @@ type BlogPageProps = {
 export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPost(slug);
+  const ogImage = post && "ogImage" in post && typeof post.ogImage === "string"
+    ? post.ogImage
+    : "/opengraph-image";
 
   return {
-    title: post?.title ?? "Technical Note",
+    title: { absolute: brandedTitle(post?.title ?? "Technical Note") },
     description: post?.excerpt,
     alternates: { canonical: post ? `/blog/${post.slug}` : "/blog" },
     openGraph: post
       ? {
-          title: `${post.title} | Youssef Youyou`,
+          title: brandedTitle(post.title),
           description: post.excerpt,
           url: `/blog/${post.slug}`,
           type: "article",
+          images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
         }
       : undefined,
     twitter: post
       ? {
           card: "summary_large_image",
-          title: `${post.title} | Youssef Youyou`,
+          title: brandedTitle(post.title),
           description: post.excerpt,
+          images: [ogImage],
         }
       : undefined,
   };
@@ -91,7 +98,7 @@ export default async function BlogPost({ params }: BlogPageProps) {
 
   return (
     <main className="min-h-screen overflow-hidden bg-slate-50 px-4 py-10 text-slate-950 dark:bg-[#020617] dark:text-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <JsonLd data={structuredData} />
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_15%_4%,rgba(14,165,233,.14),transparent_30%),radial-gradient(circle_at_85%_10%,rgba(8,145,178,.12),transparent_34%),linear-gradient(180deg,#f8fafc,#eef6ff_46%,#f8fafc)] dark:bg-[radial-gradient(circle_at_15%_4%,rgba(34,211,238,.12),transparent_30%),radial-gradient(circle_at_85%_10%,rgba(14,165,233,.14),transparent_34%),linear-gradient(180deg,#020617,#061826_46%,#020617)]" />
       <div className="relative mx-auto max-w-4xl">
         <header className="mb-8 flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-sky-200/70 bg-white/78 p-3 shadow-xl shadow-sky-100/70 backdrop-blur-2xl dark:border-cyan-400/10 dark:bg-slate-950/70 dark:shadow-none">

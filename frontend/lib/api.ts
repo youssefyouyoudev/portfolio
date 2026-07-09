@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- CMS payloads are normalized at this API boundary. */
 import {
   blogPosts as fallbackBlogPosts,
   experiences as fallbackExperiences,

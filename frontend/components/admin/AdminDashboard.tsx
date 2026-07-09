@@ -239,8 +239,10 @@ export default function AdminDashboard() {
   const activeResource = useMemo(() => resources.find((resource) => resource.key === activeKey) ?? resources[0], [activeKey]);
 
   useEffect(() => {
-    setMounted(true);
-    setToken(localStorage.getItem("portfolio_admin_token") ?? "");
+    queueMicrotask(() => {
+      setMounted(true);
+      setToken(localStorage.getItem("portfolio_admin_token") ?? "");
+    });
   }, []);
 
   useEffect(() => {

@@ -41,7 +41,7 @@ export function ContactForm() {
         if (!control.name || control.name === "website" || !(control.name in draft)) return;
         control.value = draft[control.name] ?? "";
       });
-      setMessageLength(String(draft.message ?? "").length);
+      queueMicrotask(() => setMessageLength(String(draft.message ?? "").length));
     } catch {
       localStorage.removeItem(draftKey);
     }

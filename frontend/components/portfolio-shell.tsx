@@ -702,10 +702,10 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
           <div>
             <h3 className="font-bold text-slate-950 dark:text-white">Quick links</h3>
             <div className="mt-4 grid gap-3 text-sm text-slate-600 dark:text-slate-400">
-              <a href="/#services" className="hover:text-sky-700 dark:hover:text-cyan-200">Services</a>
-              <a href="/projects" className="hover:text-sky-700 dark:hover:text-cyan-200">Projects</a>
-              <a href="/#experience" className="hover:text-sky-700 dark:hover:text-cyan-200">Experience</a>
-              <a href="/blog" className="hover:text-sky-700 dark:hover:text-cyan-200">Blog/Technical Notes</a>
+              <Link href="/#services" className="hover:text-sky-700 dark:hover:text-cyan-200">Services</Link>
+              <Link href="/projects" className="hover:text-sky-700 dark:hover:text-cyan-200">Projects</Link>
+              <Link href="/#experience" className="hover:text-sky-700 dark:hover:text-cyan-200">Experience</Link>
+              <Link href="/blog" className="hover:text-sky-700 dark:hover:text-cyan-200">Blog/Technical Notes</Link>
               <a href="/contact" className="hover:text-sky-700 dark:hover:text-cyan-200">Contact</a>
               <a href="/work-with-me" className="hover:text-sky-700 dark:hover:text-cyan-200">Work With Me</a>
               <a href="/hire-laravel-react-developer" className="hover:text-sky-700 dark:hover:text-cyan-200">Hire Me</a>
@@ -719,13 +719,13 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
           <div>
             <h3 className="font-bold text-slate-950 dark:text-white">Services</h3>
             <div className="mt-4 grid gap-3 text-sm text-slate-600 dark:text-slate-400">
-              <a href="/services/laravel-developer-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">Laravel APIs</a>
-              <a href="/services/react-nextjs-developer-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">React/Next.js</a>
-              <a href="/services/admin-dashboard-development" className="hover:text-sky-700 dark:hover:text-cyan-200">Dashboards</a>
-              <a href="/services/saas-development-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">SaaS Platforms</a>
-              <a href="/services/web-developer-nador" className="hover:text-sky-700 dark:hover:text-cyan-200">Web Developer in Nador</a>
-              <a href="/services/laravel-developer-nador" className="hover:text-sky-700 dark:hover:text-cyan-200">Laravel Developer Nador</a>
-              <a href="/services/business-automation-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">Business Automation Morocco</a>
+              <Link href="/services/laravel-developer-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">Laravel APIs</Link>
+              <Link href="/services/react-nextjs-developer-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">React/Next.js</Link>
+              <Link href="/services/admin-dashboard-development" className="hover:text-sky-700 dark:hover:text-cyan-200">Dashboards</Link>
+              <Link href="/services/saas-development-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">SaaS Platforms</Link>
+              <Link href="/services/web-developer-nador" className="hover:text-sky-700 dark:hover:text-cyan-200">Web Developer in Nador</Link>
+              <Link href="/services/laravel-developer-nador" className="hover:text-sky-700 dark:hover:text-cyan-200">Laravel Developer Nador</Link>
+              <Link href="/services/business-automation-morocco" className="hover:text-sky-700 dark:hover:text-cyan-200">Business Automation Morocco</Link>
             </div>
           </div>
           <div>

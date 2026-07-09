@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Rocket } from "lucide-react";
+import { JsonLd } from "@/components/seo/JsonLd";
 import type { PortfolioProject } from "@/lib/project-content";
 
 export function ProjectDetailPage({
@@ -12,7 +13,7 @@ export function ProjectDetailPage({
 }) {
   return (
     <main className="min-h-screen overflow-hidden bg-slate-50 px-4 py-10 text-slate-950 dark:bg-[#020617] dark:text-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <JsonLd data={structuredData} />
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_18%_2%,rgba(14,165,233,.14),transparent_30%),radial-gradient(circle_at_86%_8%,rgba(8,145,178,.12),transparent_34%),linear-gradient(180deg,#f8fafc,#eef6ff_42%,#f8fafc)] dark:bg-[radial-gradient(circle_at_18%_2%,rgba(34,211,238,.12),transparent_30%),radial-gradient(circle_at_86%_8%,rgba(14,165,233,.14),transparent_34%),linear-gradient(180deg,#020617,#061826_42%,#020617)]" />
       <div className="relative mx-auto max-w-7xl">{children}</div>
     </main>

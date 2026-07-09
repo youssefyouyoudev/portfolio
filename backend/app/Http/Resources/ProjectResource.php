@@ -55,6 +55,7 @@ class ProjectResource extends JsonResource
             'seoDescription' => $this->seo_description,
             'ogImage' => $this->absoluteUrl($this->og_image),
             'sort_order' => $this->sort_order,
+            'updated_at' => $this->updated_at?->toAtomString(),
             'images' => ProjectImageResource::collection($this->whenLoaded('images')),
         ];
     }

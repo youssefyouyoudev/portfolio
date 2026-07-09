@@ -9,6 +9,7 @@ import { getProject, getProjects } from "@/lib/api";
 import { projects as fallbackProjects } from "@/lib/data";
 import { canonicalProjectSlug, getDisplayProjects, type PortfolioProject } from "@/lib/project-content";
 import { servicePages } from "@/lib/service-content";
+import { brandedTitle } from "@/lib/site";
 
 export function generateStaticParams() {
   const params = getDisplayProjects(fallbackProjects).map((project) => ({ slug: project.slug }));
@@ -103,12 +104,12 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   const description = project?.seoDescription ?? project?.shortDescription ?? project?.businessValue;
 
   return {
-    title,
+    title: { absolute: brandedTitle(title) },
     description,
     alternates: { canonical: project ? `/projects/${project.slug}` : "/projects" },
     openGraph: project
       ? {
-          title,
+          title: brandedTitle(title),
           description,
           url: `/projects/${project.slug}`,
           type: "article",

@@ -6,7 +6,6 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
-  BadgeCheck,
   BarChart3,
   CheckCircle2,
   Code2,

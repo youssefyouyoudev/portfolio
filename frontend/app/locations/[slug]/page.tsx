@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, BadgeCheck, MapPin } from "lucide-react";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { getLocationPage, locationPageSlugs } from "@/lib/location-content";
+import { brandedTitle, siteUrl } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -15,11 +17,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const page = getLocationPage(slug);
   return {
-    title: page?.title ?? "Location",
+    title: { absolute: brandedTitle(page?.title ?? "Location") },
     description: page?.description,
     alternates: { canonical: page ? `/locations/${page.slug}` : "/locations" },
-    openGraph: page ? { title: page.title, description: page.description, url: `/locations/${page.slug}`, images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: `${page.city} web developer service page` }] } : undefined,
-    twitter: page ? { card: "summary_large_image", title: page.title, description: page.description } : undefined,
+    openGraph: page ? { title: brandedTitle(page.title), description: page.description, url: `/locations/${page.slug}`, images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: `${page.city} web developer service page` }] } : undefined,
+    twitter: page ? { card: "summary_large_image", title: brandedTitle(page.title), description: page.description, images: ["/opengraph-image"] } : undefined,
   };
 }
 
@@ -28,14 +30,14 @@ export default async function LocationPage({ params }: Props) {
   const page = getLocationPage(slug);
   if (!page) notFound();
 
-  const url = `https://www.youssefyouyou.com/locations/${page.slug}`;
+  const url = `${siteUrl}/locations/${page.slug}`;
   const structuredData = [
     {
       "@context": "https://schema.org",
       "@type": "Service",
       name: page.h1,
       url,
-      provider: { "@type": "Person", name: "Youssef Youyou", jobTitle: "Senior Full-Stack Web Developer", url: "https://www.youssefyouyou.com" },
+      provider: { "@type": "Person", name: "Youssef Youyou", jobTitle: "Full-Stack Developer", url: siteUrl },
       areaServed: page.city,
       description: page.description,
     },
@@ -43,7 +45,7 @@ export default async function LocationPage({ params }: Props) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.youssefyouyou.com" },
+        { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
         { "@type": "ListItem", position: 2, name: page.h1, item: url },
       ],
     },
@@ -51,7 +53,7 @@ export default async function LocationPage({ params }: Props) {
 
   return (
     <main className="min-h-screen overflow-hidden bg-slate-50 px-4 py-10 text-slate-950 dark:bg-[#020617] dark:text-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <JsonLd data={structuredData} />
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_15%_4%,rgba(14,165,233,.14),transparent_30%),linear-gradient(180deg,#f8fafc,#eef6ff_46%,#f8fafc)] dark:bg-[radial-gradient(circle_at_15%_4%,rgba(34,211,238,.12),transparent_30%),linear-gradient(180deg,#020617,#061826_46%,#020617)]" />
       <div className="relative mx-auto max-w-7xl">
         <header className="flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-sky-200/70 bg-white/78 p-3 shadow-xl shadow-sky-100/70 backdrop-blur-2xl dark:border-cyan-400/10 dark:bg-slate-950/70 dark:shadow-none">

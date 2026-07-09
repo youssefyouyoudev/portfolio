@@ -33,6 +33,7 @@ class BlogPostResource extends JsonResource
             'canonical_url' => $this->canonical_url,
             'meta_robots' => $this->meta_robots,
             'published_at' => $this->published_at?->toAtomString(),
+            'updated_at' => $this->updated_at?->toAtomString(),
         ];
     }
 

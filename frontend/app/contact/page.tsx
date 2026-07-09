@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 import { ArrowLeft, BadgeCheck, Mail, Send } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
 import { profile } from "@/lib/data";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact Youssef Youyou | Senior Full-Stack Web Developer",
+export const metadata: Metadata = pageMetadata({
+  title: "Contact",
   description: "Contact Youssef Youyou for Laravel APIs, React/Next.js interfaces, admin dashboards, SaaS platforms, business automation and SEO-friendly websites.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

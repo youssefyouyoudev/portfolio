@@ -1,28 +1,20 @@
-# Google Search Console Setup
+# Google Search Console setup
 
-Goal: make `https://www.youssefyouyou.com` crawlable, measurable and ready for weekly SEO improvement.
+1. Go to [Google Search Console](https://search.google.com/search-console).
+2. Add a URL-prefix property for `https://www.youssefyouyou.com`.
+3. Choose **HTML tag** verification.
+4. Copy only the `content` value from the verification meta tag into:
 
-## Setup Steps
+   ```env
+   NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=your_google_search_console_meta_code
+   ```
 
-1. Add the domain property in Google Search Console.
-2. Verify ownership through DNS, HTML file, or the `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` meta tag.
-3. Submit `https://www.youssefyouyou.com/sitemap.xml`.
-4. Inspect the homepage and request indexing.
-5. Inspect top service pages:
-   - `/services/web-developer-nador`
-   - `/services/laravel-developer-morocco`
-   - `/services/react-nextjs-developer-morocco`
-   - `/services/admin-dashboard-development`
-   - `/services/saas-development-morocco`
-   - `/work-with-me`
-   - `/hire-laravel-react-developer`
-6. Check Coverage and Pages weekly.
-7. Track queries by page and improve headings, intros, internal links and FAQs.
-8. Add real screenshots and testimonials only when available and approved.
+   Do not paste the full `<meta>` tag, and do not wrap the value in HTML.
 
-## Weekly Review
+5. Deploy the frontend with the environment variable configured.
+6. Return to Search Console and click **Verify**.
+7. Open **Sitemaps** and submit `https://www.youssefyouyou.com/sitemap.xml`.
+8. Use **URL inspection** for the homepage and key service pages, then request indexing.
 
-- Check impressions for Nador, Morocco, Laravel, React, Next.js, dashboard and SaaS queries.
-- Improve pages with impressions but low clicks.
-- Add internal links from blog posts to service pages.
-- Refresh case studies after adding real screenshots.
+The verification tag is omitted entirely when the environment variable is missing.
+

@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { AnalyticsEvents } from "@/components/analytics/AnalyticsEvents";
 import { ChatWidget } from "@/components/chatbot/ChatWidget";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { profile } from "@/lib/data";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.youssefyouyou.com";
 const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
@@ -23,11 +27,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Youssef Youyou | Senior Laravel & React Full-Stack Developer in Nador, Morocco",
-    template: "%s | Youssef Youyou",
+    default: "Full-Stack Developer in Morocco | Laravel, React, Next.js & AI Automation",
+    // Individual routes provide already-branded absolute titles where needed.
+    template: "%s",
   },
   description:
-    "Senior Full-Stack Developer from Nador, Morocco building Laravel APIs, React/Next.js interfaces, SaaS platforms, admin dashboards, business automation tools and SEO-friendly websites.",
+    "I build business websites, dashboards, SaaS MVPs, Laravel/React/Next.js apps, and AI automation systems for clients in Morocco and worldwide.",
   applicationName: "Youssef Youyou Portfolio",
   authors: [{ name: "Youssef Youyou", url: siteUrl }],
   creator: "Youssef Youyou",
@@ -61,22 +66,23 @@ export const metadata: Metadata = {
     "remote Laravel developer",
     "React dashboard developer",
   ],
-  alternates: { canonical: "/" },
+  alternates: { canonical: siteUrl },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    title: "Youssef Youyou | Senior Full-Stack Developer from Nador, Morocco",
+    title: "Full-Stack Developer in Morocco | Laravel, React, Next.js & AI Automation",
     description:
-      "Laravel, React, Next.js, SaaS platforms, dashboards, APIs, business automation and production-ready web development.",
+      "I build business websites, dashboards, SaaS MVPs, Laravel/React/Next.js apps, and AI automation systems for clients in Morocco and worldwide.",
     siteName: "Youssef Youyou Portfolio",
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Youssef Youyou senior full stack developer portfolio" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Youssef Youyou | Senior Full-Stack Developer from Nador, Morocco",
+    title: "Full-Stack Developer in Morocco | Laravel, React, Next.js & AI Automation",
     description:
-      "Laravel, React, Next.js, SaaS platforms, dashboards, APIs, business automation and production-ready web development.",
+      "I build business websites, dashboards, SaaS MVPs, Laravel/React/Next.js apps, and AI automation systems for clients in Morocco and worldwide.",
+    images: ["/opengraph-image"],
   },
   ...(googleVerification ? { verification: { google: googleVerification } } : {}),
   robots: {
@@ -104,59 +110,46 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        {gaId ? (
-          <>
-            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
-            <Script id="ga-init" strategy="afterInteractive">
-              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`}
-            </Script>
-          </>
-        ) : null}
         {plausibleDomain ? <Script defer data-domain={plausibleDomain} src="https://plausible.io/js/script.js" strategy="afterInteractive" /> : null}
-        <script
-          type="application/ld+json"
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              {
-                "@context": "https://schema.org",
-                "@type": "Person",
-                name: "Youssef Youyou",
-                jobTitle: "Senior Full-Stack Web Developer",
-                description: "Senior Full-Stack Web Developer based in Morocco focused on Laravel APIs, React/Next.js interfaces, dashboards, SaaS platforms, deployment, Cloudflare, Nginx, business automation and SEO-friendly websites.",
-                email: "contact@youssefyouyou.com",
-                url: siteUrl,
-                sameAs: ["https://github.com/youssefyouyoudev", "https://linkedin.com/in/youssefyouyoudev"],
-                address: { "@type": "PostalAddress", addressLocality: "Nador", addressCountry: "MA" },
-                homeLocation: { "@type": "Place", name: "Nador, Morocco" },
-                knowsAbout: ["Laravel", "PHP", "React", "Next.js", "JavaScript", "TypeScript", "MySQL", "REST APIs", "dashboards", "SaaS", "SEO", "Nginx", "Cloudflare", "deployment", "business automation"],
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                name: "Youssef Youyou Portfolio",
-                url: siteUrl,
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "ProfilePage",
-                name: "Youssef Youyou Senior Full-Stack Web Developer Portfolio",
-                url: siteUrl,
-                about: {
-                  "@type": "Person",
-                  name: "Youssef Youyou",
-                  jobTitle: "Senior Full-Stack Web Developer",
-                  url: siteUrl,
-                },
-                description: "Portfolio profile for Youssef Youyou, a Senior Full-Stack Web Developer based in Morocco.",
-              },
-            ]),
-          }}
-        />
+        <JsonLd data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "@id": `${siteUrl}/#person`,
+            name: "Youssef Youyou",
+            jobTitle: "Full-Stack Developer",
+            email: profile.email,
+            url: siteUrl,
+            sameAs: [profile.github, profile.linkedin].filter(Boolean),
+            knowsLanguage: ["English", "French", "Arabic"],
+            knowsAbout: ["Laravel development", "React development", "Next.js development", "SaaS MVP development", "Admin dashboard development", "AI automation integration", "Business website development", "API development", "Server deployment and security"],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "@id": `${siteUrl}/#business`,
+            name: "Youssef Youyou",
+            url: siteUrl,
+            founder: { "@id": `${siteUrl}/#person` },
+            areaServed: ["Morocco", "Nador", "Marrakech", "Casablanca", "Rabat", "Tangier", "Oujda", "Fez", "Agadir"],
+            sameAs: [profile.github, profile.linkedin].filter(Boolean),
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "@id": `${siteUrl}/#website`,
+            name: "Youssef Youyou",
+            url: siteUrl,
+            inLanguage: ["en", "fr", "ar"],
+            publisher: { "@id": `${siteUrl}/#person` },
+          },
+        ]} />
         <ThemeProvider>
           {children}
           <ChatWidget />
         </ThemeProvider>
+        <AnalyticsEvents />
+        {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
       </body>
     </html>
   );

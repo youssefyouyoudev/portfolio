@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, BadgeCheck, HelpCircle } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { JsonLd } from "@/components/seo/JsonLd";
 import type { AuthorityPageContent } from "@/lib/authority-content";
 
 export function AuthorityPage({ page }: { page: AuthorityPageContent }) {
@@ -42,7 +43,7 @@ export function AuthorityPage({ page }: { page: AuthorityPageContent }) {
 
   return (
     <main className="min-h-screen overflow-hidden bg-slate-50 px-4 py-10 text-slate-950 dark:bg-[#020617] dark:text-white" dir={page.locale === "ar" ? "rtl" : "ltr"}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+      <JsonLd data={structuredData} />
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_15%_4%,rgba(14,165,233,.14),transparent_30%),radial-gradient(circle_at_85%_10%,rgba(8,145,178,.12),transparent_34%),linear-gradient(180deg,#f8fafc,#eef6ff_46%,#f8fafc)] dark:bg-[radial-gradient(circle_at_15%_4%,rgba(34,211,238,.12),transparent_30%),radial-gradient(circle_at_85%_10%,rgba(14,165,233,.14),transparent_34%),linear-gradient(180deg,#020617,#061826_46%,#020617)]" />
       <div className="relative mx-auto max-w-7xl">
         <header className="flex flex-wrap items-center justify-between gap-3 rounded-3xl border border-sky-200/70 bg-white/78 p-3 shadow-xl shadow-sky-100/70 backdrop-blur-2xl dark:border-cyan-400/10 dark:bg-slate-950/70 dark:shadow-none">

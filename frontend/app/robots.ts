@@ -1,8 +1,14 @@
 import type { MetadataRoute } from "next";
+import { siteUrl } from "@/lib/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: { userAgent: "*", allow: "/", disallow: ["/admin", "/api", "/private", "/dashboard", "/login", "/storage/private"] },
-    sitemap: "https://www.youssefyouyou.com/sitemap.xml",
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/admin", "/dashboard", "/api", "/roadmap", "/private", "/login", "/register"],
+    },
+    sitemap: `${siteUrl}/sitemap.xml`,
+    host: siteUrl,
   };
 }
