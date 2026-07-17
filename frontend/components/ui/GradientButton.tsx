@@ -13,13 +13,13 @@ type GradientButtonProps = {
 export function GradientButton({ href, children, variant = "primary", className = "" }: GradientButtonProps) {
   const reduceMotion = useReducedMotion();
   const base =
-    "inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold outline-none transition focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-cyan-300 dark:focus-visible:ring-offset-[#020617]";
+    "relative inline-flex min-h-12 items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-sm font-black outline-none transition focus-visible:ring-2 focus-visible:ring-[#6C63FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAFAFC] dark:focus-visible:ring-[#F43F8E] dark:focus-visible:ring-offset-[#0F172A]";
   const styles = {
     primary:
-      "bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 text-white shadow-[0_16px_45px_rgba(14,165,233,.28)] ring-1 ring-cyan-200/30 hover:shadow-cyan-400/40",
+      "bg-[linear-gradient(135deg,#6C63FF,#8B5CF6,#F43F8E)] text-white shadow-[0_18px_52px_rgba(108,99,255,.34),inset_0_1px_0_rgba(255,255,255,.45)] ring-1 ring-white/35 hover:shadow-[0_24px_70px_rgba(244,63,142,.28)]",
     secondary:
-      "border border-sky-200/80 bg-white/75 text-slate-800 shadow-lg shadow-sky-100/70 backdrop-blur-xl hover:border-sky-400/60 hover:bg-sky-50 dark:border-cyan-400/22 dark:bg-white/[0.065] dark:text-slate-100 dark:shadow-slate-950/20 dark:hover:border-cyan-300/55 dark:hover:bg-cyan-300/10",
-    link: "px-1 text-sky-700 hover:text-slate-950 dark:text-cyan-200 dark:hover:text-white",
+      "border border-white/70 bg-white/72 text-slate-900 shadow-[0_16px_45px_rgba(108,99,255,.13)] backdrop-blur-xl hover:border-[#8B5CF6]/45 hover:bg-white dark:border-white/10 dark:bg-white/[0.07] dark:text-slate-100 dark:shadow-slate-950/20 dark:hover:border-[#F43F8E]/45 dark:hover:bg-white/[0.1]",
+    link: "px-1 text-[#6C63FF] hover:text-[#F43F8E] dark:text-violet-200 dark:hover:text-pink-200",
   };
 
   return (
@@ -29,6 +29,7 @@ export function GradientButton({ href, children, variant = "primary", className 
       whileTap={reduceMotion ? undefined : { scale: 0.98 }}
       className={`${base} ${styles[variant]} ${className}`}
     >
+      {variant === "primary" ? <span className="absolute inset-x-0 top-0 h-px bg-white/70" /> : null}
       {children}
     </motion.a>
   );

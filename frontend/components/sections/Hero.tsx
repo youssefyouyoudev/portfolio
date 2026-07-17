@@ -1,95 +1,137 @@
 "use client";
 
-import { ArrowUpRight, CheckCircle2, Download, MapPin } from "lucide-react";
-import { motion } from "framer-motion";
-import { FloatingDashboardVisual } from "@/components/ui/FloatingDashboardVisual";
+import Image from "next/image";
+import { ArrowUpRight, CheckCircle2, Download, MapPin, MousePointer2, Sparkles } from "lucide-react";
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import { GradientButton } from "@/components/ui/GradientButton";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { profile } from "@/lib/data";
 
-const tech = ["Laravel", "React/Next.js", "SaaS Platforms", "Admin Dashboards", "APIs", "Business Automation", "SEO", "Deployment"];
+const floatingBadges = [
+  { label: "Laravel", className: "left-0 top-[10%]", delay: 0 },
+  { label: "React", className: "right-[8%] top-[6%]", delay: 0.35 },
+  { label: "Next.js", className: "left-[8%] top-[42%]", delay: 0.7 },
+  { label: "Node.js", className: "right-0 top-[39%]", delay: 1.05 },
+  { label: "Docker", className: "left-[16%] bottom-[15%]", delay: 1.4 },
+  { label: "AI", className: "right-[12%] bottom-[17%]", delay: 1.75 },
+  { label: "Python", className: "left-[34%] top-0", delay: 2.1 },
+  { label: "Linux", className: "right-[34%] bottom-0", delay: 2.45 },
+  { label: "MySQL", className: "left-[2%] bottom-[36%]", delay: 2.8 },
+  { label: "Git", className: "right-[24%] top-[28%]", delay: 3.15 },
+  { label: "Cloud", className: "left-[38%] bottom-[8%]", delay: 3.5 },
+  { label: "API", className: "right-[2%] bottom-[40%]", delay: 3.85 },
+];
+
+const heroTech = ["Laravel", "React", "Next.js", "Node.js", "Docker", "AI", "Python", "Linux", "MySQL", "Git", "Cloud", "API"];
 const trustItems = ["Nador-based", "Morocco-ready", "Remote-friendly", "Production systems"];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 22 },
+  hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0 },
 };
 
-export function Hero() {
-  return (
-    <section id="hero" className="relative isolate min-h-[calc(100vh-72px)] overflow-hidden bg-gradient-to-br from-slate-50 via-sky-50 to-cyan-50 dark:from-[#020617] dark:via-[#061826] dark:to-[#071b2f]">
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(rgba(2,132,199,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(2,132,199,.08)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)] dark:bg-[linear-gradient(rgba(34,211,238,.052)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,.052)_1px,transparent_1px)]" />
-      <div className="absolute left-[-10%] top-16 -z-10 h-72 w-72 rounded-full bg-sky-300/35 blur-3xl dark:bg-cyan-400/18" />
-      <div className="absolute right-[-8%] top-24 -z-10 h-96 w-96 rounded-full bg-cyan-300/25 blur-3xl dark:bg-blue-600/20" />
-      <div className="absolute bottom-0 left-1/3 -z-10 h-64 w-64 rounded-full bg-sky-300/20 blur-3xl dark:bg-sky-400/10" />
+function FloatingBadge({ label, className, delay }: { label: string; className: string; delay: number }) {
+  const reduceMotion = useReducedMotion();
 
-      <div className="mx-auto grid min-h-[calc(100vh-72px)] max-w-7xl items-center gap-14 px-4 py-16 sm:py-20 lg:grid-cols-[0.94fr_1.06fr] lg:py-18 xl:gap-20">
-        <motion.div
-          initial={false}
-          animate="show"
-          transition={{ staggerChildren: 0.09 }}
-          className="relative z-10 min-w-0"
-        >
+  return (
+    <motion.div
+      className={`absolute hidden sm:block ${className}`}
+      initial={false}
+      animate={reduceMotion ? { opacity: 1 } : { y: [0, -16, 0], rotate: [-1, 2, -1], opacity: 1 }}
+      transition={reduceMotion ? { duration: 0.2 } : { duration: 5.8, repeat: Infinity, ease: "easeInOut", delay }}
+    >
+      <div className="rounded-3xl border border-white/70 bg-white/76 px-4 py-2 text-sm font-black text-slate-900 shadow-[0_18px_45px_rgba(108,99,255,.16),inset_0_1px_0_rgba(255,255,255,.75)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.08] dark:text-white">
+        {label}
+      </div>
+    </motion.div>
+  );
+}
+
+export function Hero() {
+  const reduceMotion = useReducedMotion();
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const smoothX = useSpring(mouseX, { stiffness: 90, damping: 22 });
+  const smoothY = useSpring(mouseY, { stiffness: 90, damping: 22 });
+  const imageX = useTransform(smoothX, [-1, 1], [-18, 18]);
+  const imageY = useTransform(smoothY, [-1, 1], [-14, 14]);
+  const cardRotateX = useTransform(smoothY, [-1, 1], [3, -3]);
+  const cardRotateY = useTransform(smoothX, [-1, 1], [-4, 4]);
+
+  return (
+    <section
+      id="hero"
+      onMouseMove={(event) => {
+        if (reduceMotion) return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        mouseX.set(((event.clientX - rect.left) / rect.width - 0.5) * 2);
+        mouseY.set(((event.clientY - rect.top) / rect.height - 0.5) * 2);
+      }}
+      onMouseLeave={() => {
+        mouseX.set(0);
+        mouseY.set(0);
+      }}
+      className="relative isolate min-h-[calc(100vh-72px)] overflow-hidden bg-[#FAFAFC] dark:bg-[#0F172A]"
+    >
+      <motion.div
+        aria-hidden="true"
+        className="absolute -left-28 top-20 -z-10 h-80 w-80 rounded-full bg-[#6C63FF]/22 blur-3xl"
+        animate={reduceMotion ? undefined : { x: [0, 28, 0], y: [0, -18, 0], scale: [1, 1.08, 1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="absolute -right-24 top-24 -z-10 h-96 w-96 rounded-full bg-[#F43F8E]/18 blur-3xl"
+        animate={reduceMotion ? undefined : { x: [0, -26, 0], y: [0, 22, 0], scale: [1, 1.1, 1] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="absolute bottom-0 left-1/3 -z-10 h-72 w-72 rounded-full bg-[#8B5CF6]/16 blur-3xl"
+        animate={reduceMotion ? undefined : { x: [0, 22, 0], y: [0, -18, 0] }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+      />
+
+      <div className="mx-auto grid min-h-[calc(100vh-72px)] max-w-7xl items-center gap-12 px-4 py-16 sm:py-20 lg:grid-cols-[0.92fr_1.08fr] xl:gap-16">
+        <motion.div initial="hidden" animate="show" transition={{ staggerChildren: 0.08 }} className="relative z-10 min-w-0">
           <motion.div
             variants={fadeUp}
             transition={{ duration: 0.55 }}
-            className="inline-flex w-full max-w-full items-center gap-2 rounded-full border border-sky-300/50 bg-white/75 px-4 py-2 text-sm font-medium text-sky-800 shadow-lg shadow-sky-100/70 backdrop-blur-xl dark:border-cyan-400/20 dark:bg-cyan-400/10 dark:text-cyan-100 dark:shadow-cyan-500/10 sm:w-auto"
+            className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/70 bg-white/76 px-4 py-2 text-sm font-bold text-[#6C63FF] shadow-[0_16px_45px_rgba(108,99,255,.12)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.08] dark:text-violet-100"
           >
-            <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(16,185,129,.65)] dark:bg-emerald-300 dark:shadow-[0_0_16px_rgba(110,231,183,.9)]" />
+            <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(16,185,129,.8)]" />
             <span className="truncate sm:whitespace-normal">{profile.availability}</span>
           </motion.div>
 
-          <motion.p
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            className="mt-8 text-lg font-black uppercase tracking-[0.18em] text-sky-700 dark:text-cyan-300"
-          >
-            Youssef Youyou
+          <motion.p variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 text-sm font-black uppercase tracking-[0.24em] text-[#8B5CF6] dark:text-violet-200">
+            {profile.name}
           </motion.p>
 
-          <motion.h1
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            className="mt-4 max-w-5xl text-5xl font-black leading-[0.92] tracking-tight text-slate-950 dark:text-slate-50 sm:text-6xl lg:text-7xl xl:text-[5.05rem]"
-          >
-            <span className="block">Senior Full-Stack Web Developer</span>
-            <span className="block bg-gradient-to-r from-sky-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent dark:from-sky-400 dark:via-blue-500 dark:to-cyan-300">
-              from Nador, Morocco
-            </span>
+          <motion.h1 variants={fadeUp} transition={{ duration: 0.6 }} className="mt-4 max-w-5xl text-5xl font-black leading-[0.94] tracking-tight text-[#111827] dark:text-white sm:text-6xl lg:text-7xl xl:text-[5.25rem]">
+            <span className="block">Full-stack systems</span>
+            <span className="block premium-gradient-text">with a soft product soul.</span>
           </motion.h1>
 
-          <motion.p
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            className="mt-5 text-2xl font-semibold tracking-tight text-slate-800 dark:text-slate-200 sm:text-3xl"
-          >
-            Laravel, React & Next.js developer building SaaS platforms, dashboards, APIs and business automation tools.
-          </motion.p>
+          <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-5 h-10 overflow-hidden text-2xl font-black tracking-tight text-slate-800 dark:text-slate-100 sm:text-3xl">
+            <motion.div
+              animate={reduceMotion ? undefined : { y: ["0%", "-25%", "-50%", "-75%", "0%"] }}
+              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            >
+              {["Laravel Developer", "React & Next.js Builder", "Dashboard Architect", "AI Automation Partner"].map((role) => (
+                <div key={role} className="h-10">
+                  {role}
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
 
-          <motion.p
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            className="mt-5 max-w-2xl text-base leading-8 text-slate-700 dark:text-slate-300 sm:text-lg"
-          >
+          <motion.p variants={fadeUp} transition={{ duration: 0.6 }} className="mt-5 max-w-2xl text-base leading-8 text-slate-700 dark:text-slate-300 sm:text-lg">
             {profile.description}
           </motion.p>
 
-          <motion.div
-            variants={fadeUp}
-            transition={{ duration: 0.6 }}
-            className="mt-6 flex max-w-full flex-wrap items-center gap-x-3 gap-y-2 text-xs font-bold uppercase tracking-[0.14em] text-sky-700 dark:text-sky-300 sm:text-base sm:normal-case sm:tracking-normal"
-          >
-            {tech.map((item, index) => (
-              <span key={item} className="inline-flex items-center gap-3">
-                {index > 0 && <span className="h-1.5 w-1.5 rounded-full bg-sky-400 dark:bg-cyan-300" aria-hidden="true" />}
-                {item}
-              </span>
-            ))}
-          </motion.div>
-
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <GradientButton href="#contact" className="w-full sm:w-auto">
-              Start a Project
+              Start a Project <Sparkles size={17} />
             </GradientButton>
             <GradientButton href="#projects" variant="secondary" className="w-full sm:w-auto">
               View Case Studies <ArrowUpRight size={18} />
@@ -99,35 +141,76 @@ export function Hero() {
             </GradientButton>
           </motion.div>
 
-          <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-4 flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-400">
+          <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-5 flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-400">
             {trustItems.map((item) => (
-              <span key={item} className="inline-flex items-center gap-1.5 rounded-full border border-sky-200/70 bg-white/70 px-3 py-1 dark:border-white/10 dark:bg-white/[0.035]">
-                <CheckCircle2 size={14} className="text-sky-600 dark:text-cyan-300" />
+              <span key={item} className="inline-flex items-center gap-1.5 rounded-full border border-white/70 bg-white/70 px-3 py-1.5 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.06]">
+                <CheckCircle2 size={14} className="text-[#6C63FF] dark:text-violet-200" />
                 {item}
               </span>
             ))}
           </motion.div>
 
+          <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-7 flex max-w-full flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400">
+            <span className="inline-flex items-center gap-2">
+              <MapPin size={16} className="text-[#F43F8E]" />
+              {profile.location}
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <MousePointer2 size={16} className="text-[#8B5CF6]" />
+              Move your cursor for parallax
+            </span>
+          </motion.div>
+
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
-            {tech.map((item, index) => (
+            {heroTech.slice(0, 8).map((item, index) => (
               <TechBadge key={item} delay={0.5 + index * 0.05}>
                 {item}
               </TechBadge>
             ))}
           </motion.div>
-
-          <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-7 flex max-w-full flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-400">
-            <span className="inline-flex items-center gap-2">
-              <MapPin size={16} className="text-sky-600 dark:text-cyan-300" />
-              Nador, Morocco
-            </span>
-            <span className="max-w-full">Remote / Freelance / Morocco-wide projects</span>
-          </motion.div>
         </motion.div>
 
-        <div className="relative z-10 mt-2 max-w-full overflow-hidden lg:mt-0 lg:overflow-visible lg:pl-4">
-          <FloatingDashboardVisual />
-        </div>
+        <motion.div style={reduceMotion ? undefined : { rotateX: cardRotateX, rotateY: cardRotateY }} className="relative z-10 mx-auto w-full max-w-[720px] [transform-style:preserve-3d]">
+          <div className="absolute inset-8 rounded-[3rem] bg-gradient-to-br from-[#6C63FF]/24 via-[#8B5CF6]/18 to-[#F43F8E]/24 blur-3xl" />
+          <motion.div
+            style={reduceMotion ? undefined : { x: imageX, y: imageY }}
+            animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="relative overflow-hidden rounded-[2.5rem] border border-white/70 bg-white/55 p-3 shadow-[0_30px_100px_rgba(108,99,255,.22),inset_0_1px_0_rgba(255,255,255,.8)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.06]"
+          >
+            <div className="relative aspect-[1.12/1] overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#6C63FF] via-[#5361ee] to-[#8B5CF6]">
+              <Image
+                src="/images/hero-character.png"
+                alt="3D clay developer illustration working on a laptop"
+                fill
+                priority
+                sizes="(min-width: 1024px) 48vw, 92vw"
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_18%,rgba(255,255,255,.2),transparent_30%)]" />
+            </div>
+          </motion.div>
+
+          {floatingBadges.map((badge) => (
+            <FloatingBadge key={badge.label} {...badge} />
+          ))}
+
+          <motion.div
+            className="absolute -bottom-6 left-1/2 hidden w-[84%] -translate-x-1/2 rounded-[2rem] border border-white/70 bg-white/80 p-4 shadow-[0_24px_70px_rgba(17,24,39,.14)] backdrop-blur-2xl dark:border-white/10 dark:bg-[#0F172A]/78 sm:block"
+            animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.35 }}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#8B5CF6] dark:text-violet-200">Now building</p>
+                <p className="mt-1 text-sm font-bold text-slate-800 dark:text-white">Laravel APIs, Next.js interfaces, dashboards, and automation systems.</p>
+              </div>
+              <div className="rounded-full bg-gradient-to-r from-[#6C63FF] to-[#F43F8E] px-4 py-2 text-xs font-black text-white shadow-lg shadow-pink-500/20">
+                Production-ready
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

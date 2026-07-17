@@ -16,10 +16,11 @@ export function TechBadge({ children, delay = 0 }: TechBadgeProps) {
       initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, delay }}
-      whileHover={reduceMotion ? undefined : { y: -5, borderColor: "rgba(34,211,238,.55)" }}
-      className="group rounded-2xl border border-sky-200/80 bg-white/75 px-4 py-3 text-center text-sm font-semibold text-slate-800 shadow-lg shadow-sky-100/70 backdrop-blur-xl dark:border-cyan-400/18 dark:bg-white/[0.05] dark:text-slate-100 dark:shadow-slate-950/20"
+      whileHover={reduceMotion ? undefined : { y: -7, rotate: -1.5, scale: 1.04, borderColor: "rgba(139,92,246,.45)" }}
+      className="group relative overflow-hidden rounded-3xl border border-white/70 bg-white/72 px-4 py-3 text-center text-sm font-black text-slate-800 shadow-[0_18px_42px_rgba(108,99,255,.12),inset_0_1px_0_rgba(255,255,255,.78)] backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.065] dark:text-slate-100 dark:shadow-slate-950/20"
     >
-      <span className="bg-gradient-to-r from-slate-950 to-sky-700 bg-clip-text text-transparent dark:from-white dark:to-cyan-200">{children}</span>
+      <span className="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-[#F43F8E]/60 to-transparent" />
+      <span className="relative bg-gradient-to-r from-slate-950 via-[#6C63FF] to-[#F43F8E] bg-clip-text text-transparent dark:from-white dark:via-violet-200 dark:to-pink-200">{children}</span>
     </motion.div>
   );
 }
