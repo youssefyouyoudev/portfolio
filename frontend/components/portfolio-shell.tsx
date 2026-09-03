@@ -642,23 +642,6 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
         </div>
       </section>
 
-      <section id="references" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
-        <SectionTitle
-          eyebrow="References"
-          title="References & Feedback"
-          text="Client trust matters, and it should be handled honestly. Public testimonials will only appear here when permission is clear."
-        />
-        <Reveal>
-          <PremiumCard className="mx-auto max-w-3xl p-8 text-center">
-            <ClayIcon icon={BadgeCheck} className="mx-auto" tone="mint" />
-            <h3 className="mt-4 text-2xl font-black text-slate-950 dark:text-white">Real testimonials will be added after client permission.</h3>
-            <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300">
-              Until then, the portfolio relies on case studies, technical writing, project structure, deployment notes and visible proof sections instead of invented reviews.
-            </p>
-          </PremiumCard>
-        </Reveal>
-      </section>
-
       <section id="contact" className="relative mx-auto grid max-w-7xl gap-8 px-4 py-16 md:py-24 lg:grid-cols-[.9fr_1.1fr]">
         <Reveal>
           <p className="text-xs font-black uppercase tracking-[0.3em] text-[#8B5CF6] dark:text-violet-200">Contact</p>

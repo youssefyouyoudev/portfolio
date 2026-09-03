@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
         Setting::query()->upsert([
             ['key' => 'seo', 'group' => 'seo', 'is_public' => true, 'value' => json_encode([
                 'title' => 'Youssef Youyou | Senior Laravel & React Full-Stack Developer in Nador, Morocco',
-                'description' => 'Senior Full-Stack Developer from Nador, Morocco building Laravel APIs, React/Next.js interfaces, SaaS platforms, admin dashboards, business automation tools and SEO-friendly websites.',
+                'description' => 'Full-stack developer from Nador, Morocco building Laravel APIs, React/Next.js interfaces, SaaS platforms, admin dashboards, business automation tools and SEO-friendly websites.',
                 'keywords' => ['Youssef Youyou', 'Laravel developer Morocco', 'React developer Morocco', 'Next.js developer Morocco', 'Full-stack developer Morocco', 'Senior web developer Morocco', 'Laravel React portfolio', 'SaaS developer Morocco', 'B2B web developer', 'B2C web developer', 'admin dashboard developer', 'API integration developer', 'Nador developer', 'Marrakech developer'],
             ])],
             ['key' => 'cv_file', 'group' => 'files', 'is_public' => true, 'value' => json_encode(['url' => '/cv/youssef-youyou-cv.pdf'])],
@@ -84,7 +84,7 @@ class DatabaseSeeder extends Seeder
             'label' => 'Quick actions',
             'group' => 'copy',
             'is_public' => true,
-            'value' => ['items' => ['View Services', 'See Projects', 'Request a Quote', 'Contact Youssef', 'Website Pricing', 'AI Automation']],
+            'value' => ['items' => ['View Services', 'See Projects', 'Request a Quote', 'Contact Youssef', 'Website Pricing', 'Business Automation']],
         ]);
         ChatbotSetting::query()->updateOrCreate(['key' => 'system_prompt'], [
             'label' => 'System prompt',
@@ -110,7 +110,7 @@ class DatabaseSeeder extends Seeder
             [
                 'title' => 'Core positioning',
                 'type' => 'instruction',
-                'content' => 'Youssef Youyou is a Senior Full-Stack Web Developer from Nador, Morocco. He focuses on Laravel, React, Next.js, REST APIs, SaaS platforms, admin dashboards, business automation, SEO-ready websites, deployment, Nginx and Cloudflare.',
+                'content' => 'Youssef Youyou is a full-stack web developer from Nador, Morocco. He focuses on Laravel, React, Next.js, REST APIs, SaaS platforms, admin dashboards, business automation, SEO-ready websites, deployment, Nginx and Cloudflare.',
                 'keywords' => ['positioning', 'about', 'skills'],
             ],
             [
@@ -148,7 +148,7 @@ class DatabaseSeeder extends Seeder
         }
 
         HeroSection::query()->updateOrCreate(['headline' => 'Youssef Youyou'], [
-            'subtitle' => 'Senior Full-Stack Web Developer',
+            'subtitle' => 'Full-Stack Web Developer',
             'description' => 'I build production-ready Laravel APIs, React/Next.js interfaces, SaaS platforms, admin dashboards, business automation tools, and SEO-friendly websites for businesses in Morocco and worldwide.',
             'badges' => ['Laravel', 'React', 'Next.js', 'MySQL', 'APIs', 'Nginx', 'SEO'],
             'cta_buttons' => [
@@ -163,7 +163,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         AboutSection::query()->updateOrCreate(['title' => 'Practical developer with business-process context'], [
-            'short_bio' => 'Senior Full-Stack Web Developer from Nador, Morocco focused on Laravel, React/Next.js, APIs, dashboards, deployment and digitalization.',
+            'short_bio' => 'Full-stack web developer from Nador, Morocco focused on Laravel, React/Next.js, APIs, dashboards, deployment and digitalization.',
             'body' => 'I combine freelance web work, remote React.js experience and administrative digitalization context to build practical systems that are useful, maintainable and realistic for teams.',
             'highlights' => ['Practical problem solving', 'Clean development', 'Business-focused solutions', 'Deployment mindset'],
             'cards' => [
@@ -321,24 +321,24 @@ class DatabaseSeeder extends Seeder
                 'subtitle' => 'Business Management Platform - Laravel - React - MySQL',
                 'project_type' => 'SaaS',
                 'cover_image' => '/images/projects/erplus-showcase.png',
-                'status' => 'Concept',
+                'status' => 'Engineering-qualified for staging',
                 'show_on_homepage' => true,
-                'seo_title' => 'ERPlus Case Study | Youssef Youyou Portfolio',
-                'seo_description' => 'Case study for ERPlus, a Laravel and React business management platform concept for HR workflows, inventory modules, admin dashboards and API-driven structure.',
+                'seo_title' => 'ERPlus Case Study — Laravel & React ERP Platform | Youssef Youyou',
+                'seo_description' => 'ERPlus is a Laravel and React multi-module business platform for company-scoped HR, inventory, finance and collaboration workflows.',
                 'case_study' => [
-                    'business_problem' => 'Businesses need one organized system to manage people, processes, HR data, inventory information and operational dashboards.',
-                    'solution' => 'A Laravel backend and React frontend structure with API-driven modules, admin dashboards, authentication, HR workflows and inventory management.',
-                    'role' => 'Backend/frontend structure, API integration, UI improvements, deployment support, dashboard logic and production issue fixing.',
+                    'business_problem' => 'Teams often handle HR, inventory, finance and collaboration work across disconnected files and tools, making operational context difficult to follow.',
+                    'solution' => 'A Laravel REST API and React/Vite dashboard that organizes business workflows into HR, inventory, finance and collaboration modules inside a company-scoped application.',
+                    'role' => 'Full-stack architecture, Laravel API and React/Vite implementation, dashboard workflows, data modelling and deployment troubleshooting.',
                     'target_users' => 'Small business teams, HR/admin users and managers who need clearer operational dashboards.',
-                    'impact' => 'Helps businesses organize internal operations through dashboards, structured workflows and centralized admin control.',
-                    'learned' => 'Improved experience with Laravel APIs, React dashboards, SaaS structure, deployment issues and business workflow design.',
+                    'impact' => 'Creates an engineering-focused foundation for centralizing business workflows while keeping its current delivery boundary explicit.',
+                    'learned' => 'How module boundaries, historical business data and company isolation shape a system more deeply than generic CRUD screens.',
                 ],
             ],
             'digital-archiving-system' => [
                 'subtitle' => 'Internal Tool - Vue.js - Document Tracking - Automation',
                 'project_type' => 'Dashboard',
                 'cover_image' => '/images/projects/digital-archiving-showcase.png',
-                'status' => 'Concept',
+                'status' => 'Internal',
                 'show_on_homepage' => true,
                 'seo_title' => 'Digital Archiving System Case Study | Youssef Youyou Portfolio',
                 'seo_description' => 'Case study for a digital archiving system focused on document organization, search, tracking and internal administrative workflow improvement.',
@@ -347,7 +347,7 @@ class DatabaseSeeder extends Seeder
                     'solution' => 'A structured digital archiving interface with document categories, metadata, search, tracking status, workflow support and activity overview.',
                     'role' => 'Process analysis, UI concept, simple interface development, digitalization support and workflow improvement.',
                     'target_users' => 'Administrative teams, document managers and internal staff handling recurring files and records.',
-                    'impact' => 'Helps teams find documents faster, reduce repetitive administrative work and improve organization.',
+                    'impact' => 'Supports clearer document access and repeatable administrative tracking; no unverified time-saving claim is made.',
                     'learned' => 'How to translate real administrative workflow problems into digital tools and simple interfaces.',
                 ],
             ],
@@ -389,7 +389,7 @@ class DatabaseSeeder extends Seeder
                 'subtitle' => 'Automation - Reporting - Productivity - VBA',
                 'project_type' => 'Other',
                 'cover_image' => '/images/projects/excel-vba-automation-showcase.png',
-                'status' => 'Concept',
+                'status' => 'Internal',
                 'show_on_homepage' => true,
                 'seo_title' => 'Excel/VBA Automation Tools Case Study | Youssef Youyou Portfolio',
                 'seo_description' => 'Case study for Excel and VBA automation tools focused on reports, forms, filters, calculations and administrative productivity workflows.',

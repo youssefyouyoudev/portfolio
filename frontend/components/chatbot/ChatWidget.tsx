@@ -7,7 +7,7 @@ import { Bot, BriefcaseBusiness, ChevronDown, Loader2, MessageCircle, Send, Spar
 
 const apiBase = process.env.NEXT_PUBLIC_API_URL ?? "https://api.youssefyouyou.com";
 const defaultWelcome = "Hi, I'm Youssef's AI assistant. I can help you explore his services, projects, skills, and contact options.";
-const defaultQuickActions = ["View Services", "See Projects", "Request a Quote", "Contact Youssef", "Website Pricing", "AI Automation"];
+const defaultQuickActions = ["View Services", "See Projects", "Request a Quote", "Contact Youssef", "Website Pricing", "Business Automation"];
 const sessionIdKey = "youssef_chat_session_id";
 const messagesKey = "youssef_chat_messages";
 
@@ -39,7 +39,7 @@ function quickPrompt(action: string) {
     "See Projects": "Show me Youssef's strongest portfolio projects and what they prove.",
     "Contact Youssef": "How can I contact Youssef for a project?",
     "Website Pricing": "What is the estimated pricing approach for a business website?",
-    "AI Automation": "Can Youssef build AI automation or business automation tools?",
+    "Business Automation": "Can Youssef build business automation or workflow tools?",
   }[action] ?? action;
 }
 

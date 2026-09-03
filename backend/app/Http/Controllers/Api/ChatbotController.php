@@ -23,7 +23,7 @@ class ChatbotController extends Controller
                 'text' => "Hi, I'm Youssef's AI assistant. I can help you explore his services, projects, skills, and contact options.",
             ])['text'],
             'quick_actions' => ChatbotSetting::value('quick_actions', [
-                'items' => ['View Services', 'See Projects', 'Request a Quote', 'Contact Youssef', 'Website Pricing', 'AI Automation'],
+                'items' => ['View Services', 'See Projects', 'Request a Quote', 'Contact Youssef', 'Website Pricing', 'Business Automation'],
             ])['items'],
         ]);
     }

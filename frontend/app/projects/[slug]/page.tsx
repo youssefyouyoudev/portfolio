@@ -22,6 +22,17 @@ type ProjectPageProps = {
 
 function architectureCards(project: PortfolioProject) {
   const stackText = project.stack.join(", ");
+  const dataLayer = project.slug === "erplus"
+    ? "MySQL data model organized around company-scoped business modules and their operational records."
+    : project.slug === "rifitv"
+      ? "Laravel-managed football, channel and category content supporting discovery, schedules and player-facing routes."
+      : project.slug === "digital-archiving-system"
+        ? "Structured document metadata, categories, filters and record status designed for internal administrative lookup."
+        : project.slug === "excel-vba-automation-tools"
+          ? "Structured workbook tables supporting controlled inputs, calculations, filters and report outputs."
+          : project.slug === "portfolio-admin-system"
+            ? "MySQL CMS records for projects, media, posts, services, messages and CV download events."
+            : "The concept data model is documented as a design exercise; no public implementation is claimed.";
 
   return [
     {
@@ -44,9 +55,7 @@ function architectureCards(project: PortfolioProject) {
     },
     {
       title: "Database",
-      text: stackText.includes("Excel")
-        ? "Structured tables and workbook models for tracking, reporting and repeatable outputs."
-        : "Relational data thinking for users, content, modules, orders, documents or dashboard entities.",
+      text: dataLayer,
       icon: Database,
     },
     {

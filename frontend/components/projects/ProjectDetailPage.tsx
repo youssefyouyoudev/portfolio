@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Rocket } from "lucide-react";
+import { ArrowRight, BadgeCheck } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
 import type { PortfolioProject } from "@/lib/project-content";
 
@@ -22,17 +22,25 @@ export function ProjectDetailPage({
 
 export function ProjectGallery({ project }: { project: PortfolioProject }) {
   const images = (project.gallery.length ? project.gallery : [project.image]).filter(Boolean);
-  const placeholderCount = Math.max(0, 4 - images.length);
+  if (!images.length) {
+    return (
+      <section className="mt-8 rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
+        <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Product evidence</p>
+        <h2 className="mt-3 text-2xl font-black">No public interface images</h2>
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-700 dark:text-slate-300">This case study does not publish captures when the work is private, internal or not publicly implemented. Its written scope is intentionally limited to verified work.</p>
+      </section>
+    );
+  }
 
   return (
     <section className="mt-8 rounded-3xl border border-sky-200/75 bg-white/88 p-6 shadow-xl shadow-sky-100/70 dark:border-white/10 dark:bg-white/[0.045] dark:shadow-none md:p-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Screenshots & product views</p>
-          <h2 className="mt-3 text-2xl font-black">Real screenshots will be added here after final visual review.</h2>
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-sky-700 dark:text-cyan-300">Product evidence</p>
+          <h2 className="mt-3 text-2xl font-black">Product views</h2>
         </div>
         <span className="rounded-full border border-sky-200/80 bg-sky-50 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-sky-700 dark:border-cyan-300/15 dark:bg-cyan-300/10 dark:text-cyan-100">
-          {images.length + placeholderCount || 1} visual
+          {images.length} visual{images.length === 1 ? "" : "s"}
         </span>
       </div>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -40,20 +48,11 @@ export function ProjectGallery({ project }: { project: PortfolioProject }) {
           <div key={`${image}-${index}`} className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-sky-200/80 bg-sky-50 dark:border-cyan-400/15 dark:bg-slate-950">
             <Image
               src={image}
-              alt={`${project.title} screenshot ${index + 1}`}
+              alt={project.imageAlt ?? `${project.title} product view ${index + 1}`}
               fill
               sizes="(min-width: 1024px) 45vw, 92vw"
               className="object-cover"
             />
-          </div>
-        ))}
-        {Array.from({ length: placeholderCount }).map((_, index) => (
-          <div key={`placeholder-${index}`} className="grid aspect-[16/10] place-items-center rounded-3xl border border-dashed border-sky-300/80 bg-sky-50 p-6 text-center dark:border-cyan-400/25 dark:bg-slate-950">
-            <Rocket className="text-sky-600 dark:text-cyan-300" />
-            <p className="mt-4 text-lg font-black text-slate-950 dark:text-white">Screenshot coming soon</p>
-            <p className="mt-2 max-w-sm text-sm leading-7 text-slate-700 dark:text-slate-300">
-              Placeholder reserved for a real {project.title} interface screenshot.
-            </p>
           </div>
         ))}
       </div>

@@ -6,11 +6,11 @@ import { profile } from "@/lib/data";
 import { pageMetadata, siteUrl } from "@/lib/site";
 
 const cities = ["Nador", "Marrakech", "Casablanca", "Rabat", "Tangier", "Oujda", "Fez", "Agadir"];
-const services = ["Laravel development", "React development", "Next.js development", "Admin dashboards", "SaaS MVPs", "AI automation", "Business websites", "API development"];
+const services = ["Laravel development", "React development", "Next.js development", "Admin dashboards", "SaaS MVPs", "Business automation", "Business websites", "API development"];
 
 export const metadata: Metadata = pageMetadata({
   title: "Local Web Developer in Morocco",
-  description: "Full-stack web development in Morocco for Laravel, React, Next.js, dashboards, SaaS MVPs, AI automation and business websites, with worldwide remote delivery.",
+  description: "Full-stack web development in Morocco for Laravel, React, Next.js, dashboards, SaaS MVPs, business automation and websites, with worldwide remote delivery.",
   path: "/local-web-developer-morocco",
 });
 
@@ -45,7 +45,7 @@ export default function LocalWebDeveloperMoroccoPage() {
           <p className="text-xs font-black uppercase tracking-[0.28em] text-sky-700 dark:text-cyan-300">Morocco-wide service</p>
           <h1 className="mt-4 text-4xl font-black tracking-tight md:text-6xl">Full-stack web developer in Morocco</h1>
           <p className="mt-6 max-w-4xl text-lg leading-8 text-slate-700 dark:text-slate-300">
-            I build Laravel, React and Next.js applications, business dashboards, SaaS MVPs, AI automation systems, APIs and conversion-focused websites for Moroccan businesses and remote clients worldwide.
+            I build Laravel, React and Next.js applications, business dashboards, SaaS MVPs, workflow automation, APIs and conversion-focused websites for Moroccan businesses and remote clients worldwide.
           </p>
           <div className="mt-9 grid gap-6 lg:grid-cols-2">
             <article className="rounded-3xl border border-sky-200/75 bg-sky-50/80 p-6 dark:border-white/10 dark:bg-white/[0.04]">

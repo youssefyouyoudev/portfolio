@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpRight, CheckCircle2, Download, MapPin, MousePointer2, Sparkles } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Download, MapPin, Sparkles } from "lucide-react";
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import { GradientButton } from "@/components/ui/GradientButton";
 import { TechBadge } from "@/components/ui/TechBadge";
@@ -11,10 +11,10 @@ const floatingBadges = [
   { label: "Laravel", className: "left-0 top-[10%]", delay: 0 },
   { label: "React", className: "right-[8%] top-[6%]", delay: 0.35 },
   { label: "Next.js", className: "left-[8%] top-[42%]", delay: 0.7 },
-  { label: "Node.js", className: "right-0 top-[39%]", delay: 1.05 },
-  { label: "Docker", className: "left-[16%] bottom-[15%]", delay: 1.4 },
-  { label: "AI", className: "right-[12%] bottom-[17%]", delay: 1.75 },
-  { label: "Python", className: "left-[34%] top-0", delay: 2.1 },
+  { label: "APIs", className: "right-0 top-[39%]", delay: 1.05 },
+  { label: "Dashboards", className: "left-[16%] bottom-[15%]", delay: 1.4 },
+  { label: "Automation", className: "right-[12%] bottom-[17%]", delay: 1.75 },
+  { label: "Vite", className: "left-[34%] top-0", delay: 2.1 },
   { label: "Linux", className: "right-[34%] bottom-0", delay: 2.45 },
   { label: "MySQL", className: "left-[2%] bottom-[36%]", delay: 2.8 },
   { label: "Git", className: "right-[24%] top-[28%]", delay: 3.15 },
@@ -22,7 +22,7 @@ const floatingBadges = [
   { label: "API", className: "right-[2%] bottom-[40%]", delay: 3.85 },
 ];
 
-const heroTech = ["Laravel", "React", "Next.js", "Node.js", "Docker", "AI", "Python", "Linux", "MySQL", "Git", "Cloud", "API"];
+const heroTech = ["Laravel", "React", "Next.js", "MySQL", "REST APIs", "Vue", "Nginx", "Excel/VBA"];
 const trustItems = ["Nador-based", "Morocco-ready", "Remote-friendly", "Production systems"];
 
 const fadeUp = {
@@ -108,8 +108,8 @@ export function Hero() {
           </motion.p>
 
           <motion.h1 variants={fadeUp} transition={{ duration: 0.6 }} className="mt-4 max-w-5xl text-5xl font-black leading-[0.94] tracking-tight text-[#111827] dark:text-white sm:text-6xl lg:text-7xl xl:text-[5.25rem]">
-            <span className="block">Full-stack systems</span>
-            <span className="block premium-gradient-text">with a soft product soul.</span>
+            <span className="block">Full-Stack Developer</span>
+            <span className="block premium-gradient-text">building Laravel & React business systems.</span>
           </motion.h1>
 
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-5 h-10 overflow-hidden text-2xl font-black tracking-tight text-slate-800 dark:text-slate-100 sm:text-3xl">
@@ -117,7 +117,7 @@ export function Hero() {
               animate={reduceMotion ? undefined : { y: ["0%", "-25%", "-50%", "-75%", "0%"] }}
               transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
             >
-              {["Laravel Developer", "React & Next.js Builder", "Dashboard Architect", "AI Automation Partner"].map((role) => (
+              {["Laravel Developer", "React & Next.js Builder", "Dashboard & API Builder", "Workflow Automation"].map((role) => (
                 <div key={role} className="h-10">
                   {role}
                 </div>
@@ -130,11 +130,11 @@ export function Hero() {
           </motion.p>
 
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <GradientButton href="#contact" className="w-full sm:w-auto">
-              Start a Project <Sparkles size={17} />
-            </GradientButton>
-            <GradientButton href="#projects" variant="secondary" className="w-full sm:w-auto">
+            <GradientButton href="#projects" className="w-full sm:w-auto">
               View Case Studies <ArrowUpRight size={18} />
+            </GradientButton>
+            <GradientButton href="#contact" variant="secondary" className="w-full sm:w-auto">
+              Start a Project <Sparkles size={17} />
             </GradientButton>
             <GradientButton href="/cv-download" variant="link" className="w-full sm:w-auto">
               <Download size={17} /> Download CV
@@ -154,10 +154,6 @@ export function Hero() {
             <span className="inline-flex items-center gap-2">
               <MapPin size={16} className="text-[#F43F8E]" />
               {profile.location}
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <MousePointer2 size={16} className="text-[#8B5CF6]" />
-              Move your cursor for parallax
             </span>
           </motion.div>
 

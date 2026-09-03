@@ -33,7 +33,7 @@ class PortfolioController extends Controller
     {
         return response()->json([
             'name' => 'Youssef Youyou',
-            'title' => 'Senior Full-Stack Web Developer',
+            'title' => 'Full-Stack Web Developer',
             'positioning' => 'Full-Stack Developer from Nador, Morocco | Laravel, React & Next.js Developer | SaaS, Dashboard & Business Automation Developer',
             'location' => 'Nador, Morocco',
             'availability' => 'Available for freelance, remote and business web projects in Morocco and internationally.',

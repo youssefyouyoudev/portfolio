@@ -22,7 +22,7 @@ import { trackEvent } from "@/lib/analytics";
 
 function statusClass(status: PortfolioProject["status"]) {
   if (status === "Live") return "border-emerald-300/70 bg-emerald-50 text-emerald-700 dark:border-emerald-300/25 dark:bg-emerald-300/10 dark:text-emerald-200";
-  if (status === "In Development") return "border-[#8B5CF6]/35 bg-violet-50 text-[#6C63FF] dark:border-violet-300/25 dark:bg-violet-300/10 dark:text-violet-100";
+  if (status === "Engineering-qualified for staging") return "border-sky-300/70 bg-sky-50 text-sky-700 dark:border-cyan-300/25 dark:bg-cyan-300/10 dark:text-cyan-100";
   if (status === "Internal") return "border-[#F43F8E]/35 bg-pink-50 text-[#F43F8E] dark:border-pink-300/25 dark:bg-pink-300/10 dark:text-pink-100";
   if (status === "Client Project") return "border-amber-300/70 bg-amber-50 text-amber-700 dark:border-amber-300/25 dark:bg-amber-300/10 dark:text-amber-100";
   return "border-slate-300/80 bg-slate-100 text-slate-700 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200";
@@ -86,7 +86,7 @@ export function ProjectImage({ project, priority = false }: { project: Portfolio
           <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
           <span className="h-2.5 w-2.5 rounded-full bg-amber-300" />
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-          <span className="ml-2 truncate text-[11px] font-bold text-slate-400">{project.slug}.app</span>
+          <span className="ml-2 truncate text-[11px] font-bold text-slate-400">{project.title}</span>
         </div>
         <div className="relative h-[calc(100%-2rem)]">
           {project.image ? (
@@ -435,7 +435,11 @@ export function ProjectsSection({ projects, mode = "home" }: { projects: Portfol
   const [query, setQuery] = useState("");
   const [quickViewProject, setQuickViewProject] = useState<PortfolioProject | null>(null);
 
-  const featuredProjects = projects.filter((project) => project.featured).slice(0, mode === "home" ? 3 : 2);
+  const flagshipOrder = ["erplus", "rifitv", "portfolio-admin-system", "digital-archiving-system", "excel-vba-automation-tools"];
+  const featuredProjects = projects
+    .filter((project) => project.featured && project.status !== "Concept")
+    .sort((a, b) => flagshipOrder.indexOf(a.slug) - flagshipOrder.indexOf(b.slug))
+    .slice(0, mode === "home" ? 4 : 4);
   const filteredProjects = useMemo(() => {
     const normalized = query.trim().toLowerCase();
     return projects.filter((project) => {
@@ -458,11 +462,16 @@ export function ProjectsSection({ projects, mode = "home" }: { projects: Portfol
       <ProjectQuickView project={quickViewProject} onClose={() => setQuickViewProject(null)} />
 
       {mode === "home" && activeCategory === "All" && !query ? (
-        <div className="mb-8 grid gap-6 xl:grid-cols-3">
-          {featuredProjects.map((project, index) => (
-            <FeaturedProjectCard key={project.slug} project={project} priority={index === 0} onQuickView={setQuickViewProject} />
-          ))}
-        </div>
+        <>
+          <div className="mb-5 rounded-[2rem] border border-violet-200/60 bg-white/75 p-5 text-sm leading-7 text-slate-700 shadow-lg shadow-violet-100/50 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300">
+            <strong className="text-slate-950 dark:text-white">Featured systems</strong> are implemented, live or internally used work. <strong className="text-slate-950 dark:text-white">Labs / concepts</strong> remain below as clearly labelled architecture explorations.
+          </div>
+          <div className="mb-8 grid gap-6 xl:grid-cols-2">
+            {featuredProjects.map((project, index) => (
+              <FeaturedProjectCard key={project.slug} project={project} priority={index === 0} onQuickView={setQuickViewProject} />
+            ))}
+          </div>
+        </>
       ) : null}
 
       {filteredProjects.length ? (

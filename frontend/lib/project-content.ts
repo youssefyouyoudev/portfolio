@@ -5,7 +5,7 @@ export const projectCategories = ["All", "SaaS", "Dashboard", "Media", "Automati
 type FallbackProject = (typeof fallbackProjects)[number];
 export type ProjectCategory = (typeof projectCategories)[number];
 export type PortfolioProject = FallbackProject & {
-  status: "Live" | "In Development" | "Internal" | "Concept" | "Client Project";
+  status: "Live" | "Engineering-qualified for staging" | "Internal" | "Concept" | "Client Project";
   categoryGroup: Exclude<ProjectCategory, "All">;
   featured: boolean;
   technicalDifficulty: "Focused" | "Intermediate" | "Advanced";
@@ -15,8 +15,8 @@ export type PortfolioProject = FallbackProject & {
   gallery: string[];
   nextImprovements: string[];
   specificLine: string;
-  demoLabel: "Available" | "Private" | "Coming soon";
-  codeLabel: "GitHub" | "Private repo" | "Coming soon";
+  demoLabel: "Available" | "Private" | "No public demo";
+  codeLabel: "GitHub" | "Private repo" | "No public repository";
   liveUrl?: string;
   githubUrl?: string;
   showInProjects?: boolean;
@@ -73,22 +73,22 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
     liveUrl: "https://rifitv.com",
   },
   erplus: {
-    status: "In Development",
+    status: "Engineering-qualified for staging",
     categoryGroup: "Dashboard",
     featured: true,
     technicalDifficulty: "Advanced",
     builtFor: "Small businesses that need one internal place for HR, payroll-style workflows, inventory, permissions and reports.",
     whatIBuilt: [
-      "Separated Laravel backend logic from a React/Vite dashboard frontend.",
-      "Planned modules for HR, payslip workflows, inventory records and company settings.",
-      "Worked through production build, asset path and Nginx configuration issues.",
-      "Structured the platform toward SaaS/business management needs with roles, permissions, dashboards and API-driven modules.",
+      "Built a separated Laravel REST API and React/Vite dashboard architecture.",
+      "Organized the product around HR, inventory, finance and collaboration workflows.",
+      "Modelled the platform around company-scoped business operations rather than a generic dashboard.",
+      "Worked through production build, asset-path and Nginx configuration concerns.",
     ],
-    results: "A serious Laravel API and React/Vite business-platform foundation for HR, inventory, payroll-style workflows, dashboards, roles/permissions and future SaaS direction.",
-    specificLine: "Separated Laravel API logic from React/Vite frontend modules for HR, inventory, payroll direction, dashboards and role-based business workflows.",
+    results: "A Laravel and React ERP foundation for structured company workflows. Staging qualification reflects engineering progress, not customer usage or a production release.",
+    specificLine: "A Laravel REST API and React/Vite ERP dashboard organized around company-scoped HR, inventory, finance and collaboration workflows.",
     demoLabel: "Private",
     codeLabel: "Private repo",
-    nextImprovements: ["More granular RBAC permissions", "Audit logs for HR/inventory actions", "Exportable reports and notification rules", "Workspace/subscription structure for SaaS growth"],
+    nextImprovements: ["Continue release-gate verification", "Expand audit visibility where needed", "Refine reporting and notification rules", "Document operational rollout boundaries"],
   },
   "digital-archiving-system": {
     status: "Internal",
@@ -101,9 +101,9 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
       "Created interface ideas for document status, categories, scan/upload and verification.",
       "Used Excel/VBA logic where quick automation was more practical than a full web module.",
     ],
-    results: "Reduced search friction conceptually by organizing documents around metadata, status, verification and repeatable tracking.",
-    specificLine: "Designed a document tracking workflow that replaces manual searching with structured metadata, categories, filters and repeatable archive processes.",
-    demoLabel: "Coming soon",
+    results: "Internal administrative digitalization work centered on document organization, metadata, filtering and repeatable tracking. No public demo is available because the workflow is confidential.",
+    specificLine: "Internal administrative digitalization work using document metadata, categories, filters and repeatable archive processes.",
+    demoLabel: "No public demo",
     codeLabel: "Private repo",
     nextImprovements: ["OCR-assisted search", "Role-based verification queue", "Activity history for each dossier"],
   },
@@ -120,8 +120,8 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
     ],
     results: "A practical commerce/client-portal blueprint for turning manual orders into a self-service customer experience.",
     specificLine: "Built commerce and portal foundations with product catalogues, orders, client areas, payment-ready structure and reporting logic.",
-    demoLabel: "Coming soon",
-    codeLabel: "Coming soon",
+    demoLabel: "No public demo",
+    codeLabel: "No public repository",
     nextImprovements: ["Real payment gateway integration", "Customer notifications", "Invoice/export workflow"],
   },
   "social-media-management-saas": {
@@ -137,8 +137,8 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
     ],
     results: "A believable SaaS product concept that shows dashboard design, multi-user thinking and analytics UI organization.",
     specificLine: "Planned a SaaS structure for accounts, post scheduling, analytics dashboards and multi-user workflow organization.",
-    demoLabel: "Coming soon",
-    codeLabel: "Coming soon",
+    demoLabel: "No public demo",
+    codeLabel: "No public repository",
     nextImprovements: ["Social API integrations", "Subscription billing module", "Approval workflow for client campaigns"],
   },
   "excel-vba-automation-tools": {
@@ -159,7 +159,7 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
     nextImprovements: ["Move stable workflows into a web dashboard", "Add permissions and central storage", "Create export-ready reporting views"],
   },
   "portfolio-admin-system": {
-    status: "In Development",
+    status: "Internal",
     categoryGroup: "API",
     featured: true,
     technicalDifficulty: "Advanced",
@@ -209,8 +209,8 @@ export function enrichProject(project: FallbackProject): PortfolioProject {
     gallery,
     nextImprovements: meta.nextImprovements ?? ["Add more admin controls", "Improve reporting views", "Expand production monitoring"],
     specificLine: meta.specificLine ?? canonical.solution ?? canonical.shortDescription,
-    demoLabel: meta.demoLabel ?? (meta.liveUrl || optionalLinks.liveUrl ? "Available" : "Coming soon"),
-    codeLabel: meta.codeLabel ?? (meta.githubUrl || optionalLinks.githubUrl ? "GitHub" : "Coming soon"),
+    demoLabel: meta.demoLabel ?? (meta.liveUrl || optionalLinks.liveUrl ? "Available" : "No public demo"),
+    codeLabel: meta.codeLabel ?? (meta.githubUrl || optionalLinks.githubUrl ? "GitHub" : "No public repository"),
     liveUrl: meta.liveUrl ?? optionalLinks.liveUrl,
     githubUrl: meta.githubUrl ?? optionalLinks.githubUrl,
     showInProjects: meta.showInProjects ?? true,

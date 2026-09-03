@@ -27,12 +27,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Full-Stack Developer in Morocco | Laravel, React, Next.js & AI Automation",
+    default: "Full-Stack Developer in Morocco | Laravel, React & Next.js",
     // Individual routes provide already-branded absolute titles where needed.
     template: "%s",
   },
   description:
-    "I build business websites, dashboards, SaaS MVPs, Laravel/React/Next.js apps, and AI automation systems for clients in Morocco and worldwide.",
+    "Youssef Youyou builds Laravel, React and Next.js business systems: APIs, dashboards, SaaS foundations and workflow automation for Morocco and remote clients.",
   applicationName: "Youssef Youyou Portfolio",
   authors: [{ name: "Youssef Youyou", url: siteUrl }],
   creator: "Youssef Youyou",
@@ -71,17 +71,17 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    title: "Full-Stack Developer in Morocco | Laravel, React, Next.js & AI Automation",
+    title: "Full-Stack Developer in Morocco | Laravel, React & Next.js",
     description:
-      "I build business websites, dashboards, SaaS MVPs, Laravel/React/Next.js apps, and AI automation systems for clients in Morocco and worldwide.",
+      "Youssef Youyou builds Laravel, React and Next.js business systems: APIs, dashboards, SaaS foundations and workflow automation for Morocco and remote clients.",
     siteName: "Youssef Youyou Portfolio",
     images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Youssef Youyou senior full stack developer portfolio" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Full-Stack Developer in Morocco | Laravel, React, Next.js & AI Automation",
+    title: "Full-Stack Developer in Morocco | Laravel, React & Next.js",
     description:
-      "I build business websites, dashboards, SaaS MVPs, Laravel/React/Next.js apps, and AI automation systems for clients in Morocco and worldwide.",
+      "Youssef Youyou builds Laravel, React and Next.js business systems: APIs, dashboards, SaaS foundations and workflow automation for Morocco and remote clients.",
     images: ["/opengraph-image"],
   },
   ...(googleVerification ? { verification: { google: googleVerification } } : {}),
@@ -120,9 +120,10 @@ export default function RootLayout({
             jobTitle: "Full-Stack Developer",
             email: profile.email,
             url: siteUrl,
+            address: { "@type": "PostalAddress", addressLocality: "Nador", addressCountry: "MA" },
             sameAs: [profile.github, profile.linkedin].filter(Boolean),
             knowsLanguage: ["English", "French", "Arabic"],
-            knowsAbout: ["Laravel development", "React development", "Next.js development", "SaaS MVP development", "Admin dashboard development", "AI automation integration", "Business website development", "API development", "Server deployment and security"],
+            knowsAbout: ["Laravel development", "React development", "Next.js development", "SaaS development", "Admin dashboard development", "Business automation", "Business website development", "API development", "Server deployment and technical SEO"],
           },
           {
             "@context": "https://schema.org",
