@@ -108,8 +108,8 @@ export function Hero() {
           </motion.p>
 
           <motion.h1 variants={fadeUp} transition={{ duration: 0.6 }} className="mt-4 max-w-5xl text-5xl font-black leading-[0.94] tracking-tight text-[#111827] dark:text-white sm:text-6xl lg:text-7xl xl:text-[5.25rem]">
-            <span className="block">Full-Stack Developer</span>
-            <span className="block premium-gradient-text">building Laravel & React business systems.</span>
+            <span className="block">Je conçois des sites, SaaS</span>
+            <span className="block premium-gradient-text">et outils métier qui font avancer votre entreprise.</span>
           </motion.h1>
 
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-5 h-10 overflow-hidden text-2xl font-black tracking-tight text-slate-800 dark:text-slate-100 sm:text-3xl">
@@ -131,16 +131,16 @@ export function Hero() {
 
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <GradientButton href="#projects" className="w-full sm:w-auto">
-              View Case Studies <ArrowUpRight size={18} />
+              Voir mes réalisations <ArrowUpRight size={18} />
             </GradientButton>
             <GradientButton href="#contact" variant="secondary" className="w-full sm:w-auto">
-              Start a Project <Sparkles size={17} />
+              Démarrer mon projet <Sparkles size={17} />
             </GradientButton>
             <GradientButton href="/cv-download" variant="link" className="w-full sm:w-auto">
-              <Download size={17} /> Download CV
+              <Download size={17} /> CV
             </GradientButton>
             <GradientButton href="/pricing" variant="link" className="w-full sm:w-auto">
-              View Services & Pricing <ArrowUpRight size={17} />
+              Voir les tarifs <ArrowUpRight size={17} />
             </GradientButton>
           </motion.div>
 

@@ -7,8 +7,6 @@ import {
   ArrowRight,
   BadgeCheck,
   BookOpenText,
-  CalendarDays,
-  CheckCircle2,
   Code2,
   Database,
   Download,
@@ -35,13 +33,11 @@ import { Hero } from "@/components/sections/Hero";
 import { ClayIcon } from "@/components/ui/ClayIcon";
 import {
   blogPosts as fallbackBlogPosts,
-  experiences as fallbackExperiences,
   profile as fallbackProfile,
   projects as fallbackProjects,
   services as fallbackServices,
   skills as fallbackSkills,
   stats as fallbackStats,
-  timeline as fallbackTimeline,
 } from "@/lib/data";
 import { getDisplayProjects } from "@/lib/project-content";
 import { trackEvent } from "@/lib/analytics";
@@ -52,10 +48,8 @@ type PortfolioShellProps = {
     projects?: typeof fallbackProjects;
     services?: typeof fallbackServices;
     skills?: Record<string, string[]>;
-    experiences?: typeof fallbackExperiences;
     blogPosts?: typeof fallbackBlogPosts;
     stats?: typeof fallbackStats;
-    timeline?: typeof fallbackTimeline;
   };
 };
 
@@ -145,10 +139,8 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
   const projects = content?.projects ?? fallbackProjects;
   const services = content?.services ?? fallbackServices;
   const skills = content?.skills ?? fallbackSkills;
-  const experiences = content?.experiences ?? fallbackExperiences;
   const blogPosts = content?.blogPosts ?? fallbackBlogPosts;
   const stats = content?.stats ?? fallbackStats;
-  const timeline = content?.timeline ?? fallbackTimeline;
   const displayProjects = getDisplayProjects(projects);
 
   const highlightedServices = services.filter((service) =>
@@ -274,16 +266,9 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
           </Reveal>
           <Reveal>
             <PremiumCard className="p-6">
-              <h3 className="text-xl font-bold text-slate-950 dark:text-white">Career timeline</h3>
-              <div className="mt-6 space-y-5">
-                {timeline.map((item) => (
-                  <div key={`${item.year}-${item.event}`} className="relative pl-8">
-                    <span className="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-[#F43F8E] shadow-[0_0_20px_rgba(34,211,238,.8)]" />
-                    <span className="absolute left-1.5 top-5 h-[calc(100%+1rem)] w-px bg-[#F43F8E]/20 last:hidden" />
-                    <p className="text-sm font-black text-[#6C63FF] dark:text-violet-200">{item.year}</p>
-                    <p className="mt-1 text-sm leading-6 text-slate-700 dark:text-slate-300">{item.event}</p>
-                  </div>
-                ))}
+              <h3 className="text-xl font-bold text-slate-950 dark:text-white">Built, shipped & operated</h3>
+              <div className="mt-6 grid gap-3 text-sm leading-6 text-slate-700 dark:text-slate-300">
+                {["ERPlus — Laravel and React ERP architecture", "Youssef Control — constrained operations and security workflows", "RiFiTV — live Laravel media platform and deployment work", "Portfolio Platform — Next.js, Laravel API and content administration"].map((item) => <div key={item} className="rounded-2xl border border-violet-200/60 bg-violet-50/70 p-4 dark:border-white/10 dark:bg-white/[.04]">{item}</div>)}
               </div>
             </PremiumCard>
           </Reveal>
@@ -529,6 +514,21 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
         </Reveal>
       </section>
 
+      <section id="pricing" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
+        <SectionTitle eyebrow="Starting prices" title="Clear offers before we talk scope" text="Most projects are quoted after scope. These starting points help you choose the right conversation." />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          {[
+            ["Landing SEO/GEO", "1 000 DH", "One focused page that presents an offer and generates contacts."],
+            ["Présence Locale", "2 500 DH", "A compact business presence with local SEO foundations."],
+            ["Site Business", "4 500 DH", "A professional multi-page website for a clear service offer."],
+            ["Dashboard", "5 000 DH+", "Replace manual work with a structured internal tool."],
+            ["SaaS MVP", "15 000 DH+", "A focused product version built around one real workflow."],
+            ["SEO & GEO", "1 500 DH/mois+", "Technical and content improvements without ranking guarantees."],
+          ].map(([name, price, summary]) => <Reveal key={name}><PremiumCard className="flex h-full flex-col p-5"><p className="text-sm font-black text-slate-950 dark:text-white">{name}</p><p className="mt-3 text-2xl font-black text-[#6C63FF] dark:text-violet-200">À partir de {price}</p><p className="mt-3 flex-1 text-sm leading-6 text-slate-600 dark:text-slate-300">{summary}</p></PremiumCard></Reveal>)}
+        </div>
+        <div className="mt-7 text-center"><Link href="/pricing" className="inline-flex rounded-full bg-[#6C63FF] px-6 py-3 text-sm font-black text-white shadow-lg shadow-violet-500/20">Voir les tarifs et le périmètre</Link></div>
+      </section>
+
       <section id="projects" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
         <SectionTitle
           eyebrow="Selected Work"
@@ -536,46 +536,6 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
           text="A selection of platforms, dashboards, automation tools and web systems built with Laravel, React, Next.js, APIs and deployment-ready architecture."
         />
         <ProjectsSection projects={displayProjects} />
-      </section>
-
-      <section id="experience" className="relative mx-auto max-w-6xl px-4 py-16 md:py-24">
-        <SectionTitle
-          eyebrow="Experience"
-          title="Practical delivery across freelance, remote and internal digitalization"
-          text="A timeline that connects development work with real operational support and workflow improvement."
-        />
-        <div className="relative mx-auto max-w-4xl">
-          <div className="absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-[#F43F8E]/60 via-[#F43F8E]/20 to-transparent md:block" />
-          <div className="space-y-6">
-            {experiences.map((experience) => (
-              <Reveal key={experience.role}>
-                <div className="relative md:pl-12">
-                  <span className="absolute left-[11px] top-8 hidden h-3 w-3 rounded-full bg-[#F43F8E] shadow-[0_0_20px_rgba(34,211,238,.9)] md:block" />
-                  <PremiumCard className="p-6">
-                    <div className="flex flex-wrap items-start justify-between gap-4">
-                      <div>
-                        <h3 className="text-xl font-black text-slate-950 dark:text-white">{experience.role}</h3>
-                        {experience.company && <p className="mt-1 font-semibold text-[#6C63FF] dark:text-violet-200">{experience.company}</p>}
-                      </div>
-                      <span className="inline-flex items-center gap-2 rounded-full border border-violet-200/60 bg-violet-50 px-3 py-1 text-xs font-bold text-[#6C63FF] dark:border-white/10 dark:bg-[#F43F8E]/10 dark:text-violet-100">
-                        <CalendarDays size={14} /> {experience.date}
-                      </span>
-                    </div>
-                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{experience.location}</p>
-                    <ul className="mt-5 grid gap-2 text-sm leading-6 text-slate-700 dark:text-slate-300">
-                      {experience.points.map((point) => (
-                        <li key={point} className="flex gap-2">
-                          <CheckCircle2 className="mt-0.5 shrink-0 text-[#6C63FF] dark:text-violet-200" size={16} />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </PremiumCard>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
       </section>
 
       <section id="capabilities" className="relative mx-auto max-w-7xl px-4 py-16 md:py-24">
@@ -701,7 +661,7 @@ export default function PortfolioShell({ content }: PortfolioShellProps) {
             <div className="mt-4 grid gap-3 text-sm text-slate-600 dark:text-slate-400">
               <Link href="/#services" className="hover:text-[#6C63FF] dark:hover:text-pink-200">Services</Link>
               <Link href="/projects" className="hover:text-[#6C63FF] dark:hover:text-pink-200">Projects</Link>
-              <Link href="/#experience" className="hover:text-[#6C63FF] dark:hover:text-pink-200">Experience</Link>
+              <Link href="/pricing" className="hover:text-[#6C63FF] dark:hover:text-pink-200">Services & Pricing</Link>
               <Link href="/blog" className="hover:text-[#6C63FF] dark:hover:text-pink-200">Blog/Technical Notes</Link>
               <a href="/contact" className="hover:text-[#6C63FF] dark:hover:text-pink-200">Contact</a>
               <a href="/work-with-me" className="hover:text-[#6C63FF] dark:hover:text-pink-200">Work With Me</a>

@@ -7,8 +7,8 @@ import { ClayIcon } from "@/components/ui/ClayIcon";
 import { trackEvent } from "@/lib/analytics";
 import { profile } from "@/lib/data";
 
-const projectTypes = ["B2B website", "B2C website", "SaaS", "Admin dashboard", "E-commerce", "API integration", "Internal tool", "Digital archiving", "Automation", "Other"];
-const budgets = ["Small project", "Medium project", "Large project", "Not sure yet"];
+const projectTypes = ["Landing Page — 1,000 DH", "Local Business Presence — 2,500 DH+", "Business Website — 4,500 DH+", "Dashboard / Internal Tool — 5,000 DH+", "SaaS MVP — 15,000 DH+", "SEO/GEO — 1,500 DH/month+", "Existing Project Fix", "Other"];
+const budgets = ["Up to 2,500 DH", "2,500–5,000 DH", "5,000–15,000 DH", "15,000 DH+", "Not sure yet"];
 const timelines = ["As soon as possible", "This month", "1-3 months", "Flexible / planning phase"];
 const contactMethods = ["Email", "WhatsApp on request", "Google Meet", "Phone call if needed"];
 const contactAsOptions = ["Business owner", "Agency", "Recruiter", "Startup founder", "Developer/team", "Other"];

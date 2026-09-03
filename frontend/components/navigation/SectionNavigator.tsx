@@ -10,7 +10,7 @@ const sections = [
   ["about", "About"],
   ["skills", "Skills"],
   ["projects", "Projects"],
-  ["experience", "Experience"],
+  ["pricing", "Pricing"],
   ["blog", "Notes"],
   ["contact", "Contact"],
 ] as const;
