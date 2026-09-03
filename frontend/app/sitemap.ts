@@ -27,6 +27,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${siteUrl}/projects`, lastModified: contentLastModified, changeFrequency: "weekly", priority: 0.7 },
     { url: `${siteUrl}/blog`, lastModified: contentLastModified, changeFrequency: "weekly", priority: 0.7 },
     { url: `${siteUrl}/contact`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${siteUrl}/pricing`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${siteUrl}/services/developpement-saas-nador`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: `${siteUrl}/hire-laravel-react-developer`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: `${siteUrl}/local-web-developer-morocco`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: `${siteUrl}/cv`, lastModified: contentLastModified, changeFrequency: "monthly", priority: 0.6 },
@@ -68,4 +70,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 }
-

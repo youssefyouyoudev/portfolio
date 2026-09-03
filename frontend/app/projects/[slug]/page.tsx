@@ -244,6 +244,11 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
                   Live demo <ExternalLink size={16} />
                 </a>
               ) : null}
+              {project.slug === "erplus" ? (
+                <a href="https://erplus.ma" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-5 py-3 text-sm font-bold text-slate-800 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-100 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
+                  Open ERPlus <ExternalLink size={16} />
+                </a>
+              ) : null}
               {project.githubUrl ? (
                 <a href={project.githubUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-5 py-3 text-sm font-bold text-slate-800 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-100 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
                   GitHub <GitBranch size={16} />

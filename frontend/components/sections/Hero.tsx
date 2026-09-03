@@ -139,6 +139,9 @@ export function Hero() {
             <GradientButton href="/cv-download" variant="link" className="w-full sm:w-auto">
               <Download size={17} /> Download CV
             </GradientButton>
+            <GradientButton href="/pricing" variant="link" className="w-full sm:w-auto">
+              View Services & Pricing <ArrowUpRight size={17} />
+            </GradientButton>
           </motion.div>
 
           <motion.div variants={fadeUp} transition={{ duration: 0.6 }} className="mt-5 flex flex-wrap gap-2 text-sm text-slate-600 dark:text-slate-400">

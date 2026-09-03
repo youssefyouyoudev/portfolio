@@ -28,6 +28,8 @@ function statusClass(status: PortfolioProject["status"]) {
   return "border-slate-300/80 bg-slate-100 text-slate-700 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-200";
 }
 
+// Kept for future non-product illustrations; private systems intentionally render no fake UI.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ProjectMockup({ project }: { project: PortfolioProject }) {
   return (
     <div className="relative h-full w-full overflow-hidden bg-[radial-gradient(circle_at_80%_20%,rgba(14,165,233,.24),transparent_32%),linear-gradient(135deg,#f8fafc,#e0f2fe)] p-5 dark:bg-[radial-gradient(circle_at_80%_20%,rgba(34,211,238,.2),transparent_32%),linear-gradient(135deg,#020617,#0f172a)]">
@@ -100,7 +102,13 @@ export function ProjectImage({ project, priority = false }: { project: Portfolio
               className="object-cover transition duration-700 group-hover:scale-[1.05]"
             />
           ) : (
-            <ProjectMockup project={project} />
+            <div className="grid h-full place-items-center bg-slate-950 p-6 text-center text-slate-200">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-200">Private product</p>
+                <p className="mt-3 text-xl font-black text-white">{project.title}</p>
+                <p className="mt-2 max-w-xs text-sm leading-6 text-slate-300">No public interface capture is shown for this authentication-gated system.</p>
+              </div>
+            </div>
           )}
         </div>
       </motion.div>
@@ -435,7 +443,7 @@ export function ProjectsSection({ projects, mode = "home" }: { projects: Portfol
   const [query, setQuery] = useState("");
   const [quickViewProject, setQuickViewProject] = useState<PortfolioProject | null>(null);
 
-  const flagshipOrder = ["erplus", "rifitv", "portfolio-admin-system", "digital-archiving-system", "excel-vba-automation-tools"];
+  const flagshipOrder = ["erplus", "youssef-control", "rifitv", "portfolio-admin-system", "digital-archiving-system", "excel-vba-automation-tools"];
   const featuredProjects = projects
     .filter((project) => project.featured && project.status !== "Concept")
     .sort((a, b) => flagshipOrder.indexOf(a.slug) - flagshipOrder.indexOf(b.slug))

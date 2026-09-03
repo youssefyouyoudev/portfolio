@@ -52,6 +52,26 @@ const portfolioAdminProject: FallbackProject = {
 };
 
 const enhancements: Record<string, Partial<PortfolioProject>> = {
+  "youssef-control": {
+    status: "Internal",
+    categoryGroup: "Dashboard",
+    featured: true,
+    technicalDifficulty: "Advanced",
+    builtFor: "Authorized operators who need a controlled view of website and service operations without exposing infrastructure details publicly.",
+    whatIBuilt: [
+      "Separated a Next.js operations interface from a Laravel API and MySQL data layer.",
+      "Built website discovery, service/deployment visibility and configured operational actions.",
+      "Kept terminal access disabled by default, using one-time tickets with replay rejection when enabled.",
+      "Designed read-only database workbench defaults, SQL classification, audit logging and recursive secret redaction.",
+      "Added security status and two-factor authentication workflows without exposing secrets in the interface.",
+    ],
+    results: "A private operations product with an intentionally conservative security posture: sensitive capabilities are constrained, logged and not presented as public product access.",
+    specificLine: "Next.js and Laravel operations control panel with discovered website inventory, allowlisted actions, audit history and constrained terminal/database workflows.",
+    demoLabel: "Private",
+    codeLabel: "Private repo",
+    liveUrl: "https://control.youssefyouyou.com/",
+    nextImprovements: ["Continue production hardening", "Expand approved health checks", "Refine role-specific operational views", "Maintain security test coverage"],
+  },
   rifitv: {
     status: "Live",
     categoryGroup: "Media",
@@ -88,6 +108,7 @@ const enhancements: Record<string, Partial<PortfolioProject>> = {
     specificLine: "A Laravel REST API and React/Vite ERP dashboard organized around company-scoped HR, inventory, finance and collaboration workflows.",
     demoLabel: "Private",
     codeLabel: "Private repo",
+    liveUrl: "https://erplus.youssefyouyou.com/",
     nextImprovements: ["Continue release-gate verification", "Expand audit visibility where needed", "Refine reporting and notification rules", "Document operational rollout boundaries"],
   },
   "digital-archiving-system": {
