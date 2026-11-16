@@ -239,6 +239,11 @@ export default async function ProjectCaseStudy({ params }: ProjectPageProps) {
               <Link href="/projects" className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-5 py-3 text-sm font-bold text-slate-800 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-100 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
                 <ArrowLeft size={16} /> Back to projects
               </Link>
+              {project.slug === "jawbiq" ? (
+                <Link href="/projects/jawbiq/roadmap" className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-700">
+                  View 56-day delivery roadmap <ArrowRight size={16} />
+                </Link>
+              ) : null}
               {project.liveUrl ? (
                 <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200/80 bg-white/75 px-5 py-3 text-sm font-bold text-slate-800 transition hover:border-sky-400/50 hover:text-sky-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-100 dark:hover:border-cyan-300/35 dark:hover:text-cyan-100">
                   Live demo <ExternalLink size={16} />
