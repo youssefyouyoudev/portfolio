@@ -80,6 +80,32 @@ export const skills = {
 
 export const projects = [
   {
+    title: "JAWBIQ — AI WhatsApp Receptionist",
+    slug: "jawbiq",
+    category: "AI automation / B2B SaaS / WhatsApp customer service",
+    subtitle: "Planned SaaS — Laravel · Next.js · Ollama · Meta Cloud API",
+    shortDescription: "A planned multilingual AI receptionist for Moroccan small businesses to answer approved FAQs, capture leads and transfer conversations to human staff over the official WhatsApp Cloud API.",
+    caseStudyUrl: "/projects/jawbiq",
+    image: "",
+    imageAlt: "JAWBIQ project concept — no working product screenshot yet",
+    seoTitle: "JAWBIQ AI WhatsApp Receptionist SaaS — Project Roadmap | Youssef Youyou",
+    seoDescription: "Explore JAWBIQ, a planned WhatsApp customer-service SaaS for Moroccan businesses, with a 56-day Laravel, Next.js and self-hosted AI development roadmap.",
+    stack: ["Laravel", "Next.js", "TypeScript", "MySQL", "Redis", "Ollama", "Qwen3", "Meta WhatsApp Cloud API"],
+    features: ["Planned multilingual FAQ assistant", "Planned official WhatsApp messaging integration", "Planned human handoff and shared inbox", "Planned lead capture", "Planned per-business knowledge base", "Planned usage and cost controls", "Planned company-separated SaaS accounts"],
+    businessValue: "The planned product aims to help small businesses respond to customers consistently, qualify inquiries and retain employee control of complex conversations.",
+    problems: ["Delayed WhatsApp replies", "Repeated customer questions", "Untracked leads", "Unclear conversation handoff", "Potential paid messaging costs", "Multi-tenant data separation"],
+    businessProblem: "Small businesses can miss sales opportunities when incoming WhatsApp messages go unanswered and staff cannot track who needs follow-up.",
+    solution: "Design a business-focused receptionist SaaS using Meta's official Cloud API, company-approved knowledge and a Laravel/Next.js staff inbox backed by local Ollama AI.",
+    myRole: "Product conception, technical requirements, architecture and 56-day implementation planning; development and delivery are not yet verified.",
+    targetUsers: "Moroccan small businesses, agencies, service providers and teams receiving frequent WhatsApp inquiries.",
+    deliverables: ["Official Cloud API integration", "Tenant-scoped business knowledge", "Local multilingual AI answers", "Shared inbox and human takeover", "Contact and lead records", "Usage safeguards and analytics", "Release checks and pilot handover"],
+    architecture: "Planned multi-tenant architecture: Next.js staff dashboard, Laravel API and queue workers, MySQL storage, local Ollama, signed Meta webhooks and official outbound messages.",
+    impact: "Concept stage only: no deployed customers, verified response-time improvements or revenue outcomes are claimed.",
+    recruiterSignal: "Shows B2B product definition, API/webhook architecture, security-aware SaaS design and structured delivery planning.",
+    learned: "A commercially useful chatbot needs verified messaging rules, company-specific knowledge, robust human handoff and measurable acceptance gates.",
+  },
+
+  {
     title: "RiFiTV",
     slug: "rifitv",
     category: "Media platform / football content / streaming-style interface",
