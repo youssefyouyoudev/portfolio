@@ -52,6 +52,25 @@ const portfolioAdminProject: FallbackProject = {
 };
 
 const enhancements: Record<string, Partial<PortfolioProject>> = {
+  jawbiq: {
+    status: "Concept",
+    categoryGroup: "SaaS",
+    featured: true,
+    technicalDifficulty: "Advanced",
+    builtFor: "Moroccan small businesses handling WhatsApp inquiries and lead follow-up.",
+    whatIBuilt: [
+      "Defined the business requirements and official Meta API integration constraints.",
+      "Designed a proposed multi-tenant Laravel, Next.js and Ollama architecture.",
+      "Documented the 56-day build plan with daily delivery criteria.",
+      "Specified human takeover, privacy boundaries and cost safeguards.",
+    ],
+    results: "Concept stage. No software delivery, customers or performance results claimed.",
+    specificLine: "Planned SaaS: signed Meta webhooks, company-grounded AI replies, staff inbox and tenant isolation.",
+    demoLabel: "No public demo",
+    codeLabel: "No public repository",
+    nextImprovements: ["Integrate Meta sandbox", "Implement Laravel messaging pipeline", "Build AI and human inbox", "Pilot with three businesses"],
+  },
+
   "youssef-control": {
     status: "Internal",
     categoryGroup: "Dashboard",
