@@ -160,7 +160,12 @@ export async function getHomeContent() {
 
   return {
     profile: profile ?? fallbackProfile,
-    projects: apiProjects.length ? apiProjects : getDisplayProjects(fallbackProjects),
+    projects: (() => {
+      const merged = new Map((apiProjects.length ? apiProjects : getDisplayProjects(fallbackProjects)).map((project) => [project.slug, project]));
+      const jawbiq = getDisplayProjects(fallbackProjects).find((project) => project.slug === "jawbiq");
+      if (jawbiq && !merged.has("jawbiq")) merged.set("jawbiq", jawbiq);
+      return Array.from(merged.values());
+    })(),
     services: apiServices.length ? apiServices : fallbackServices,
     skills: normalizeSkills(skillsPayload) ?? fallbackSkills,
     experiences: collection(experiencesPayload).length ? collection(experiencesPayload).map(normalizeExperience) : fallbackExperiences,
@@ -181,7 +186,10 @@ export async function getProjects() {
   const payload = await fetchJson<ApiCollection<any>>("/api/projects");
   const rawProjects = collection(payload);
   const apiProjects = rawProjects.length ? getDisplayProjects(rawProjects.map(normalizeProject)) : [];
-  return apiProjects.length ? apiProjects : getDisplayProjects(fallbackProjects);
+  const merged = new Map((apiProjects.length ? apiProjects : getDisplayProjects(fallbackProjects)).map((project) => [project.slug, project]));
+  const jawbiq = getDisplayProjects(fallbackProjects).find((project) => project.slug === "jawbiq");
+  if (jawbiq && !merged.has("jawbiq")) merged.set("jawbiq", jawbiq);
+  return Array.from(merged.values());
 }
 
 export async function getProject(slug: string) {
